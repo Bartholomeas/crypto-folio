@@ -6,6 +6,23 @@ module.exports = {
 	theme: {
 		boxShadow: { standardShadow: '3px 2px 0 40px #E1E4E6' },
 		extend: {
+			fontSize: {
+				xs: '1.2rem',
+				sm: '1.4rem',
+				DEFAULT: '1.6rem',
+				md: '2rem',
+				lg: '2.4rem',
+				xl: '3.2rem',
+			},
+
+			padding: {
+				xs: '0.8rem',
+				sm: '1.6rem',
+				DEFAULT: '2rem',
+				md: '2.4rem',
+				lg: '3.2rem',
+			},
+
 			colors: {
 				font: '#244A84',
 				fontLight: '#597690',
@@ -24,14 +41,11 @@ module.exports = {
 				error: '#FD6D6D',
 			},
 
-			padding: {
-				xs: '0.8rem',
-				sm: '1.6rem',
-				md: '2.4rem',
-				lg: '3.2rem',
+			gap: {
+				sm: '.8rem',
+				DEFAULT: '2rem',
+				lg: '4rem',
 			},
-
-			gap: { lg: '4rem' },
 		},
 	},
 	plugins: [],
