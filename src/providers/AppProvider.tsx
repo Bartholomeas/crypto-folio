@@ -1,13 +1,18 @@
 import React from 'react';
 import store from '../state/store';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 interface ProviderProps {
 	children: React.ReactNode;
 }
 
-const AppProvider = ({ children }: ProviderProps) => {
-	return <Provider store={store}>{children}</Provider>;
+const AppLayout = ({ children }: ProviderProps) => {
+	return (
+		<Provider store={store}>
+			<BrowserRouter>{children}</BrowserRouter>
+		</Provider>
+	);
 };
 
-export default AppProvider;
+export default AppLayout;

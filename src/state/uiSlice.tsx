@@ -1,11 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface InitialStateProps {
+interface InitialState {
 	isMobile: boolean;
 }
 
-const initialState: InitialStateProps = {
+const initialState: InitialState = {
 	isMobile: false,
 };
 
@@ -13,7 +12,7 @@ const uiSlice = createSlice({
 	name: 'ui',
 	initialState,
 	reducers: {
-		toggleNavbar(state, action: PayloadAction) {
+		toggleSmth(state, action: PayloadAction) {
 			console.log(state);
 		},
 	},

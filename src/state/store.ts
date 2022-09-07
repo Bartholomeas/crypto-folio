@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import uiSlice from './uiSlice';
+import navSlice from './navSlice';
 
 const store = configureStore({
-	reducer: { ui: uiSlice.reducer },
+	reducer: { nav: navSlice.reducer, ui: uiSlice.reducer },
 });
 
 export default store;
