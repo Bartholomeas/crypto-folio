@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, Store } from '@reduxjs/toolkit';
 import uiSlice from './uiSlice';
 import navSlice from './navSlice';
 
@@ -7,3 +7,5 @@ const store = configureStore({
 });
 
 export default store;
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;

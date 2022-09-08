@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface InitialState {
+export interface InitialState {
 	isNavOpen: boolean;
 }
 
