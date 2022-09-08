@@ -31,3 +31,7 @@ textarea,
 select {
 	font: inherit;
 }
+
+.icon {
+	@apply text-lg;
+}

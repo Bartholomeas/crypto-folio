@@ -8,9 +8,8 @@ interface Props {
 const NavLinkItem = ({ children, route = '#' }: Props) => {
 	return (
 		<NavLink
-			className='before:content-[""] before:absolute before:l-0 before:h-[30px] before:w-[20px] before:bg-accent
-			 relative flex items-center text-center gap-sm h-full w-full p-4 text-font text-md 
-		md:text'
+			className='flex items-center justify-center  text-center gap-sm h-full w-full p-3 text-font text-md  
+			md:justify-start 	md:text'
 			to={route}>
 			{children}
 		</NavLink>
