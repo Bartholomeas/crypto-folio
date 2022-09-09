@@ -19,11 +19,6 @@ const useReduxDispatch = () => {
 		dispatch(navActions.toggleNavbar());
 	}
 
-	// function sendDispatch({ sliceFunction = '' }: sliceFunctionProps): void {
-	// 	console.log(typeof sliceFunction);
-	// 	if (sliceFunction) dispatch(navActions[sliceFunction]());
-	// }
-
 	return { dispatch, isNavOpen, toggleNavbar };
 };
 

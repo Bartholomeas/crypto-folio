@@ -4,13 +4,14 @@ interface Props {
 	children: React.ReactNode;
 }
 
-const AppWrapper = ({ children }: Props) => {
+const AppLayout = ({ children }: Props) => {
 	return (
-		<div className='flex flex-col md:flex-row w-full md:h-[100vh]'>
+		<div className='flex flex-col md:flex-row w-full md:h-[100vh] bg-indigo-500'>
 			<Navbar />
+
 			{children}
 		</div>
 	);
 };
 
-export default AppWrapper;
+export default AppLayout;

@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import Link from 'next';
 
 interface Props {
 	children: React.ReactNode | string;
@@ -7,12 +7,11 @@ interface Props {
 
 const NavLinkItem = ({ children, route = '#' }: Props) => {
 	return (
-		<NavLink
+		<a
 			className='flex items-center justify-center  text-center gap-sm h-full w-full p-3 text-font text-md  
-			md:justify-start 	md:text'
-			to={route}>
+			md:justify-start 	md:text'>
 			{children}
-		</NavLink>
+		</a>
 	);
 };
 

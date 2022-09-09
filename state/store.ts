@@ -1,4 +1,4 @@
-import { configureStore, Store } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import uiSlice from './uiSlice';
 import navSlice from './navSlice';
 
