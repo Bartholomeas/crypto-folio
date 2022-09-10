@@ -3,7 +3,6 @@ module.exports = {
 	content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
 	darkMode: 'class',
 	theme: {
-		boxShadow: { standardShadow: '3px 2px 0 40px #E1E4E6' },
 		breakpoints: {
 			sm: '476px',
 			md: '768px',
@@ -12,6 +11,8 @@ module.exports = {
 		},
 
 		extend: {
+			dropShadow: { DEFAULT: '2px 2px 0 40px #E1E4E6' },
+
 			fontSize: {
 				xs: '1.2rem',
 				sm: '1.4rem',

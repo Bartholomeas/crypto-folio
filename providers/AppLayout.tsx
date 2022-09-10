@@ -6,7 +6,7 @@ interface Props {
 
 const AppLayout = ({ children }: Props) => {
 	return (
-		<div className='flex flex-col md:flex-row md:h-[100vh] md:max-h-[100vh]'>
+		<div className='flex md:flex-row w-full md:h-[100vh]'>
 			<Navbar />
 			{children}
 		</div>
