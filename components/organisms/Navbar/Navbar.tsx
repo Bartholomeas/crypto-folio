@@ -6,13 +6,14 @@ import NavLinkItem from '../../atoms/NavLink/NavLink';
 import NavListItem from '../../atoms/NavListItem/NavListItem';
 import { MdDashboard, MdSettings, MdSearch, MdAccountBalanceWallet, MdHistory, MdLogout } from 'react-icons/md';
 import SelectMenu from '../../molecules/SelectMenu/SelectMenu';
+
 const Navbar = () => {
 	const { toggleNavbar, isNavOpen } = useReduxDispatch();
 
 	return (
 		<nav
-			className='fixed h-[100px] w-full t-0 l-0 bg-baseVeryLight z-200
-		md:relative md:h-full md:w-auto '>
+			className='h-[100px] w-full t-0 l-0 bg-baseVeryLight z-200
+		md:relative md:h-full md:max-w-[200px]'>
 			<div
 				className='nav-wrapper flex justify-between items-center
 				 px-md py-sm
@@ -32,7 +33,7 @@ const Navbar = () => {
 							</NavLinkItem>
 						</NavListItem>
 						<NavListItem>
-							<NavLinkItem route='/'>
+							<NavLinkItem route='/search'>
 								<MdSearch className='icon' />
 								Search
 							</NavLinkItem>
@@ -63,7 +64,7 @@ const Navbar = () => {
 							</a>
 						</NavListItem>
 						<NavListItem>
-							<SelectMenu>asdasd</SelectMenu>
+							<SelectMenu>selectmenu</SelectMenu>
 						</NavListItem>
 					</NavList>
 				</div>

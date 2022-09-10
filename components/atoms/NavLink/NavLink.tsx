@@ -1,17 +1,19 @@
-import Link from 'next';
+import React from 'react';
+import Link from 'next/link';
 
 interface Props {
-	children: React.ReactNode | string;
+	children: React.ReactNode;
 	route: string;
 }
-
-const NavLinkItem = ({ children, route = '#' }: Props) => {
+const NavLinkItem = ({ children, route = '/' }: Props) => {
 	return (
-		<a
-			className='flex items-center justify-center  text-center gap-sm h-full w-full p-3 text-font text-md  
-			md:justify-start 	md:text'>
-			{children}
-		</a>
+		<Link href={route}>
+			<div
+				className='flex items-center justify-center  text-center gap-sm h-full w-full p-3 text-font text-md  
+			md:justify-start md:text cursor-pointer'>
+				{children}
+			</div>
+		</Link>
 	);
 };
 

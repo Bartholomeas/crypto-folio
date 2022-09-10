@@ -4,6 +4,13 @@ module.exports = {
 	darkMode: 'class',
 	theme: {
 		boxShadow: { standardShadow: '3px 2px 0 40px #E1E4E6' },
+		breakpoints: {
+			sm: '476px',
+			md: '768px',
+			lg: '992px',
+			xl: '1200px',
+		},
+
 		extend: {
 			fontSize: {
 				xs: '1.2rem',
