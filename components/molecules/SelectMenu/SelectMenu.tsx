@@ -9,7 +9,7 @@ interface Props {
 }
 const SelectMenu = ({ children, options }: Props) => {
 	return (
-		<div className='flex items-center'>
+		<div className='flex items-center py-sm'>
 			<Label forProp='languages'>{children}</Label>
 
 			<select

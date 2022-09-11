@@ -6,11 +6,13 @@ interface Props {
 export interface InitialState {
 	isNavOpen: boolean;
 	isThemeDark: boolean;
+	isInfoPanelOpen: boolean;
 }
 
 const initialState: InitialState = {
 	isNavOpen: false,
 	isThemeDark: false,
+	isInfoPanelOpen: false,
 };
 
 const uiSlice = createSlice({
@@ -22,6 +24,10 @@ const uiSlice = createSlice({
 		},
 		toggleTheme(state) {
 			state.isThemeDark = !state.isThemeDark;
+		},
+
+		toggleInfoPanel(state) {
+			state.isInfoPanelOpen = !state.isInfoPanelOpen;
 		},
 	},
 });

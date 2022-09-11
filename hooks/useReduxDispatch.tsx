@@ -12,17 +12,20 @@ export interface sliceFunctionProps {
 
 const useReduxDispatch = () => {
 	const dispatch = useAppDispatch();
-	const { isNavOpen, isThemeDark } = useAppSelector(state => state.ui);
+	const { isNavOpen, isThemeDark, isInfoPanelOpen } = useAppSelector(state => state.ui);
 
 	function toggleNavbar() {
 		dispatch(uiActions.toggleNavbar());
 	}
 	function toggleTheme() {
 		dispatch(uiActions.toggleTheme());
-		console.log(isThemeDark);
 	}
 
-	return { dispatch, isNavOpen, isThemeDark, toggleNavbar, toggleTheme };
+	function toggleInfoPanel() {
+		dispatch(uiActions.toggleInfoPanel());
+	}
+
+	return { dispatch, isNavOpen, isThemeDark, toggleNavbar, toggleTheme, toggleInfoPanel, isInfoPanelOpen };
 };
 
 export default useReduxDispatch;

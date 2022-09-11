@@ -8,7 +8,7 @@ interface Props {
 const Logo = ({ heightVal = '50' }: Props) => {
 	return (
 		<a className='cursor-pointer h-auto'>
-			<Image className='h-full' src='/logo.svg' width='100%' height={heightVal} alt='Logo of cointis app' />
+			<Image className='h-full' src='/logo.svg' width={heightVal} height={heightVal} alt='Logo of cointis app' />
 		</a>
 	);
 };

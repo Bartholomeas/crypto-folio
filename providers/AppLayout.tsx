@@ -1,4 +1,5 @@
 import React from 'react';
+import InfoPanel from '../components/organisms/InfoPanel/InfoPanel';
 import Navbar from '../components/organisms/Navbar/Navbar';
 interface Props {
 	children: React.ReactNode;
@@ -6,9 +7,10 @@ interface Props {
 
 const AppLayout = ({ children }: Props) => {
 	return (
-		<div className='flex md:flex-row w-full md:h-[100vh]'>
+		<div className='relative flex  w-full md:flex-row md:h-[100vh]'>
 			<Navbar />
 			{children}
+			<InfoPanel />
 		</div>
 	);
 };

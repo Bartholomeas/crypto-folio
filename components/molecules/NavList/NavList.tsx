@@ -7,8 +7,8 @@ interface Props {
 const NavList = ({ children }: Props) => {
 	return (
 		<ul
-			className='flex flex-col justify-start items-center gap w-full 
-			md:items-start '>
+			className='flex flex-col items-end gap w-full px-md md:mt-[100px]
+			md:items-start md:gap'>
 			{children}
 		</ul>
 	);
