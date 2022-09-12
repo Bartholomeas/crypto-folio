@@ -47,9 +47,9 @@ const Navbar = () => {
 						</NavLinkItem>
 					</NavListItem>
 					<NavListItem>
-						<NavLinkItem route='/search'>
+						<NavLinkItem route='/explore'>
 							<MdSearch className='icon' />
-							Search
+							Explore
 						</NavLinkItem>
 					</NavListItem>
 					<NavListItem>

@@ -9,7 +9,7 @@ interface Props {
 
 const InfoAssetsBox = ({ children, asset, changeValue, isPercent }: Props) => {
 	return (
-		<div className='flex flex-col gap-sm p py-sm bg-accentDark text-white rounded'>
+		<div className='flex flex-col justify-center gap-sm p py-sm bg-accentDark text-white rounded lg:h-[50%]'>
 			<p className='text-sm'>{children}</p>
 			<div className='flex items-center gap-sm'>
 				<p className='font-semibold text'>{asset}</p>
