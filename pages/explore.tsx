@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import FavouriteButton from '../components/atoms/FavouriteButton/FavouriteButton';
 import MarginBox from '../components/atoms/MarginBox/MarginBox';
@@ -16,21 +17,23 @@ const explore = () => {
 			<MarginBox />
 			<Table>
 				<colgroup>
-					<col className='' />
-					<col className='' />
-					<col className='' />
-					<col className='' />
-					<col className='' />
-					<col className='' />
+					<col className='w-[5%]' />
+					<col className='w-[5%]' />
+					<col className='w-[20%]' />
+					<col className='w-[20%]' />
+					<col className='w-[15%]' />
+					<col className='w-[20%]' />
+					<col className='w-[15%] hidden md:table-column' />
 				</colgroup>
 				<TableHead>
 					<TableRow>
+						<TableHeader></TableHeader>
 						<TableHeader>#</TableHeader>
 						<TableHeader>Name</TableHeader>
 						<TableHeader>Current price</TableHeader>
 						<TableHeader>24h change</TableHeader>
 						<TableHeader>Capitalization</TableHeader>
-						<TableHeader>Price change</TableHeader>
+						<TableHeader hideOnMobile={true}>Price change</TableHeader>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -38,11 +41,17 @@ const explore = () => {
 						<TableData>
 							<FavouriteButton />
 						</TableData>
-						<TableData>Bitcoin</TableData>
-						<TableData>21213</TableData>
-						<TableData>+3.2%</TableData>
-						<TableData>432 453 432 320</TableData>
-						<TableData>[]</TableData>
+						<TableData isBold={true}>1</TableData>
+						<TableData>
+							<Image src='/testIcon.svg' height={30} width={30} alt='Test crypto icon' />
+							Bitcoin
+						</TableData>
+						<TableData appendAfter={'USD'}>21213</TableData>
+						<TableData appendBefore={'+'} appendAfter={'%'}>
+							3.2
+						</TableData>
+						<TableData appendAfter={'USD'}>432 453 432 320</TableData>
+						<TableData hideOnMobile={true}>[]</TableData>
 					</TableRow>
 				</TableBody>
 			</Table>

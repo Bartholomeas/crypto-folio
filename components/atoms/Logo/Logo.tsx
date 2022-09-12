@@ -1,4 +1,3 @@
-import logo from '/logo.svg';
 import Image from 'next/image';
 
 interface Props {
