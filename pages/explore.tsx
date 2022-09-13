@@ -17,23 +17,23 @@ const explore = () => {
 			<MarginBox />
 			<Table>
 				<colgroup>
-					<col className='w-[5%]' />
-					<col className='w-[5%]' />
-					<col className='w-[20%]' />
+					<col className='w-[2%]' />
+					<col className='w-[3%]' />
+					<col className='w-[25%]' />
 					<col className='w-[20%]' />
 					<col className='w-[15%]' />
 					<col className='w-[20%]' />
-					<col className='w-[15%] hidden md:table-column' />
+					<col className='w-[15%]' />
 				</colgroup>
 				<TableHead>
 					<TableRow>
 						<TableHeader></TableHeader>
 						<TableHeader>#</TableHeader>
-						<TableHeader>Name</TableHeader>
+						<TableHeader leftAlign={true}>Name</TableHeader>
 						<TableHeader>Current price</TableHeader>
 						<TableHeader>24h change</TableHeader>
 						<TableHeader>Capitalization</TableHeader>
-						<TableHeader hideOnMobile={true}>Price change</TableHeader>
+						<TableHeader>Price change</TableHeader>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -42,7 +42,7 @@ const explore = () => {
 							<FavouriteButton />
 						</TableData>
 						<TableData isBold={true}>1</TableData>
-						<TableData>
+						<TableData leftAlign={true}>
 							<Image src='/testIcon.svg' height={30} width={30} alt='Test crypto icon' />
 							Bitcoin
 						</TableData>
@@ -51,7 +51,7 @@ const explore = () => {
 							3.2
 						</TableData>
 						<TableData appendAfter={'USD'}>432 453 432 320</TableData>
-						<TableData hideOnMobile={true}>[]</TableData>
+						<TableData>[]</TableData>
 					</TableRow>
 				</TableBody>
 			</Table>

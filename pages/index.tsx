@@ -13,7 +13,7 @@ import MarginBox from '../components/atoms/MarginBox/MarginBox';
 const Dashboard = () => {
 	return (
 		<main
-			className='flex flex-col gap w-full max-w px bg-white min-h-[100vh] overflow-y-scroll
+			className='flex flex-col items-start gap-lg w-full md:max-w px pb-[10rem] min-h-[100vh] bg-white overflow-y-auto
 		md:h-[100vh] md:py-lg md:mr-[5rem]'>
 			<MarginBox />
 			<HeaderGreeting pageName='Dashboard'>Barth</HeaderGreeting>
@@ -31,14 +31,17 @@ const Dashboard = () => {
 				</div>
 			</div>
 
-			<div className='table w-full'>
+			<div className='flex flex-col gap w-full overflow-x-scroll'>
+				<h2 className='text-font font-bold text-lg'>Explore coins</h2>
+
 				<Table>
 					<colgroup>
-						<col className='w-[5%]' />
-						<col className='w-[25%]' />
-						<col className='w-[25%]' />
+						<col className='w-[3%]' />
 						<col className='w-[20%]' />
-						<col className='w-[25%]' />
+						<col className='w-[20%]' />
+						<col className='w-[15%]' />
+						<col className='w-[20%]' />
+						<col className='w-[22%]' />
 					</colgroup>
 					<TableHead>
 						<TableRow>
@@ -47,15 +50,29 @@ const Dashboard = () => {
 							<TableHeader>Current price</TableHeader>
 							<TableHeader>24h change</TableHeader>
 							<TableHeader>Quantity</TableHeader>
+							<TableHeader>Value</TableHeader>
 						</TableRow>
 					</TableHead>
 					<TableBody>
 						<TableRow>
-							<TableData>1</TableData>
+							<TableData isBold={true}>1</TableData>
 							<TableData leftAlign={true}>Bitcoin</TableData>
-							<TableData>21321</TableData>
-							<TableData>21.2</TableData>
+							<TableData appendAfter={'USD'}>21321</TableData>
+							<TableData appendAfter={'%'} isBold={true}>
+								21.2
+							</TableData>
 							<TableData>0.73</TableData>
+							<TableData appendAfter={'USD'}>15600</TableData>
+						</TableRow>
+						<TableRow>
+							<TableData isBold={true}>1</TableData>
+							<TableData leftAlign={true}>Bitcoin</TableData>
+							<TableData appendAfter={'USD'}>21321</TableData>
+							<TableData appendAfter={'%'} isBold={true}>
+								21.2
+							</TableData>
+							<TableData>0.73</TableData>
+							<TableData appendAfter={'USD'}>15600</TableData>
 						</TableRow>
 					</TableBody>
 				</Table>

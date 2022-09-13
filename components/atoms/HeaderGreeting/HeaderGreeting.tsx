@@ -9,7 +9,7 @@ const HeaderGreeting = ({ children, pageName }: Props) => {
 			<p className='text-lg'>
 				Hi <span className='font-bold'>{children}</span>
 			</p>
-			{pageName && <p className='text-md'>Thats your {pageName}</p>}
+			{pageName && <h1 className='text-md'>Thats your {pageName}</h1>}
 		</div>
 	);
 };
