@@ -1,14 +1,14 @@
 import React from 'react';
 
 interface Props {
-	children: string;
+	children: string | React.ReactNode;
 	forProp?: string;
 }
 
 const Label = ({ children, forProp }: Props) => {
 	return (
-		<label htmlFor={forProp} className='text-font text-sm'>
-			{children}:
+		<label htmlFor={forProp} className='flex items-center text-font text-sm'>
+			{children}
 		</label>
 	);
 };

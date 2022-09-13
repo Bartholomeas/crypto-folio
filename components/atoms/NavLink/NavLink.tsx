@@ -7,7 +7,6 @@ interface Props {
 	routerPath?: string;
 }
 const NavLinkItem = ({ children, route = '/', routerPath = '' }: Props) => {
-	console.log(routerPath);
 	return (
 		<Link href={route} passHref>
 			<a

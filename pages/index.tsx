@@ -1,4 +1,3 @@
-import HeaderGreeting from '../components/atoms/HeaderGreeting/HeaderGreeting';
 import TableData from '../components/molecules/TableData/TableData';
 import TableHeader from '../components/molecules/TableHeader/TableHeader';
 import TableRow from '../components/molecules/TableRow/TableRow';
@@ -9,15 +8,16 @@ import Table from '../components/organisms/Table/Table';
 import TableHead from '../components/molecules/TableHead/TableHead';
 import TableBody from '../components/molecules/TableBody/TableBody';
 import MarginBox from '../components/atoms/MarginBox/MarginBox';
+import SecondHeader from '../components/atoms/SecondHeader/SecondHeader';
+import PageHeader from '../components/atoms/PageHeader/PageHeader';
 
 const Dashboard = () => {
 	return (
 		<main
-			className='flex flex-col items-start gap-lg w-full md:max-w px pb-[10rem] min-h-[100vh] bg-white overflow-y-auto
+			className='flex flex-col items-start gap-sm w-full md:max-w px pb-[10rem] min-h-[100vh] bg-white overflow-y-auto
 		md:h-[100vh] md:py-lg md:mr-[5rem]'>
 			<MarginBox />
-			<HeaderGreeting pageName='Dashboard'>Barth</HeaderGreeting>
-
+			<PageHeader appendAfter='of DefaultWallet'>Dashboard</PageHeader>
 			<div className='cards flex flex-col gap-sm w-full lg:flex-row'>
 				<DailyChangeGraph />
 				<TotalAssetsValue totalValue={32227} valueInBtc={0.3} changePercent={10} changeValue={21.34} />
@@ -32,7 +32,7 @@ const Dashboard = () => {
 			</div>
 
 			<div className='flex flex-col gap w-full overflow-x-scroll'>
-				<h2 className='text-font font-bold text-lg'>Explore coins</h2>
+				<SecondHeader>Explore coins</SecondHeader>
 
 				<Table>
 					<colgroup>

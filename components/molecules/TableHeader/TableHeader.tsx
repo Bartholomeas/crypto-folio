@@ -6,7 +6,7 @@ interface Props {
 const TableHeader = ({ children, leftAlign }: Props) => {
 	return (
 		<th
-			className={`py-sm px-xs text-xs 
+			className={`py-sm px-xs text-xs text-font
  last:pr-xs 
 		${leftAlign ? 'text-start' : 'text-end'}
 			md:table-cell
