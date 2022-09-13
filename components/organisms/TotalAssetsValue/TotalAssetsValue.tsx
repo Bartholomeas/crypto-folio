@@ -12,7 +12,7 @@ const TotalAssetsValue = ({ totalValue, valueInBtc, changePercent, changeValue }
 	return (
 		<div
 			className='flex justify-between items-center min-w-[200px] w-full px py-lg rounded text-white bg-accent 
-        lg:max-w-[300px]'>
+			lg:max-w-[300px]'>
 			<div className='flex flex-col items-start w-full'>
 				<p>My portfolio</p>
 				<p className='text-lg font-semibold'>{totalValue}$</p>

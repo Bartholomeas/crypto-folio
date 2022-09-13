@@ -12,7 +12,7 @@ import Table from '../components/organisms/Table/Table';
 const explore = () => {
 	return (
 		<main
-			className='flex flex-col max-w-[1400px] items-start gap w-full px min-h-[100vh] overflow-y-scroll
+			className='flex flex-col items-start gap w-full px min-h-[100vh] overflow-y-scroll 
     md:h-[100vh] md:py-lg md:mr-[5rem]'>
 			<MarginBox />
 			<Table>

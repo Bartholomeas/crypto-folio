@@ -5,15 +5,18 @@ interface Props {
 	appendBefore?: string | number;
 	appendAfter?: string | number;
 	hideOnMobile?: boolean;
+	leftAlign?: boolean;
 }
-const TableData = ({ children, isBold, appendBefore, appendAfter, hideOnMobile }: Props) => {
+const TableData = ({ children, isBold, appendBefore, appendAfter, hideOnMobile, leftAlign }: Props) => {
 	return (
 		<td
-			className={`py-sm px-xs align-middle text-sm text-end text-font 
-			first:pl-xs last:pr-xs [&:nth-child(2)]:text-center [&:nth-child(3)]:text-start 
+			className={`py-sm px-xs align-middle text-sm text-font 
+			first:pl-xs last:pr-xs 
 			${isBold && 'font-semibold'} 
 			${hideOnMobile && 'hidden'}
-			md:table-cell`}>
+			${leftAlign ? 'text-start' : 'text-end'}
+			md:table-cell
+			`}>
 			<span className='font-bold'>{appendBefore ?? ''}</span>
 			{children}
 			<span className='font-bold'> {appendAfter ?? ' '}</span>

@@ -12,8 +12,8 @@ import MarginBox from '../components/atoms/MarginBox/MarginBox';
 
 const Dashboard = () => {
 	return (
-		<div
-			className='flex flex-col max-w-[1400px] items-start gap w-full px bg-white min-h-[100vh] overflow-y-scroll
+		<main
+			className='flex flex-col gap w-full max-w px bg-white min-h-[100vh] overflow-y-scroll
 		md:h-[100vh] md:py-lg md:mr-[5rem]'>
 			<MarginBox />
 			<HeaderGreeting pageName='Dashboard'>Barth</HeaderGreeting>
@@ -21,7 +21,7 @@ const Dashboard = () => {
 			<div className='cards flex flex-col gap-sm w-full lg:flex-row'>
 				<DailyChangeGraph />
 				<TotalAssetsValue totalValue={32227} valueInBtc={0.3} changePercent={10} changeValue={21.34} />
-				<div className='flex flex-col gap-sm'>
+				<div className='flex flex-col lg:w-[35%] gap-sm'>
 					<InfoAssetsBox asset='Atom' changeValue={14} isPercent={true}>
 						Biggest move
 					</InfoAssetsBox>
@@ -34,16 +34,16 @@ const Dashboard = () => {
 			<div className='table w-full'>
 				<Table>
 					<colgroup>
-						<col className='w-[10%]' />
-						<col className='w-[30%]' />
+						<col className='w-[5%]' />
+						<col className='w-[25%]' />
+						<col className='w-[25%]' />
 						<col className='w-[20%]' />
-						<col className='w-[20%]' />
-						<col className='w-[20%]' />
+						<col className='w-[25%]' />
 					</colgroup>
 					<TableHead>
 						<TableRow>
 							<TableHeader>#</TableHeader>
-							<TableHeader>Name</TableHeader>
+							<TableHeader leftAlign={true}>Name</TableHeader>
 							<TableHeader>Current price</TableHeader>
 							<TableHeader>24h change</TableHeader>
 							<TableHeader>Quantity</TableHeader>
@@ -52,7 +52,7 @@ const Dashboard = () => {
 					<TableBody>
 						<TableRow>
 							<TableData>1</TableData>
-							<TableData>Bitcoin</TableData>
+							<TableData leftAlign={true}>Bitcoin</TableData>
 							<TableData>21321</TableData>
 							<TableData>21.2</TableData>
 							<TableData>0.73</TableData>
@@ -60,7 +60,7 @@ const Dashboard = () => {
 					</TableBody>
 				</Table>
 			</div>
-		</div>
+		</main>
 	);
 };
 

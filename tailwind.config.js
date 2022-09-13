@@ -4,14 +4,15 @@ module.exports = {
 	darkMode: 'class',
 	theme: {
 		maxWidth: {
-			standard: '1400px',
+			DEFAULT: '1200px',
 		},
 
-		breakpoints: {
+		screens: {
 			sm: '476px',
 			md: '768px',
 			lg: '992px',
 			xl: '1200px',
+			xxl: '1670px',
 		},
 
 		extend: {
