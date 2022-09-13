@@ -1,5 +1,4 @@
 import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
-import { navActions, InitialState as NavState } from '../state/navSlice';
 import { uiActions } from '../state/uiSlice';
 import { RootState, AppDispatch } from '../state/store';
 
@@ -7,19 +6,26 @@ const useAppDispatch = () => useDispatch<AppDispatch>();
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export interface sliceFunctionProps {
-	sliceFunction: keyof typeof navActions;
+	sliceFunction: keyof typeof uiActions;
 	payload?: string;
 }
 
 const useReduxDispatch = () => {
 	const dispatch = useAppDispatch();
-	const { isNavOpen } = useAppSelector(state => state.nav);
+	const { isNavOpen, isThemeDark, isInfoPanelOpen } = useAppSelector(state => state.ui);
 
 	function toggleNavbar() {
-		dispatch(navActions.toggleNavbar());
+		dispatch(uiActions.toggleNavbar());
+	}
+	function toggleTheme() {
+		dispatch(uiActions.toggleTheme());
 	}
 
-	return { dispatch, isNavOpen, toggleNavbar };
+	function toggleInfoPanel() {
+		dispatch(uiActions.toggleInfoPanel());
+	}
+
+	return { dispatch, isNavOpen, isThemeDark, toggleNavbar, toggleTheme, toggleInfoPanel, isInfoPanelOpen };
 };
 
 export default useReduxDispatch;

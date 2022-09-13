@@ -3,8 +3,24 @@ module.exports = {
 	content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
 	darkMode: 'class',
 	theme: {
-		boxShadow: { standardShadow: '3px 2px 0 40px #E1E4E6' },
+		maxWidth: {
+			DEFAULT: '1200px',
+		},
+
+		screens: {
+			sm: '476px',
+			md: '768px',
+			lg: '992px',
+			xl: '1200px',
+			xxl: '1670px',
+		},
+
 		extend: {
+			dropShadow: { DEFAULT: '2px 2px 0 40px #E1E4E6' },
+			borderRadius: {
+				DEFAULT: '8px',
+				large: '16px',
+			},
 			fontSize: {
 				xs: '1.2rem',
 				sm: '1.4rem',
@@ -28,6 +44,7 @@ module.exports = {
 
 				accent: '#111BFF',
 				accentDark: '#0911CF',
+				accentHover: 'rgba(17, 27, 255, 0.05)',
 
 				baseLight: '#EDF0FB',
 				baseVeryLight: '#F7F9FC',
@@ -36,7 +53,7 @@ module.exports = {
 				support: '#58EDB7',
 				supportDark: '#24D9AE',
 
-				success: '#58EDB',
+				success: '#066C47',
 				error: '#FD6D6D',
 			},
 

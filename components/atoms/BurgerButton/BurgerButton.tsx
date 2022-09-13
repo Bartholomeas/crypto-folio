@@ -1,5 +1,5 @@
 import useReduxDispatch from '../../../hooks/useReduxDispatch';
-import { navActions } from '../../../state/navSlice';
+import { uiActions } from '../../../state/uiSlice';
 
 interface Props {
 	onClickFn: () => void;

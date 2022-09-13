@@ -1,10 +1,13 @@
-import logo from '../../../assets/logo.svg';
 import Image from 'next/image';
 
-const Logo = () => {
+interface Props {
+	heightVal?: string;
+}
+
+const Logo = ({ heightVal = '50' }: Props) => {
 	return (
 		<a className='cursor-pointer h-auto'>
-			<Image className='h-full' src={logo} alt='Logo of cointis app' />
+			<Image className='h-full' src='/logo.svg' width={heightVal} height={heightVal} alt='Logo of cointis app' />
 		</a>
 	);
 };

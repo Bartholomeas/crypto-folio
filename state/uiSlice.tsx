@@ -1,19 +1,33 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface InitialState {
-	isMobile: boolean;
+interface Props {
+	state: InitialState;
+	action?: PayloadAction;
+}
+export interface InitialState {
+	isNavOpen: boolean;
+	isThemeDark: boolean;
+	isInfoPanelOpen: boolean;
 }
 
 const initialState: InitialState = {
-	isMobile: false,
+	isNavOpen: false,
+	isThemeDark: false,
+	isInfoPanelOpen: false,
 };
 
 const uiSlice = createSlice({
 	name: 'ui',
 	initialState,
 	reducers: {
-		toggleSmth(state, action: PayloadAction) {
-			console.log(state);
+		toggleNavbar(state) {
+			state.isNavOpen = !state.isNavOpen;
+		},
+		toggleTheme(state) {
+			state.isThemeDark = !state.isThemeDark;
+		},
+
+		toggleInfoPanel(state) {
+			state.isInfoPanelOpen = !state.isInfoPanelOpen;
 		},
 	},
 });

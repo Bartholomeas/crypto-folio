@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next';
 
 interface Props {
 	children: React.ReactNode;
@@ -6,16 +7,16 @@ interface Props {
 const NavListItem = ({ children }: Props) => {
 	return (
 		<li
-			className='before:content-[""] before:absolute before:left-0 before:top-0 before:h-full before:w-[5px] 
+			className='before:content-[""] before:absolute before:left-[-2rem] before:bottom-0 before:h-full before:w-[5px] 
+			before:transition-colors before:ease-out
 			relative
 			w-full
-			p-3
 			transition-colors
+			cursor-pointer
+			md:hover:before:bg-accent
 			md:text-end 
-			before:transition-colors before:ease-out
-			hover:before:bg-accent
 			md:w-full
-			md:hover:bg-baseLight'>
+			'>
 			{children}
 		</li>
 	);
