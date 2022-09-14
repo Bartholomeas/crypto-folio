@@ -7,9 +7,11 @@ import NavListItem from '../../atoms/NavListItem/NavListItem';
 import { MdDashboard, MdSettings, MdSearch, MdAccountBalanceWallet, MdHistory, MdLogout } from 'react-icons/md';
 import SelectMenu from '../../molecules/SelectMenu/SelectMenu';
 import ThemeSwitch from '../../molecules/ThemeSwitch/ThemeSwitch';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
 	const { toggleNavbar, isNavOpen, toggleTheme, isThemeDark } = useReduxDispatch();
+	const router = useRouter();
 
 	const languages = {
 		english: 'ENG',
@@ -24,8 +26,8 @@ const Navbar = () => {
 
 	return (
 		<nav
-			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-baseLight z-200
-		md:relative md:h-full md:max-w-[180px] md:py-lg z-[1000]'>
+			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-baseLight z-200 z-[1000] 
+		md:relative md:h-full md:max-w-[180px] md:py-lg'>
 			<div
 				className='nav-wrapper flex justify-between items-center w-full
 				 px-md py-sm
@@ -41,31 +43,31 @@ const Navbar = () => {
 					}`}>
 				<NavList>
 					<NavListItem>
-						<NavLinkItem route='/'>
+						<NavLinkItem route='/' routerPath={router.pathname}>
 							<MdDashboard className='icon' />
 							Dashboard
 						</NavLinkItem>
 					</NavListItem>
 					<NavListItem>
-						<NavLinkItem route='/explore'>
+						<NavLinkItem route='/explore' routerPath={router.pathname}>
 							<MdSearch className='icon' />
 							Explore
 						</NavLinkItem>
 					</NavListItem>
 					<NavListItem>
-						<NavLinkItem route='/wallet'>
+						<NavLinkItem route='/wallet' routerPath={router.pathname}>
 							<MdAccountBalanceWallet className='icon' />
 							Wallet
 						</NavLinkItem>
 					</NavListItem>
 					<NavListItem>
-						<NavLinkItem route='/history'>
+						<NavLinkItem route='/history' routerPath={router.pathname}>
 							<MdHistory className='icon' />
 							History
 						</NavLinkItem>
 					</NavListItem>
 					<NavListItem>
-						<NavLinkItem route='/settings'>
+						<NavLinkItem route='/settings' routerPath={router.pathname}>
 							<MdSettings className='icon' /> Settings
 						</NavLinkItem>
 					</NavListItem>
