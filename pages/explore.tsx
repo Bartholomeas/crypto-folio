@@ -10,15 +10,21 @@ import TableHeader from '../components/molecules/TableHeader/TableHeader';
 import TableRow from '../components/molecules/TableRow/TableRow';
 import Searchbar from '../components/organisms/Searchbar/Searchbar';
 import Table from '../components/organisms/Table/Table';
+import useFetch from '../hooks/useFetch';
 
-const explore = () => {
+const Explore = () => {
+	const { coinList } = useFetch(
+		'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h'
+	);
+	console.log(coinList);
+
 	return (
 		<main
 			className='flex flex-col items-start gap w-full px min-h-[100vh] overflow-y-scroll 
     md:h-[100vh] md:py-lg md:mr-[5rem]'>
 			<MarginBox />
+			<PageHeader>all Cryptocurrencies</PageHeader>
 			<div className='flex flex-col gap w-full pt'>
-				<PageHeader>Search for coins</PageHeader>
 				<Searchbar placeholderText='Search for..' />
 
 				<Table>
@@ -66,4 +72,4 @@ const explore = () => {
 	);
 };
 
-export default explore;
+export default Explore;

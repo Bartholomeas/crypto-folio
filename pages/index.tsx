@@ -35,7 +35,8 @@ const Dashboard = () => {
 			<div className='flex flex-col gap w-full mt-[5rem]'>
 				<SecondHeader>Explore coins</SecondHeader>
 				<Searchbar placeholderText='Search your coins..' />
-				<div className='w-full overflow-x-auto'>
+
+				<div className='w-full  overflow-x-auto'>
 					<Table>
 						<colgroup>
 							<col className='w-[3%]' />

@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface Props {
-	state: InitialState;
+	state: StateInterface;
 	action?: PayloadAction;
 }
-export interface InitialState {
+export interface StateInterface {
 	isNavOpen: boolean;
 	isThemeDark: boolean;
 	isInfoPanelOpen: boolean;
 }
 
-const initialState: InitialState = {
+const initialState: StateInterface = {
 	isNavOpen: false,
 	isThemeDark: false,
 	isInfoPanelOpen: false,

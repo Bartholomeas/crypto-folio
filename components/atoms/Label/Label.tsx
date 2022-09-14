@@ -7,7 +7,7 @@ interface Props {
 
 const Label = ({ children, forProp }: Props) => {
 	return (
-		<label htmlFor={forProp} className='flex items-center text-font text-sm'>
+		<label htmlFor={forProp} className='flex items-center w-full font-bold text-sm'>
 			{children}
 		</label>
 	);
