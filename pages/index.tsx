@@ -10,6 +10,7 @@ import TableBody from '../components/molecules/TableBody/TableBody';
 import MarginBox from '../components/atoms/MarginBox/MarginBox';
 import SecondHeader from '../components/atoms/SecondHeader/SecondHeader';
 import PageHeader from '../components/atoms/PageHeader/PageHeader';
+import Searchbar from '../components/organisms/Searchbar/Searchbar';
 
 const Dashboard = () => {
 	return (
@@ -31,51 +32,53 @@ const Dashboard = () => {
 				</div>
 			</div>
 
-			<div className='flex flex-col gap w-full overflow-x-scroll'>
+			<div className='flex flex-col gap w-full mt-[5rem]'>
 				<SecondHeader>Explore coins</SecondHeader>
-
-				<Table>
-					<colgroup>
-						<col className='w-[3%]' />
-						<col className='w-[20%]' />
-						<col className='w-[20%]' />
-						<col className='w-[15%]' />
-						<col className='w-[20%]' />
-						<col className='w-[22%]' />
-					</colgroup>
-					<TableHead>
-						<TableRow>
-							<TableHeader>#</TableHeader>
-							<TableHeader leftAlign={true}>Name</TableHeader>
-							<TableHeader>Current price</TableHeader>
-							<TableHeader>24h change</TableHeader>
-							<TableHeader>Quantity</TableHeader>
-							<TableHeader>Value</TableHeader>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						<TableRow>
-							<TableData isBold={true}>1</TableData>
-							<TableData leftAlign={true}>Bitcoin</TableData>
-							<TableData appendAfter={'USD'}>21321</TableData>
-							<TableData appendAfter={'%'} isBold={true}>
-								21.2
-							</TableData>
-							<TableData>0.73</TableData>
-							<TableData appendAfter={'USD'}>15600</TableData>
-						</TableRow>
-						<TableRow>
-							<TableData isBold={true}>1</TableData>
-							<TableData leftAlign={true}>Bitcoin</TableData>
-							<TableData appendAfter={'USD'}>21321</TableData>
-							<TableData appendAfter={'%'} isBold={true}>
-								21.2
-							</TableData>
-							<TableData>0.73</TableData>
-							<TableData appendAfter={'USD'}>15600</TableData>
-						</TableRow>
-					</TableBody>
-				</Table>
+				<Searchbar placeholderText='Search your coins..' />
+				<div className='w-full overflow-x-auto'>
+					<Table>
+						<colgroup>
+							<col className='w-[3%]' />
+							<col className='w-[20%]' />
+							<col className='w-[20%]' />
+							<col className='w-[15%]' />
+							<col className='w-[20%]' />
+							<col className='w-[22%]' />
+						</colgroup>
+						<TableHead>
+							<TableRow>
+								<TableHeader>#</TableHeader>
+								<TableHeader leftAlign={true}>Name</TableHeader>
+								<TableHeader>Current price</TableHeader>
+								<TableHeader>24h change</TableHeader>
+								<TableHeader>Quantity</TableHeader>
+								<TableHeader>Value</TableHeader>
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							<TableRow>
+								<TableData isBold={true}>1</TableData>
+								<TableData leftAlign={true}>Bitcoin</TableData>
+								<TableData appendAfter={'USD'}>21321</TableData>
+								<TableData appendAfter={'%'} isBold={true}>
+									21.2
+								</TableData>
+								<TableData>0.73</TableData>
+								<TableData appendAfter={'USD'}>15600</TableData>
+							</TableRow>
+							<TableRow>
+								<TableData isBold={true}>1</TableData>
+								<TableData leftAlign={true}>Bitcoin</TableData>
+								<TableData appendAfter={'USD'}>21321</TableData>
+								<TableData appendAfter={'%'} isBold={true}>
+									21.2
+								</TableData>
+								<TableData>0.73</TableData>
+								<TableData appendAfter={'USD'}>15600</TableData>
+							</TableRow>
+						</TableBody>
+					</Table>
+				</div>
 			</div>
 		</main>
 	);

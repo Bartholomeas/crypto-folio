@@ -6,9 +6,7 @@ interface Props {
 const PageHeader = ({ children, appendAfter }: Props) => {
 	return (
 		<h1 className='w-full font-bold leading-10 bg-support text-accentDark py-md px-lg rounded  text-lg md:text-xl'>
-			{children}
-			<br />
-			{appendAfter && <span className='font-normal text-md'>{appendAfter}</span>}
+			{children} {appendAfter && <span className='font-normal text-md'>{appendAfter}</span>}
 		</h1>
 	);
 };
