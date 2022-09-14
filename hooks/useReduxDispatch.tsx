@@ -15,7 +15,7 @@ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 const useReduxDispatch = () => {
 	const dispatch = useAppDispatch();
 	const { isNavOpen, isThemeDark, isInfoPanelOpen } = useAppSelector(state => state.ui);
-	const {} = useAppSelector(state => state.coins);
+	const { coinsList } = useAppSelector(state => state.coins);
 	const {} = useAppSelector(state => state.wallet);
 
 	function toggleNavbar() {
@@ -28,7 +28,20 @@ const useReduxDispatch = () => {
 		dispatch(uiActions.toggleInfoPanel());
 	}
 
-	return { dispatch, isNavOpen, isThemeDark, toggleNavbar, toggleTheme, toggleInfoPanel, isInfoPanelOpen };
+	function setCoinsList(coinsList: []) {
+		dispatch(coinsActions.setCoinsList(coinsList));
+	}
+
+	return {
+		isNavOpen,
+		isThemeDark,
+		toggleNavbar,
+		toggleTheme,
+		toggleInfoPanel,
+		isInfoPanelOpen,
+		coinsList,
+		setCoinsList,
+	};
 };
 
 export default useReduxDispatch;
