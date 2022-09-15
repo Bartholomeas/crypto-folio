@@ -4,7 +4,7 @@ interface Props {
 	children: React.ReactNode;
 }
 const TableBody = ({ children }: Props) => {
-	return <tbody>{children}</tbody>;
+	return <tbody className=''>{children}</tbody>;
 };
 
 export default TableBody;

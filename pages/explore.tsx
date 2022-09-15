@@ -12,64 +12,66 @@ import TableHeader from '../components/molecules/TableHeader/TableHeader';
 import TableRow from '../components/molecules/TableRow/TableRow';
 import Searchbar from '../components/organisms/Searchbar/Searchbar';
 import Table from '../components/organisms/Table/Table';
-import useFetch from '../hooks/useFetch';
+import { useGetCoinsQuery } from '../state/apiSlice';
+import useReduxDispatch from '../hooks/useReduxDispatch';
 
 const Explore = () => {
-	const { coinsList } = useFetch(
-		'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h'
-	);
+	const { data, error, isLoading, isSuccess } = useGetCoinsQuery('');
+	// const { setCoinsList } = useReduxDispatch();
 
 	return (
 		<main
-			className='flex flex-col items-start gap w-full px min-h-[100vh]  
-    md:h-[100vh] md:py-lg md:mr-[5rem]'>
+			className='flex flex-col items-start gap w-full px min-h-[100vh] overflow-auto
+    md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem]'>
 			<MarginBox />
 			<PageHeader>all Cryptocurrencies</PageHeader>
-			<div className=' top-[5rem] flex flex-col gap w-full pt'>
+			<div className='top-[5rem] flex flex-col gap w-full pt'>
 				<Searchbar placeholderText='Search for..' />
-				<div className='bg-rose-200 sticky top-[5rem] w-[300px] h-[300px]'></div>
-				<Table>
-					<colgroup>
-						<col className='w-[2%]' />
-						<col className='w-[3%]' />
-						<col className='w-[20%]' />
-						<col className='w-[20%]' />
-						<col className='w-[15%]' />
-						<col className='w-[25%]' />
-						<col className='w-[15%]' />
-					</colgroup>
-					<TableHead>
-						<TableRow>
-							<TableHeader></TableHeader>
-							<TableHeader>#</TableHeader>
-							<TableHeader leftAlign={true}>Name</TableHeader>
-							<TableHeader>Current price</TableHeader>
-							<TableHeader>24h change</TableHeader>
-							<TableHeader>Capitalization</TableHeader>
-							<TableHeader>Price change</TableHeader>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{coinsList.map((coin, index) => {
-							return (
-								<TableRow key={uuidv4()}>
-									<TableData>
-										<FavouriteButton />
-									</TableData>
-									<TableData isBold={true}>{index + 1}</TableData>
-									<TableData leftAlign={true}>
-										<Image src={coin.image} height={30} width={30} alt='Test crypto icon' />
-										{coin.name}
-									</TableData>
-									<TableData appendAfter={'USD'}>{coin.current_price.toFixed(2)}</TableData>
-									<TableData appendAfter={'%'}>{coin.price_change_percentage_24h}</TableData>
-									<TableData appendAfter={'USD'}>{coin.market_cap}</TableData>
-									<TableData>[]</TableData>
-								</TableRow>
-							);
-						})}
-					</TableBody>
-				</Table>
+				<div className='flex flex-col justify-center w-full'>
+					<Table>
+						<colgroup>
+							<col className='w-[2%]' />
+							<col className='w-[3%]' />
+							<col className='w-[20%]' />
+							<col className='w-[20%]' />
+							<col className='w-[15%]' />
+							<col className='w-[25%]' />
+							<col className='w-[15%]' />
+						</colgroup>
+						<TableHead>
+							<TableRow>
+								<TableHeader></TableHeader>
+								<TableHeader>#</TableHeader>
+								<TableHeader leftAlign={true}>Name</TableHeader>
+								<TableHeader>Current price</TableHeader>
+								<TableHeader>24h change</TableHeader>
+								<TableHeader>Capitalization</TableHeader>
+								<TableHeader>Price change</TableHeader>
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							{isSuccess &&
+								data.map((coin: any, index: number) => {
+									return (
+										<TableRow key={uuidv4()}>
+											<TableData>
+												<FavouriteButton />
+											</TableData>
+											<TableData isBold={true}>{index + 1}</TableData>
+											<TableData leftAlign={true}>
+												<Image src={coin.image} height={30} width={30} alt='Test crypto icon' />
+												{coin.name}
+											</TableData>
+											<TableData appendAfter={'USD'}>{coin.current_price.toFixed(2)}</TableData>
+											<TableData appendAfter={'%'}>{coin.price_change_percentage_24h}</TableData>
+											<TableData appendAfter={'USD'}>{coin.market_cap}</TableData>
+											<TableData>[]</TableData>
+										</TableRow>
+									);
+								})}
+						</TableBody>
+					</Table>
+				</div>
 			</div>
 		</main>
 	);
