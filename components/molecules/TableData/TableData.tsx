@@ -14,6 +14,13 @@ const TableData = ({ children, isBold, appendBefore, appendAfter, leftAlign }: P
 			${isBold && 'font-semibold'} 
 			${leftAlign ? 'text-start' : 'text-end'}
 			md:table-cell [&:nth-child(1)]:text-center
+			${
+				appendAfter === '%'
+					? children! > 0
+						? 'text-success font-semibold text-xs'
+						: 'text-error font-semibold text-xs'
+					: ''
+			}
 			`}>
 			<span className='font-bold'>{appendBefore ?? ''}</span>
 			{children}
