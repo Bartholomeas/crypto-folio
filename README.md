@@ -1,6 +1,6 @@
 # PROJECT IN PROGRESS :)
 
-## Live: https://crypto-folio-qxrhomwc1-bartholomeas.vercel.app/
+## Live: https://crypto-folio-i7x3s4rkh-bartholomeas.vercel.app/
 
 ## General info
 

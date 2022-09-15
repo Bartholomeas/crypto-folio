@@ -4,7 +4,7 @@ interface Props {
 	children: React.ReactNode;
 }
 const TableHead = ({ children }: Props) => {
-	return <thead className='bg-baseVeryLight'>{children}</thead>;
+	return <thead className='bg-baseVeryLight z-100'>{children}</thead>;
 };
 
 export default TableHead;
