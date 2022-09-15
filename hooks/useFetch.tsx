@@ -12,16 +12,17 @@ const useFetch = (url: string) => {
 			setIsLoading(true);
 			const data = await axios(url);
 			setCoinsList(data.data);
+			console.log('data sie wykonuje');
 		} catch {
 			setIsLoading(false);
 			throw new Error('Something went wrong');
 		}
 		setIsLoading(false);
-	}, [url]);
+	}, [url, coinsList.length, setCoinsList]);
 
 	useEffect(() => {
 		getData();
-	}, [url]);
+	}, [url, getData]);
 
 	return { coinsList };
 };

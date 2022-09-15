@@ -21,13 +21,13 @@ const Explore = () => {
 
 	return (
 		<main
-			className='flex flex-col items-start gap w-full px min-h-[100vh] overflow-y-scroll 
+			className='flex flex-col items-start gap w-full px min-h-[100vh]  
     md:h-[100vh] md:py-lg md:mr-[5rem]'>
 			<MarginBox />
 			<PageHeader>all Cryptocurrencies</PageHeader>
-			<div className='flex flex-col gap w-full pt'>
+			<div className=' top-[5rem] flex flex-col gap w-full pt'>
 				<Searchbar placeholderText='Search for..' />
-
+				<div className='bg-rose-200 sticky top-[5rem] w-[300px] h-[300px]'></div>
 				<Table>
 					<colgroup>
 						<col className='w-[2%]' />
@@ -58,7 +58,7 @@ const Explore = () => {
 									</TableData>
 									<TableData isBold={true}>{index + 1}</TableData>
 									<TableData leftAlign={true}>
-										<Image src='/testIcon.svg' height={30} width={30} alt='Test crypto icon' />
+										<Image src={coin.image} height={30} width={30} alt='Test crypto icon' />
 										{coin.name}
 									</TableData>
 									<TableData appendAfter={'USD'}>{coin.current_price.toFixed(2)}</TableData>
