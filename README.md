@@ -1,6 +1,8 @@
 # PROJECT IN PROGRESS :)
 
-## Live: https://crypto-folio-i7x3s4rkh-bartholomeas.vercel.app/
+## Live: https://crypto-folio-i7x3s4rkh-bartholomeas.vercel.app/ (May not be latest version, for latest check on the right side of screen:
+
+Environments => Preview, Top link => View deployment )
 
 ## General info
 
