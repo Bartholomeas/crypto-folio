@@ -1,5 +1,5 @@
 import React from 'react';
-import useFetch from '../../../hooks/useFetch';
+
 interface Props {
 	children: React.ReactNode;
 }

@@ -7,14 +7,12 @@ import { RootState, AppDispatch } from '../state/store';
 const useAppDispatch = () => useDispatch<AppDispatch>();
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-// export interface sliceFunctionProps {
-// 	sliceFunction: keyof typeof uiActions;
-// 	payload?: string;
-// }
-
 const useReduxDispatch = () => {
 	const dispatch = useAppDispatch();
 	const { isNavOpen, isThemeDark, isInfoPanelOpen } = useAppSelector(state => state.ui);
+
+
+	
 	const { coinsList } = useAppSelector(state => state.coins);
 	const {} = useAppSelector(state => state.wallet);
 

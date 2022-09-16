@@ -5,7 +5,7 @@ interface Props {
 	action: PayloadAction;
 }
 
-interface CoinItem {
+export interface CoinItem {
 	id: string;
 	symbol: string;
 	name: string;
