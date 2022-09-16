@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 interface Props {
@@ -6,14 +7,15 @@ interface Props {
 	appendBefore?: string | number;
 	appendAfter?: string | number;
 	leftAlign?: boolean;
+	hrefRoute?: string;
+	imgSrc?: string;
 }
-const TableData = ({ children, isBold, appendBefore, appendAfter, leftAlign }: Props) => {
+const TableData = ({ children, isBold, appendBefore, appendAfter, leftAlign, hrefRoute = '', imgSrc }: Props) => {
 	return (
 		<td
-			className={`flex items-center justify-center h-full py-sm px-xs align-middle text-sm text-font 
-			first:pl-xs last:pr-xs
+			className={`px-xs text-sm text-font h-[6rem]
+			first:pl-xs first last:pr-xs
 			${isBold && 'font-semibold'} 
-			${leftAlign ? 'text-start' : 'text-end'}
 			md:table-cell [&:nth-child(1)]:text-center
 			${
 				appendAfter === '%'
@@ -23,9 +25,26 @@ const TableData = ({ children, isBold, appendBefore, appendAfter, leftAlign }: P
 					: ''
 			}
 			`}>
-			<span className='font-bold'>{appendBefore ?? ''}</span>
-			{children}
-			<span className='font-bold'> {appendAfter ?? ' '}</span>
+			{hrefRoute ? (
+				<Link passHref href={`/explore/${hrefRoute.toLowerCase()}`} className=''>
+					<a className={`flex ${leftAlign ? 'justify-start' : 'justify-end'} items-center w-full h-full`}>
+						<span className='font-bold'>{appendBefore ?? ''}</span>
+						{imgSrc && (
+							<div className=' w-[3rem] mr-4'>
+								<Image layout='responsive' src={imgSrc!} width={'10'} height={'10'} alt={`${hrefRoute} icon`} />
+							</div>
+						)}
+						{children}
+						<span className='font-bold'> {appendAfter ?? ' '}</span>
+					</a>
+				</Link>
+			) : (
+				<>
+					<span className='font-bold'>{appendBefore ?? ''}</span>
+					{children}
+					<span className='font-bold'> {appendAfter ?? ' '}</span>
+				</>
+			)}
 		</td>
 	);
 };

@@ -36,11 +36,10 @@ const Explore = () => {
 						<colgroup>
 							<col className='w-[2%]' />
 							<col className='w-[3%]' />
-							<col className='w-[20%]' />
-							<col className='w-[20%]' />
-							<col className='w-[15%]' />
 							<col className='w-[25%]' />
-							<col className='w-[15%]' />
+							<col className='w-[25%]' />
+							<col className='w-[20%]' />
+							<col className='w-[25%]' />
 						</colgroup>
 						<TableHead>
 							<TableRow>
@@ -50,7 +49,6 @@ const Explore = () => {
 								<TableHeader>Current price</TableHeader>
 								<TableHeader>24h change</TableHeader>
 								<TableHeader>Capitalization</TableHeader>
-								{/* <TableHeader>Price change</TableHeader> */}
 							</TableRow>
 						</TableHead>
 						<TableBody>
@@ -58,22 +56,24 @@ const Explore = () => {
 								data.map((coin: CoinItem, index: number) => {
 									return (
 										<TableRow key={uuidv4()}>
-											<TableData>
+											<TableData hrefRoute={coin.symbol}>
 												<FavouriteButton />
 											</TableData>
-											<TableData isBold={true}>{index + 1}</TableData>
-											<TableData leftAlign={true}>
-												<Link passHref href={`/explore/${coin.symbol.toLowerCase()}`}>
-													<a>
-														<Image src={coin.image} height={30} width={30} alt={`${coin.name} icon`} />
-														{coin.name}
-													</a>
-												</Link>
+											<TableData hrefRoute={coin.symbol} isBold={true}>
+												{index + 1}
 											</TableData>
-											<TableData appendAfter={'USD'}>{coin.current_price.toFixed(2)}</TableData>
-											<TableData appendAfter={'%'}>{coin.price_change_percentage_24h}</TableData>
-											<TableData appendAfter={'USD'}>{coin.market_cap}</TableData>
-											{/* <TableData>[]</TableData> */}
+											<TableData imgSrc={coin.image} hrefRoute={coin.symbol} leftAlign={true}>
+												{coin.name}
+											</TableData>
+											<TableData hrefRoute={coin.symbol} appendAfter={'USD'}>
+												{coin.current_price.toFixed(2)}
+											</TableData>
+											<TableData hrefRoute={coin.symbol} appendAfter={'%'}>
+												{coin.price_change_percentage_24h}
+											</TableData>
+											<TableData hrefRoute={coin.symbol} appendAfter={'USD'}>
+												{coin.market_cap}
+											</TableData>
 										</TableRow>
 									);
 								})}
