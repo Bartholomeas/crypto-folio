@@ -1,20 +1,30 @@
 import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
+import { data } from '../components/molecules/SmallLineChart/SmallLineChart';
 
 const useFetch = (url?: string) => {
+	const [data, setData] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState('null');
 
-	const getData = useCallback(async () => {
+	const sendRequest = async () => {
+		setIsLoading(true);
+		setError('null');
 		try {
-			const data = url && (await axios(url));
-			console.log('data sie wykonuje');
-		} catch {
-			throw new Error('Something went wrong');
+			const response = await axios(url!);
+			setData(response);
+			response;
+		} catch (err) {
+			setError('Something went wrong!');
+			throw new Error('Something went wrong!');
 		}
-	}, [url]);
+	};
+
 	useEffect(() => {
-		getData();
-	}, [url, getData]);
+		sendRequest();
+	}, [url]);
+
+	return { data };
 };
 
 export default useFetch;
