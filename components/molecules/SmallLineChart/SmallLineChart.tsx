@@ -34,8 +34,7 @@ export const data = {
 	datasets: [
 		{
 			fill: true,
-			label: 'Dataset 2',
-			data: labels.map(() => Math.random() * 10),
+			data: labels.map(() => 2137),
 			borderColor: 'rgb(53, 162, 235)',
 			backgroundColor: 'rgba(53, 162, 235, 0.5)',
 		},

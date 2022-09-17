@@ -1,11 +1,11 @@
-import Image from 'next/image';
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Link from 'next/link';
+import axios from 'axios';
+
 import FavouriteButton from '../components/atoms/FavouriteButton/FavouriteButton';
 import MarginBox from '../components/atoms/MarginBox/MarginBox';
 import PageHeader from '../components/atoms/PageHeader/PageHeader';
-import SmallLineChart from '../components/molecules/SmallLineChart/SmallLineChart';
+
 import TableBody from '../components/molecules/TableBody/TableBody';
 import TableData from '../components/molecules/TableData/TableData';
 import TableHead from '../components/molecules/TableHead/TableHead';
@@ -16,9 +16,9 @@ import Table from '../components/organisms/Table/Table';
 import { useGetCoinsQuery } from '../state/apiSlice';
 import { CoinItem } from '../state/coinsSlice';
 
-const Explore = () => {
+const Explore = ({ coins }: any) => {
 	const { data, error, isLoading, isSuccess } = useGetCoinsQuery('');
-
+	console.log(coins);
 	return (
 		<main
 			className='flex flex-col items-start gap w-full px min-h-[100vh] overflow-auto max-w
@@ -29,8 +29,6 @@ const Explore = () => {
 				<Searchbar placeholderText='Search for..' />
 				<div className='flex flex-col justify-center w-full'>
 					{isLoading && <p className='font-bold text-xl text-font'>Loading...</p>}
-
-					<SmallLineChart />
 
 					<Table>
 						<colgroup>
@@ -53,25 +51,25 @@ const Explore = () => {
 						</TableHead>
 						<TableBody>
 							{isSuccess &&
-								data.map((coin: CoinItem, index: number) => {
+								coins.map((coin: CoinItem, index: number) => {
 									return (
 										<TableRow key={uuidv4()}>
-											<TableData hrefRoute={coin.symbol}>
+											<TableData hrefRoute={coin.name}>
 												<FavouriteButton />
 											</TableData>
-											<TableData hrefRoute={coin.symbol} isBold={true}>
+											<TableData hrefRoute={coin.name} isBold={true}>
 												{index + 1}
 											</TableData>
-											<TableData imgSrc={coin.image} hrefRoute={coin.symbol} leftAlign={true}>
+											<TableData imgSrc={coin.image} hrefRoute={coin.name} leftAlign={true}>
 												{coin.name}
 											</TableData>
-											<TableData hrefRoute={coin.symbol} appendAfter={'USD'}>
+											<TableData hrefRoute={coin.name} appendAfter={'USD'}>
 												{coin.current_price.toFixed(2)}
 											</TableData>
-											<TableData hrefRoute={coin.symbol} appendAfter={'%'}>
+											<TableData hrefRoute={coin.name} appendAfter={'%'}>
 												{coin.price_change_percentage_24h}
 											</TableData>
-											<TableData hrefRoute={coin.symbol} appendAfter={'USD'}>
+											<TableData hrefRoute={coin.name} appendAfter={'USD'}>
 												{coin.market_cap}
 											</TableData>
 										</TableRow>
@@ -84,5 +82,21 @@ const Explore = () => {
 		</main>
 	);
 };
+
+export async function getStaticProps() {
+	try {
+		const res = await axios(
+			'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h'
+		);
+		return {
+			props: {
+				coins: res.data,
+			},
+			revalidate: 60,
+		};
+	} catch {
+		throw new Error('Something went wrong in staticProps :(');
+	}
+}
 
 export default Explore;

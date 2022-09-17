@@ -11,8 +11,6 @@ const useReduxDispatch = () => {
 	const dispatch = useAppDispatch();
 	const { isNavOpen, isThemeDark, isInfoPanelOpen } = useAppSelector(state => state.ui);
 
-
-	
 	const { coinsList } = useAppSelector(state => state.coins);
 	const {} = useAppSelector(state => state.wallet);
 
