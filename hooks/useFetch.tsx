@@ -13,7 +13,7 @@ const useFetch = (url?: string) => {
 		try {
 			const response = await axios(url!);
 			setData(response);
-			console.log(response);
+			response;
 		} catch (err) {
 			setError('Something went wrong!');
 			throw new Error('Something went wrong!');
