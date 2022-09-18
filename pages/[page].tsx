@@ -115,7 +115,6 @@ export const getStaticPaths = async () => {
 			{ params: { page: '8' } },
 			{ params: { page: '9' } },
 			{ params: { page: '10' } },
-			{ params: { page: '10' } },
 		],
 		fallback: true,
 	};
