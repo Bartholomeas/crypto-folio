@@ -26,7 +26,7 @@ const TableData = ({ children, isBold, appendBefore, appendAfter, leftAlign, hre
 			}
 			`}>
 			{hrefRoute ? (
-				<Link passHref href={`/explore/${hrefRoute.toLowerCase()}`} className=''>
+				<Link passHref href={`/coins/${hrefRoute.toLowerCase()}`} className=''>
 					<a className={`flex ${leftAlign ? 'justify-start' : 'justify-end'} items-center w-full h-full`}>
 						<span className='font-bold'>{appendBefore ?? ''}</span>
 						{imgSrc && (

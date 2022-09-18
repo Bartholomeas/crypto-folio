@@ -1,88 +1,118 @@
+import { useEffect, useState } from 'react';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
+
+import FavouriteButton from '../components/atoms/FavouriteButton/FavouriteButton';
+import MarginBox from '../components/atoms/MarginBox/MarginBox';
+import PageHeader from '../components/atoms/PageHeader/PageHeader';
+
+import TableBody from '../components/molecules/TableBody/TableBody';
 import TableData from '../components/molecules/TableData/TableData';
+import TableHead from '../components/molecules/TableHead/TableHead';
 import TableHeader from '../components/molecules/TableHeader/TableHeader';
 import TableRow from '../components/molecules/TableRow/TableRow';
-import DailyChangeGraph from '../components/organisms/DailyChangeGraph/DailyChangeGraph';
-import InfoAssetsBox from '../components/organisms/InfoAssetsBox/InfoAssetsBox';
-import TotalAssetsValue from '../components/organisms/TotalAssetsValue/TotalAssetsValue';
-import Table from '../components/organisms/Table/Table';
-import TableHead from '../components/molecules/TableHead/TableHead';
-import TableBody from '../components/molecules/TableBody/TableBody';
-import MarginBox from '../components/atoms/MarginBox/MarginBox';
-import SecondHeader from '../components/atoms/SecondHeader/SecondHeader';
-import PageHeader from '../components/atoms/PageHeader/PageHeader';
 import Searchbar from '../components/organisms/Searchbar/Searchbar';
+import Table from '../components/organisms/Table/Table';
+import { CoinItem } from '../state/coinsSlice';
 
-const Dashboard = () => {
+const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
+	const [currentCoins, setCurrentCoins] = useState([]);
+	const [filteredCoins, setFilteredCoins] = useState<CoinItem | CoinItem[]>([]);
+	const [page, setPage] = useState(1);
+
+	useEffect(() => {
+		setCurrentCoins(coins);
+		console.log(currentCoins);
+	}, []);
+
+	const getInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+		console.log(e.target.value);
+	};
+
 	return (
 		<main
-			className='flex flex-col items-start gap-sm w-full md:max-w px pb-[10rem] min-h-[100vh] bg-white overflow-y-auto
-		md:h-[100vh] md:py-lg md:mr-[5rem]'>
+			className='flex flex-col items-start gap w-full px min-h-[100vh] overflow-auto max-w
+    md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem]'>
 			<MarginBox />
-			<PageHeader appendAfter='of DefaultWallet'>Dashboard</PageHeader>
-			<div className='cards flex flex-col gap-sm w-full lg:flex-row'>
-				<DailyChangeGraph />
-				<TotalAssetsValue totalValue={32227} valueInBtc={0.3} changePercent={10} changeValue={21.34} />
-				<div className='flex flex-col lg:w-[35%] gap-sm'>
-					<InfoAssetsBox asset='Atom' changeValue={14} isPercent={true}>
-						Biggest move
-					</InfoAssetsBox>
-					<InfoAssetsBox asset='Juno' changeValue={21}>
-						Biggest 24h profit
-					</InfoAssetsBox>
-				</div>
-			</div>
+			<PageHeader>all Cryptocurrencies</PageHeader>
+			<div className='top-[5rem] flex flex-col gap w-full pt'>
+				<Searchbar onChangeFunc={getInputValue} placeholderText='Search for..' />
+				<div className='flex flex-col justify-center w-full'>
+					{/* {isLoading && <p className='font-bold text-xl text-font'>Loading...</p>} */}
 
-			<div className='flex flex-col gap w-full mt-[5rem]'>
-				<SecondHeader>Explore coins</SecondHeader>
-				<Searchbar placeholderText='Search your coins..' />
-
-				<div className='w-full  overflow-x-auto'>
 					<Table>
 						<colgroup>
+							<col className='w-[2%]' />
 							<col className='w-[3%]' />
+							<col className='w-[25%]' />
+							<col className='w-[25%]' />
 							<col className='w-[20%]' />
-							<col className='w-[20%]' />
-							<col className='w-[15%]' />
-							<col className='w-[20%]' />
-							<col className='w-[22%]' />
+							<col className='w-[25%]' />
 						</colgroup>
 						<TableHead>
 							<TableRow>
+								<TableHeader></TableHeader>
 								<TableHeader>#</TableHeader>
 								<TableHeader leftAlign={true}>Name</TableHeader>
 								<TableHeader>Current price</TableHeader>
 								<TableHeader>24h change</TableHeader>
-								<TableHeader>Quantity</TableHeader>
-								<TableHeader>Value</TableHeader>
+								<TableHeader>Capitalization</TableHeader>
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							<TableRow>
-								<TableData isBold={true}>1</TableData>
-								<TableData leftAlign={true}>Bitcoin</TableData>
-								<TableData appendAfter={'USD'}>21321</TableData>
-								<TableData appendAfter={'%'} isBold={true}>
-									21.2
-								</TableData>
-								<TableData>0.73</TableData>
-								<TableData appendAfter={'USD'}>15600</TableData>
-							</TableRow>
-							<TableRow>
-								<TableData isBold={true}>1</TableData>
-								<TableData leftAlign={true}>Bitcoin</TableData>
-								<TableData appendAfter={'USD'}>21321</TableData>
-								<TableData appendAfter={'%'} isBold={true}>
-									21.2
-								</TableData>
-								<TableData>0.73</TableData>
-								<TableData appendAfter={'USD'}>15600</TableData>
-							</TableRow>
+							{currentCoins.map((coin: CoinItem, index: number) => {
+								return (
+									<TableRow key={uuidv4()}>
+										<TableData hrefRoute={coin.name}>
+											<FavouriteButton />
+										</TableData>
+										<TableData hrefRoute={coin.id} isBold={true}>
+											{index + 1}
+										</TableData>
+										<TableData imgSrc={coin.image} hrefRoute={coin.id} leftAlign={true}>
+											{coin.name}
+										</TableData>
+										<TableData hrefRoute={coin.id} appendAfter={'USD'}>
+											{coin.current_price.toFixed(2)}
+										</TableData>
+										<TableData hrefRoute={coin.id} appendAfter={'%'}>
+											{coin.price_change_percentage_24h}
+										</TableData>
+										<TableData hrefRoute={coin.id} appendAfter={'USD'}>
+											{coin.market_cap}
+										</TableData>
+									</TableRow>
+								);
+							})}
 						</TableBody>
 					</Table>
 				</div>
 			</div>
+			<p className='text-xs text-fontLight'>
+				Crypto data powered by{' '}
+				<a className='text-accent' rel='noreferrer' target={'_blank'} href='https://www.coingecko.com/'>
+					Coingecko API
+				</a>
+			</p>
 		</main>
 	);
 };
 
-export default Dashboard;
+export const getStaticProps: GetStaticProps = async () => {
+	try {
+		const res = await axios(
+			'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h'
+		);
+		return {
+			props: {
+				coins: res.data,
+			},
+			revalidate: 60,
+		};
+	} catch {
+		throw new Error('Something went wrong in staticProps :(');
+	}
+};
+
+export default Explore;
