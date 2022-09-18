@@ -44,14 +44,14 @@ const Navbar = () => {
 				<NavList>
 					<NavListItem>
 						<NavLinkItem route='/' routerPath={router.pathname}>
-							<MdDashboard className='icon' />
-							Dashboard
+							<MdSearch className='icon' />
+							Explore
 						</NavLinkItem>
 					</NavListItem>
 					<NavListItem>
-						<NavLinkItem route='/explore' routerPath={router.pathname}>
-							<MdSearch className='icon' />
-							Explore
+						<NavLinkItem route='/dashboard' routerPath={router.pathname}>
+							<MdDashboard className='icon' />
+							Dashboard
 						</NavLinkItem>
 					</NavListItem>
 					<NavListItem>

@@ -41,8 +41,8 @@ export const data = {
 	],
 };
 
-const SmallLineChart = () => {
+const SparklineChart = () => {
 	return <Line options={options} data={data} />;
 };
 
-export default SmallLineChart;
+export default SparklineChart;
