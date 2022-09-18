@@ -15,15 +15,13 @@ import TableRow from '../components/molecules/TableRow/TableRow';
 import Searchbar from '../components/organisms/Searchbar/Searchbar';
 import Table from '../components/organisms/Table/Table';
 import { CoinItem } from '../state/coinsSlice';
-import Pagination from '../components/organisms/Pagination/Pagination';
 import Footer from '../components/organisms/Footer/Footer';
+import Pagination from '../components/organisms/Pagination/Pagination';
 
-const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const [currentCoins, setCurrentCoins] = useState([]);
-	const [filteredCoins, setFilteredCoins] = useState<CoinItem | CoinItem[]>([]);
-	const [page, setPage] = useState(1);
 
-	const getNextPage = useCallback(async () => {}, [page]);
+	const indexingByPage = page > 1 ? (page - 1) * 100 : 0;
 
 	useEffect(() => {
 		setCurrentCoins(coins);
@@ -71,7 +69,7 @@ const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 											<FavouriteButton />
 										</TableData>
 										<TableData hrefRoute={coin.id} isBold={true}>
-											{index + 1}
+											{indexingByPage + index + 1}
 										</TableData>
 										<TableData imgSrc={coin.image} hrefRoute={coin.id} leftAlign={true}>
 											{coin.name}
@@ -104,21 +102,41 @@ const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 		</main>
 	);
 };
+export const getStaticPaths = async () => {
+	return {
+		paths: [
+			{ params: { page: '1' } },
+			{ params: { page: '2' } },
+			{ params: { page: '3' } },
+			{ params: { page: '4' } },
+			{ params: { page: '5' } },
+			{ params: { page: '6' } },
+			{ params: { page: '7' } },
+			{ params: { page: '8' } },
+			{ params: { page: '9' } },
+			{ params: { page: '10' } },
+			{ params: { page: '10' } },
+		],
+		fallback: true,
+	};
+};
 
-export const getStaticProps: GetStaticProps = async context => {
+export const getStaticProps = async (context: any) => {
+	const { page } = context.params;
+
 	try {
 		const res = await axios(
-			'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h'
+			`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=${page}&sparkline=false&price_change_percentage=24h`
 		);
 		return {
 			props: {
 				coins: res.data,
+				page: page,
 			},
 			revalidate: 60,
 		};
 	} catch {
-		throw new Error('Something went wrong in staticProps :(');
+		throw new Error('Something went wrong :(');
 	}
 };
-
-export default Explore;
+export default SpecifiedPage;

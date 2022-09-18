@@ -39,8 +39,8 @@ module.exports = {
 			},
 
 			colors: {
-				font: '#244A84',
-				fontLight: '#597690',
+				font: '#0C1069',
+				fontLight: '#6F71A9',
 
 				accent: '#111BFF',
 				accentDark: '#0911CF',
