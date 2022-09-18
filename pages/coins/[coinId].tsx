@@ -7,8 +7,6 @@ import useFetch from '../../hooks/useFetch';
 const CoinDetail = ({ coinDetails }: any) => {
 	const router = useRouter();
 	const { coinId } = router.query;
-	console.log(coinId);
-	console.log(coinDetails);
 	return <div>CoinDetail {coinId} </div>;
 };
 

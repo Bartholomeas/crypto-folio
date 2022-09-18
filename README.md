@@ -11,7 +11,7 @@ Crypto-Portfolio app where you can browse cryptocurrencies, check your coins and
 ## Technologies
 
 - React / Next.js
-  -Typescript
+- Typescript
 - Firebase (in progress)
 - Tailwind Css
 - Redux (Redux Toolkit)
