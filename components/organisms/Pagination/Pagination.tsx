@@ -1,26 +1,41 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
 	currPage: number;
 }
 const Pagination = ({ currPage }: Props) => {
-	const [pages, setPages] = useState<any>({ previousPages: [], nextPages: [] });
+	const pagesArr = Array.from({ length: 10 }, (_, idx) => ++idx);
 
-	useEffect(() => {
-		for (let i = 0; i < currPage; i++) {
-			setPages((prevState: any) => ({
-				...prevState,
-				previousPages: [...prevState.previousPages, i],
-			}));
+	const changePage = (pageId: any, next: boolean = true) => {
+		if (+pageId === 10 && next) return 1;
+		if (+pageId === 1 && !next) return 10;
+
+		if (!next) {
+			return +pageId! - 1;
+		} else {
+			return +pageId! + 1;
 		}
-	}, [currPage]);
-	console.log(pages);
+	};
 
 	return (
-		<div className='flex items-center text-font text-xs bg-rose-100 rounded'>
-			<button className=' px-sm text font-semibold'>{'<'}</button>
-			<p className='font-semibold text-sm'>{currPage}</p>
-			<button className=' px-sm text font-semibold'>{'>'}</button>
+		<div className='flex items-center gap-sm text-font text-xs bg-baseLight rounded'>
+			<Link passHref href={`/${changePage(currPage, false)}`}>
+				<a className=' px-xs py-xs text font-semibold'>{'<'}</a>
+			</Link>
+			<button></button>
+			{pagesArr.map(page => {
+				return (
+					<Link key={uuidv4()} passHref href={`/${page}`}>
+						<a className={`px-xs ${+currPage === +page && ' text-sm font-semibold'}`}>{page}</a>
+					</Link>
+				);
+			})}
+			<Link passHref href={`/${changePage(currPage)}`}>
+				<a className='px-xs py-xs text font-semibold'>{'>'}</a>
+			</Link>
 		</div>
 	);
 };

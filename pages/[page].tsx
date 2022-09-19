@@ -18,14 +18,13 @@ import { CoinItem } from '../state/coinsSlice';
 import Footer from '../components/organisms/Footer/Footer';
 import Pagination from '../components/organisms/Pagination/Pagination';
 
-const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServerSideProps>) => {
 	const [currentCoins, setCurrentCoins] = useState([]);
-
 	const indexingByPage = page > 1 ? (page - 1) * 100 : 0;
 
 	useEffect(() => {
 		setCurrentCoins(coins);
-	}, []);
+	}, [coins, page]);
 
 	const getInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
 		console.log(e.target.value);
@@ -102,26 +101,8 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 		</main>
 	);
 };
-export const getStaticPaths = async () => {
-	return {
-		paths: [
-			{ params: { page: '1' } },
-			{ params: { page: '2' } },
-			{ params: { page: '3' } },
-			{ params: { page: '4' } },
-			{ params: { page: '5' } },
-			{ params: { page: '6' } },
-			{ params: { page: '7' } },
-			{ params: { page: '8' } },
-			{ params: { page: '9' } },
-			{ params: { page: '10' } },
-			{ params: { page: '10' } },
-		],
-		fallback: true,
-	};
-};
 
-export const getStaticProps = async (context: any) => {
+export const getServerSideProps = async (context: any) => {
 	const { page } = context.params;
 
 	try {
@@ -133,7 +114,7 @@ export const getStaticProps = async (context: any) => {
 				coins: res.data,
 				page: page,
 			},
-			revalidate: 60,
+			// revalidate: 60,
 		};
 	} catch {
 		throw new Error('Something went wrong :(');
