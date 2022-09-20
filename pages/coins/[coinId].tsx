@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { GetServerSideProps, GetServerSidePropsContext, GetStaticProps, GetStaticPropsContext } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import axios from 'axios';
-import { useRouter } from 'next/router';
+import { v4 as uuidv4 } from 'uuid';
 import CoinHeadBox from '../../components/molecules/CoinHeadBox/CoinHeadBox';
-import LinksContainer from '../../components/molecules/LinksContainer/LinksContainer';
+import LinkItem from '../../components/atoms/LinkItem/LinkItem';
 
 interface InitialStateProps {
-	homepage: string;
+	homepage: string | string[];
 	blockchain_site: string | string[];
-	github: string;
-	reddit: string;
-	forum: string;
+	github: string | string[];
+	reddit: string | string[];
+	forum: string | string[];
 }
 
 const initialState: InitialStateProps = {
@@ -22,17 +22,27 @@ const initialState: InitialStateProps = {
 };
 
 const CoinDetails = ({ coinDetails }: any) => {
-	const router = useRouter();
-	const [links, setLinks] = useState(initialState);
+	const [links, setLinks] = useState<InitialStateProps>(initialState);
 
-	// console.log(coinDetails.links);
-	const { homepage, subreddit_url, blockchain_site, official_forum_url } = coinDetails.links;
+	const {
+		homepage,
+		subreddit_url,
+		blockchain_site,
+		official_forum_url,
+		repos_url: { github },
+	} = coinDetails.links;
 
 	const linksArray = { homepage, subreddit_url, blockchain_site, official_forum_url };
 
-	useEffect(() => {}, []);
-	console.log(links);
-
+	useEffect(() => {
+		setLinks({
+			homepage: homepage,
+			blockchain_site: blockchain_site,
+			github: github,
+			reddit: subreddit_url,
+			forum: official_forum_url,
+		});
+	}, [homepage, subreddit_url, blockchain_site, official_forum_url, github]);
 	return (
 		<main
 			className='flex flex-col items-start gap w-full px min-h-[100vh] max-w
@@ -41,22 +51,18 @@ const CoinDetails = ({ coinDetails }: any) => {
 				<div className='coin-name-box'>
 					<CoinHeadBox name={coinDetails.name} symbol={coinDetails.symbol} rank={coinDetails.market_cap_rank} />
 				</div>
-				<div>
-
-					
+				<div className='links flex items-center py'>
+					{coinDetails &&
+						Object.entries(links).map(([key, value]) => {
+							return <LinkItem key={uuidv4()} allLinks={value} linkKey={key} />;
+						})}
+					<LinkItem key={uuidv4()} allLinks={'testLink'} linkKey={'testKey'} />
 				</div>
 			</div>
 			<div className='coin-prices'></div>
 		</main>
 	);
 };
-
-// export const getStaticPaths = async () => {
-// 	return {
-// 		paths: [],
-// 		fallback: true,
-// 	};
-// };
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
 	const coinId = context!.params!.coinId;
