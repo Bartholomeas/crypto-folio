@@ -2,7 +2,7 @@ import React from 'react';
 import { MdStar, MdStarBorder } from 'react-icons/md';
 
 interface Props {
-	isBox: boolean;
+	isBox?: boolean;
 }
 
 const FavouriteButton = ({ isBox = false }: Props) => {

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import CoinHeadBox from '../../components/molecules/CoinHeadBox/CoinHeadBox';
 import LinksContainer from '../../components/molecules/LinksContainer/LinksContainer';
+import LinkBoxy from '../../components/atoms/LinkBoxy/LinkBoxy';
 
 interface InitialStateProps {
 	homepage: string;
@@ -41,9 +42,8 @@ const CoinDetails = ({ coinDetails }: any) => {
 				<div className='coin-name-box'>
 					<CoinHeadBox name={coinDetails.name} symbol={coinDetails.symbol} rank={coinDetails.market_cap_rank} />
 				</div>
-				<div>
-
-					
+				<div className='links'>
+					<LinkBoxy>hehehe</LinkBoxy>
 				</div>
 			</div>
 			<div className='coin-prices'></div>
