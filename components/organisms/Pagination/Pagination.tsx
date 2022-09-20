@@ -21,7 +21,7 @@ const Pagination = ({ currPage }: Props) => {
 	};
 
 	return (
-		<div className='flex items-center gap-sm text-font text-xs bg-baseLight rounded'>
+		<div className='flex items-center justify-between gap-xs w-full text-font text-xs bg-baseLight rounded md:justify-center md:mx-auto md:w-auto'>
 			<Link passHref href={`/${changePage(currPage, false)}`}>
 				<a className=' px-xs py-xs text font-semibold'>{'<'}</a>
 			</Link>
