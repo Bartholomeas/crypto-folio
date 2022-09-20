@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import {  InferGetStaticPropsType } from 'next';
+import { InferGetStaticPropsType } from 'next';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
@@ -33,7 +33,7 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServer
 	return (
 		<main
 			className='flex flex-col items-start gap w-full px min-h-[100vh]  max-w
-    md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem]'>
+    md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] md:overflow-y-scroll'>
 			<MarginBox />
 			<PageHeader>all Cryptocurrencies</PageHeader>
 			<div className='top-[5rem] flex flex-col gap w-full pt'>

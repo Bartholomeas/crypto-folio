@@ -6,28 +6,29 @@ interface Props {
 	linkKey: string;
 }
 const LinkItem = ({ allLinks, linkKey }: Props): any => {
-	Array.isArray(allLinks) ? (
-		allLinks.map(link => {
+	if (Array.isArray(allLinks)) {
+		return allLinks.map(link => {
 			if (link === '') return;
-			console.log(link);
 			return (
 				<a
 					key={uuidv4()}
 					href={link}
 					target='blank'
-					className='flex items-center justify-center w-fit h-[3rem] px py-[0.6rem] bg-baseLight text-xs font-semibold text-fontLight rounded-lg cursor-pointer hover:bg-baseVeryLight transition-colors'>
-					asdasdasd a
+					className='flex items-center justify-center min-w-[3rem] w-fit h-[3rem] px py-[0.6rem] bg-baseLight text-xs font-semibold text-fontLight rounded-lg cursor-pointer hover:bg-baseVeryLight transition-colors'>
+					{linkKey}
 				</a>
 			);
-		})
-	) : (
-		<a
-			href={'allLinks'}
-			target='blank'
-			className='flex items-center justify-center w-fit h-[3rem] px py-[0.6rem] bg-baseLight text-xs font-semibold text-fontLight rounded-lg cursor-pointer hover:bg-baseVeryLight transition-colors'>
-			Test link that isnt rendering
-		</a>
-	);
+		});
+	} else {
+		return (
+			<a
+				href={'allLinks'}
+				target='blank'
+				className='flex items-center justify-center w-fit h-[3rem] px py-[0.6rem] bg-baseLight text-xs font-semibold text-fontLight rounded-lg cursor-pointer hover:bg-baseVeryLight transition-colors'>
+				Test link that isnt rendering
+			</a>
+		);
+	}
 };
 
 export default LinkItem;

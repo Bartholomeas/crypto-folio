@@ -47,19 +47,25 @@ const CoinDetails = ({ coinDetails }: any) => {
 		<main
 			className='flex flex-col items-start gap w-full px min-h-[100vh] max-w
 		md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] py-[10rem] '>
-			<div className='coin-info-heading'>
-				<div className='coin-name-box'>
+			<div className='top-container flex justify-between h-[50rem] w-full py'>
+				<div className='coin-info-heading flex flex-col md:flex-row'>
 					<CoinHeadBox name={coinDetails.name} symbol={coinDetails.symbol} rank={coinDetails.market_cap_rank} />
+					<div className='links'>
+						{coinDetails &&
+							Object.entries(links).map(([key, value]) => {
+								return (
+									<>
+										<LinkItem key={uuidv4()} allLinks={value} linkKey={key} />
+									</>
+								);
+							})}
+					</div>
 				</div>
-				<div className='links flex items-center py'>
-					{coinDetails &&
-						Object.entries(links).map(([key, value]) => {
-							return <LinkItem key={uuidv4()} allLinks={value} linkKey={key} />;
-						})}
-					<LinkItem key={uuidv4()} allLinks={'testLink'} linkKey={'testKey'} />
-				</div>
+				<div
+					className='relative w-full h-fit
+				md:w-[50%] px
+				before:absolute before:content-[""] before:top-0 before:left-[-0.3rem] before:bg-slate-100 before:h-full before:w-2 before:rounded-lg'></div>
 			</div>
-			<div className='coin-prices'></div>
 		</main>
 	);
 };

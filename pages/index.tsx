@@ -36,7 +36,7 @@ const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	return (
 		<main
 			className='flex flex-col items-start gap w-full px min-h-[100vh]  max-w
-    md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem]'>
+    md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] md:overflow-y-scroll'>
 			<MarginBox />
 			<PageHeader>all Cryptocurrencies</PageHeader>
 			<div className='top-[5rem] flex flex-col gap w-full pt'>
