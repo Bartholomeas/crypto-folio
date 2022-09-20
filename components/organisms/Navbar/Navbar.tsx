@@ -72,10 +72,10 @@ const Navbar = () => {
 						</NavLinkItem>
 					</NavListItem>
 					<li className='flex mx-auto md:ml-0'>
-						<a className='flex flex-row-reverse items-center justify-center gap-sm py-md text-error text-sm cursor-pointer md:flex-row md:justify-start'>
+						<button className='flex flex-row-reverse items-center justify-center gap-sm py-md text-error text-sm cursor-pointer md:flex-row md:justify-start'>
 							<MdLogout className='icon text-error' />
 							Logout
-						</a>
+						</button>
 					</li>
 				</NavList>
 				<div className='flex flex-row-reverse justify-center items-center gap-sm w-full px-md md:flex-col md:items-start'>

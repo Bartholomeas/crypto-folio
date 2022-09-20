@@ -40,7 +40,7 @@ module.exports = {
 
 			colors: {
 				font: '#0C1069',
-				fontLight: '#6F71A9',
+				fontLight: '#5E76C9',
 
 				accent: '#111BFF',
 				accentDark: '#0911CF',
