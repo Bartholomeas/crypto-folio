@@ -3,7 +3,9 @@ import { GetServerSidePropsContext } from 'next';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import CoinHeadBox from '../../components/molecules/CoinHeadBox/CoinHeadBox';
-import LinkItem from '../../components/atoms/LinkItem/LinkItem';
+import LinkItem from '../../components/molecules/LinkItem/LinkItem';
+import CoinPriceBox from '../../components/molecules/CoinPriceBox/CoinPriceBox';
+import CoinMarketData from '../../components/molecules/CoinMarketData/CoinMarketData';
 
 interface InitialStateProps {
 	homepage: string | string[];
@@ -23,7 +25,6 @@ const initialState: InitialStateProps = {
 
 const CoinDetails = ({ coinDetails }: any) => {
 	const [links, setLinks] = useState<InitialStateProps>(initialState);
-
 	const {
 		homepage,
 		subreddit_url,
@@ -32,7 +33,21 @@ const CoinDetails = ({ coinDetails }: any) => {
 		repos_url: { github },
 	} = coinDetails.links;
 
-	const linksArray = { homepage, subreddit_url, blockchain_site, official_forum_url };
+	const {
+		symbol,
+		name,
+		market_cap_rank,
+		description,
+		image,
+		market_data,
+		market_cap,
+		total_volume,
+		total_supply,
+		max_supply,
+		circulating_supply,
+	} = coinDetails;
+
+	// console.log(market_data.sparkline_7d.price);
 
 	useEffect(() => {
 		setLinks({
@@ -43,23 +58,44 @@ const CoinDetails = ({ coinDetails }: any) => {
 			forum: official_forum_url,
 		});
 	}, [homepage, subreddit_url, blockchain_site, official_forum_url, github]);
+
 	return (
 		<main
 			className='flex flex-col items-start gap w-full px min-h-[100vh] max-w
 		md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] py-[10rem] '>
-			<div className='coin-info-heading'>
-				<div className='coin-name-box'>
-					<CoinHeadBox name={coinDetails.name} symbol={coinDetails.symbol} rank={coinDetails.market_cap_rank} />
+			<div
+				className='top-container flex flex-col gap-xl h-[50rem] w-full py
+			md:flex-row'>
+				<div
+					className='coin-info-heading flex flex-col gap-lg 
+				md:max-w-[50%]'>
+					<CoinHeadBox name={name} symbol={symbol} rank={market_cap_rank} />
+					<div className='links flex items-center gap-sm flex-wrap w-fit'>
+						{coinDetails &&
+							Object.entries(links).map(([key, value]) => {
+								return <LinkItem key={uuidv4()} allLinks={value} linkKey={key} />;
+							})}
+					</div>
 				</div>
-				<div className='links flex items-center py'>
-					{coinDetails &&
-						Object.entries(links).map(([key, value]) => {
-							return <LinkItem key={uuidv4()} allLinks={value} linkKey={key} />;
-						})}
-					<LinkItem key={uuidv4()} allLinks={'testLink'} linkKey={'testKey'} />
+				<div
+					className='relative w-full h-fit
+				md:w-[50%] px
+				before:absolute before:content-[""] before:top-0 before:left-[-0.3rem] before:bg-slate-100 before:h-full before:w-2 before:rounded-lg'>
+					<CoinPriceBox
+						name={name}
+						market_cap={market_cap}
+						volume={total_volume}
+						curr_price={market_data.current_price.usd}
+						high={market_data.high_24h.usd}
+						low={market_data.low_24h.usd}
+						price_change_24h={market_data.price_change_percentage_24h.toFixed(2)}
+						total_supply={total_supply}
+						max_supply={max_supply}
+						circulatin_supply={circulating_supply}></CoinPriceBox>
+
+					<CoinMarketData>Pepe</CoinMarketData>
 				</div>
 			</div>
-			<div className='coin-prices'></div>
 		</main>
 	);
 };
