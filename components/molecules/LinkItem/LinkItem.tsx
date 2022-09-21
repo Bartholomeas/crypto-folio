@@ -19,18 +19,18 @@ const LinkItem = ({ allLinks, linkKey }: Props): any => {
 			<div className='relative flex-col gap-sm h-[3rem]'>
 				<button
 					onClick={toggleLinkList}
-					className=' flex items-center justify-center min-w-[3rem] w-fit h-[3rem] px py-[0.6rem] bg-baseLight text-xs font-semibold text-fontLight rounded-lg cursor-pointer hover:bg-baseVeryLight transition-colors z-100'>
+					className='flex items-center justify-center min-w-[3rem] w-fit h-[3rem] px py-[0.6rem] bg-baseLight text-xs font-semibold text-fontLight rounded-lg cursor-pointer hover:bg-baseVeryLight transition-colors'>
 					{linkKey}
 				</button>
 				<ul
 					className={`${
-						isOpen ? 'scale-1 translate-x-0' : 'scale-0 translate-x-1/2'
+						isOpen ? 'ascale-1 translate-x-0' : 'scale-0 translate-x-1/2'
 					} absolute t-[3rem] origin-top transition-transform`}>
 					{allLinks.map(link => {
 						if (link === '' || link === null) return;
 
 						return (
-							<li key={uuidv4()}>
+							<li key={uuidv4()} className='z-1000'>
 								<a
 									onClick={e => toggleLinkList(e, true)}
 									href={link}

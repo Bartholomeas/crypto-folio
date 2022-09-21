@@ -62,24 +62,27 @@ const CoinDetails = ({ coinDetails }: any) => {
 	return (
 		<main
 			className='flex flex-col items-start gap w-full px min-h-[100vh] max-w
-		md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] py-[10rem] '>
+		md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] py-[10rem] pb-[20rem] md:pb-auto '>
 			<div
-				className='top-container flex flex-col gap-xl h-[50rem] w-full py
+				className='top-container flex flex-col gap-xl h-fit w-full py
 			md:flex-row'>
 				<div
-					className='coin-info-heading flex flex-col gap-lg 
-				md:max-w-[50%]'>
+					className='coin-info-heading flex flex-col gap 
+				md:max-w-[35%]'>
 					<CoinHeadBox name={name} symbol={symbol} rank={market_cap_rank} />
-					<div className='links flex items-center gap-sm flex-wrap w-fit'>
-						{coinDetails &&
-							Object.entries(links).map(([key, value]) => {
-								return <LinkItem key={uuidv4()} allLinks={value} linkKey={key} />;
-							})}
+					<div className='flex flex-col gap-sm'>
+						<p className='text-fontLight text-sm font-semibold'>links</p>
+						<div className='links flex items-center gap-sm flex-wrap w-fit'>
+							{coinDetails &&
+								Object.entries(links).map(([key, value]) => {
+									return <LinkItem key={uuidv4()} allLinks={value} linkKey={key} />;
+								})}
+						</div>
 					</div>
 				</div>
 				<div
-					className='relative w-full h-fit
-				md:w-[50%] px
+					className='relative flex flex-col gap w-full h-fit
+				md:w-[65%] px md:h-full
 				before:absolute before:content-[""] before:top-0 before:left-[-0.3rem] before:bg-slate-100 before:h-full before:w-2 before:rounded-lg'>
 					<CoinPriceBox
 						name={name}
@@ -93,8 +96,16 @@ const CoinDetails = ({ coinDetails }: any) => {
 						max_supply={max_supply}
 						circulatin_supply={circulating_supply}></CoinPriceBox>
 
-					<CoinMarketData>Pepe</CoinMarketData>
+					<div className='market-datas flex flex-col gap-sm w-full lg:flex-row md:gap-lg'>
+						<CoinMarketData dataValue={43255321}>Market cap</CoinMarketData>
+						<CoinMarketData dataValue={43255321}>Volume</CoinMarketData>
+						<CoinMarketData dataValue={43255321}>Circulating supply</CoinMarketData>
+					</div>
 				</div>
+			</div>
+
+			<div className='content-container'>
+				
 			</div>
 		</main>
 	);
