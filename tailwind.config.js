@@ -40,6 +40,7 @@ module.exports = {
 
 			colors: {
 				font: '#0C1069',
+				fontOff: '#244A84',
 				fontLight: '#5E76C9',
 
 				accent: '#111BFF',
@@ -61,6 +62,7 @@ module.exports = {
 				sm: '.8rem',
 				DEFAULT: '2rem',
 				lg: '4rem',
+				xl: '8rem',
 			},
 		},
 	},
