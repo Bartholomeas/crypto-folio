@@ -2,18 +2,7 @@ import React from 'react';
 import DetailsBigPrice from '../../atoms/DetailsBigPrice/DetailsBigPrice';
 import PriceChangeDetails from '../../atoms/PriceChangeDetails/PriceChangeDetails';
 
-const CoinPriceBox = ({
-	name,
-	market_cap,
-	volume,
-	curr_price,
-	high,
-	low,
-	price_change_24h,
-	total_supply,
-	max_supply,
-	circulatin_supply,
-}: any) => {
+const CoinPriceBox = ({ name, curr_price, high, low, price_change_24h }: any) => {
 	return (
 		<div className='flex flex-col'>
 			<p className='text-fontOff text-sm'>{name} price</p>

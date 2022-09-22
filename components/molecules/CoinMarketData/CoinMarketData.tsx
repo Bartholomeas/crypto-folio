@@ -5,9 +5,9 @@ interface Props {
 }
 const CoinMarketData = ({ children, dataValue }: Props) => {
 	return (
-		<div className='flex flex-col'>
-			<p className='text text-fontOff font-bold'>{children}</p>
-			<p className='text-sm text-fontOff font-semibold'>${dataValue}</p>
+		<div className='flex flex-col text-center'>
+			<p className='text text-fontLight '>{children}</p>
+			<p className='text-sm text-font font-semibold'>${dataValue}</p>
 		</div>
 	);
 };
