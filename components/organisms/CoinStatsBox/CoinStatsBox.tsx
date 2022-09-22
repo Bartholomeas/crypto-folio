@@ -20,7 +20,7 @@ const CoinStatsBox = ({ props }: { props: Props }) => {
 	// console.log(props);
 	return (
 		<div className='flex flex-col w-[300px] gap min-h-[300px] px py-sm bg-baseVeryLight rounded'>
-			<h2 className='font-bold text-fontLight'>Cosmos statistics</h2>
+			<h2 className='font-bold text-fontLight'>{props.name} statistics</h2>
 			<ul className='flex flex-col w-full gap-sm '>
 				<li className='flex justify-between items-center border-b-2 py-[0.3rem]'>
 					<p className='text-fontLight text-sm'>Cosmos price</p>
