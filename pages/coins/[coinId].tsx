@@ -8,6 +8,7 @@ import CoinPriceBox from '../../components/molecules/CoinPriceBox/CoinPriceBox';
 import CoinMarketData from '../../components/molecules/CoinMarketData/CoinMarketData';
 import SparklineChart from '../../components/organisms/SparklineChart/SparklineChart';
 import CoinStatsBox from '../../components/organisms/CoinStatsBox/CoinStatsBox';
+import CoinDescription from '../../components/molecules/CoinDescription/CoinDescription';
 
 interface InitialStateProps {
 	homepage: string | string[];
@@ -36,7 +37,6 @@ const CoinDetails = ({ coinDetails }: any) => {
 	} = coinDetails.links;
 
 	const { symbol, name, market_cap_rank, description, image, market_data } = coinDetails;
-
 	useEffect(() => {
 		setLinks({
 			homepage: homepage,
@@ -48,7 +48,7 @@ const CoinDetails = ({ coinDetails }: any) => {
 	}, [homepage, subreddit_url, blockchain_site, official_forum_url, github]);
 	return (
 		<main
-			className='flex flex-col items-start  w-full px min-h-[100vh] max-w
+			className='flex flex-col items-start  w-full px min-h-[100vh] max-w overflow-y-scroll
 		md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] py-[10rem] pb-[20rem] md:pb-auto '>
 			<div
 				className='top-container flex flex-col gap-xl h-fit w-full py
@@ -89,7 +89,7 @@ const CoinDetails = ({ coinDetails }: any) => {
 			<div className='content-container flex flex-col w-full gap-lg'>
 				<SparklineChart coinName={name} chartData={market_data.sparkline_7d.price} />
 
-				<div className='content'>
+				<div className='content flex flex-col gap md:flex-row'>
 					<CoinStatsBox
 						props={{
 							name: name,
@@ -107,6 +107,9 @@ const CoinDetails = ({ coinDetails }: any) => {
 							atlDate: market_data.atl_date.usd,
 						}}
 					/>
+					<div>
+						<CoinDescription coinName={name}>{description.en}</CoinDescription>
+					</div>
 				</div>
 			</div>
 		</main>
