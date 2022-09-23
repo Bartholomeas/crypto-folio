@@ -13,7 +13,7 @@ interface Props {
 const TableData = ({ children, isBold, appendBefore, appendAfter, leftAlign, hrefRoute = '', imgSrc }: Props) => {
 	return (
 		<td
-			className={`px-xs text-sm text-font h-[6rem]
+			className={` px-xs text-sm text-font h-[6rem]
 			first:pl-xs first last:pr-xs
 			${isBold && 'font-semibold'} 
 			md:table-cell [&:nth-child(1)]:text-center

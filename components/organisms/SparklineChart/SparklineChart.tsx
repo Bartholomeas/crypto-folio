@@ -34,7 +34,6 @@ const SparklineChart = ({ chartData, coinName = '' }: Props) => {
 	};
 
 	const labels = chartData.map((item, idx) => idx);
-	// const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 	const data = {
 		labels,
 		datasets: [

@@ -1,14 +1,15 @@
 import React, { ReducerAction } from 'react';
 import Label from '../../atoms/Label/Label';
 import { MdSearch } from 'react-icons/md';
+import SearchbarItems from '../../molecules/SearchbarItems/SearchbarItems';
 
 interface Props<T> {
 	onChangeFunc: (e: React.ChangeEvent<T>) => void;
 	placeholderText?: string;
 }
-const Searchbar = <T,>({ onChangeFunc, placeholderText = '' }: Props<HTMLInputElement>) => {
+const Searchbar = ({ onChangeFunc, placeholderText = '' }: Props<HTMLInputElement>) => {
 	return (
-		<div className='flex flex-col w-full min-h-[3rem] md:max-w-[400px] '>
+		<div className='relative flex flex-col w-full min-h-[3rem] md:max-w-[400px] z-[100]'>
 			<Label forProp='searchbar'>
 				<div className='flex justify-between items-center w-full h-full border-accent border-solid border-l-4 rounded-md'>
 					<input
@@ -23,6 +24,7 @@ const Searchbar = <T,>({ onChangeFunc, placeholderText = '' }: Props<HTMLInputEl
 					</button>
 				</div>
 			</Label>
+			<SearchbarItems />
 		</div>
 	);
 };

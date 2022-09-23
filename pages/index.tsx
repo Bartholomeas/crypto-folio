@@ -31,6 +31,8 @@ const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 		console.log(e.target.value);
 	};
 
+	console.log(coins);
+
 	return (
 		<main
 			className='flex flex-col items-start gap w-full px min-h-[100vh]  max-w
@@ -39,7 +41,7 @@ const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 			<PageHeader>all Cryptocurrencies</PageHeader>
 			<div className='top-[5rem] flex flex-col gap w-full pt'>
 				<Searchbar onChangeFunc={getInputValue} placeholderText='Search for..' />
-				<div className='flex flex-col justify-center w-full overflow-x-scroll'>
+				<div className=' flex flex-col justify-center w-full overflow-x-scroll'>
 					{/* {isLoading && <p className='font-bold text-xl text-font'>Loading...</p>} */}
 
 					<Table>

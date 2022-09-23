@@ -1,9 +1,11 @@
 import React from 'react';
-import useReduxDispatch from '../../../hooks/useReduxDispatch';
+import { useAppDispatch, useAppSelector } from '../../../state/reduxHooks';
+import { uiActions } from '../../../state/uiSlice';
 import ArrowButton from '../../atoms/ArrowButton/ArrowButton';
 
 const InfoPanel = () => {
-	const { isInfoPanelOpen, toggleInfoPanel } = useReduxDispatch();
+	const { isInfoPanelOpen } = useAppSelector(state => state.ui);
+	const dispatch = useAppDispatch();
 
 	return (
 		<div
@@ -12,7 +14,7 @@ const InfoPanel = () => {
             md:max-w-[300px] md:left-auto md:right-0 md:h-full md:translate-y-0 ${
 							isInfoPanelOpen ? 'md:translate-x-0' : 'md:translate-x-[27rem]'
 						} xxl:translate-x-0`}>
-			<ArrowButton onClickFn={toggleInfoPanel} arrowDirection={isInfoPanelOpen} />
+			<ArrowButton onClickFn={() => dispatch(uiActions.toggleInfoPanel())} arrowDirection={isInfoPanelOpen} />
 
 			<div className='content-wrapper'></div>
 		</div>

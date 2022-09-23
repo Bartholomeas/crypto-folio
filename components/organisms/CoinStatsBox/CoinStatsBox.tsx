@@ -20,7 +20,7 @@ interface Props {
 const CoinStatsBox = ({ props }: { props: Props }) => {
 	return (
 		<div
-			className='flex flex-col min-w-[300px] w-full gap min-h-[300px]  px py bg-baseVeryLight rounded
+			className='flex flex-col min-w-[300px] w-full gap min-h-[300px] h-fit px py bg-baseVeryLight rounded
         lg:max-w-[350px]
         '>
 			<h2 className='font-bold text-fontLight text-md'>{props.name} statistics</h2>
