@@ -1,0 +1,3 @@
+add sparkline to coins table from react-sparklines PACKAGE
+
+configure chartjs to coin details

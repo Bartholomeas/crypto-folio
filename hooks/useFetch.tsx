@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
-import { data } from '../components/molecules/SparklineChart/SparklineChart';
 
 const useFetch = (url?: string) => {
 	const [data, setData] = useState({});

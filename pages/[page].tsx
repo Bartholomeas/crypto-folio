@@ -17,6 +17,7 @@ import Table from '../components/organisms/Table/Table';
 import { CoinItem } from '../state/coinsSlice';
 import Footer from '../components/organisms/Footer/Footer';
 import Pagination from '../components/organisms/Pagination/Pagination';
+import { addSpacesToNumber } from '../utils/convertUtils';
 
 const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServerSideProps>) => {
 	const [currentCoins, setCurrentCoins] = useState([]);
@@ -80,7 +81,7 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServer
 											{coin.price_change_percentage_24h}
 										</TableData>
 										<TableData hrefRoute={coin.id} appendAfter={'USD'}>
-											{coin.market_cap}
+											{addSpacesToNumber(coin.market_cap)}
 										</TableData>
 									</TableRow>
 								);

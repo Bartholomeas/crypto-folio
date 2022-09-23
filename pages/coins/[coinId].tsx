@@ -6,6 +6,10 @@ import CoinHeadBox from '../../components/molecules/CoinHeadBox/CoinHeadBox';
 import LinkItem from '../../components/molecules/LinkItem/LinkItem';
 import CoinPriceBox from '../../components/molecules/CoinPriceBox/CoinPriceBox';
 import CoinMarketData from '../../components/molecules/CoinMarketData/CoinMarketData';
+import SparklineChart from '../../components/organisms/SparklineChart/SparklineChart';
+import CoinStatsBox from '../../components/organisms/CoinStatsBox/CoinStatsBox';
+import CoinDescription from '../../components/molecules/CoinDescription/CoinDescription';
+import { addSpacesToNumber } from '../../utils/convertUtils';
 
 interface InitialStateProps {
 	homepage: string | string[];
@@ -33,22 +37,7 @@ const CoinDetails = ({ coinDetails }: any) => {
 		repos_url: { github },
 	} = coinDetails.links;
 
-	const {
-		symbol,
-		name,
-		market_cap_rank,
-		description,
-		image,
-		market_data,
-		market_cap,
-		total_volume,
-		total_supply,
-		max_supply,
-		circulating_supply,
-	} = coinDetails;
-
-	// console.log(market_data.sparkline_7d.price);
-
+	const { symbol, name, market_cap_rank, description, image, market_data } = coinDetails;
 	useEffect(() => {
 		setLinks({
 			homepage: homepage,
@@ -58,10 +47,9 @@ const CoinDetails = ({ coinDetails }: any) => {
 			forum: official_forum_url,
 		});
 	}, [homepage, subreddit_url, blockchain_site, official_forum_url, github]);
-
 	return (
 		<main
-			className='flex flex-col items-start gap w-full px min-h-[100vh] max-w
+			className='flex flex-col items-start  w-full px min-h-[100vh] max-w overflow-y-scroll
 		md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] py-[10rem] pb-[20rem] md:pb-auto '>
 			<div
 				className='top-container flex flex-col gap-xl h-fit w-full py
@@ -81,31 +69,53 @@ const CoinDetails = ({ coinDetails }: any) => {
 					</div>
 				</div>
 				<div
-					className='relative flex flex-col gap w-full h-fit
+					className='flex flex-col gap-lg w-full h-fit
 				md:w-[65%] px md:h-full
-				before:absolute before:content-[""] before:top-0 before:left-[-0.3rem] before:bg-slate-100 before:h-full before:w-2 before:rounded-lg'>
+				border-baseLight md:border-l-2
+				'>
 					<CoinPriceBox
 						name={name}
-						market_cap={market_cap}
-						volume={total_volume}
 						curr_price={market_data.current_price.usd}
 						high={market_data.high_24h.usd}
 						low={market_data.low_24h.usd}
-						price_change_24h={market_data.price_change_percentage_24h.toFixed(2)}
-						total_supply={total_supply}
-						max_supply={max_supply}
-						circulatin_supply={circulating_supply}></CoinPriceBox>
-
-					<div className='market-datas flex flex-col gap-sm w-full lg:flex-row md:gap-lg'>
-						<CoinMarketData dataValue={43255321}>Market cap</CoinMarketData>
-						<CoinMarketData dataValue={43255321}>Volume</CoinMarketData>
-						<CoinMarketData dataValue={43255321}>Circulating supply</CoinMarketData>
-					</div>
+						price_change_24h={market_data.price_change_percentage_24h.toFixed(2)}></CoinPriceBox>
 				</div>
 			</div>
+			<div className='market-datas flex  justify-around gap w-full py border-t-2 border-b-2 border-baseLight lg:flex-row md:gap-lg '>
+				<CoinMarketData dataValue={`$ ${addSpacesToNumber(market_data.market_cap.usd)}`}>Market cap</CoinMarketData>
+				<CoinMarketData dataValue={`$ ${addSpacesToNumber(market_data.total_volume.usd)}`}>Volume</CoinMarketData>
+				<CoinMarketData
+					dataValue={addSpacesToNumber(market_data.total_supply)}
+					secondDataValue={addSpacesToNumber(market_data.circulating_supply)}>
+					Circulating supply
+				</CoinMarketData>
+			</div>
 
-			<div className='content-container'>
-				
+			<div className='content-container flex flex-col w-full gap-lg'>
+				<SparklineChart coinName={name} chartData={market_data.sparkline_7d.price} />
+
+				<div className='content flex flex-col gap md:flex-row'>
+					<CoinStatsBox
+						props={{
+							name: name,
+							price: market_data.current_price.usd,
+							coinRank: market_data.market_cap_rank,
+							priceChange: market_data.price_change_percentage_24h,
+							highDay: market_data.high_24h.usd,
+							lowDay: market_data.low_24h.usd,
+							volumeDay: market_data.total_volume.usd,
+							totalSupply: market_data.total_supply,
+							circulatingSupply: market_data.circulating_supply,
+							allTimeHigh: market_data.ath.usd,
+							athDate: market_data.ath_date.usd,
+							allTimeLow: market_data.atl.usd,
+							atlDate: market_data.atl_date.usd,
+						}}
+					/>
+					<div>
+						<CoinDescription coinName={name}>{description.en}</CoinDescription>
+					</div>
+				</div>
 			</div>
 		</main>
 	);
