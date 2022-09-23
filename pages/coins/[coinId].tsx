@@ -94,7 +94,7 @@ const CoinDetails = ({ coinDetails }: any) => {
 			<div className='content-container flex flex-col w-full gap-lg'>
 				<SparklineChart coinName={name} chartData={market_data.sparkline_7d.price} />
 
-				<div className='content flex flex-col gap md:flex-row'>
+				<div className='content flex flex-col gap lg:flex-row  '>
 					<CoinStatsBox
 						props={{
 							name: name,
@@ -112,9 +112,7 @@ const CoinDetails = ({ coinDetails }: any) => {
 							atlDate: market_data.atl_date.usd,
 						}}
 					/>
-					<div>
-						<CoinDescription coinName={name}>{description.en}</CoinDescription>
-					</div>
+					<CoinDescription coinName={name}>{description.en}</CoinDescription>
 				</div>
 			</div>
 		</main>

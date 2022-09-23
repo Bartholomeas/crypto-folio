@@ -1,17 +1,18 @@
 import BurgerButton from '../../atoms/BurgerButton/BurgerButton';
 import Logo from '../../atoms/Logo/Logo';
 import NavList from '../../molecules/NavList/NavList';
-import useReduxDispatch from '../../../hooks/useReduxDispatch';
+import { useAppDispatch, useAppSelector } from '../../../state/reduxHooks';
 import NavLinkItem from '../../atoms/NavLink/NavLink';
 import NavListItem from '../../atoms/NavListItem/NavListItem';
 import { MdDashboard, MdSettings, MdSearch, MdAccountBalanceWallet, MdHistory, MdLogout } from 'react-icons/md';
-import SelectMenu from '../../molecules/SelectMenu/SelectMenu';
 import ThemeSwitch from '../../molecules/ThemeSwitch/ThemeSwitch';
 import { useRouter } from 'next/router';
+import { uiActions } from '../../../state/uiSlice';
 
 const Navbar = () => {
-	const { toggleNavbar, isNavOpen, toggleTheme, isThemeDark } = useReduxDispatch();
 	const router = useRouter();
+	const { isNavOpen, isThemeDark } = useAppSelector(state => state.ui);
+	const dispatch = useAppDispatch();
 
 	const languages = {
 		english: 'ENG',
@@ -33,7 +34,7 @@ const Navbar = () => {
 				 px-md py-sm
 			 md:justify-center md:w-auto md:px-0 overflow-hidden'>
 				<Logo />
-				<BurgerButton onClickFn={toggleNavbar} />
+				<BurgerButton onClickFn={() => dispatch(uiActions.toggleNavbar())} />
 			</div>
 
 			<div
@@ -71,8 +72,8 @@ const Navbar = () => {
 							<MdSettings className='icon' /> Settings
 						</NavLinkItem>
 					</NavListItem>
-					<li className='flex mx-auto md:ml-0'>
-						<button className='flex flex-row-reverse items-center justify-center gap-sm py-md text-error text-sm cursor-pointer md:flex-row md:justify-start'>
+					<li className='flex self-start md:ml-0'>
+						<button className='flex flex-row-reverse items-center justify-start gap-sm py-md text-error text-sm cursor-pointer md:flex-row md:justify-start'>
 							<MdLogout className='icon text-error' />
 							Logout
 						</button>
@@ -83,7 +84,7 @@ const Navbar = () => {
 						<SelectMenu options={languages}>Language</SelectMenu>
 						<SelectMenu options={currencies}>Currency</SelectMenu>
 					</div> */}
-					<ThemeSwitch toggleThemeFunc={toggleTheme} isThemeDark={isThemeDark} />
+					<ThemeSwitch toggleThemeFunc={() => dispatch(uiActions.toggleTheme())} isThemeDark={isThemeDark} />
 				</div>
 			</div>
 		</nav>
