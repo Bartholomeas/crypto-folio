@@ -9,6 +9,7 @@ import CoinMarketData from '../../components/molecules/CoinMarketData/CoinMarket
 import SparklineChart from '../../components/organisms/SparklineChart/SparklineChart';
 import CoinStatsBox from '../../components/organisms/CoinStatsBox/CoinStatsBox';
 import CoinDescription from '../../components/molecules/CoinDescription/CoinDescription';
+import { addSpacesToNumber } from '../../utils/convertUtils';
 
 interface InitialStateProps {
 	homepage: string | string[];
@@ -81,9 +82,13 @@ const CoinDetails = ({ coinDetails }: any) => {
 				</div>
 			</div>
 			<div className='market-datas flex  justify-around gap w-full py border-t-2 border-b-2 border-baseLight lg:flex-row md:gap-lg '>
-				<CoinMarketData dataValue={43255321}>Market cap</CoinMarketData>
-				<CoinMarketData dataValue={43255321}>Volume</CoinMarketData>
-				<CoinMarketData dataValue={43255321}>Circulating supply</CoinMarketData>
+				<CoinMarketData dataValue={`$ ${addSpacesToNumber(market_data.market_cap.usd)}`}>Market cap</CoinMarketData>
+				<CoinMarketData dataValue={`$ ${addSpacesToNumber(market_data.total_volume.usd)}`}>Volume</CoinMarketData>
+				<CoinMarketData
+					dataValue={addSpacesToNumber(market_data.total_supply)}
+					secondDataValue={addSpacesToNumber(market_data.circulating_supply)}>
+					Circulating supply
+				</CoinMarketData>
 			</div>
 
 			<div className='content-container flex flex-col w-full gap-lg'>

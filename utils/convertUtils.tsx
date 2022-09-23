@@ -18,3 +18,7 @@ export const convertDate = (dateArg: any, format: string) => {
 	format = format.replace('dd', day.toString().padStart(2, '0'));
 	return format;
 };
+
+export const addSpacesToNumber = (numberData: number) => {
+	return numberData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+};

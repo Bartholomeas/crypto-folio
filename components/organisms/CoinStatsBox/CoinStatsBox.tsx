@@ -1,5 +1,5 @@
 import React from 'react';
-import { convertDate } from '../../../utils/convertDate';
+import { addSpacesToNumber, convertDate } from '../../../utils/convertUtils';
 interface Props {
 	[key: string]: number | string;
 	name: string;
@@ -49,15 +49,15 @@ const CoinStatsBox = ({ props }: { props: Props }) => {
 				</li>
 				<li className='flex justify-between items-center border-b-2 py-[0.3rem]'>
 					<p className='text-fontLight text-sm'>Volume</p>
-					<p className='font-semibold text-font text-sm'>$ {props.volumeDay}</p>
+					<p className='font-semibold text-font text-sm'>$ {addSpacesToNumber(props.volumeDay)}</p>
 				</li>
 				<li className='flex justify-between items-center border-b-2 py-[0.3rem]'>
 					<p className='text-fontLight text-sm'>Total supply</p>
-					<p className='font-semibold text-font text-sm'>{props.totalSupply.toFixed()}</p>
+					<p className='font-semibold text-font text-sm'>{addSpacesToNumber(props.totalSupply)}</p>
 				</li>
 				<li className='flex justify-between items-center border-b-2 py-[0.3rem]'>
 					<p className='text-fontLight text-sm'>Circulating supply</p>
-					<p className='font-semibold text-font text-sm'>{props.circulatingSupply.toFixed()}</p>
+					<p className='font-semibold text-font text-sm'>{addSpacesToNumber(props.circulatingSupply)}</p>
 				</li>
 				<li className='flex justify-between items-center border-b-2 py-[0.3rem]'>
 					<p className='text-fontLight text-sm'>All time HIGH</p>

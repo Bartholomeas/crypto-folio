@@ -5,7 +5,11 @@ interface Props {
 	children: React.ReactNode;
 }
 const TableRow = ({ children }: Props) => {
-	return <tr className='w-full border-solid border-b-2 border-baseLight'>{children}</tr>;
+	return (
+		<tr className='w-full border-solid border-b-2 border-baseLight hover:bg-baseVeryLight transition-colors'>
+			{children}
+		</tr>
+	);
 };
 
 export default TableRow;

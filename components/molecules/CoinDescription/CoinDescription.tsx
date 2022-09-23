@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface Props {
 	children: React.ReactNode | React.ReactNode[];
@@ -6,9 +6,15 @@ interface Props {
 }
 
 const CoinDescription = ({ children, coinName }: Props) => {
-	const description = document.querySelector('.description-content');
+	const [d, setd] = useState();
 
-	if (description) description!.innerHTML = `${children}`;
+	if (typeof window !== 'undefined' && window.document) {
+	}
+
+	useEffect(() => {
+		const description = document.querySelector('.description-content');
+		if (description) description.innerHTML = `${children}`;
+	}, []);
 
 	return (
 		<div className='text flex-col  '>

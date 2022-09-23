@@ -17,13 +17,11 @@ import Table from '../components/organisms/Table/Table';
 import { CoinItem } from '../state/coinsSlice';
 import Pagination from '../components/organisms/Pagination/Pagination';
 import Footer from '../components/organisms/Footer/Footer';
+import { addSpacesToNumber } from '../utils/convertUtils';
 
 const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const [currentCoins, setCurrentCoins] = useState([]);
-	const [filteredCoins, setFilteredCoins] = useState<CoinItem | CoinItem[]>([]);
 	const [page, setPage] = useState(1);
-
-	const getNextPage = useCallback(async () => {}, [page]);
 
 	useEffect(() => {
 		setCurrentCoins(coins);
@@ -83,7 +81,7 @@ const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 											{coin.price_change_percentage_24h}
 										</TableData>
 										<TableData hrefRoute={coin.id} appendAfter={'USD'}>
-											{coin.market_cap}
+											{addSpacesToNumber(coin.market_cap)}
 										</TableData>
 									</TableRow>
 								);
