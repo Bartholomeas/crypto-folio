@@ -6,11 +6,6 @@ interface Props {
 }
 
 const CoinDescription = ({ children, coinName }: Props) => {
-	const [d, setd] = useState();
-
-	if (typeof window !== 'undefined' && window.document) {
-	}
-
 	useEffect(() => {
 		const description = document.querySelector('.description-content');
 		if (description) description.innerHTML = `${children}`;
