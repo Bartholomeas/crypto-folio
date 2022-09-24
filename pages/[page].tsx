@@ -27,10 +27,6 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServer
 		setCurrentCoins(coins);
 	}, [coins, page]);
 
-	const getInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-		console.log(e.target.value);
-	};
-
 	return (
 		<main
 			className='flex flex-col items-start gap w-full px min-h-[100vh]  max-w
@@ -38,7 +34,7 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServer
 			<MarginBox />
 			<PageHeader>all Cryptocurrencies</PageHeader>
 			<div className='top-[5rem] flex flex-col gap w-full pt'>
-				<Searchbar onChangeFunc={getInputValue} placeholderText='Search for..' />
+				<Searchbar placeholderText='Search for..' />
 				<div className='flex flex-col justify-center w-full overflow-x-scroll'>
 					{/* {isLoading && <p className='font-bold text-xl text-font'>Loading...</p>} */}
 

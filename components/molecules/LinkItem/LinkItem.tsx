@@ -13,7 +13,6 @@ const LinkItem = ({ allLinks, linkKey }: Props): any => {
 		setIsOpen(!isOpen);
 	};
 
-	// console.log(allLinks, linkKey);
 	if (Array.isArray(allLinks) && allLinks.length > 0 && allLinks[0] !== '') {
 		return (
 			<div className='relative flex-col gap-sm h-[3rem]'>
