@@ -1,6 +1,4 @@
 export const convertDate = (dateArg: any, format: string) => {
-	console.log(dateArg);
-
 	const date = new Date(dateArg);
 
 	const day = date.getDate();

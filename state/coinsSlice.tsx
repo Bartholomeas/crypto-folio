@@ -6,6 +6,7 @@ interface Props {
 }
 
 export interface CoinItem {
+	// [key: string]: string | number | string[] | number[];
 	id: string;
 	symbol: string;
 	name: string;
@@ -14,6 +15,7 @@ export interface CoinItem {
 	current_price: number;
 	price_change_percentage_24h: number;
 	image: string;
+	thumb: string;
 }
 
 interface StateInterface {

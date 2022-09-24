@@ -18,20 +18,16 @@ import { CoinItem } from '../state/coinsSlice';
 import Pagination from '../components/organisms/Pagination/Pagination';
 import Footer from '../components/organisms/Footer/Footer';
 import { addSpacesToNumber } from '../utils/convertUtils';
+import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
 
 const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const [currentCoins, setCurrentCoins] = useState([]);
+
 	const [page, setPage] = useState(1);
 
 	useEffect(() => {
 		setCurrentCoins(coins);
 	}, []);
-
-	const getInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-		console.log(e.target.value);
-	};
-
-	console.log(coins);
 
 	return (
 		<main
@@ -40,7 +36,7 @@ const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 			<MarginBox />
 			<PageHeader>all Cryptocurrencies</PageHeader>
 			<div className='top-[5rem] flex flex-col gap w-full pt'>
-				<Searchbar onChangeFunc={getInputValue} placeholderText='Search for..' />
+				<Searchbar placeholderText='Search for coin..' />
 				<div className=' flex flex-col justify-center w-full overflow-x-scroll'>
 					{/* {isLoading && <p className='font-bold text-xl text-font'>Loading...</p>} */}
 
