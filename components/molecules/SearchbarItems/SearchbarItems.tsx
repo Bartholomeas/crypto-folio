@@ -12,7 +12,7 @@ const SearchbarItems = ({ coinsData }: Props) => {
 			`}>
 			{coinsData.length >= 1 &&
 				coinsData.map(coin => {
-					console.log(coin);
+					// console.log(coin);
 					return (
 						<SearchbarCoin
 							key={uuidv4()}
