@@ -8,6 +8,7 @@ import { MdDashboard, MdSettings, MdSearch, MdAccountBalanceWallet, MdHistory, M
 import ThemeSwitch from '../../molecules/ThemeSwitch/ThemeSwitch';
 import { useRouter } from 'next/router';
 import { uiActions } from '../../../state/uiSlice';
+import Searchbr from '../Searchbar/Searchbar';
 
 const Navbar = () => {
 	const router = useRouter();
