@@ -10,9 +10,10 @@ import TableBody from '../components/molecules/TableBody/TableBody';
 import MarginBox from '../components/atoms/MarginBox/MarginBox';
 import SecondHeader from '../components/atoms/SecondHeader/SecondHeader';
 import PageHeader from '../components/atoms/PageHeader/PageHeader';
-import Searchbar from '../components/organisms/Searchbar/Searchbar';
+import useDatabase from '../hooks/useDatabase';
 
 const Dashboard = () => {
+	const { getData } = useDatabase();
 	return (
 		<main
 			className='flex flex-col items-start gap-sm w-full md:max-w px pb-[10rem] min-h-[100vh] bg-white overflow-y-auto
@@ -29,6 +30,8 @@ const Dashboard = () => {
 					<InfoAssetsBox asset='Juno' changeValue={21}>
 						Biggest 24h profit
 					</InfoAssetsBox>
+
+					<button onClick={getData}>KLIKNIJ MNIE</button>
 				</div>
 			</div>
 

@@ -14,18 +14,24 @@ import TableHeader from '../components/molecules/TableHeader/TableHeader';
 import TableRow from '../components/molecules/TableRow/TableRow';
 import Searchbar from '../components/organisms/Searchbar/Searchbar';
 import Table from '../components/organisms/Table/Table';
-import { CoinItem } from '../state/coinsSlice';
+import { CoinItem, coinsActions } from '../state/coinsSlice';
 import Footer from '../components/organisms/Footer/Footer';
 import Pagination from '../components/organisms/Pagination/Pagination';
 import { addSpacesToNumber } from '../utils/convertUtils';
+import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
+import useFilter from '../hooks/useFilter';
 
 const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServerSideProps>) => {
-	const [currentCoins, setCurrentCoins] = useState([]);
 	const indexingByPage = page > 1 ? (page - 1) * 100 : 0;
+	const { sortCoins } = useFilter();
+	const dispatch = useAppDispatch();
+	const { coinsList } = useAppSelector(state => state.coins);
+
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		setCurrentCoins(coins);
-	}, [coins, page]);
+		dispatch(coinsActions.setCoinsList(coins));
+	}, [coins, dispatch]);
 
 	return (
 		<main
@@ -34,9 +40,10 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServer
 			<MarginBox />
 			<PageHeader>all Cryptocurrencies</PageHeader>
 			<div className='top-[5rem] flex flex-col gap w-full pt'>
-				<Searchbar placeholderText='Search for..' />
-				<div className='flex flex-col justify-center w-full overflow-x-scroll'>
-					{/* {isLoading && <p className='font-bold text-xl text-font'>Loading...</p>} */}
+				<Searchbar placeholderText='Search for coin..' />
+				<div className=' flex flex-col justify-center w-full overflow-x-scroll'>
+					{coins.length < 1 && <p className='absolute font-bold text-xl text-accent'>Loading...</p>}
+					{/* <p className='absolute font-bold text-xl text-accent top-[50%]'>Loading...</p> */}
 
 					<Table>
 						<colgroup>
@@ -50,15 +57,25 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServer
 						<TableHead>
 							<TableRow>
 								<TableHeader></TableHeader>
-								<TableHeader>#</TableHeader>
-								<TableHeader leftAlign={true}>Name</TableHeader>
-								<TableHeader>Current price</TableHeader>
-								<TableHeader>24h change</TableHeader>
-								<TableHeader>Capitalization</TableHeader>
+								<TableHeader onClickFn={sortCoins} value={'market_cap_rank'}>
+									#
+								</TableHeader>
+								<TableHeader onClickFn={sortCoins} value={'id'} leftAlign={true}>
+									Name
+								</TableHeader>
+								<TableHeader onClickFn={sortCoins} value={'current_price'}>
+									Current price
+								</TableHeader>
+								<TableHeader onClickFn={sortCoins} value={'price_change_percentage_24h'}>
+									24h change
+								</TableHeader>
+								<TableHeader onClickFn={sortCoins} value={'market_cap'}>
+									Capitalization
+								</TableHeader>
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{currentCoins.map((coin: CoinItem, index: number) => {
+							{coinsList.map((coin: CoinItem, index: number) => {
 								return (
 									<TableRow key={uuidv4()}>
 										<TableData hrefRoute={coin.name}>
@@ -71,7 +88,7 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServer
 											{coin.name}
 										</TableData>
 										<TableData hrefRoute={coin.id} appendAfter={'USD'}>
-											{coin.current_price.toFixed(2)}
+											{coin.current_price}
 										</TableData>
 										<TableData hrefRoute={coin.id} appendAfter={'%'}>
 											{coin.price_change_percentage_24h}

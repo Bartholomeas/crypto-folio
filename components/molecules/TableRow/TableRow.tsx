@@ -6,7 +6,7 @@ interface Props {
 }
 const TableRow = ({ children }: Props) => {
 	return (
-		<tr className=' w-full border-solid border-b-2 border-baseLight hover:bg-baseVeryLight transition-colors '>
+		<tr className=' w-full border-solid border-b-2 border-baseVeryLight hover:bg-baseVery	Light transition-colors '>
 			{children}
 		</tr>
 	);
