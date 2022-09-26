@@ -23,6 +23,7 @@ html {
 
 body {
 	font-size: 1.6rem;
+	scroll-behavior: smooth;
 }
 
 input,

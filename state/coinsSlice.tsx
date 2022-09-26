@@ -6,7 +6,7 @@ interface Props {
 }
 
 export interface CoinItem {
-	// [key: string]: string | number | string[] | number[];
+	[key: string]: string | number;
 	id: string;
 	symbol: string;
 	name: string;
@@ -20,10 +20,12 @@ export interface CoinItem {
 
 interface StateInterface {
 	coinsList: CoinItem[];
+	filteredCoins: CoinItem[];
 }
 
 const initialState: StateInterface = {
 	coinsList: [],
+	filteredCoins: [],
 };
 
 const coinsSlice = createSlice({
@@ -32,6 +34,9 @@ const coinsSlice = createSlice({
 	reducers: {
 		setCoinsList(state, action) {
 			state.coinsList = action.payload;
+		},
+		setFilteredCoins(state, action) {
+			state.filteredCoins = action.payload;
 		},
 	},
 });

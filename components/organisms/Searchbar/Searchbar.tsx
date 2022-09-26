@@ -3,7 +3,6 @@ import { MdSearch } from 'react-icons/md';
 import axios from 'axios';
 import Label from '../../atoms/Label/Label';
 import SearchbarItems from '../../molecules/SearchbarItems/SearchbarItems';
-import { request } from 'http';
 
 interface Props {
 	placeholderText?: string;
@@ -12,8 +11,8 @@ const Searchbar = ({ placeholderText = '' }: Props) => {
 	const [inputValue, setInputValue] = useState('');
 	const [searchedCoins, setSearchedCoins] = useState([]);
 
-	const clearCoinsData = () => {
-		console.log('clear');
+	const clearCoinsData = (e: React.FocusEvent<HTMLInputElement>) => {
+		e.target.value = '';
 		setInputValue('');
 		setSearchedCoins([]);
 	};
@@ -21,41 +20,36 @@ const Searchbar = ({ placeholderText = '' }: Props) => {
 	const getSearchedCoins = useCallback(async (coinValue: string) => {
 		try {
 			const data = await axios(`https://api.coingecko.com/api/v3/search?query=${coinValue}`);
-			console.log('ustawia date coinow');
 			setSearchedCoins(data.data.coins);
-		} catch (error) {
-			console.log(error);
-		}
+		} catch (error) {}
 	}, []);
 
-	let isTyping: any;
-	const getSpecifiedCoinsData = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-		if (e.target.value === '') {
-			setSearchedCoins([]);
-			return;
-		}
-
-		console.log('TO COINS DATA');
+	const getInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value);
-
-		clearTimeout(isTyping);
-		isTyping = setTimeout(() => {
+	};
+	useEffect(() => {
+		if (inputValue === '') return;
+		const debounceTimeout = setTimeout(() => {
 			getSearchedCoins(inputValue);
-		}, 1000);
-	}, []);
+		}, 500);
+
+		return () => clearTimeout(debounceTimeout);
+	}, [inputValue, getSearchedCoins]);
 
 	return (
 		<div className=' relative flex flex-col w-full min-h-[3rem] md:max-w-[400px] z-[100]'>
 			<Label forProp='searchbar'>
 				<div className='flex justify-between items-center w-full h-full border-accent border-solid border-l-4 rounded-md'>
 					<input
-						onChange={getSpecifiedCoinsData}
+						autoComplete='off'
+						onChange={e => getInputValue(e)}
+						onBlur={e => clearCoinsData(e)}
 						id='searchbar'
 						placeholder={placeholderText}
 						className='w-full h-full max-h-[4rem] py px-xs bg-baseVeryLight '
 						type='text'
 					/>
-					<span className='flex items-center justify-center h-full max-h-[4rem] p-xs rounded-r  bg-accentDark text-lg text-white'>
+					<span className='flex items-center justify-center h-full max-h-[4rem] p-xs rounded-r  bg-baseVeryLight text-lg text-fontLight'>
 						<MdSearch />
 					</span>
 				</div>

@@ -21,15 +21,17 @@ const Pagination = ({ currPage }: Props) => {
 	};
 
 	return (
-		<div className='flex items-center justify-between gap-xs w-full text-font text-xs bg-baseLight rounded md:justify-center md:mx-auto md:w-auto'>
+		<div className='flex items-center justify-between gap-xs w-full text-font text-xs bg-baseVeryLight rounded md:justify-center md:mx-auto md:w-auto'>
 			<Link passHref href={`/${changePage(currPage, false)}`}>
 				<a className=' px-xs py-xs text font-semibold'>{'<'}</a>
 			</Link>
-			<button></button>
 			{pagesArr.map(page => {
 				return (
 					<Link key={uuidv4()} passHref href={`/${page}`}>
-						<a className={`px-xs ${+currPage === +page && ' text-sm font-semibold'}`}>{page}</a>
+						<a
+							className={`px-xs ${+currPage === +page && ' text-sm text-white font-semibold bg-accent rounded py-sm'}`}>
+							{page}
+						</a>
 					</Link>
 				);
 			})}

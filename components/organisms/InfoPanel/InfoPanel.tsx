@@ -9,7 +9,8 @@ const InfoPanel = () => {
 
 	return (
 		<div
-			className={`fixed bottom-0 left-0 h-full w-full bg-baseLight z-500 drop-shadow-sm transition-transform 
+			className={`fixed bottom-0 left-0 h-full w-full bg-baseLight z-500 drop-shadow-sm transition-transform
+			z-[100] 
             ${isInfoPanelOpen ? 'translate-y-[10rem]' : 'translate-y-[95%]'}
             md:max-w-[300px] md:left-auto md:right-0 md:h-full md:translate-y-0 ${
 							isInfoPanelOpen ? 'md:translate-x-0' : 'md:translate-x-[27rem]'

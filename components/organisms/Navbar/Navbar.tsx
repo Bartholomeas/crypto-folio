@@ -27,7 +27,7 @@ const Navbar = () => {
 
 	return (
 		<nav
-			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-baseLight z-200 z-[1000] 
+			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-baseLight z-[1000] 
 		md:relative md:h-full md:max-w-[180px] md:py-lg'>
 			<div
 				className='nav-wrapper flex justify-between items-center w-full

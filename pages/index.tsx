@@ -14,20 +14,23 @@ import TableHeader from '../components/molecules/TableHeader/TableHeader';
 import TableRow from '../components/molecules/TableRow/TableRow';
 import Searchbar from '../components/organisms/Searchbar/Searchbar';
 import Table from '../components/organisms/Table/Table';
-import { CoinItem } from '../state/coinsSlice';
+import { CoinItem, coinsActions } from '../state/coinsSlice';
 import Pagination from '../components/organisms/Pagination/Pagination';
 import Footer from '../components/organisms/Footer/Footer';
 import { addSpacesToNumber } from '../utils/convertUtils';
+import useFilter from '../hooks/useFilter';
 import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
 
 const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
-	const [currentCoins, setCurrentCoins] = useState([]);
-
+	const dispatch = useAppDispatch();
+	const { coinsList } = useAppSelector(state => state.coins);
 	const [page, setPage] = useState(1);
+	const { filterCoins } = useFilter();
 
 	useEffect(() => {
-		setCurrentCoins(coins);
-	}, []);
+		// filterCoins([...currentCoins], 'id');
+		dispatch(coinsActions.setCoinsList(coins));
+	}, [coins]);
 
 	return (
 		<main
@@ -52,15 +55,25 @@ const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 						<TableHead>
 							<TableRow>
 								<TableHeader></TableHeader>
-								<TableHeader>#</TableHeader>
-								<TableHeader leftAlign={true}>Name</TableHeader>
-								<TableHeader>Current price</TableHeader>
-								<TableHeader>24h change</TableHeader>
-								<TableHeader>Capitalization</TableHeader>
+								<TableHeader onClickFn={filterCoins} value={'market_cap_rank'}>
+									#
+								</TableHeader>
+								<TableHeader onClickFn={filterCoins} value={'id'} leftAlign={true}>
+									Name
+								</TableHeader>
+								<TableHeader onClickFn={filterCoins} value={'current_price'}>
+									Current price
+								</TableHeader>
+								<TableHeader onClickFn={filterCoins} value={'price_change_percentage_24h'}>
+									24h change
+								</TableHeader>
+								<TableHeader onClickFn={filterCoins} value={'market_cap'}>
+									Capitalization
+								</TableHeader>
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{currentCoins.map((coin: CoinItem, index: number) => {
+							{coinsList.map((coin: CoinItem, index: number) => {
 								return (
 									<TableRow key={uuidv4()}>
 										<TableData hrefRoute={coin.name}>
@@ -73,7 +86,7 @@ const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 											{coin.name}
 										</TableData>
 										<TableData hrefRoute={coin.id} appendAfter={'USD'}>
-											{coin.current_price.toFixed(2)}
+											{coin.current_price}
 										</TableData>
 										<TableData hrefRoute={coin.id} appendAfter={'%'}>
 											{coin.price_change_percentage_24h}
