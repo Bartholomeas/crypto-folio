@@ -23,14 +23,13 @@ import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
 
 const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const dispatch = useAppDispatch();
-	const { coinsList } = useAppSelector(state => state.coins);
+	const { coinsList, filteredCoins } = useAppSelector(state => state.coins);
 	const [page, setPage] = useState(1);
-	const { filterCoins } = useFilter();
+	const { sortCoins } = useFilter();
 
 	useEffect(() => {
-		// filterCoins([...currentCoins], 'id');
 		dispatch(coinsActions.setCoinsList(coins));
-	}, [coins]);
+	}, [coins, dispatch]);
 
 	return (
 		<main
@@ -55,19 +54,19 @@ const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 						<TableHead>
 							<TableRow>
 								<TableHeader></TableHeader>
-								<TableHeader onClickFn={filterCoins} value={'market_cap_rank'}>
+								<TableHeader onClickFn={sortCoins} value={'market_cap_rank'}>
 									#
 								</TableHeader>
-								<TableHeader onClickFn={filterCoins} value={'id'} leftAlign={true}>
+								<TableHeader onClickFn={sortCoins} value={'id'} leftAlign={true}>
 									Name
 								</TableHeader>
-								<TableHeader onClickFn={filterCoins} value={'current_price'}>
+								<TableHeader onClickFn={sortCoins} value={'current_price'}>
 									Current price
 								</TableHeader>
-								<TableHeader onClickFn={filterCoins} value={'price_change_percentage_24h'}>
+								<TableHeader onClickFn={sortCoins} value={'price_change_percentage_24h'}>
 									24h change
 								</TableHeader>
-								<TableHeader onClickFn={filterCoins} value={'market_cap'}>
+								<TableHeader onClickFn={sortCoins} value={'market_cap'}>
 									Capitalization
 								</TableHeader>
 							</TableRow>

@@ -1,25 +1,26 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { CoinItem } from '../state/coinsSlice';
 import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
 import { coinsActions } from '../state/coinsSlice';
 
 const useFilter = () => {
 	const dispatch = useAppDispatch();
-	const { filteredCoins } = useAppSelector(state => state.coins);
+	const [isAscending, setIsAscending] = useState(true);
 
-	const filterCoins = (coinsList: CoinItem[], valueToSort: string) => {
-		console.log('gut');
-		const coinsListFiltered =
+	const sortCoins = (coinsList: CoinItem[], valueToSort: string) => {
+		const sortedCoinsList =
 			coinsList.length > 1 &&
 			coinsList.sort((a: any, b: any): number => {
 				a[valueToSort] == b[valueToSort] && 0;
-				return a[valueToSort] > b[valueToSort] ? 1 : -1;
+				return (
+					(a[valueToSort] > b[valueToSort] ? 1 : a[valueToSort] < b[valueToSort] ? -1 : 0) * (isAscending ? 1 : -1)
+				);
 			});
-		console.log(coinsListFiltered);
-		// dispatch(coinsActions.setFilteredCoins(filteredCoins));
+		dispatch(coinsActions.setCoinsList(sortedCoinsList));
+		setIsAscending(!isAscending);
 	};
 
-	return { filterCoins };
+	return { sortCoins };
 };
 
 export default useFilter;
