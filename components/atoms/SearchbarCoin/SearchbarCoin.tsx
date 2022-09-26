@@ -15,8 +15,8 @@ const SearchbarCoin = ({ children, hrefRoute, coinSymbol, coinLogo, coinRank }: 
 				<div
 					className='flex items-center justify-between bg-white w-full px-sm py-[0.3rem] h-full rounded min-h-[5rem]
                 hover:bg-baseLight'>
-					<div className='flex items-center gap'>
-						{/* <Image src={coinLogo} width={20} height={20} alt='Logo of cointis app' /> */}
+					<div className='flex items-center gap-sm'>
+						<Image src={coinLogo} width={20} height={20} alt='Logo of cointis app' />
 						<p className='text-font '>{children}</p>
 						<p className='text-fontLight font-bold'>{coinSymbol}</p>
 					</div>

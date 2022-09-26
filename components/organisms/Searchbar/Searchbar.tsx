@@ -3,7 +3,6 @@ import { MdSearch } from 'react-icons/md';
 import axios from 'axios';
 import Label from '../../atoms/Label/Label';
 import SearchbarItems from '../../molecules/SearchbarItems/SearchbarItems';
-import { request } from 'http';
 
 interface Props {
 	placeholderText?: string;
@@ -19,14 +18,10 @@ const Searchbar = ({ placeholderText = '' }: Props) => {
 	};
 
 	const getSearchedCoins = useCallback(async (coinValue: string) => {
-		console.log('AKTYWOWALO REQUEST');
 		try {
 			const data = await axios(`https://api.coingecko.com/api/v3/search?query=${coinValue}`);
-			console.log('ustawia date coinow');
 			setSearchedCoins(data.data.coins);
-		} catch (error) {
-			console.log(error);
-		}
+		} catch (error) {}
 	}, []);
 
 	const getInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +30,6 @@ const Searchbar = ({ placeholderText = '' }: Props) => {
 	useEffect(() => {
 		if (inputValue === '') return;
 		const debounceTimeout = setTimeout(() => {
-			console.log('gut');
 			getSearchedCoins(inputValue);
 		}, 500);
 
@@ -47,6 +41,7 @@ const Searchbar = ({ placeholderText = '' }: Props) => {
 			<Label forProp='searchbar'>
 				<div className='flex justify-between items-center w-full h-full border-accent border-solid border-l-4 rounded-md'>
 					<input
+						autoComplete='off'
 						onChange={e => getInputValue(e)}
 						onBlur={e => clearCoinsData(e)}
 						id='searchbar'
@@ -54,7 +49,7 @@ const Searchbar = ({ placeholderText = '' }: Props) => {
 						className='w-full h-full max-h-[4rem] py px-xs bg-baseVeryLight '
 						type='text'
 					/>
-					<span className='flex items-center justify-center h-full max-h-[4rem] p-xs rounded-r  bg-accentDark text-lg text-white'>
+					<span className='flex items-center justify-center h-full max-h-[4rem] p-xs rounded-r  bg-baseVeryLight text-lg text-fontLight'>
 						<MdSearch />
 					</span>
 				</div>

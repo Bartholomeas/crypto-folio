@@ -8,7 +8,6 @@ import { MdDashboard, MdSettings, MdSearch, MdAccountBalanceWallet, MdHistory, M
 import ThemeSwitch from '../../molecules/ThemeSwitch/ThemeSwitch';
 import { useRouter } from 'next/router';
 import { uiActions } from '../../../state/uiSlice';
-import Searchbr from '../Searchbar/Searchbar';
 
 const Navbar = () => {
 	const router = useRouter();
@@ -28,7 +27,7 @@ const Navbar = () => {
 
 	return (
 		<nav
-			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-baseLight z-200 z-[1000] 
+			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-baseLight z-[1000] 
 		md:relative md:h-full md:max-w-[180px] md:py-lg'>
 			<div
 				className='nav-wrapper flex justify-between items-center w-full
