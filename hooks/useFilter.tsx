@@ -16,7 +16,6 @@ const useFilter = () => {
 					(a[valueToSort] > b[valueToSort] ? 1 : a[valueToSort] < b[valueToSort] ? -1 : 0) * (isAscending ? 1 : -1)
 				);
 			});
-		console.log(sortedCoinsList);
 		dispatch(coinsActions.setCoinsList(sortedCoinsList));
 		setIsAscending(!isAscending);
 	};
