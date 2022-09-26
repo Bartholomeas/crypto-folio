@@ -13,7 +13,7 @@ const initialState: StateInterface = {
 	portfolioCoins: [],
 };
 
-const walletSlice = createSlice({ name: 'wallet', initialState, reducers: {} });
+const userSlice = createSlice({ name: 'user', initialState, reducers: {} });
 
-export const walletActions = walletSlice.actions;
-export default walletSlice;
+export const userActions = userSlice.actions;
+export default userSlice;

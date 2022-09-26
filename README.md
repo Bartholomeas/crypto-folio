@@ -1,6 +1,6 @@
 # PROJECT IN PROGRESS :)
 
-## Live: https://github.com/Bartholomeas/crypto-folio/deployments/activity_log?environment=Preview (Latest link is this on top of the page, press "View deployment")
+## Live: https://crypto-folio-phi.vercel.app
 
 Environments => Preview, Top link => View deployment )
 

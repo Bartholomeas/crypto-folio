@@ -23,7 +23,7 @@ import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
 
 const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const dispatch = useAppDispatch();
-	const { coinsList, filteredCoins } = useAppSelector(state => state.coins);
+	const { coinsList } = useAppSelector(state => state.coins);
 	const [page, setPage] = useState(1);
 	const { sortCoins } = useFilter();
 
