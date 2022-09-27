@@ -13,7 +13,7 @@ import PageHeader from '../components/atoms/PageHeader/PageHeader';
 import useDatabase from '../hooks/useDatabase';
 
 const Dashboard = () => {
-	const { getData } = useDatabase();
+	const { addItem, deleteItem } = useDatabase();
 	return (
 		<main
 			className='flex flex-col items-start gap-sm w-full md:max-w px pb-[10rem] min-h-[100vh] bg-white overflow-y-auto
@@ -30,8 +30,27 @@ const Dashboard = () => {
 					<InfoAssetsBox asset='Juno' changeValue={21}>
 						Biggest 24h profit
 					</InfoAssetsBox>
+					<div className='EBE EBE'>
+						<form className='add-item' onSubmit={addItem}>
+							<label>
+								ID COINA
+								<input name='idName' id='coinId' type='text' required />
+							</label>
+							<label>
+								SYMBOL
+								<input name='symbol' id='coinSymbol' type='text' required />
+							</label>
+							<button>DODAJ COS</button>
+						</form>
+						<form className='delete-item' onSubmit={deleteItem}>
+							<label>
+								ID COINA
+								<input name='idDelete' type='text' required />
+							</label>
 
-					<button onClick={getData}>KLIKNIJ MNIE</button>
+							<button>USUN</button>
+						</form>
+					</div>
 				</div>
 			</div>
 
