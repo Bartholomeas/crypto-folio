@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { CoinItem } from '../state/coinsSlice';
 import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
 import { coinsActions } from '../state/coinsSlice';
@@ -13,7 +13,8 @@ const useFilter = () => {
 			coinsList.sort((a: any, b: any): number => {
 				a[valueToSort] == b[valueToSort] && 0;
 				return (
-					(a[valueToSort] > b[valueToSort] ? 1 : a[valueToSort] < b[valueToSort] ? -1 : 0) * (isAscending ? 1 : -1)
+					(a[valueToSort] > b[valueToSort] ? 1 : a[valueToSort] < b[valueToSort] ? -1 : 0) *
+					(isAscending ? 1 : -1)
 				);
 			});
 		dispatch(coinsActions.setCoinsList(sortedCoinsList));
