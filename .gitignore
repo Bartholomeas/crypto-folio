@@ -28,6 +28,7 @@ firebaseConfig.js
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
