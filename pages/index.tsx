@@ -104,7 +104,11 @@ const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 			<Footer>
 				<p className='text-xs text-fontLight'>
 					Crypto data powered by{' '}
-					<a className='text-accent' rel='noreferrer' target={'_blank'} href='https://www.coingecko.com/'>
+					<a
+						className='text-accent'
+						rel='noreferrer'
+						target={'_blank'}
+						href='https://www.coingecko.com/'>
 						Coingecko API
 					</a>
 				</p>

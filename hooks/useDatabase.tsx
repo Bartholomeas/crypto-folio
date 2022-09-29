@@ -30,98 +30,98 @@ const auth = getAuth();
 const useDatabase = () => {
 	const [favourites, setFavourites] = useState<any>([]);
 
-	const q = query(colRef, orderBy('createdAt'));
+	// const q = query(colRef, orderBy('createdAt'));
 
-	const unsubCol = onSnapshot(q, snapshot => {
-		let coins: any[] = [];
-		snapshot.docs.forEach(doc => {
-			coins.push({ ...doc.data(), id: doc.id });
-		});
-		console.log(coins);
-	});
+	// const unsubCol = onSnapshot(q, snapshot => {
+	// 	let coins: any[] = [];
+	// 	snapshot.docs.forEach(doc => {
+	// 		coins.push({ ...doc.data(), id: doc.id });
+	// 	});
+	// 	console.log(coins);
+	// });
 
-	const addItem = (e: any) => {
-		e.preventDefault();
+	// const addItem = (e: any) => {
+	// 	e.preventDefault();
 
-		const addForm: any = document.querySelector('.add-item');
+	// 	const addForm: any = document.querySelector('.add-item');
 
-		addDoc(colRef, {
-			id: addForm?.querySelector('#coinId')?.value,
-			symbol: addForm?.querySelector('#coinSymbol')?.value,
-			createdAt: serverTimestamp(),
-		});
-	};
-	const deleteItem = (e: any) => {
-		e.preventDefault();
-		const deleteForm: any = document.querySelector('.delete-item');
+	// 	addDoc(colRef, {
+	// 		id: addForm?.querySelector('#coinId')?.value,
+	// 		symbol: addForm?.querySelector('#coinSymbol')?.value,
+	// 		createdAt: serverTimestamp(),
+	// 	});
+	// };
+	// const deleteItem = (e: any) => {
+	// 	e.preventDefault();
+	// 	const deleteForm: any = document.querySelector('.delete-item');
 
-		const docRef = doc(db, 'favourites', deleteForm.idDelete.value);
-		deleteDoc(docRef).then(() => {
-			deleteForm.reset();
-		});
-	};
+	// 	const docRef = doc(db, 'favourites', deleteForm.idDelete.value);
+	// 	deleteDoc(docRef).then(() => {
+	// 		deleteForm.reset();
+	// 	});
+	// };
 
-	const getSingleDoc = () => {
-		const docRef: any = doc(db, 'favourites', 'q0XKWS2wXRC4hmoj3wqb');
-		getDoc(docRef).then((doc: any) => {
-			console.log(doc.data(), doc.id);
-		});
+	// const getSingleDoc = () => {
+	// 	const docRef: any = doc(db, 'favourites', 'q0XKWS2wXRC4hmoj3wqb');
+	// 	getDoc(docRef).then((doc: any) => {
+	// 		console.log(doc.data(), doc.id);
+	// 	});
 
-		onSnapshot(docRef, (doc: any) => {
-			console.log(doc.data(), doc.id);
-		});
-	};
+	// 	onSnapshot(docRef, (doc: any) => {
+	// 		console.log(doc.data(), doc.id);
+	// 	});
+	// };
 
-	const updateItem = (e: any) => {
-		e.preventDefault();
+	// const updateItem = (e: any) => {
+	// 	e.preventDefault();
 
-		const updateForm: any = document.querySelector('.update-item');
-		const updateId = updateForm.querySelector('#idUpdate').value;
+	// 	const updateForm: any = document.querySelector('.update-item');
+	// 	const updateId = updateForm.querySelector('#idUpdate').value;
 
-		const docRef = doc(db, 'favourites', updateId);
+	// 	const docRef = doc(db, 'favourites', updateId);
 
-		updateDoc(docRef, {
-			symbol: 'updated symbol lol :)',
-		}).then(() => {
-			updateForm.reset();
-		});
-	};
+	// 	updateDoc(docRef, {
+	// 		symbol: 'updated symbol lol :)',
+	// 	}).then(() => {
+	// 		updateForm.reset();
+	// 	});
+	// };
 
-	const signup = (e: any) => {
-		e.preventDefault();
+	// const signup = (e: any) => {
+	// 	e.preventDefault();
 
-		createUserWithEmailAndPassword(auth, 'testowymail@onet.pl', 'testoweHaslo123')
-			.then(cred => {
-				console.log('user create:', cred.user);
-			})
-			.catch(err => console.log(err));
-	};
+	// 	createUserWithEmailAndPassword(auth, 'testowymail@onet.pl', 'testoweHaslo123')
+	// 		.then(cred => {
+	// 			console.log('user create:', cred.user);
+	// 		})
+	// 		.catch(err => console.log(err));
+	// };
 
-	const login = () => {
-		signInWithEmailAndPassword(auth, 'testowymail@onet.pl', 'testoweHaslo123')
-			.then(cred => {
-				console.log('usee loged in:', cred.user);
-			})
-			.catch(err => console.log(err));
-	};
+	// const login = () => {
+	// 	signInWithEmailAndPassword(auth, 'testowymail@onet.pl', 'testoweHaslo123')
+	// 		.then(cred => {
+	// 			console.log('usee loged in:', cred.user);
+	// 		})
+	// 		.catch(err => console.log(err));
+	// };
 
-	const logout = () => {
-		signOut(auth)
-			.then(() => {})
-			.catch(err => console.log(err));
-	};
+	// const logout = () => {
+	// 	signOut(auth)
+	// 		.then(() => {})
+	// 		.catch(err => console.log(err));
+	// };
 
-	const unsubAuth = onAuthStateChanged(auth, user => {
-		if (user) {
-			console.log('user is signed in' + user);
-		} else {
-			console.log('user is signed out');
-		}
-	});
+	// const unsubAuth = onAuthStateChanged(auth, user => {
+	// 	if (user) {
+	// 		console.log('user is signed in' + user);
+	// 	} else {
+	// 		console.log('user is signed out');
+	// 	}
+	// });
 
-	//unsub to np unsubAuth() zwaraca funkcje ktora sie wywoluje np przy onSnapshot
+	// //unsub to np unsubAuth() zwaraca funkcje ktora sie wywoluje np przy onSnapshot
 
-	return { addItem, deleteItem, getSingleDoc, updateItem, signup, logout, login };
+	// return { addItem, deleteItem, getSingleDoc, updateItem, signup, logout, login };
 };
 
 export default useDatabase;

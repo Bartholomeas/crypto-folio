@@ -13,7 +13,7 @@ import PageHeader from '../components/atoms/PageHeader/PageHeader';
 import useDatabase from '../hooks/useDatabase';
 
 const Dashboard = () => {
-	const { addItem, deleteItem, getSingleDoc, updateItem, signup, logout, login } = useDatabase();
+	// const { addItem, deleteItem, getSingleDoc, updateItem, signup, logout, login } = useDatabase();
 
 	return (
 		<main
@@ -37,7 +37,7 @@ const Dashboard = () => {
 					<InfoAssetsBox asset='Juno' changeValue={21}>
 						Biggest 24h profit
 					</InfoAssetsBox>
-					<div className='EBE EBE'>
+					{/* <div className='EBE EBE'>
 						<button onClick={getSingleDoc}>KLIK KLIK </button>
 						<form className='add-item' onSubmit={addItem}>
 							<label>
@@ -74,7 +74,7 @@ const Dashboard = () => {
 						<button className='bg-rose-200' onClick={login}>
 							Zaloguj
 						</button>
-					</div>
+					</div> */}
 				</div>
 			</div>
 
