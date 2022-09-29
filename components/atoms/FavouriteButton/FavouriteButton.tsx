@@ -9,7 +9,7 @@ const FavouriteButton = ({ isBox = false }: Props) => {
 	return (
 		<button
 			className={` flex items-center justify-end w-full py-xs
-		${isBox && 'w-[3rem] h-[3rem] rounded-lg justify-center bg-baseLight text-fontLight'}`}>
+		${isBox && 'w-[3rem] h-[3rem] rounded-xl justify-center bg-baseLight text-fontLight'}`}>
 			<MdStarBorder />
 		</button>
 	);

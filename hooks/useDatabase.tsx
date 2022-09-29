@@ -23,12 +23,21 @@ import {
 	onAuthStateChanged,
 } from 'firebase/auth';
 
-const colRef = collection(db, 'favourites');
+const colRef = collection(db, 'walletCoins');
 
 const auth = getAuth();
 
 const useDatabase = () => {
 	const [favourites, setFavourites] = useState<any>([]);
+
+	const getData = () => {
+		onSnapshot(colRef, snapshot => {
+			snapshot.docs.forEach(doc => {
+				console.log(doc.data());
+			});
+		});
+		// setFavourites(data);
+	};
 
 	// const q = query(colRef, orderBy('createdAt'));
 
@@ -40,17 +49,22 @@ const useDatabase = () => {
 	// 	console.log(coins);
 	// });
 
-	// const addItem = (e: any) => {
-	// 	e.preventDefault();
-
-	// 	const addForm: any = document.querySelector('.add-item');
-
-	// 	addDoc(colRef, {
-	// 		id: addForm?.querySelector('#coinId')?.value,
-	// 		symbol: addForm?.querySelector('#coinSymbol')?.value,
-	// 		createdAt: serverTimestamp(),
-	// 	});
-	// };
+	const addItem = () => {
+		addDoc(colRef, {
+			amount: 0.5,
+			coinName: 'Ethereum',
+			coinSymbol: 'ETH',
+			purchaseDate: serverTimestamp(),
+			purchasePrice: 2000,
+			// createdAt: serverTimestamp(),
+		})
+			.then(res => {
+				console.log(res);
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	};
 	// const deleteItem = (e: any) => {
 	// 	e.preventDefault();
 	// 	const deleteForm: any = document.querySelector('.delete-item');
@@ -122,6 +136,7 @@ const useDatabase = () => {
 	// //unsub to np unsubAuth() zwaraca funkcje ktora sie wywoluje np przy onSnapshot
 
 	// return { addItem, deleteItem, getSingleDoc, updateItem, signup, logout, login };
+	return { getData, addItem };
 };
 
 export default useDatabase;

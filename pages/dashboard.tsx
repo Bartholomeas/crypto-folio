@@ -13,7 +13,7 @@ import PageHeader from '../components/atoms/PageHeader/PageHeader';
 import useDatabase from '../hooks/useDatabase';
 
 const Dashboard = () => {
-	// const { addItem, deleteItem, getSingleDoc, updateItem, signup, logout, login } = useDatabase();
+	const { getData, addItem } = useDatabase();
 
 	return (
 		<main
@@ -37,44 +37,9 @@ const Dashboard = () => {
 					<InfoAssetsBox asset='Juno' changeValue={21}>
 						Biggest 24h profit
 					</InfoAssetsBox>
-					{/* <div className='EBE EBE'>
-						<button onClick={getSingleDoc}>KLIK KLIK </button>
-						<form className='add-item' onSubmit={addItem}>
-							<label>
-								ID COINA
-								<input name='idName' id='coinId' type='text' required />
-							</label>
-							<label>
-								SYMBOL
-								<input name='symbol' id='coinSymbol' type='text' required />
-							</label>
-							<button>DODAJ COS</button>
-						</form>
-						<form className='delete-item' onSubmit={deleteItem}>
-							<label>
-								ID COINA
-								<input name='idDelete' type='text' required />
-							</label>
 
-							<button>USUN</button>
-						</form>
-						<form className='update-item bg-sky-300' onSubmit={updateItem}>
-							<label>
-								Id UPDATE
-								<input name='idUpdate' id='idUpdate' type='text' required />
-								<button>update</button>
-							</label>
-
-							<button>USUN</button>
-						</form>
-						<button onClick={signup}>kliku zaloguj sie</button>
-						<button className='bg-rose-200' onClick={logout}>
-							Wyloguj
-						</button>
-						<button className='bg-rose-200' onClick={login}>
-							Zaloguj
-						</button>
-					</div> */}
+					<button onClick={getData}>Klik onsnapshot</button>
+					<button onClick={addItem}>DODAJ COS</button>
 				</div>
 			</div>
 

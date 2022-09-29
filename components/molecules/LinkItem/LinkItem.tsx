@@ -18,14 +18,14 @@ const LinkItem = ({ allLinks, linkKey }: Props): any => {
 			<div className='relative flex-col gap-sm h-[3rem]'>
 				<button
 					onClick={toggleLinkList}
-					className='flex items-center justify-between min-w-[3rem] w-full h-[3rem] px py-[0.6rem] bg-baseLight text-xs font-semibold text-fontLight rounded-lg cursor-pointer hover:bg-baseVeryLight transition-colors'>
+					className='flex items-center justify-between min-w-[3rem] w-full h-[3rem] px py-[0.6rem] bg-baseLight text-xs font-semibold text-fontLight rounded-xl cursor-pointer hover:bg-baseVeryLight transition-colors'>
 					{linkKey}
 					<span className='font-bold text-fontLight text-sm '>v</span>
 				</button>
 				<ul
 					className={`${
 						isOpen ? 'scale-1 translate-x-0' : 'scale-0 translate-x-1/2'
-					} absolute t-[3rem] origin-top transition-transform z-[1000] bg-baseVeryLight rounded-lg  flex flex-col gap-[0.3rem]`}>
+					} absolute t-[3rem] origin-top transition-transform z-[1000] bg-baseVeryLight rounded-xl  flex flex-col gap-[0.3rem]`}>
 					{allLinks.map(link => {
 						if (link === '' || link === null) return;
 
@@ -35,7 +35,7 @@ const LinkItem = ({ allLinks, linkKey }: Props): any => {
 									onClick={e => toggleLinkList(e, true)}
 									href={link}
 									target='blank'
-									className='flex items-center justify-center min-w-[3rem] w-fit h-[3rem] px py-[0.6rem] bg-baseVeryLight text-xs font-semibold text-fontLight rounded-lg cursor-pointer hover:bg-baseVeryLight transition-colors'>
+									className='flex items-center justify-center min-w-[3rem] w-fit h-[3rem] px py-[0.6rem] bg-baseVeryLight text-xs font-semibold text-fontLight rounded-xl cursor-pointer hover:bg-baseVeryLight transition-colors'>
 									{linkKey}
 								</a>
 							</li>
@@ -50,7 +50,7 @@ const LinkItem = ({ allLinks, linkKey }: Props): any => {
 				<a
 					href={allLinks}
 					target='blank'
-					className='flex items-center justify-center w-fit h-[3rem] px py-[0.6rem] bg-baseLight text-xs font-semibold text-fontLight rounded-lg cursor-pointer hover:bg-baseVeryLight transition-colors'>
+					className='flex items-center justify-center w-fit h-[3rem] px py-[0.6rem] bg-baseLight text-xs font-semibold text-fontLight rounded-xl cursor-pointer hover:bg-baseVeryLight transition-colors'>
 					{linkKey}
 				</a>
 			)

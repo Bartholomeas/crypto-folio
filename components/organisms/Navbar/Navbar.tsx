@@ -4,10 +4,18 @@ import NavList from '../../molecules/NavList/NavList';
 import { useAppDispatch, useAppSelector } from '../../../state/reduxHooks';
 import NavLinkItem from '../../atoms/NavLink/NavLink';
 import NavListItem from '../../atoms/NavListItem/NavListItem';
-import { MdDashboard, MdSettings, MdSearch, MdAccountBalanceWallet, MdHistory, MdLogout } from 'react-icons/md';
+import {
+	MdDashboard,
+	MdSettings,
+	MdSearch,
+	MdAccountBalanceWallet,
+	MdHistory,
+	MdLogout,
+} from 'react-icons/md';
 import ThemeSwitch from '../../molecules/ThemeSwitch/ThemeSwitch';
 import { useRouter } from 'next/router';
 import { uiActions } from '../../../state/uiSlice';
+import Button from '../../atoms/Button/Button';
 
 const Navbar = () => {
 	const router = useRouter();
@@ -27,8 +35,8 @@ const Navbar = () => {
 
 	return (
 		<nav
-			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-baseLight z-[1000] 
-		md:relative md:h-full md:max-w-[180px] md:py-lg'>
+			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-white z-[1000] 
+		md:relative md:h-full md:max-w-[180px] md:py-lg md:border-r-2 md:border-baseLight shadow-xl'>
 			<div
 				className='nav-wrapper flex justify-between items-center w-full
 				 px-md py-sm
@@ -38,7 +46,7 @@ const Navbar = () => {
 			</div>
 
 			<div
-				className={`nav-menu fixed flex flex-col justify-around items-center w-full  top-[70px] left-0 bottom-0 right-0 bg-baseVeryLight transition-transform overflow-hidden
+				className={`nav-menu fixed flex flex-col justify-around items-center w-full  top-[70px] left-0 bottom-0 right-0 bg-white transition-transform overflow-hidden
 				 md:relative md:justify-between md:top-0 md:w-full md:my-auto md:h-full md:bg-transparent md:translate-x-0  ${
 						isNavOpen ? 'translate-x-0' : 'translate-x-[100%] '
 					}`}>
@@ -72,19 +80,38 @@ const Navbar = () => {
 							<MdSettings className='icon' /> Settings
 						</NavLinkItem>
 					</NavListItem>
-					<li className='flex self-start md:ml-0'>
-						<button className='flex flex-row-reverse items-center justify-start gap-sm py-md text-error text-sm cursor-pointer md:flex-row md:justify-start'>
-							<MdLogout className='icon text-error' />
-							Logout
-						</button>
-					</li>
 				</NavList>
-				<div className='flex flex-row-reverse justify-center items-center gap-sm w-full px-md md:flex-col md:items-start'>
+				<div className='flex flex-col justify-center items-center gap-sm w-full px-md md:items-start'>
 					{/* <div className='flex flex-col justify-center items-center w-full md:flex-col'>
 						<SelectMenu options={languages}>Language</SelectMenu>
 						<SelectMenu options={currencies}>Currency</SelectMenu>
 					</div> */}
-					<ThemeSwitch toggleThemeFunc={() => dispatch(uiActions.toggleTheme())} isThemeDark={isThemeDark} />
+					<Button
+						onClickFn={() => {
+							console.log('create acc btn');
+						}}
+						isAccent={true}>
+						Create account
+					</Button>
+					<Button
+						onClickFn={() => {
+							console.log('create acc btn');
+						}}>
+						Log in <MdLogout />
+					</Button>
+					<div className='flex items-center gap-sm w-full md:flex-col'>
+						<Button
+							onClickFn={() => {
+								console.log('create acc btn');
+							}}
+							otherStyles='text-xs'>
+							Language
+						</Button>
+						<ThemeSwitch
+							toggleThemeFunc={() => dispatch(uiActions.toggleTheme())}
+							isThemeDark={isThemeDark}
+						/>
+					</div>
 				</div>
 			</div>
 		</nav>
