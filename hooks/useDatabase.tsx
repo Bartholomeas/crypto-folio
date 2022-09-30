@@ -21,14 +21,25 @@ import {
 	signOut,
 	signInWithEmailAndPassword,
 	onAuthStateChanged,
+	GoogleAuthProvider,
+	signInWithPopup,
+	signInWithRedirect,
 } from 'firebase/auth';
 
 const colRef = collection(db, 'walletCoins');
 
 const auth = getAuth();
+const googleProvider = new GoogleAuthProvider();
+
+const initialUserState: any = {
+	credential: {},
+	token: {},
+	userInfo: {},
+};
 
 const useDatabase = () => {
 	const [favourites, setFavourites] = useState<any>([]);
+	const [userData, setUserData] = useState({});
 
 	const getData = () => {
 		onSnapshot(colRef, snapshot => {
@@ -37,6 +48,35 @@ const useDatabase = () => {
 			});
 		});
 		// setFavourites(data);
+	};
+
+	onAuthStateChanged(auth, user => {
+		if (user) {
+			console.log(user.uid);
+		} else {
+			console.log('error');
+		}
+	});
+	const getUserInfo = () => {
+		const user = auth.currentUser;
+		console.log(user!.uid);
+	};
+
+	const authWithGoogle = () => {
+		signInWithPopup(auth, googleProvider)
+			.then(result => {
+				console.log(result);
+				const credential = GoogleAuthProvider.credentialFromResult(result);
+				// localStorage.setItem('userId', credential!.idToken);
+				console.log(credential);
+				setUserData({
+					token: credential!.accessToken,
+					userInfo: result.user,
+				});
+			})
+			.catch(err => {
+				console.log(err);
+			});
 	};
 
 	// const q = query(colRef, orderBy('createdAt'));
@@ -65,78 +105,8 @@ const useDatabase = () => {
 				console.log(err);
 			});
 	};
-	// const deleteItem = (e: any) => {
-	// 	e.preventDefault();
-	// 	const deleteForm: any = document.querySelector('.delete-item');
 
-	// 	const docRef = doc(db, 'favourites', deleteForm.idDelete.value);
-	// 	deleteDoc(docRef).then(() => {
-	// 		deleteForm.reset();
-	// 	});
-	// };
-
-	// const getSingleDoc = () => {
-	// 	const docRef: any = doc(db, 'favourites', 'q0XKWS2wXRC4hmoj3wqb');
-	// 	getDoc(docRef).then((doc: any) => {
-	// 		console.log(doc.data(), doc.id);
-	// 	});
-
-	// 	onSnapshot(docRef, (doc: any) => {
-	// 		console.log(doc.data(), doc.id);
-	// 	});
-	// };
-
-	// const updateItem = (e: any) => {
-	// 	e.preventDefault();
-
-	// 	const updateForm: any = document.querySelector('.update-item');
-	// 	const updateId = updateForm.querySelector('#idUpdate').value;
-
-	// 	const docRef = doc(db, 'favourites', updateId);
-
-	// 	updateDoc(docRef, {
-	// 		symbol: 'updated symbol lol :)',
-	// 	}).then(() => {
-	// 		updateForm.reset();
-	// 	});
-	// };
-
-	// const signup = (e: any) => {
-	// 	e.preventDefault();
-
-	// 	createUserWithEmailAndPassword(auth, 'testowymail@onet.pl', 'testoweHaslo123')
-	// 		.then(cred => {
-	// 			console.log('user create:', cred.user);
-	// 		})
-	// 		.catch(err => console.log(err));
-	// };
-
-	// const login = () => {
-	// 	signInWithEmailAndPassword(auth, 'testowymail@onet.pl', 'testoweHaslo123')
-	// 		.then(cred => {
-	// 			console.log('usee loged in:', cred.user);
-	// 		})
-	// 		.catch(err => console.log(err));
-	// };
-
-	// const logout = () => {
-	// 	signOut(auth)
-	// 		.then(() => {})
-	// 		.catch(err => console.log(err));
-	// };
-
-	// const unsubAuth = onAuthStateChanged(auth, user => {
-	// 	if (user) {
-	// 		console.log('user is signed in' + user);
-	// 	} else {
-	// 		console.log('user is signed out');
-	// 	}
-	// });
-
-	// //unsub to np unsubAuth() zwaraca funkcje ktora sie wywoluje np przy onSnapshot
-
-	// return { addItem, deleteItem, getSingleDoc, updateItem, signup, logout, login };
-	return { getData, addItem };
+	return { getData, addItem, authWithGoogle, getUserInfo };
 };
 
 export default useDatabase;
@@ -153,3 +123,74 @@ export default useDatabase;
 // 	.catch(error => {
 // 		console.log(error);
 // 	});
+// const deleteItem = (e: any) => {
+// 	e.preventDefault();
+// 	const deleteForm: any = document.querySelector('.delete-item');
+
+// 	const docRef = doc(db, 'favourites', deleteForm.idDelete.value);
+// 	deleteDoc(docRef).then(() => {
+// 		deleteForm.reset();
+// 	});
+// };
+
+// const getSingleDoc = () => {
+// 	const docRef: any = doc(db, 'favourites', 'q0XKWS2wXRC4hmoj3wqb');
+// 	getDoc(docRef).then((doc: any) => {
+// 		console.log(doc.data(), doc.id);
+// 	});
+
+// 	onSnapshot(docRef, (doc: any) => {
+// 		console.log(doc.data(), doc.id);
+// 	});
+// };
+
+// const updateItem = (e: any) => {
+// 	e.preventDefault();
+
+// 	const updateForm: any = document.querySelector('.update-item');
+// 	const updateId = updateForm.querySelector('#idUpdate').value;
+
+// 	const docRef = doc(db, 'favourites', updateId);
+
+// 	updateDoc(docRef, {
+// 		symbol: 'updated symbol lol :)',
+// 	}).then(() => {
+// 		updateForm.reset();
+// 	});
+// };
+
+// const signup = (e: any) => {
+// 	e.preventDefault();
+
+// 	createUserWithEmailAndPassword(auth, 'testowymail@onet.pl', 'testoweHaslo123')
+// 		.then(cred => {
+// 			console.log('user create:', cred.user);
+// 		})
+// 		.catch(err => console.log(err));
+// };
+
+// const login = () => {
+// 	signInWithEmailAndPassword(auth, 'testowymail@onet.pl', 'testoweHaslo123')
+// 		.then(cred => {
+// 			console.log('usee loged in:', cred.user);
+// 		})
+// 		.catch(err => console.log(err));
+// };
+
+// const logout = () => {
+// 	signOut(auth)
+// 		.then(() => {})
+// 		.catch(err => console.log(err));
+// };
+
+// const unsubAuth = onAuthStateChanged(auth, user => {
+// 	if (user) {
+// 		console.log('user is signed in' + user);
+// 	} else {
+// 		console.log('user is signed out');
+// 	}
+// });
+
+// //unsub to np unsubAuth() zwaraca funkcje ktora sie wywoluje np przy onSnapshot
+
+// return { addItem, deleteItem, getSingleDoc, updateItem, signup, logout, login };

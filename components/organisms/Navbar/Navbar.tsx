@@ -16,11 +16,13 @@ import ThemeSwitch from '../../molecules/ThemeSwitch/ThemeSwitch';
 import { useRouter } from 'next/router';
 import { uiActions } from '../../../state/uiSlice';
 import Button from '../../atoms/Button/Button';
+import useDatabase from '../../../hooks/useDatabase';
 
 const Navbar = () => {
 	const router = useRouter();
 	const { isNavOpen, isThemeDark } = useAppSelector(state => state.ui);
 	const dispatch = useAppDispatch();
+	const { authWithGoogle } = useDatabase();
 
 	const languages = {
 		english: 'ENG',
@@ -93,10 +95,7 @@ const Navbar = () => {
 						isAccent={true}>
 						Create account
 					</Button>
-					<Button
-						onClickFn={() => {
-							console.log('create acc btn');
-						}}>
+					<Button onClickFn={authWithGoogle}>
 						Log in <MdLogout />
 					</Button>
 					<div className='flex items-center gap-sm w-full md:flex-col'>
