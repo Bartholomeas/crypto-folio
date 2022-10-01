@@ -162,10 +162,3 @@ export const getStaticProps = async (context: any) => {
 	}
 };
 export default SpecifiedPage;
-
-const pairs = [
-	['us', 'en'],
-	['us', 'es'],
-	['ca', 'en'],
-	['ca', 'fr'],
-];
