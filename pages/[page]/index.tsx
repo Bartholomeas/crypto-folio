@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { InferGetStaticPropsType } from 'next';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
@@ -26,8 +26,16 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 	const { sortCoins } = useFilter();
 	const dispatch = useAppDispatch();
 	const { coinsList } = useAppSelector(state => state.coins);
-
 	const [isLoading, setIsLoading] = useState(false);
+
+	const getApiDB = async () => {
+		try {
+			const data = await axios('/api/get-database');
+			console.log(data);
+		} catch {
+			throw new Error('nie dizala');
+		}
+	};
 
 	useEffect(() => {
 		dispatch(coinsActions.setCoinsList(coins));
@@ -44,7 +52,7 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 				<div className=' flex flex-col justify-center w-full overflow-x-scroll'>
 					{coins.length < 1 && <p className='absolute font-bold text-xl text-accent'>Loading...</p>}
 					{/* <p className='absolute font-bold text-xl text-accent top-[50%]'>Loading...</p> */}
-
+					<button onClick={getApiDB}>KLIKU</button>
 					<Table>
 						<colgroup>
 							<col className='w-[2%]' />

@@ -13,7 +13,7 @@ import PageHeader from '../components/atoms/PageHeader/PageHeader';
 import useDatabase from '../hooks/useDatabase';
 
 const Dashboard = () => {
-	// const { getData, addItem, getUserInfo } = useDatabase();
+	const { writeUserData } = useDatabase();
 
 	return (
 		<main
@@ -38,8 +38,12 @@ const Dashboard = () => {
 						Biggest 24h profit
 					</InfoAssetsBox>
 
-					{/* <button onClick={getData}>Klik onsnapshot</button>
-					<button onClick={getUserInfo}>DODAJ COS</button> */}
+					<button
+						onClick={() =>
+							writeUserData({ name: 'barthol', email: 'barth@onet.com', uid: '12312345Dasdef' })
+						}>
+						Klik onsnapshot
+					</button>
 				</div>
 			</div>
 

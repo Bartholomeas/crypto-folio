@@ -1,13 +1,12 @@
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
 	currPage: number;
 }
 const Pagination = ({ currPage }: Props) => {
-	console.log(currPage);
 	const pagesArr = Array.from({ length: 10 }, (_, idx) => ++idx);
 
 	const changePage = (pageId: any, next: boolean = true) => {

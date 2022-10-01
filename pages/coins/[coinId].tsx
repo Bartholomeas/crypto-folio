@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { GetServerSidePropsContext } from 'next';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
@@ -137,7 +137,6 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 			// revalidate: 60,
 		};
 	} catch {
-		console.log(context);
 		throw new Error('Something went wrong in staticProps :(');
 	}
 };

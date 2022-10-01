@@ -12,8 +12,9 @@ import {
 	orderBy,
 	serverTimestamp,
 	updateDoc,
+	setDoc,
 } from 'firebase/firestore';
-import { app, db, auth } from '../firebaseConfig';
+import { db, auth } from '../firebaseConfig';
 
 import {
 	getAuth,
@@ -25,8 +26,9 @@ import {
 	signInWithPopup,
 	signInWithRedirect,
 } from 'firebase/auth';
+import { ref, set } from 'firebase/database';
 
-const colRef = collection(db, 'walletCoins');
+const colRef: any = collection(db, 'users');
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -37,34 +39,40 @@ const initialUserState: any = {
 };
 
 const useDatabase = () => {
-	// const [favourites, setFavourites] = useState<any>([]);
-	// const [userData, setUserData] = useState({});
-	// const getData = () => {
-	// 	onSnapshot(colRef, snapshot => {
-	// 		snapshot.docs.forEach(doc => {
-	// 			console.log(doc.data());
-	// 		});
-	// 	});
-	// 	// setFavourites(data);
-	// };
-	// // onAuthStateChanged(auth, user => {
-	// // 	if (user) {
-	// // 		console.log(user.uid);
-	// // 	} else {
-	// // 		console.log('error');
-	// // 	}
-	// // });
+	const writeUserData = async (user: any) => {
+		// const reference = ref(db, 'users/' + user.uid);
+		// try {
+		// 	set(reference, {
+		// 		username: user.name,
+		// 		email: user.email,
+		// 		userId: user.uid,
+		// 	});
+		// } catch {
+		// 	throw new Error('something is no yes with creating user');
+		// }
+		const docRef = doc(db, 'users', user.uid);
+		getDoc(docRef).then(doc => {
+			console.log(doc.data());
+		});
+	};
+
+	onAuthStateChanged(auth, user => {
+		if (user) {
+			console.log(user);
+		} else {
+			console.log('error');
+		}
+	});
 	// const getUserInfo = () => {
 	// 	const user = auth.currentUser;
 	// 	console.log(user!.uid);
 	// };
-	const authWithGoogle = () => {
+	function authWithGoogle() {
 		signInWithPopup(auth, googleProvider)
 			.then(result => {
-				console.log(result);
 				const credential = GoogleAuthProvider.credentialFromResult(result);
+				addUserToDB(result);
 				// localStorage.setItem('userId', credential!.idToken);
-				console.log(credential);
 				// setUserData({
 				// 	token: credential!.accessToken,
 				// 	userInfo: result.user,
@@ -73,7 +81,16 @@ const useDatabase = () => {
 			.catch(err => {
 				console.log(err);
 			});
-	};
+	}
+
+	function addUserToDB(user: any) {
+		setDoc(colRef, {
+			id: user.uid,
+			email: user.email,
+			name: user.displayName,
+			favouriteCoins: ['BTC', 'ETH', 'XRP'],
+		});
+	}
 	// const q = query(colRef, orderBy('createdAt'));
 	// const unsubCol = onSnapshot(q, snapshot => {
 	// 	let coins: any[] = [];
@@ -98,7 +115,7 @@ const useDatabase = () => {
 	// 			console.log(err);
 	// 		});
 	// };
-	return { authWithGoogle };
+	return { authWithGoogle, writeUserData };
 };
 
 export default useDatabase;
