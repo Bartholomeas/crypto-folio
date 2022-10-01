@@ -36,7 +36,6 @@ const CoinDetails = ({ coinDetails }: any) => {
 		official_forum_url,
 		repos_url: { github },
 	} = coinDetails.links;
-
 	const { symbol, name, market_cap_rank, description, image, market_data } = coinDetails;
 	useEffect(() => {
 		setLinks({
@@ -82,8 +81,12 @@ const CoinDetails = ({ coinDetails }: any) => {
 				</div>
 			</div>
 			<div className='market-datas flex  justify-around gap w-full py border-t-2 border-b-2 border-baseLight lg:flex-row md:gap-lg '>
-				<CoinMarketData dataValue={`$ ${addSpacesToNumber(market_data.market_cap.usd)}`}>Market cap</CoinMarketData>
-				<CoinMarketData dataValue={`$ ${addSpacesToNumber(market_data.total_volume.usd)}`}>Volume</CoinMarketData>
+				<CoinMarketData dataValue={`$ ${addSpacesToNumber(market_data.market_cap.usd)}`}>
+					Market cap
+				</CoinMarketData>
+				<CoinMarketData dataValue={`$ ${addSpacesToNumber(market_data.total_volume.usd)}`}>
+					Volume
+				</CoinMarketData>
 				<CoinMarketData
 					dataValue={addSpacesToNumber(market_data.total_supply)}
 					secondDataValue={addSpacesToNumber(market_data.circulating_supply)}>
@@ -134,6 +137,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 			// revalidate: 60,
 		};
 	} catch {
+		console.log(context);
 		throw new Error('Something went wrong in staticProps :(');
 	}
 };

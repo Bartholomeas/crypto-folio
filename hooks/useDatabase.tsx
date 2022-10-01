@@ -38,30 +38,27 @@ const initialUserState: any = {
 };
 
 const useDatabase = () => {
-	const [favourites, setFavourites] = useState<any>([]);
-	const [userData, setUserData] = useState({});
-
-	const getData = () => {
-		onSnapshot(colRef, snapshot => {
-			snapshot.docs.forEach(doc => {
-				console.log(doc.data());
-			});
-		});
-		// setFavourites(data);
-	};
-
-	onAuthStateChanged(auth, user => {
-		if (user) {
-			console.log(user.uid);
-		} else {
-			console.log('error');
-		}
-	});
-	const getUserInfo = () => {
-		const user = auth.currentUser;
-		console.log(user!.uid);
-	};
-
+	// const [favourites, setFavourites] = useState<any>([]);
+	// const [userData, setUserData] = useState({});
+	// const getData = () => {
+	// 	onSnapshot(colRef, snapshot => {
+	// 		snapshot.docs.forEach(doc => {
+	// 			console.log(doc.data());
+	// 		});
+	// 	});
+	// 	// setFavourites(data);
+	// };
+	// // onAuthStateChanged(auth, user => {
+	// // 	if (user) {
+	// // 		console.log(user.uid);
+	// // 	} else {
+	// // 		console.log('error');
+	// // 	}
+	// // });
+	// const getUserInfo = () => {
+	// 	const user = auth.currentUser;
+	// 	console.log(user!.uid);
+	// };
 	const authWithGoogle = () => {
 		signInWithPopup(auth, googleProvider)
 			.then(result => {
@@ -69,18 +66,16 @@ const useDatabase = () => {
 				const credential = GoogleAuthProvider.credentialFromResult(result);
 				// localStorage.setItem('userId', credential!.idToken);
 				console.log(credential);
-				setUserData({
-					token: credential!.accessToken,
-					userInfo: result.user,
-				});
+				// setUserData({
+				// 	token: credential!.accessToken,
+				// 	userInfo: result.user,
+				// });
 			})
 			.catch(err => {
 				console.log(err);
 			});
 	};
-
 	// const q = query(colRef, orderBy('createdAt'));
-
 	// const unsubCol = onSnapshot(q, snapshot => {
 	// 	let coins: any[] = [];
 	// 	snapshot.docs.forEach(doc => {
@@ -88,7 +83,6 @@ const useDatabase = () => {
 	// 	});
 	// 	console.log(coins);
 	// });
-
 	// const addItem = () => {
 	// 	addDoc(colRef, {
 	// 		amount: 0.5,
@@ -105,8 +99,7 @@ const useDatabase = () => {
 	// 			console.log(err);
 	// 		});
 	// };
-
-	return { getData, authWithGoogle, getUserInfo };
+	return { authWithGoogle };
 };
 
 export default useDatabase;
