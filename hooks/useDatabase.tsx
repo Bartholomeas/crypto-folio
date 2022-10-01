@@ -56,13 +56,13 @@ const useDatabase = () => {
 		});
 	};
 
-	onAuthStateChanged(auth, user => {
-		if (user) {
-			console.log(user);
-		} else {
-			console.log('error');
-		}
-	});
+	// onAuthStateChanged(auth, user => {
+	// 	if (user) {
+	// 		console.log(user);
+	// 	} else {
+	// 		console.log('error');
+	// 	}
+	// });
 	// const getUserInfo = () => {
 	// 	const user = auth.currentUser;
 	// 	console.log(user!.uid);
@@ -71,25 +71,25 @@ const useDatabase = () => {
 		signInWithPopup(auth, googleProvider)
 			.then(result => {
 				const credential = GoogleAuthProvider.credentialFromResult(result);
-				addUserToDB(result);
-				// localStorage.setItem('userId', credential!.idToken);
-				// setUserData({
-				// 	token: credential!.accessToken,
-				// 	userInfo: result.user,
-				// });
+				addUserToDB(result.user);
 			})
 			.catch(err => {
 				console.log(err);
 			});
 	}
 
-	function addUserToDB(user: any) {
-		setDoc(colRef, {
-			id: user.uid,
-			email: user.email,
-			name: user.displayName,
-			favouriteCoins: ['BTC', 'ETH', 'XRP'],
-		});
+	async function addUserToDB(user: any) {
+		const userRef = doc(db, 'users', user.uid);
+		setDoc(
+			userRef,
+			{
+				id: user.uid,
+				email: user.email,
+				name: user.displayName,
+				favouriteCoins: ['BTC', 'ETH', 'XRP'],
+			},
+			{ merge: true }
+		);
 	}
 	// const q = query(colRef, orderBy('createdAt'));
 	// const unsubCol = onSnapshot(q, snapshot => {
