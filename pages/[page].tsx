@@ -21,7 +21,7 @@ import { addSpacesToNumber } from '../utils/convertUtils';
 import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
 import useFilter from '../hooks/useFilter';
 
-const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServerSideProps>) => {
+const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const indexingByPage = page > 1 ? (page - 1) * 100 : 0;
 	const { sortCoins } = useFilter();
 	const dispatch = useAppDispatch();
@@ -77,8 +77,13 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServer
 						<TableBody>
 							{coinsList.map((coin: CoinItem, index: number) => {
 								return (
-									<TableRow key={uuidv4()}>
-										<TableData hrefRoute={coin.name}>
+									<TableRow
+										key={uuidv4()}
+										onClickFn={(e: any) => {
+											e.target.classList.contains('fav-btn') && e.preventDefault();
+											console.log(e.target.classList.contains('fav-btn'));
+										}}>
+										<TableData>
 											<FavouriteButton />
 										</TableData>
 										<TableData hrefRoute={coin.id} isBold={true}>
@@ -103,11 +108,15 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServer
 					</Table>
 				</div>
 			</div>
-			<Pagination currPage={page ?? 1} />
+			<Pagination currPage={page} />
 			<Footer>
 				<p className='text-xs text-fontLight'>
 					Crypto data powered by{' '}
-					<a className='text-accent' rel='noreferrer' target={'_blank'} href='https://www.coingecko.com/'>
+					<a
+						className='text-accent'
+						rel='noreferrer'
+						target={'_blank'}
+						href='https://www.coingecko.com/'>
 						Coingecko API
 					</a>
 				</p>
@@ -116,7 +125,25 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServer
 	);
 };
 
-export const getServerSideProps = async (context: any) => {
+export const getStaticPaths = async () => {
+	return {
+		paths: [
+			{ params: { page: '1' } },
+			{ params: { page: '2' } },
+			{ params: { page: '3' } },
+			{ params: { page: '4' } },
+			{ params: { page: '5' } },
+			{ params: { page: '6' } },
+			{ params: { page: '7' } },
+			{ params: { page: '8' } },
+			{ params: { page: '9' } },
+			{ params: { page: '10' } },
+		],
+		fallback: true,
+	};
+};
+
+export const getStaticProps = async (context: any) => {
 	const { page } = context.params;
 
 	try {
@@ -128,10 +155,17 @@ export const getServerSideProps = async (context: any) => {
 				coins: res.data,
 				page: page,
 			},
-			// revalidate: 60,
+			revalidate: 60,
 		};
 	} catch {
 		throw new Error('Something went wrong :(');
 	}
 };
 export default SpecifiedPage;
+
+const pairs = [
+	['us', 'en'],
+	['us', 'es'],
+	['ca', 'en'],
+	['ca', 'fr'],
+];

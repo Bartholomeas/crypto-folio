@@ -74,8 +74,13 @@ const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 						<TableBody>
 							{coinsList.map((coin: CoinItem, index: number) => {
 								return (
-									<TableRow key={uuidv4()}>
-										<TableData hrefRoute={coin.name}>
+									<TableRow
+										key={uuidv4()}
+										onClickFn={(e: any) => {
+											e.target.classList.contains('fav-btn') && e.preventDefault();
+											console.log(e.target.classList.contains('fav-btn'));
+										}}>
+										<TableData>
 											<FavouriteButton />
 										</TableData>
 										<TableData hrefRoute={coin.id} isBold={true}>

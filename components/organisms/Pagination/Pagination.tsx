@@ -7,6 +7,7 @@ interface Props {
 	currPage: number;
 }
 const Pagination = ({ currPage }: Props) => {
+	console.log(currPage);
 	const pagesArr = Array.from({ length: 10 }, (_, idx) => ++idx);
 
 	const changePage = (pageId: any, next: boolean = true) => {
@@ -29,7 +30,9 @@ const Pagination = ({ currPage }: Props) => {
 				return (
 					<Link key={uuidv4()} passHref href={`/${page}`}>
 						<a
-							className={`px-xs ${+currPage === +page && ' text-sm text-white font-semibold bg-accent rounded py-sm'}`}>
+							className={`px-xs ${
+								+currPage === +page && ' text-sm text-white font-semibold bg-accent rounded py-sm'
+							}`}>
 							{page}
 						</a>
 					</Link>
