@@ -89,24 +89,24 @@ const useDatabase = () => {
 	// 	console.log(coins);
 	// });
 
-	const addItem = () => {
-		addDoc(colRef, {
-			amount: 0.5,
-			coinName: 'Ethereum',
-			coinSymbol: 'ETH',
-			purchaseDate: serverTimestamp(),
-			purchasePrice: 2000,
-			// createdAt: serverTimestamp(),
-		})
-			.then(res => {
-				console.log(res);
-			})
-			.catch(err => {
-				console.log(err);
-			});
-	};
+	// const addItem = () => {
+	// 	addDoc(colRef, {
+	// 		amount: 0.5,
+	// 		coinName: 'Ethereum',
+	// 		coinSymbol: 'ETH',
+	// 		purchaseDate: serverTimestamp(),
+	// 		purchasePrice: 2000,
+	// 		// createdAt: serverTimestamp(),
+	// 	})
+	// 		.then(res => {
+	// 			console.log(res);
+	// 		})
+	// 		.catch(err => {
+	// 			console.log(err);
+	// 		});
+	// };
 
-	return { getData, addItem, authWithGoogle, getUserInfo };
+	return { getData, authWithGoogle, getUserInfo };
 };
 
 export default useDatabase;

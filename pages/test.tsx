@@ -80,7 +80,6 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 									<TableRow
 										key={uuidv4()}
 										onClickFn={(e: any) => {
-											e.target.classList.contains('fav-btn') && e.preventDefault();
 											console.log(e.target.classList.contains('fav-btn'));
 										}}>
 										<TableData>

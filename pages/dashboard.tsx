@@ -11,10 +11,9 @@ import MarginBox from '../components/atoms/MarginBox/MarginBox';
 import SecondHeader from '../components/atoms/SecondHeader/SecondHeader';
 import PageHeader from '../components/atoms/PageHeader/PageHeader';
 import useDatabase from '../hooks/useDatabase';
-import axios from 'axios';
 
 const Dashboard = () => {
-	const { getData, addItem, getUserInfo } = useDatabase();
+	// const { getData, addItem, getUserInfo } = useDatabase();
 
 	return (
 		<main
@@ -39,8 +38,8 @@ const Dashboard = () => {
 						Biggest 24h profit
 					</InfoAssetsBox>
 
-					<button onClick={getData}>Klik onsnapshot</button>
-					<button onClick={getUserInfo}>DODAJ COS</button>
+					{/* <button onClick={getData}>Klik onsnapshot</button>
+					<button onClick={getUserInfo}>DODAJ COS</button> */}
 				</div>
 			</div>
 

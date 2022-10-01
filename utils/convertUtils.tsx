@@ -18,5 +18,5 @@ export const convertDate = (dateArg: any, format: string) => {
 };
 
 export const addSpacesToNumber = (numberData: number) => {
-	return numberData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+	return parseFloat(numberData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '));
 };
