@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { InferGetStaticPropsType } from 'next';
+import { useState, useEffect } from 'react';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
@@ -15,19 +15,17 @@ import TableRow from '../components/molecules/TableRow/TableRow';
 import Searchbar from '../components/organisms/Searchbar/Searchbar';
 import Table from '../components/organisms/Table/Table';
 import { CoinItem, coinsActions } from '../state/coinsSlice';
-import Footer from '../components/organisms/Footer/Footer';
 import Pagination from '../components/organisms/Pagination/Pagination';
+import Footer from '../components/organisms/Footer/Footer';
 import { addSpacesToNumber } from '../utils/convertUtils';
-import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
 import useFilter from '../hooks/useFilter';
+import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
 
-const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStaticProps>) => {
-	const indexingByPage = page > 1 ? (page - 1) * 100 : 0;
-	const { sortCoins } = useFilter();
+const Explore = ({ coins }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const dispatch = useAppDispatch();
 	const { coinsList } = useAppSelector(state => state.coins);
-
-	const [isLoading, setIsLoading] = useState(false);
+	const [page, setPage] = useState(1);
+	const { sortCoins } = useFilter();
 
 	useEffect(() => {
 		dispatch(coinsActions.setCoinsList(coins));
@@ -42,8 +40,7 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 			<div className='top-[5rem] flex flex-col gap w-full pt'>
 				<Searchbar placeholderText='Search for coin..' />
 				<div className=' flex flex-col justify-center w-full overflow-x-scroll'>
-					{coins.length < 1 && <p className='absolute font-bold text-xl text-accent'>Loading...</p>}
-					{/* <p className='absolute font-bold text-xl text-accent top-[50%]'>Loading...</p> */}
+					{/* {isLoading && <p className='font-bold text-xl text-font'>Loading...</p>} */}
 
 					<Table>
 						<colgroup>
@@ -80,13 +77,14 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 									<TableRow
 										key={uuidv4()}
 										onClickFn={(e: any) => {
+											e.target.classList.contains('fav-btn') && e.preventDefault();
 											console.log(e.target.classList.contains('fav-btn'));
 										}}>
 										<TableData>
 											<FavouriteButton />
 										</TableData>
 										<TableData hrefRoute={coin.id} isBold={true}>
-											{indexingByPage + index + 1}
+											{index + 1}
 										</TableData>
 										<TableData imgSrc={coin.image} hrefRoute={coin.id} leftAlign={true}>
 											{coin.name}
@@ -107,7 +105,7 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 					</Table>
 				</div>
 			</div>
-			<Pagination currPage={page} />
+			<Pagination currPage={page ?? 1} />
 			<Footer>
 				<p className='text-xs text-fontLight'>
 					Crypto data powered by{' '}
@@ -124,40 +122,20 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 	);
 };
 
-export const getStaticPaths = async () => {
-	return {
-		paths: [
-			{ params: { page: '1' } },
-			{ params: { page: '2' } },
-			{ params: { page: '3' } },
-			{ params: { page: '4' } },
-			{ params: { page: '5' } },
-			{ params: { page: '6' } },
-			{ params: { page: '7' } },
-			{ params: { page: '8' } },
-			{ params: { page: '9' } },
-			{ params: { page: '10' } },
-		],
-		fallback: true,
-	};
-};
-
-export const getStaticProps = async (context: any) => {
-	const { page } = context.params;
-
+export const getStaticProps: GetStaticProps = async context => {
 	try {
 		const res = await axios(
-			`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=${page}&sparkline=false&price_change_percentage=24h`
+			'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h'
 		);
 		return {
 			props: {
 				coins: res.data,
-				page: page,
 			},
 			revalidate: 60,
 		};
 	} catch {
-		throw new Error('Something went wrong :(');
+		throw new Error('Something went wrong in staticProps :(');
 	}
 };
-export default SpecifiedPage;
+
+export default Explore;

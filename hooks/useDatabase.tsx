@@ -13,7 +13,7 @@ import {
 	serverTimestamp,
 	updateDoc,
 } from 'firebase/firestore';
-import { app, db } from '../firebaseConfig';
+import { app, db, auth } from '../firebaseConfig';
 
 import {
 	getAuth,
@@ -28,7 +28,6 @@ import {
 
 const colRef = collection(db, 'walletCoins');
 
-const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
 
 const initialUserState: any = {
