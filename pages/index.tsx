@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';

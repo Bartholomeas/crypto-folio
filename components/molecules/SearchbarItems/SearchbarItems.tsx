@@ -1,4 +1,3 @@
-import React from 'react';
 import { CoinItem } from '../../../state/coinsSlice';
 import SearchbarCoin from '../../atoms/SearchbarCoin/SearchbarCoin';
 import { v4 as uuidv4 } from 'uuid';
