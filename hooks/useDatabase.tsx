@@ -53,30 +53,40 @@ const useDatabase = () => {
 		});
 	};
 
-	onAuthStateChanged(auth, user => {
+	const authChange = onAuthStateChanged(auth, user => {
 		if (user) {
 			if (userData.uid !== '') return;
-			setLoggedIn(true);
-			dispatch(
-				userActions.setUserData({
-					name: user.displayName,
-					email: user.email,
-					uid: user.uid,
-					photoURL: user.photoURL,
-				})
-			);
+			setLoggedInUser(user);
 		} else {
-			setLoggedIn(false);
-
-			console.log('error');
+			removeLoggedInUser();
+			return;
 		}
 	});
+
+	function setLoggedInUser(user: any) {
+		setLoggedIn(true);
+		dispatch(
+			userActions.setUserData({
+				name: user.displayName,
+				email: user.email,
+				uid: user.uid,
+				photoURL: user.photoURL,
+			})
+		);
+		localStorage.setItem('userId', user.uid);
+	}
+
+	function removeLoggedInUser() {
+		setLoggedIn(false);
+		dispatch(userActions.setInitialState());
+		localStorage.removeItem('userId');
+	}
 
 	function authWithGoogle() {
 		signInWithPopup(auth, googleProvider)
 			.then(result => {
 				addUserToDB(result.user);
-				localStorage.setItem('userId', result.user.uid);
+				setLoggedInUser(result.user);
 			})
 			.catch(err => {
 				console.log(err);
@@ -84,16 +94,12 @@ const useDatabase = () => {
 	}
 
 	function signOutGoogle() {
-		signOut(auth)
-			.then(() => {
-				console.log('success');
-				dispatch(userActions.setInitialState());
-				localStorage.removeItem('userId');
-				setLoggedIn(false);
-			})
-			.catch(() => {
-				throw new Error('Cannot logout');
-			});
+		try {
+			removeLoggedInUser();
+			signOut(auth);
+		} catch {
+			throw new Error('Cannot logout');
+		}
 	}
 
 	async function addUserToDB(user: any) {
@@ -115,7 +121,7 @@ const useDatabase = () => {
 	// 	snapshot.docs.forEach(doc => {
 	// 		coins.push({ ...doc.data(), id: doc.id });
 
-	return { loggedIn, authWithGoogle, signOutGoogle, writeUserData };
+	return { loggedIn, authWithGoogle, signOutGoogle, writeUserData, authChange };
 };
 
 export default useDatabase;

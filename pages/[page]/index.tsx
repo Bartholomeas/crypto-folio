@@ -28,15 +28,6 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 	const { coinsList } = useAppSelector(state => state.coins);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const getApiDB = async () => {
-		try {
-			const data = await axios('/api/get-database');
-			console.log(data);
-		} catch {
-			throw new Error('nie dizala');
-		}
-	};
-
 	useEffect(() => {
 		dispatch(coinsActions.setCoinsList(coins));
 	}, [coins, dispatch]);

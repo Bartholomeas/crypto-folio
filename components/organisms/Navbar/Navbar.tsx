@@ -22,26 +22,15 @@ import BoxyLink from '../../atoms/BoxyLink/BoxyLink';
 
 const Navbar = () => {
 	const router = useRouter();
-	const [userPanelActive, setUserPanelActive] = useState(false);
 	const { isNavOpen, isThemeDark } = useAppSelector(state => state.ui);
 	const { userData } = useAppSelector(state => state.user);
 	const dispatch = useAppDispatch();
-	const { authWithGoogle, signOutGoogle, loggedIn } = useDatabase();
-
-	const languages = {
-		english: 'ENG',
-		polish: 'PL',
-		german: 'GER',
-	};
-	const currencies = {
-		dollar: 'USD',
-		zloty: 'PLN',
-		euro: 'EUR',
-	};
+	const { authWithGoogle, signOutGoogle, loggedIn, authChange } = useDatabase();
 
 	useEffect(() => {
-		console.log(loggedIn);
-	}, [loggedIn]);
+		authChange();
+	}, []);
+
 	return (
 		<nav
 			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-white z-[1000] 
@@ -91,14 +80,14 @@ const Navbar = () => {
 					</NavListItem>
 				</NavList>
 				<div className='flex flex-col justify-center items-center gap-sm w-full px-md md:items-start'>
-					{!loggedIn && !userData.uid ? (
+					{!loggedIn ? (
 						<>
 							<BoxyLink hrefRoute='/auth' isAccent={true}>
 								Create account
 							</BoxyLink>
-							<BoxyLink hrefRoute='/auth'>
+							<Button onClickFn={authWithGoogle}>
 								Log in <MdLogout />
-							</BoxyLink>
+							</Button>
 						</>
 					) : (
 						<>
