@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
 	collection,
 	getDocs,
@@ -53,15 +53,20 @@ const useDatabase = () => {
 		});
 	};
 
-	const authChange = onAuthStateChanged(auth, user => {
-		if (user) {
-			if (userData.uid !== '') return;
-			setLoggedInUser(user);
-		} else {
-			removeLoggedInUser();
-			return;
-		}
-	});
+	const authChange = () => {};
+	useEffect(() => {
+		onAuthStateChanged(auth, user => {
+			if (user) {
+				// if (userData.uid !== '') return;
+				setLoggedInUser(user);
+				console.log('auth ch');
+			} else {
+				console.log('error auth');
+				removeLoggedInUser();
+				return;
+			}
+		});
+	}, []);
 
 	function setLoggedInUser(user: any) {
 		setLoggedIn(true);

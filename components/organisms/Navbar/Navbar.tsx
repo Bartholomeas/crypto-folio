@@ -27,10 +27,6 @@ const Navbar = () => {
 	const dispatch = useAppDispatch();
 	const { authWithGoogle, signOutGoogle, loggedIn, authChange } = useDatabase();
 
-	useEffect(() => {
-		authChange();
-	}, []);
-
 	return (
 		<nav
 			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-white z-[1000] 
