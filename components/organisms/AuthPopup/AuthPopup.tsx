@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
+import { BsGoogle } from 'react-icons/bs';
 import { useAppDispatch, useAppSelector } from '../../../state/reduxHooks';
 import { uiActions } from '../../../state/uiSlice';
 import Button from '../../atoms/Button/Button';
 import InputWithLabel from '../../molecules/InputWithLabel/InputWithLabel';
+import useDatabase from '../../../hooks/useDatabase';
 
 interface Props {}
 
@@ -11,6 +13,7 @@ const AuthPopup = () => {
 	const dispatch = useAppDispatch();
 	const { isAuthPopupOpen } = useAppSelector(state => state.ui);
 	const [loginBox, setLoginBox] = useState(true);
+	const { authWithGoogle } = useDatabase();
 
 	return (
 		<div
@@ -44,7 +47,7 @@ const AuthPopup = () => {
 						Sign up
 					</Button>
 				</div>
-				<div className='flex flex-col gap-lg pt-lg'>
+				<div className='flex flex-col items-center justify-center gap pt-lg'>
 					<div className='flex flex-col gap w-full h-full'>
 						<InputWithLabel forProp='email' inputType='email' placeholderValue='Email adress here'>
 							Email
@@ -59,6 +62,10 @@ const AuthPopup = () => {
 
 					<Button isAccent={true} onClickFn={() => {}} otherStyles='max-h-[5rem]'>
 						Log in
+					</Button>
+					<p className='font-semibold text text-font'>OR</p>
+					<Button onClickFn={authWithGoogle} otherStyles='max-h-[5rem]'>
+						Sign in with Gmail <BsGoogle />
 					</Button>
 				</div>
 			</div>

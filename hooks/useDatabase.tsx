@@ -29,6 +29,7 @@ import {
 import { ref, set } from 'firebase/database';
 import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
 import { userActions } from '../state/userSlice';
+import { uiActions } from '../state/uiSlice';
 
 const colRef: any = collection(db, 'users');
 
@@ -43,6 +44,7 @@ const initialUserState: any = {
 const useDatabase = () => {
 	const dispatch = useAppDispatch();
 	const { userData } = useAppSelector(state => state.user);
+	const { isAuthPopupOpen } = useAppSelector(state => state.ui);
 
 	const [loggedIn, setLoggedIn] = useState(false);
 
@@ -91,6 +93,7 @@ const useDatabase = () => {
 			.then(result => {
 				addUserToDB(result.user);
 				setLoggedInUser(result.user);
+				dispatch(uiActions.closeAuthPopup());
 			})
 			.catch(err => {
 				console.log(err);

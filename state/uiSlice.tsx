@@ -34,6 +34,9 @@ const uiSlice = createSlice({
 		toggleAuthPopup(state) {
 			state.isAuthPopupOpen = !state.isAuthPopupOpen;
 		},
+		closeAuthPopup(state) {
+			state.isAuthPopupOpen = false;
+		},
 	},
 });
 
