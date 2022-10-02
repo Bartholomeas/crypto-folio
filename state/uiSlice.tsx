@@ -7,12 +7,14 @@ export interface StateInterface {
 	isNavOpen: boolean;
 	isThemeDark: boolean;
 	isInfoPanelOpen: boolean;
+	isAuthPopupOpen: boolean;
 }
 
 const initialState: StateInterface = {
 	isNavOpen: false,
 	isThemeDark: false,
 	isInfoPanelOpen: false,
+	isAuthPopupOpen: false,
 };
 
 const uiSlice = createSlice({
@@ -28,6 +30,9 @@ const uiSlice = createSlice({
 
 		toggleInfoPanel(state) {
 			state.isInfoPanelOpen = !state.isInfoPanelOpen;
+		},
+		toggleAuthPopup(state) {
+			state.isAuthPopupOpen = !state.isAuthPopupOpen;
 		},
 	},
 });

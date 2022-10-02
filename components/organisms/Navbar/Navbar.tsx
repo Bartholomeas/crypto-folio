@@ -19,13 +19,18 @@ import Button from '../../atoms/Button/Button';
 import useDatabase from '../../../hooks/useDatabase';
 import { useEffect, useState } from 'react';
 import BoxyLink from '../../atoms/BoxyLink/BoxyLink';
+import AuthPopup from '../AuthPopup/AuthPopup';
 
 const Navbar = () => {
 	const router = useRouter();
 	const { isNavOpen, isThemeDark } = useAppSelector(state => state.ui);
 	const { userData } = useAppSelector(state => state.user);
 	const dispatch = useAppDispatch();
-	const { authWithGoogle, signOutGoogle, loggedIn, authChange } = useDatabase();
+	const { authWithGoogle, signOutGoogle, loggedIn } = useDatabase();
+
+	const openAuthPopup = () => {
+		dispatch(uiActions.toggleAuthPopup());
+	};
 
 	return (
 		<nav
@@ -77,14 +82,9 @@ const Navbar = () => {
 				</NavList>
 				<div className='flex flex-col justify-center items-center gap-sm w-full px-md md:items-start'>
 					{!loggedIn ? (
-						<>
-							<BoxyLink hrefRoute='/auth' isAccent={true}>
-								Create account
-							</BoxyLink>
-							<Button onClickFn={authWithGoogle}>
-								Log in <MdLogout />
-							</Button>
-						</>
+						<Button isAccent={true} onClickFn={openAuthPopup}>
+							Log in <MdLogout />
+						</Button>
 					) : (
 						<>
 							<Button otherStyles='font-semibold bg-transparent' onClickFn={() => {}}>
@@ -111,6 +111,7 @@ const Navbar = () => {
 					</div>
 				</div>
 			</div>
+			<AuthPopup />
 		</nav>
 	);
 };

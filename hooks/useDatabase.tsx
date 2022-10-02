@@ -53,7 +53,6 @@ const useDatabase = () => {
 		});
 	};
 
-	const authChange = () => {};
 	useEffect(() => {
 		onAuthStateChanged(auth, user => {
 			if (user) {
@@ -126,7 +125,7 @@ const useDatabase = () => {
 	// 	snapshot.docs.forEach(doc => {
 	// 		coins.push({ ...doc.data(), id: doc.id });
 
-	return { loggedIn, authWithGoogle, signOutGoogle, writeUserData, authChange };
+	return { loggedIn, authWithGoogle, signOutGoogle, writeUserData };
 };
 
 export default useDatabase;
