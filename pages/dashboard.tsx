@@ -13,8 +13,6 @@ import PageHeader from '../components/atoms/PageHeader/PageHeader';
 import useDatabase from '../hooks/useDatabase';
 
 const Dashboard = () => {
-	const { writeUserData } = useDatabase();
-
 	return (
 		<main
 			className='flex flex-col items-start gap-sm w-full md:max-w px pb-[10rem] min-h-[100vh] bg-white overflow-y-auto
@@ -37,13 +35,6 @@ const Dashboard = () => {
 					<InfoAssetsBox asset='Juno' changeValue={21}>
 						Biggest 24h profit
 					</InfoAssetsBox>
-
-					<button
-						onClick={() =>
-							writeUserData({ name: 'barthol', email: 'barth@onet.com', uid: '12312345Dasdef' })
-						}>
-						Klik onsnapshot
-					</button>
 				</div>
 			</div>
 

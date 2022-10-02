@@ -52,7 +52,6 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 				<div className=' flex flex-col justify-center w-full overflow-x-scroll'>
 					{coins.length < 1 && <p className='absolute font-bold text-xl text-accent'>Loading...</p>}
 					{/* <p className='absolute font-bold text-xl text-accent top-[50%]'>Loading...</p> */}
-					<button onClick={getApiDB}>KLIKU</button>
 					<Table>
 						<colgroup>
 							<col className='w-[2%]' />

@@ -27,6 +27,8 @@ import {
 	signInWithRedirect,
 } from 'firebase/auth';
 import { ref, set } from 'firebase/database';
+import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
+import { userActions } from '../state/userSlice';
 
 const colRef: any = collection(db, 'users');
 
@@ -39,42 +41,58 @@ const initialUserState: any = {
 };
 
 const useDatabase = () => {
-	const writeUserData = async (user: any) => {
-		// const reference = ref(db, 'users/' + user.uid);
-		// try {
-		// 	set(reference, {
-		// 		username: user.name,
-		// 		email: user.email,
-		// 		userId: user.uid,
-		// 	});
-		// } catch {
-		// 	throw new Error('something is no yes with creating user');
-		// }
+	const dispatch = useAppDispatch();
+	const { userData } = useAppSelector(state => state.user);
+
+	const [loggedIn, setLoggedIn] = useState(false);
+
+	const writeUserData = (user: any) => {
 		const docRef = doc(db, 'users', user.uid);
 		getDoc(docRef).then(doc => {
 			console.log(doc.data());
 		});
 	};
 
-	// onAuthStateChanged(auth, user => {
-	// 	if (user) {
-	// 		console.log(user);
-	// 	} else {
-	// 		console.log('error');
-	// 	}
-	// });
-	// const getUserInfo = () => {
-	// 	const user = auth.currentUser;
-	// 	console.log(user!.uid);
-	// };
+	onAuthStateChanged(auth, user => {
+		if (user) {
+			if (userData.uid !== '') return;
+			setLoggedIn(true);
+			dispatch(
+				userActions.setUserData({
+					name: user.displayName,
+					email: user.email,
+					uid: user.uid,
+					photoURL: user.photoURL,
+				})
+			);
+		} else {
+			setLoggedIn(false);
+
+			console.log('error');
+		}
+	});
+
 	function authWithGoogle() {
 		signInWithPopup(auth, googleProvider)
 			.then(result => {
-				const credential = GoogleAuthProvider.credentialFromResult(result);
 				addUserToDB(result.user);
+				localStorage.setItem('userId', result.user.uid);
 			})
 			.catch(err => {
 				console.log(err);
+			});
+	}
+
+	function signOutGoogle() {
+		signOut(auth)
+			.then(() => {
+				console.log('success');
+				dispatch(userActions.setInitialState());
+				localStorage.removeItem('userId');
+				setLoggedIn(false);
+			})
+			.catch(() => {
+				throw new Error('Cannot logout');
 			});
 	}
 
@@ -86,7 +104,7 @@ const useDatabase = () => {
 				id: user.uid,
 				email: user.email,
 				name: user.displayName,
-				favouriteCoins: ['BTC', 'ETH', 'XRP'],
+				favouriteCoins: ['BTC', 'ETH', 'ATOM'],
 			},
 			{ merge: true }
 		);
@@ -96,26 +114,8 @@ const useDatabase = () => {
 	// 	let coins: any[] = [];
 	// 	snapshot.docs.forEach(doc => {
 	// 		coins.push({ ...doc.data(), id: doc.id });
-	// 	});
-	// 	console.log(coins);
-	// });
-	// const addItem = () => {
-	// 	addDoc(colRef, {
-	// 		amount: 0.5,
-	// 		coinName: 'Ethereum',
-	// 		coinSymbol: 'ETH',
-	// 		purchaseDate: serverTimestamp(),
-	// 		purchasePrice: 2000,
-	// 		// createdAt: serverTimestamp(),
-	// 	})
-	// 		.then(res => {
-	// 			console.log(res);
-	// 		})
-	// 		.catch(err => {
-	// 			console.log(err);
-	// 		});
-	// };
-	return { authWithGoogle, writeUserData };
+
+	return { loggedIn, authWithGoogle, signOutGoogle, writeUserData };
 };
 
 export default useDatabase;

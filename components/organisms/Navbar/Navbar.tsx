@@ -17,12 +17,16 @@ import { useRouter } from 'next/router';
 import { uiActions } from '../../../state/uiSlice';
 import Button from '../../atoms/Button/Button';
 import useDatabase from '../../../hooks/useDatabase';
+import { useEffect, useState } from 'react';
+import BoxyLink from '../../atoms/BoxyLink/BoxyLink';
 
 const Navbar = () => {
 	const router = useRouter();
+	const [userPanelActive, setUserPanelActive] = useState(false);
 	const { isNavOpen, isThemeDark } = useAppSelector(state => state.ui);
+	const { userData } = useAppSelector(state => state.user);
 	const dispatch = useAppDispatch();
-	const { authWithGoogle } = useDatabase();
+	const { authWithGoogle, signOutGoogle, loggedIn } = useDatabase();
 
 	const languages = {
 		english: 'ENG',
@@ -35,6 +39,9 @@ const Navbar = () => {
 		euro: 'EUR',
 	};
 
+	useEffect(() => {
+		console.log(loggedIn);
+	}, [loggedIn]);
 	return (
 		<nav
 			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-white z-[1000] 
@@ -84,27 +91,33 @@ const Navbar = () => {
 					</NavListItem>
 				</NavList>
 				<div className='flex flex-col justify-center items-center gap-sm w-full px-md md:items-start'>
-					{/* <div className='flex flex-col justify-center items-center w-full md:flex-col'>
-						<SelectMenu options={languages}>Language</SelectMenu>
-						<SelectMenu options={currencies}>Currency</SelectMenu>
-					</div> */}
-					<Button
-						onClickFn={() => {
-							console.log('create acc btn');
-						}}
-						isAccent={true}>
-						Create account
-					</Button>
-					<Button onClickFn={authWithGoogle}>
-						Log in <MdLogout />
-					</Button>
-					<div className='flex items-center gap-sm w-full md:flex-col'>
+					{!loggedIn && !userData.uid ? (
+						<>
+							<BoxyLink hrefRoute='/auth' isAccent={true}>
+								Create account
+							</BoxyLink>
+							<BoxyLink hrefRoute='/auth'>
+								Log in <MdLogout />
+							</BoxyLink>
+						</>
+					) : (
+						<>
+							<Button otherStyles='font-semibold bg-transparent' onClickFn={() => {}}>
+								{userData.name}
+							</Button>
+							<Button otherStyles=' bg-transparent py-xs text-error ' onClickFn={signOutGoogle}>
+								Logout
+							</Button>
+						</>
+					)}
+
+					<div className='flex items-center gap-sm w-full '>
 						<Button
 							onClickFn={() => {
 								console.log('create acc btn');
 							}}
 							otherStyles='text-xs'>
-							Language
+							USD
 						</Button>
 						<ThemeSwitch
 							toggleThemeFunc={() => dispatch(uiActions.toggleTheme())}
