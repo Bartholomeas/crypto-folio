@@ -16,7 +16,7 @@ module.exports = {
 		},
 
 		extend: {
-			dropShadow: { DEFAULT: '2px 2px 0 40px #E1E4E6' },
+			boxShadow: { DEFAULT: '0 0 40px 0 rgba(225, 228, 230, 1)' },
 			borderRadius: {
 				DEFAULT: '8px',
 				large: '16px',
@@ -32,7 +32,7 @@ module.exports = {
 
 			padding: {
 				xs: '0.8rem',
-				sm: '1.2rem',
+				sm: '1.6rem',
 				DEFAULT: '2rem',
 				md: '2.4rem',
 				lg: '3.2rem',

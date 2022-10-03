@@ -13,7 +13,7 @@ const InputWithLabel = ({ children, forProp, inputType = 'text', placeholderValu
 		<div className='flex flex-col gap-sm'>
 			<Label forProp={forProp}>{children}</Label>
 			<input
-				className='p-xs rounded-xl border-2 border-baseLight text'
+				className='px-sm py-sm rounded-xl border-2 border-baseLight text'
 				placeholder={placeholderValue}
 				type={inputType}
 				name={forProp}

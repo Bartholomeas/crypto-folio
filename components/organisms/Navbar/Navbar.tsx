@@ -17,8 +17,6 @@ import { useRouter } from 'next/router';
 import { uiActions } from '../../../state/uiSlice';
 import Button from '../../atoms/Button/Button';
 import useDatabase from '../../../hooks/useDatabase';
-import { useEffect, useState } from 'react';
-import BoxyLink from '../../atoms/BoxyLink/BoxyLink';
 import AuthPopup from '../AuthPopup/AuthPopup';
 
 const Navbar = () => {
@@ -35,7 +33,7 @@ const Navbar = () => {
 	return (
 		<nav
 			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-white z-[1000] 
-		md:relative md:h-full md:max-w-[180px] md:py-lg md:border-r-2 md:border-baseLight shadow-xl'>
+		md:relative md:h-full md:max-w-[180px] md:py-lg border-b-2 border-baseLight md:border-r-2 shadow'>
 			<div
 				className='nav-wrapper flex justify-between items-center w-full
 				 px-md py-sm

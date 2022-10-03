@@ -10,6 +10,7 @@ const AppLayout = ({ children }: Props) => {
 		<div className='relative flex items-center w-full  md:flex-row md:h-[100vh]'>
 			<Navbar />
 			{children}
+
 			<InfoPanel />
 		</div>
 	);
