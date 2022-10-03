@@ -7,6 +7,7 @@ import Button from '../../atoms/Button/Button';
 import InputWithLabel from '../../molecules/InputWithLabel/InputWithLabel';
 import useDatabase from '../../../hooks/useDatabase';
 import NotificationPopup from '../NotificationPopup/NotificationPopup';
+import BasicLink from '../../atoms/BasicLink/BasicLink';
 
 interface Props {}
 
@@ -67,6 +68,7 @@ const AuthPopup = () => {
 								Log in
 							</Button>
 						</form>
+						<BasicLink hrefRoute={'/'}>I forgot password</BasicLink>
 						<p className='font-semibold text text-font'>OR</p>
 						<Button onClickFn={authWithGoogle} otherStyles='max-h-[5rem]'>
 							Sign in with Gmail <BsGoogle />
@@ -110,8 +112,6 @@ const AuthPopup = () => {
 					</div>
 				)}
 			</div>
-
-			<NotificationPopup isSuccess={true}>TO TESTOWY KOMUNIKAT JEST</NotificationPopup>
 		</div>
 	);
 };

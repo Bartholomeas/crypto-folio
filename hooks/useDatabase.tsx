@@ -44,7 +44,7 @@ const initialUserState: any = {
 const useDatabase = () => {
 	const dispatch = useAppDispatch();
 	const { userData } = useAppSelector(state => state.user);
-	const { isAuthPopupOpen } = useAppSelector(state => state.ui);
+	const { isAuthPopupOpen, notificationPopup } = useAppSelector(state => state.ui);
 
 	const [loggedIn, setLoggedIn] = useState(false);
 
@@ -94,6 +94,23 @@ const useDatabase = () => {
 				addUserToDB(result.user);
 				setLoggedInUser(result.user);
 				dispatch(uiActions.closeAuthPopup());
+				dispatch(
+					uiActions.toggleNotificationPopup({
+						open: true,
+						success: true,
+						content: 'Nice to see you! Succesfully logged in.',
+					})
+				);
+
+				setTimeout(() => {
+					dispatch(
+						uiActions.toggleNotificationPopup({
+							open: false,
+							success: true,
+							content: '',
+						})
+					);
+				}, 3000);
 			})
 			.catch(err => {
 				console.log(err);

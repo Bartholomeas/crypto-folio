@@ -8,7 +8,11 @@ export interface StateInterface {
 	isThemeDark: boolean;
 	isInfoPanelOpen: boolean;
 	isAuthPopupOpen: boolean;
-	isNotificationPopupOpen: boolean;
+	notificationPopup: {
+		isNotificationPopupOpen: boolean;
+		isNotificationPopupSuccess: boolean;
+		NotificationPopupContent: string;
+	};
 }
 
 const initialState: StateInterface = {
@@ -16,7 +20,11 @@ const initialState: StateInterface = {
 	isThemeDark: false,
 	isInfoPanelOpen: false,
 	isAuthPopupOpen: false,
-	isNotificationPopupOpen: false,
+	notificationPopup: {
+		isNotificationPopupOpen: false,
+		isNotificationPopupSuccess: true,
+		NotificationPopupContent: '',
+	},
 };
 
 const uiSlice = createSlice({
@@ -39,8 +47,19 @@ const uiSlice = createSlice({
 		closeAuthPopup(state) {
 			state.isAuthPopupOpen = false;
 		},
-		toggleNotificationPopup(state) {
-			state.isNotificationPopupOpen = !state.isNotificationPopupOpen;
+		toggleNotificationPopup(state, action) {
+			// if (!action.payload) {
+			// 	return (state.notificationPopup.isNotificationPopupOpen =
+			// 		!state.notificationPopup.isNotificationPopupOpen);
+			// }
+
+			state.notificationPopup = {
+				isNotificationPopupOpen: action.payload.open,
+				isNotificationPopupSuccess: action.payload.success,
+				NotificationPopupContent: action.payload.content,
+			};
+
+			// state.notificationPopup.isNotificationPopupSuccess = action.payload.isSuccess;
 		},
 	},
 });
