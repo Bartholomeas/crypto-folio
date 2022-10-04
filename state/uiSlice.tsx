@@ -48,18 +48,11 @@ const uiSlice = createSlice({
 			state.isAuthPopupOpen = false;
 		},
 		toggleNotificationPopup(state, action) {
-			// if (!action.payload) {
-			// 	return (state.notificationPopup.isNotificationPopupOpen =
-			// 		!state.notificationPopup.isNotificationPopupOpen);
-			// }
-
 			state.notificationPopup = {
 				isNotificationPopupOpen: action.payload.open,
 				isNotificationPopupSuccess: action.payload.success,
 				NotificationPopupContent: action.payload.content,
 			};
-
-			// state.notificationPopup.isNotificationPopupSuccess = action.payload.isSuccess;
 		},
 	},
 });

@@ -30,22 +30,24 @@ import { ref, set } from 'firebase/database';
 import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
 import { userActions } from '../state/userSlice';
 import { uiActions } from '../state/uiSlice';
-
-const colRef: any = collection(db, 'users');
+import useUiHandling from './useUi';
 
 const googleProvider = new GoogleAuthProvider();
-
-const initialUserState: any = {
-	credential: {},
-	token: {},
-	userInfo: {},
-};
 
 const useDatabase = () => {
 	const dispatch = useAppDispatch();
 	const { userData } = useAppSelector(state => state.user);
 	const { isAuthPopupOpen, notificationPopup } = useAppSelector(state => state.ui);
-
+	// const { setNotificationPopup } = useUiHandling();
+	function setNotificationPopup(isOpen: boolean, isSuccess: boolean = true, content: string) {
+		dispatch(
+			uiActions.toggleNotificationPopup({
+				open: isOpen,
+				success: isSuccess,
+				content: content,
+			})
+		);
+	}
 	const [loggedIn, setLoggedIn] = useState(false);
 
 	const writeUserData = (user: any) => {
@@ -58,11 +60,8 @@ const useDatabase = () => {
 	useEffect(() => {
 		onAuthStateChanged(auth, user => {
 			if (user) {
-				// if (userData.uid !== '') return;
 				setLoggedInUser(user);
-				console.log('auth ch');
 			} else {
-				console.log('error auth');
 				removeLoggedInUser();
 				return;
 			}
@@ -94,26 +93,17 @@ const useDatabase = () => {
 				addUserToDB(result.user);
 				setLoggedInUser(result.user);
 				dispatch(uiActions.closeAuthPopup());
-				dispatch(
-					uiActions.toggleNotificationPopup({
-						open: true,
-						success: true,
-						content: 'Nice to see you! Succesfully logged in.',
-					})
-				);
-
+				setNotificationPopup(true, true, 'Successfully logged in');
 				setTimeout(() => {
-					dispatch(
-						uiActions.toggleNotificationPopup({
-							open: false,
-							success: true,
-							content: '',
-						})
-					);
+					setNotificationPopup(false, true, 'Successfully logged in');
 				}, 3000);
 			})
 			.catch(err => {
 				console.log(err);
+				setNotificationPopup(true, false, 'Something went wrong :(');
+				setTimeout(() => {
+					setNotificationPopup(false, false, 'Something went wrong :(');
+				}, 3000);
 			});
 	}
 
@@ -121,6 +111,11 @@ const useDatabase = () => {
 		try {
 			removeLoggedInUser();
 			signOut(auth);
+			setNotificationPopup(true, true, 'Successfully logged out');
+
+			setTimeout(() => {
+				setNotificationPopup(false, true, 'Successfully logged out');
+			}, 3000);
 		} catch {
 			throw new Error('Cannot logout');
 		}
@@ -139,17 +134,16 @@ const useDatabase = () => {
 			{ merge: true }
 		);
 	}
-	// const q = query(colRef, orderBy('createdAt'));
-	// const unsubCol = onSnapshot(q, snapshot => {
-	// 	let coins: any[] = [];
-	// 	snapshot.docs.forEach(doc => {
-	// 		coins.push({ ...doc.data(), id: doc.id });
 
 	return { loggedIn, authWithGoogle, signOutGoogle, writeUserData };
 };
 
 export default useDatabase;
-
+// const q = query(colRef, orderBy('createdAt'));
+// const unsubCol = onSnapshot(q, snapshot => {
+// 	let coins: any[] = [];
+// 	snapshot.docs.forEach(doc => {
+// 		coins.push({ ...doc.data(), id: doc.id });
 // STATIC DATA, NOT UPDATING AFTER REQUEST
 // getDocs(colRef)
 // 	.then(snapshot => {
