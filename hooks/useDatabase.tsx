@@ -87,12 +87,44 @@ const useDatabase = () => {
 		localStorage.removeItem('userId');
 	}
 
+	const signupCustomUser = (emailValue: string, passwordValue: string) => {
+		createUserWithEmailAndPassword(auth, emailValue, passwordValue)
+			.then(cred => {
+				console.log('user create:', cred.user);
+				setNotificationPopup(true, true, 'Congratulations, you got registered!');
+				setTimeout(() => {
+					setNotificationPopup(false, true, 'Congratulations, you got registered!');
+				}, 3000);
+			})
+			.catch(err => {
+				setNotificationPopup(true, false, 'We cannot register you :(');
+				setTimeout(() => {
+					setNotificationPopup(false, false, 'We cannot register you :(!');
+				}, 3000);
+			});
+	};
+
+	const loginCustomUser = (emailValue: string, passwordValue: string) => {
+		signInWithEmailAndPassword(auth, emailValue, passwordValue)
+			.then(cred => {
+				console.log('usee loged in:', cred.user);
+			})
+			.catch(err => console.log(err));
+	};
+
+	const logout = () => {
+		signOut(auth)
+			.then(() => {})
+			.catch(err => console.log(err));
+	};
+
 	function authWithGoogle() {
 		signInWithPopup(auth, googleProvider)
 			.then(result => {
 				addUserToDB(result.user);
 				setLoggedInUser(result.user);
 				dispatch(uiActions.closeAuthPopup());
+
 				setNotificationPopup(true, true, 'Successfully logged in');
 				setTimeout(() => {
 					setNotificationPopup(false, true, 'Successfully logged in');
@@ -100,6 +132,7 @@ const useDatabase = () => {
 			})
 			.catch(err => {
 				console.log(err);
+
 				setNotificationPopup(true, false, 'Something went wrong :(');
 				setTimeout(() => {
 					setNotificationPopup(false, false, 'Something went wrong :(');
@@ -135,7 +168,14 @@ const useDatabase = () => {
 		);
 	}
 
-	return { loggedIn, authWithGoogle, signOutGoogle, writeUserData };
+	return {
+		loggedIn,
+		authWithGoogle,
+		signOutGoogle,
+		signupCustomUser,
+		loginCustomUser,
+		writeUserData,
+	};
 };
 
 export default useDatabase;

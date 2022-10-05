@@ -1,6 +1,8 @@
+import React from 'react';
+
 interface Props {
 	children: React.ReactNode | React.ReactNode[];
-	onClickFn: () => void;
+	onClickFn: (arg1?: React.MouseEvent<HTMLButtonElement> | EventTarget) => void;
 	isAccent?: boolean;
 	otherStyles?: string;
 }

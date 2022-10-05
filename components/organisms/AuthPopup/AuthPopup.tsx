@@ -6,16 +6,15 @@ import { uiActions } from '../../../state/uiSlice';
 import Button from '../../atoms/Button/Button';
 import InputWithLabel from '../../molecules/InputWithLabel/InputWithLabel';
 import useDatabase from '../../../hooks/useDatabase';
-import NotificationPopup from '../NotificationPopup/NotificationPopup';
 import BasicLink from '../../atoms/BasicLink/BasicLink';
-
-interface Props {}
+import useForm from '../../../hooks/useForm';
 
 const AuthPopup = () => {
 	const dispatch = useAppDispatch();
 	const { isAuthPopupOpen } = useAppSelector(state => state.ui);
 	const [loginBox, setLoginBox] = useState(true);
-	const { authWithGoogle } = useDatabase();
+	const { authWithGoogle, signupCustomUser } = useDatabase();
+	const { values, setInputValues, validateInputValue } = useForm();
 
 	return (
 		<div
@@ -52,12 +51,16 @@ const AuthPopup = () => {
 					<div className='flex flex-col items-center justify-center gap pt-lg'>
 						<form className='flex flex-col gap w-full h-full'>
 							<InputWithLabel
+								onChangeFunc={setInputValues}
+								onBlurFunc={validateInputValue}
 								forProp='email'
 								inputType='email'
 								placeholderValue='Email adress here'>
 								Email
 							</InputWithLabel>
 							<InputWithLabel
+								onChangeFunc={setInputValues}
+								onBlurFunc={validateInputValue}
 								forProp='password'
 								inputType='password'
 								placeholderValue='Password here'>
@@ -76,27 +79,42 @@ const AuthPopup = () => {
 					</div>
 				) : (
 					<div className='flex flex-col items-center justify-center gap pt-lg'>
-						<form className='flex flex-col gap w-full h-full'>
+						<form
+							onSubmit={(e: any) => e.preventDefault()}
+							className='flex flex-col gap w-full h-full'>
 							<InputWithLabel
+								onChangeFunc={setInputValues}
+								onBlurFunc={validateInputValue}
 								forProp='email_register'
 								inputType='email'
 								placeholderValue='Email adress here'>
 								Email
 							</InputWithLabel>
 							<InputWithLabel
+								onChangeFunc={setInputValues}
+								onBlurFunc={validateInputValue}
 								forProp='password_register'
 								inputType='password'
 								placeholderValue='Password here'>
 								Password
 							</InputWithLabel>
 							<InputWithLabel
+								onChangeFunc={setInputValues}
+								onBlurFunc={validateInputValue}
 								forProp='password_repeat'
 								inputType='password'
 								placeholderValue='Password here'>
 								Repeat password
 							</InputWithLabel>
-							<Button isAccent={true} onClickFn={() => {}} otherStyles='max-h-[5rem]'>
-								Sign in
+							<Button
+								isAccent={true}
+								onClickFn={(e: any) => {
+									e.preventDefault;
+									signupCustomUser(values.email_register, values.password_register);
+									console.log(values.password_register);
+								}}
+								otherStyles='max-h-[5rem]'>
+								Sign up
 							</Button>
 						</form>
 
