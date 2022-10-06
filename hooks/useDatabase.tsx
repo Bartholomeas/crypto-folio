@@ -36,9 +36,8 @@ const googleProvider = new GoogleAuthProvider();
 
 const useDatabase = () => {
 	const dispatch = useAppDispatch();
-	const { userData } = useAppSelector(state => state.user);
-	const { isAuthPopupOpen, notificationPopup } = useAppSelector(state => state.ui);
-	// const { setNotificationPopup } = useUiHandling();
+	const [loggedIn, setLoggedIn] = useState(false);
+
 	function setNotificationPopup(isOpen: boolean, isSuccess: boolean = true, content: string) {
 		dispatch(
 			uiActions.toggleNotificationPopup({
@@ -48,7 +47,10 @@ const useDatabase = () => {
 			})
 		);
 	}
-	const [loggedIn, setLoggedIn] = useState(false);
+
+	function setLoader(active: boolean) {
+		dispatch(uiActions.toggleLoader(active));
+	}
 
 	const writeUserData = (user: any) => {
 		const docRef = doc(db, 'users', user.uid);
@@ -88,15 +90,17 @@ const useDatabase = () => {
 	}
 
 	const signupCustomUser = (emailValue: string, passwordValue: string) => {
+		setLoader(true);
 		createUserWithEmailAndPassword(auth, emailValue, passwordValue)
 			.then(cred => {
-				console.log('user create:', cred.user);
+				setLoader(false);
 				setNotificationPopup(true, true, 'Congratulations, you got registered!');
 				setTimeout(() => {
 					setNotificationPopup(false, true, 'Congratulations, you got registered!');
 				}, 3000);
 			})
 			.catch(err => {
+				setLoader(false);
 				setNotificationPopup(true, false, 'We cannot register you :(');
 				setTimeout(() => {
 					setNotificationPopup(false, false, 'We cannot register you :(!');
@@ -105,11 +109,16 @@ const useDatabase = () => {
 	};
 
 	const loginCustomUser = (emailValue: string, passwordValue: string) => {
+		setLoader(true);
 		signInWithEmailAndPassword(auth, emailValue, passwordValue)
 			.then(cred => {
+				setLoader(false);
 				console.log('usee loged in:', cred.user);
 			})
-			.catch(err => console.log(err));
+			.catch(err => {
+				setLoader(false);
+				console.log(err);
+			});
 	};
 
 	const logout = () => {
@@ -119,8 +128,10 @@ const useDatabase = () => {
 	};
 
 	function authWithGoogle() {
+		setLoader(true);
 		signInWithPopup(auth, googleProvider)
 			.then(result => {
+				setLoader(false);
 				addUserToDB(result.user);
 				setLoggedInUser(result.user);
 				dispatch(uiActions.closeAuthPopup());
@@ -132,7 +143,7 @@ const useDatabase = () => {
 			})
 			.catch(err => {
 				console.log(err);
-
+				setLoader(false);
 				setNotificationPopup(true, false, 'Something went wrong :(');
 				setTimeout(() => {
 					setNotificationPopup(false, false, 'Something went wrong :(');

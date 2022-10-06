@@ -8,10 +8,11 @@ import InputWithLabel from '../../molecules/InputWithLabel/InputWithLabel';
 import useDatabase from '../../../hooks/useDatabase';
 import BasicLink from '../../atoms/BasicLink/BasicLink';
 import useForm from '../../../hooks/useForm';
+import Loader from '../../atoms/Loader/Loader';
 
 const AuthPopup = () => {
 	const dispatch = useAppDispatch();
-	const { isAuthPopupOpen } = useAppSelector(state => state.ui);
+	const { isAuthPopupOpen, isLoaderOpen } = useAppSelector(state => state.ui);
 	const [loginBox, setLoginBox] = useState(true);
 	const { authWithGoogle, signupCustomUser } = useDatabase();
 	const { values, setInputValues, validateInputValue } = useForm();
@@ -46,7 +47,6 @@ const AuthPopup = () => {
 						Sign up
 					</Button>
 				</div>
-
 				{loginBox ? (
 					<div className='flex flex-col items-center justify-center gap pt-lg'>
 						<form className='flex flex-col gap w-full h-full'>
@@ -129,6 +129,7 @@ const AuthPopup = () => {
 						</p>
 					</div>
 				)}
+				{isLoaderOpen && <Loader />}
 			</div>
 		</div>
 	);

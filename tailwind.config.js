@@ -16,6 +16,10 @@ module.exports = {
 		},
 
 		extend: {
+			animation: {
+				'spin-slow': 'spin 3s linear infinite',
+			},
+
 			boxShadow: { DEFAULT: '0 0 40px 0 rgba(225, 228, 230, 1)' },
 			borderRadius: {
 				DEFAULT: '8px',

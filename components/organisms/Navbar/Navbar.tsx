@@ -86,7 +86,7 @@ const Navbar = () => {
 					) : (
 						<>
 							<Button otherStyles='font-semibold bg-transparent' onClickFn={() => {}}>
-								{userData.name}
+								{userData.name || userData.email}
 							</Button>
 							<Button otherStyles=' bg-transparent py-xs text-error ' onClickFn={signOutGoogle}>
 								Logout

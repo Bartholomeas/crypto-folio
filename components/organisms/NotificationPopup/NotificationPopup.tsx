@@ -11,7 +11,7 @@ const NotificationPopup = ({ children }: Props) => {
 
 	return (
 		<div
-			className={`flex fixed left-0 right-0 bottom-0 w-full h-auto min-h-[100px] max-h-[300px] p-md bg-white rounded-xl z-[10000] transition-transform ease-in shadow ${
+			className={`flex fixed left-0 right-0 bottom-0 w-full h-auto min-h-[100px] max-h-[300px] p-md bg-white rounded-xl z-[10000] transition-transform ease-in drop-shadow-xl ${
 				notificationPopup.isNotificationPopupOpen
 					? ' translate-y-0 md:translate-y-[-10%]'
 					: ' translate-y-[150%]'

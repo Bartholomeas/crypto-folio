@@ -8,6 +8,7 @@ export interface StateInterface {
 	isThemeDark: boolean;
 	isInfoPanelOpen: boolean;
 	isAuthPopupOpen: boolean;
+	isLoaderOpen: boolean;
 	notificationPopup: {
 		isNotificationPopupOpen: boolean;
 		isNotificationPopupSuccess: boolean;
@@ -20,6 +21,7 @@ const initialState: StateInterface = {
 	isThemeDark: false,
 	isInfoPanelOpen: false,
 	isAuthPopupOpen: false,
+	isLoaderOpen: false,
 	notificationPopup: {
 		isNotificationPopupOpen: false,
 		isNotificationPopupSuccess: true,
@@ -43,6 +45,9 @@ const uiSlice = createSlice({
 		},
 		toggleAuthPopup(state) {
 			state.isAuthPopupOpen = !state.isAuthPopupOpen;
+		},
+		toggleLoader(state, action: PayloadAction<boolean>) {
+			state.isLoaderOpen = action.payload;
 		},
 		closeAuthPopup(state) {
 			state.isAuthPopupOpen = false;
