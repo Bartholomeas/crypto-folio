@@ -1,4 +1,5 @@
 import React from 'react';
+import useDatabase from '../../../hooks/useDatabase';
 import CoinName from '../../atoms/CoinName/CoinName';
 import CoinRank from '../../atoms/CoinRank/CoinRank';
 import CoinSymbol from '../../atoms/CoinSymbol/CoinSymbol';
@@ -17,7 +18,8 @@ const CoinHeadBox = ({ name, symbol, rank }: Props) => {
             before:content-[""] before:absolute before:w-[1.6rem] before:h-full before:rounded-full before:top-0 before:left-[-2.4rem]  before:bg-accent'>
 			<div className='flex items-center gap-sm'>
 				<CoinName>{name}</CoinName>
-				<CoinSymbol>{symbol.toUpperCase()}</CoinSymbol> <FavouriteButton isBox={true} />
+				<CoinSymbol>{symbol.toUpperCase()}</CoinSymbol>{' '}
+				<FavouriteButton funcArg={name} isBox={true} />
 			</div>
 			<CoinRank>{rank}</CoinRank>
 		</div>

@@ -1,17 +1,18 @@
 import React from 'react';
 import { MdStar, MdStarBorder } from 'react-icons/md';
+import useDatabase from '../../../hooks/useDatabase';
 
 interface Props {
 	isBox?: boolean;
-	funcArg?: string;
-	onClickFn: (arg1: string) => void;
+	funcArg: string;
 }
 
-const FavouriteButton = ({ isBox = false, onClickFn, funcArg = '' }: Props) => {
-	console.log(funcArg);
+const FavouriteButton = ({ isBox = false, funcArg = '' }: Props) => {
+	const { addToFavourites } = useDatabase();
+
 	return (
 		<button
-			onClick={() => onClickFn(funcArg)}
+			onClick={() => addToFavourites(funcArg)}
 			className={`group fav-btn flex items-center justify-end w-full py-xs
 		${isBox && 'w-[3rem] h-[3rem] rounded-xl justify-center bg-baseLight text-fontLight'} w-full ${
 				!isBox && 'px-xs'
