@@ -46,11 +46,11 @@ const uiSlice = createSlice({
 		toggleAuthPopup(state) {
 			state.isAuthPopupOpen = !state.isAuthPopupOpen;
 		},
-		toggleLoader(state, action: PayloadAction<boolean>) {
-			state.isLoaderOpen = action.payload;
-		},
 		closeAuthPopup(state) {
 			state.isAuthPopupOpen = false;
+		},
+		toggleLoader(state, action: PayloadAction<boolean>) {
+			state.isLoaderOpen = action.payload;
 		},
 		toggleNotificationPopup(state, action) {
 			state.notificationPopup = {

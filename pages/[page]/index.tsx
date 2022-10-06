@@ -20,12 +20,14 @@ import Pagination from '../../components/organisms/Pagination/Pagination';
 import { addSpacesToNumber } from '../../utils/convertUtils';
 import { useAppDispatch, useAppSelector } from '../../state/reduxHooks';
 import useFilter from '../../hooks/useFilter';
+import useDatabase from '../../hooks/useDatabase';
 
 const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const indexingByPage = page > 1 ? (page - 1) * 100 : 0;
 	const { sortCoins } = useFilter();
 	const dispatch = useAppDispatch();
 	const { coinsList } = useAppSelector(state => state.coins);
+	const { addToFavourites } = useDatabase();
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
@@ -75,13 +77,9 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 						<TableBody>
 							{coinsList.map((coin: CoinItem, index: number) => {
 								return (
-									<TableRow
-										key={uuidv4()}
-										onClickFn={(e: any) => {
-											console.log(e.target.classList.contains('fav-btn'));
-										}}>
+									<TableRow key={uuidv4()}>
 										<TableData>
-											<FavouriteButton />
+											<FavouriteButton onClickFn={addToFavourites} funcArg={coin.id} />
 										</TableData>
 										<TableData hrefRoute={coin.id} isBold={true}>
 											{indexingByPage + index + 1}

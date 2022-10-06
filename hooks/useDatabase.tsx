@@ -13,6 +13,8 @@ import {
 	serverTimestamp,
 	updateDoc,
 	setDoc,
+	arrayUnion,
+	arrayRemove,
 } from 'firebase/firestore';
 import { db, auth } from '../firebaseConfig';
 
@@ -30,12 +32,13 @@ import { ref, set } from 'firebase/database';
 import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
 import { userActions } from '../state/userSlice';
 import { uiActions } from '../state/uiSlice';
-import useUiHandling from './useUi';
+import { ReadVResult } from 'fs';
 
 const googleProvider = new GoogleAuthProvider();
 
 const useDatabase = () => {
 	const dispatch = useAppDispatch();
+	const { userData } = useAppSelector(state => state.user);
 	const [loggedIn, setLoggedIn] = useState(false);
 
 	function setNotificationPopup(isOpen: boolean, isSuccess: boolean = true, content: string) {
@@ -52,12 +55,12 @@ const useDatabase = () => {
 		dispatch(uiActions.toggleLoader(active));
 	}
 
-	const writeUserData = (user: any) => {
-		const docRef = doc(db, 'users', user.uid);
-		getDoc(docRef).then(doc => {
-			console.log(doc.data());
-		});
-	};
+	// const writeUserData = (user: DBUser) => {
+	// 	const docRef = doc(db, 'users', user.uid);
+	// 	getDoc(docRef).then(doc => {
+	// 		console.log(doc.data());
+	// 	});
+	// };
 
 	useEffect(() => {
 		onAuthStateChanged(auth, user => {
@@ -69,6 +72,20 @@ const useDatabase = () => {
 			}
 		});
 	}, []);
+
+	function addUserToDB(user: any) {
+		const userRef = doc(db, 'users', user.uid);
+		setDoc(
+			userRef,
+			{
+				id: user.uid,
+				email: user.email,
+				name: user.displayName,
+				favouriteCoins: [],
+			},
+			{ merge: true }
+		);
+	}
 
 	function setLoggedInUser(user: any) {
 		setLoggedIn(true);
@@ -114,7 +131,6 @@ const useDatabase = () => {
 		signInWithEmailAndPassword(auth, emailValue, passwordValue)
 			.then(cred => {
 				setLoader(false);
-				console.log('usee loged in:', cred.user);
 			})
 			.catch(err => {
 				setLoader(false);
@@ -166,18 +182,26 @@ const useDatabase = () => {
 		}
 	}
 
-	function addUserToDB(user: any) {
-		const userRef = doc(db, 'users', user.uid);
-		setDoc(
-			userRef,
-			{
-				id: user.uid,
-				email: user.email,
-				name: user.displayName,
-				favouriteCoins: [],
-			},
-			{ merge: true }
-		);
+	async function addToFavourites(coinName: string) {
+		console.log(coinName);
+		if (!userData.uid) {
+			dispatch(uiActions.toggleAuthPopup());
+			return;
+		}
+		if (coinName === '') return;
+
+		const userRef = doc(db, 'users', userData.uid);
+		await updateDoc(userRef, {
+			favouriteCoins: arrayUnion(coinName),
+		});
+
+		// setDoc(
+		// 	userRef,
+		// 	{
+		// 		favouriteCoins: ['Ripple'],
+		// 	},
+		// 	{ merge: true }
+		// );
 	}
 
 	return {
@@ -186,7 +210,7 @@ const useDatabase = () => {
 		signOutGoogle,
 		signupCustomUser,
 		loginCustomUser,
-		writeUserData,
+		addToFavourites,
 	};
 };
 
