@@ -92,8 +92,9 @@ const useDatabase = () => {
 	const signupCustomUser = (emailValue: string, passwordValue: string) => {
 		setLoader(true);
 		createUserWithEmailAndPassword(auth, emailValue, passwordValue)
-			.then(cred => {
+			.then(result => {
 				setLoader(false);
+				addUserToDB(result.user);
 				setNotificationPopup(true, true, 'Congratulations, you got registered!');
 				setTimeout(() => {
 					setNotificationPopup(false, true, 'Congratulations, you got registered!');
@@ -165,7 +166,7 @@ const useDatabase = () => {
 		}
 	}
 
-	async function addUserToDB(user: any) {
+	function addUserToDB(user: any) {
 		const userRef = doc(db, 'users', user.uid);
 		setDoc(
 			userRef,
@@ -173,7 +174,7 @@ const useDatabase = () => {
 				id: user.uid,
 				email: user.email,
 				name: user.displayName,
-				favouriteCoins: ['BTC', 'ETH', 'ATOM'],
+				favouriteCoins: [],
 			},
 			{ merge: true }
 		);
