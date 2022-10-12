@@ -46,7 +46,7 @@ const Searchbar = ({ placeholderText = '' }: Props) => {
 						onBlur={e => clearCoinsData(e)}
 						id='searchbar'
 						placeholder={placeholderText}
-						className='w-full h-full max-h-[4rem] py px-xs bg-baseVeryLight '
+						className='text w-full h-full max-h-[4rem] py px-xs bg-baseVeryLight '
 						type='text'
 					/>
 					<span className='flex items-center justify-center h-full max-h-[4rem] p-xs rounded-r  bg-baseVeryLight text-lg text-fontLight'>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { CoinItem } from '../../../state/coinsSlice';
 import SearchbarCoin from '../../atoms/SearchbarCoin/SearchbarCoin';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,7 +12,6 @@ const SearchbarItems = ({ coinsData }: Props) => {
 			`}>
 			{coinsData.length >= 1 &&
 				coinsData.map(coin => {
-					// console.log(coin);
 					return (
 						<SearchbarCoin
 							key={uuidv4()}

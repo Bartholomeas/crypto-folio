@@ -35,7 +35,10 @@ const CoinStatsBox = ({ props }: { props: Props }) => {
 				</li>
 				<li className='flex justify-between items-center border-b-2 py-[0.3rem]'>
 					<p className='text-fontLight text-sm'>Price change 24h</p>
-					<p className={`font-semibold text-sm ${props.priceChange > 0 ? 'text-success' : 'text-error'} `}>
+					<p
+						className={`font-semibold text-sm ${
+							props.priceChange > 0 ? 'text-success' : 'text-error'
+						} `}>
 						{props.priceChange.toFixed(2)}%
 					</p>
 				</li>
@@ -57,7 +60,9 @@ const CoinStatsBox = ({ props }: { props: Props }) => {
 				</li>
 				<li className='flex justify-between items-center border-b-2 py-[0.3rem]'>
 					<p className='text-fontLight text-sm'>Circulating supply</p>
-					<p className='font-semibold text-font text-sm'>{addSpacesToNumber(props.circulatingSupply)}</p>
+					<p className='font-semibold text-font text-sm'>
+						{addSpacesToNumber(props.circulatingSupply)}
+					</p>
 				</li>
 				<li className='flex justify-between items-center border-b-2 py-[0.3rem]'>
 					<p className='text-fontLight text-sm'>All time HIGH</p>
@@ -69,11 +74,17 @@ const CoinStatsBox = ({ props }: { props: Props }) => {
 				</li>
 				<li className='flex justify-between items-center border-b-2 py-[0.3rem]'>
 					<p className='text-fontLight text-sm'>ATH date</p>
-					<p className='font-semibold text-sm text-font'> {convertDate(props.athDate, 'MM-dd-yyyy')}</p>
+					<p className='font-semibold text-sm text-font'>
+						{' '}
+						{convertDate(props.athDate, 'MM-dd-yyyy')}
+					</p>
 				</li>
 				<li className='flex justify-between items-center border-b-2 py-[0.3rem]'>
 					<p className='text-fontLight text-sm'>ATL date</p>
-					<p className='font-semibold text-sm text-font'> {convertDate(props.atlDate, 'MM-dd-yyyy')}</p>
+					<p className='font-semibold text-sm text-font'>
+						{' '}
+						{convertDate(props.atlDate, 'MM-dd-yyyy')}
+					</p>
 				</li>
 			</ul>
 		</div>

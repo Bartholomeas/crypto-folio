@@ -1,32 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { InferGetStaticPropsType } from 'next';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
-import FavouriteButton from '../components/atoms/FavouriteButton/FavouriteButton';
-import MarginBox from '../components/atoms/MarginBox/MarginBox';
-import PageHeader from '../components/atoms/PageHeader/PageHeader';
+import FavouriteButton from '../../components/atoms/FavouriteButton/FavouriteButton';
+import MarginBox from '../../components/atoms/MarginBox/MarginBox';
+import PageHeader from '../../components/atoms/PageHeader/PageHeader';
 
-import TableBody from '../components/molecules/TableBody/TableBody';
-import TableData from '../components/molecules/TableData/TableData';
-import TableHead from '../components/molecules/TableHead/TableHead';
-import TableHeader from '../components/molecules/TableHeader/TableHeader';
-import TableRow from '../components/molecules/TableRow/TableRow';
-import Searchbar from '../components/organisms/Searchbar/Searchbar';
-import Table from '../components/organisms/Table/Table';
-import { CoinItem, coinsActions } from '../state/coinsSlice';
-import Footer from '../components/organisms/Footer/Footer';
-import Pagination from '../components/organisms/Pagination/Pagination';
-import { addSpacesToNumber } from '../utils/convertUtils';
-import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
-import useFilter from '../hooks/useFilter';
+import TableBody from '../../components/molecules/TableBody/TableBody';
+import TableData from '../../components/molecules/TableData/TableData';
+import TableHead from '../../components/molecules/TableHead/TableHead';
+import TableHeader from '../../components/molecules/TableHeader/TableHeader';
+import TableRow from '../../components/molecules/TableRow/TableRow';
+import Searchbar from '../../components/organisms/Searchbar/Searchbar';
+import Table from '../../components/organisms/Table/Table';
+import { CoinItem, coinsActions } from '../../state/coinsSlice';
+import Footer from '../../components/organisms/Footer/Footer';
+import Pagination from '../../components/organisms/Pagination/Pagination';
+import { addSpacesToNumber } from '../../utils/convertUtils';
+import { useAppDispatch, useAppSelector } from '../../state/reduxHooks';
+import useFilter from '../../hooks/useFilter';
+import useDatabase from '../../hooks/useDatabase';
 
-const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServerSideProps>) => {
+const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const indexingByPage = page > 1 ? (page - 1) * 100 : 0;
 	const { sortCoins } = useFilter();
 	const dispatch = useAppDispatch();
 	const { coinsList } = useAppSelector(state => state.coins);
-
+	const { addToFavourites } = useDatabase();
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
@@ -44,7 +45,6 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServer
 				<div className=' flex flex-col justify-center w-full overflow-x-scroll'>
 					{coins.length < 1 && <p className='absolute font-bold text-xl text-accent'>Loading...</p>}
 					{/* <p className='absolute font-bold text-xl text-accent top-[50%]'>Loading...</p> */}
-
 					<Table>
 						<colgroup>
 							<col className='w-[2%]' />
@@ -78,8 +78,8 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServer
 							{coinsList.map((coin: CoinItem, index: number) => {
 								return (
 									<TableRow key={uuidv4()}>
-										<TableData hrefRoute={coin.name}>
-											<FavouriteButton />
+										<TableData>
+											<FavouriteButton funcArg={coin.name} />
 										</TableData>
 										<TableData hrefRoute={coin.id} isBold={true}>
 											{indexingByPage + index + 1}
@@ -103,11 +103,15 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServer
 					</Table>
 				</div>
 			</div>
-			<Pagination currPage={page ?? 1} />
+			<Pagination currPage={page} />
 			<Footer>
 				<p className='text-xs text-fontLight'>
 					Crypto data powered by{' '}
-					<a className='text-accent' rel='noreferrer' target={'_blank'} href='https://www.coingecko.com/'>
+					<a
+						className='text-accent'
+						rel='noreferrer'
+						target={'_blank'}
+						href='https://www.coingecko.com/'>
 						Coingecko API
 					</a>
 				</p>
@@ -116,7 +120,25 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getServer
 	);
 };
 
-export const getServerSideProps = async (context: any) => {
+export const getStaticPaths = async () => {
+	return {
+		fallback: false,
+		paths: [
+			{ params: { page: '1' } },
+			{ params: { page: '2' } },
+			{ params: { page: '3' } },
+			{ params: { page: '4' } },
+			{ params: { page: '5' } },
+			{ params: { page: '6' } },
+			{ params: { page: '7' } },
+			{ params: { page: '8' } },
+			{ params: { page: '9' } },
+			{ params: { page: '10' } },
+		],
+	};
+};
+
+export const getStaticProps = async (context: any) => {
 	const { page } = context.params;
 
 	try {
@@ -128,7 +150,7 @@ export const getServerSideProps = async (context: any) => {
 				coins: res.data,
 				page: page,
 			},
-			// revalidate: 60,
+			revalidate: 60,
 		};
 	} catch {
 		throw new Error('Something went wrong :(');

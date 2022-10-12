@@ -13,7 +13,6 @@ import PageHeader from '../components/atoms/PageHeader/PageHeader';
 import useDatabase from '../hooks/useDatabase';
 
 const Dashboard = () => {
-	const { getData } = useDatabase();
 	return (
 		<main
 			className='flex flex-col items-start gap-sm w-full md:max-w px pb-[10rem] min-h-[100vh] bg-white overflow-y-auto
@@ -22,7 +21,13 @@ const Dashboard = () => {
 			<PageHeader appendAfter='of DefaultWallet'>Dashboard</PageHeader>
 			<div className='cards flex flex-col gap-sm w-full lg:flex-row'>
 				<DailyChangeGraph />
-				<TotalAssetsValue totalValue={32227} valueInBtc={0.3} changePercent={10} changeValue={21.34} />
+				<TotalAssetsValue
+					totalValue={32227}
+					valueInBtc={0.3}
+					changePercent={10}
+					changeValue={21.34}
+				/>
+
 				<div className='flex flex-col lg:w-[35%] gap-sm'>
 					<InfoAssetsBox asset='Atom' changeValue={14} isPercent={true}>
 						Biggest move
@@ -30,8 +35,6 @@ const Dashboard = () => {
 					<InfoAssetsBox asset='Juno' changeValue={21}>
 						Biggest 24h profit
 					</InfoAssetsBox>
-
-					<button onClick={getData}>KLIKNIJ MNIE</button>
 				</div>
 			</div>
 

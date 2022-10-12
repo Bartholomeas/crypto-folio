@@ -4,31 +4,36 @@ import NavList from '../../molecules/NavList/NavList';
 import { useAppDispatch, useAppSelector } from '../../../state/reduxHooks';
 import NavLinkItem from '../../atoms/NavLink/NavLink';
 import NavListItem from '../../atoms/NavListItem/NavListItem';
-import { MdDashboard, MdSettings, MdSearch, MdAccountBalanceWallet, MdHistory, MdLogout } from 'react-icons/md';
+import {
+	MdDashboard,
+	MdSettings,
+	MdSearch,
+	MdAccountBalanceWallet,
+	MdHistory,
+	MdLogout,
+} from 'react-icons/md';
 import ThemeSwitch from '../../molecules/ThemeSwitch/ThemeSwitch';
 import { useRouter } from 'next/router';
 import { uiActions } from '../../../state/uiSlice';
+import Button from '../../atoms/Button/Button';
+import useDatabase from '../../../hooks/useDatabase';
+import AuthPopup from '../AuthPopup/AuthPopup';
 
 const Navbar = () => {
 	const router = useRouter();
 	const { isNavOpen, isThemeDark } = useAppSelector(state => state.ui);
+	const { userData } = useAppSelector(state => state.user);
 	const dispatch = useAppDispatch();
+	const { authWithGoogle, signOutGoogle, loggedIn } = useDatabase();
 
-	const languages = {
-		english: 'ENG',
-		polish: 'PL',
-		german: 'GER',
-	};
-	const currencies = {
-		dollar: 'USD',
-		zloty: 'PLN',
-		euro: 'EUR',
+	const openAuthPopup = () => {
+		dispatch(uiActions.toggleAuthPopup());
 	};
 
 	return (
 		<nav
-			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-baseLight z-[1000] 
-		md:relative md:h-full md:max-w-[180px] md:py-lg'>
+			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-white z-[1000] 
+		md:relative md:h-full md:max-w-[180px] md:py-lg border-b-2 border-baseLight md:border-r-2 shadow'>
 			<div
 				className='nav-wrapper flex justify-between items-center w-full
 				 px-md py-sm
@@ -38,13 +43,13 @@ const Navbar = () => {
 			</div>
 
 			<div
-				className={`nav-menu fixed flex flex-col justify-around items-center w-full  top-[70px] left-0 bottom-0 right-0 bg-baseVeryLight transition-transform overflow-hidden
+				className={`nav-menu fixed flex flex-col justify-around items-center w-full  top-[70px] left-0 bottom-0 right-0 bg-white transition-transform overflow-hidden
 				 md:relative md:justify-between md:top-0 md:w-full md:my-auto md:h-full md:bg-transparent md:translate-x-0  ${
 						isNavOpen ? 'translate-x-0' : 'translate-x-[100%] '
 					}`}>
 				<NavList>
 					<NavListItem>
-						<NavLinkItem route='/' routerPath={router.pathname}>
+						<NavLinkItem route='/1' routerPath={router.pathname}>
 							<MdSearch className='icon' />
 							Explore
 						</NavLinkItem>
@@ -72,21 +77,39 @@ const Navbar = () => {
 							<MdSettings className='icon' /> Settings
 						</NavLinkItem>
 					</NavListItem>
-					<li className='flex self-start md:ml-0'>
-						<button className='flex flex-row-reverse items-center justify-start gap-sm py-md text-error text-sm cursor-pointer md:flex-row md:justify-start'>
-							<MdLogout className='icon text-error' />
-							Logout
-						</button>
-					</li>
 				</NavList>
-				<div className='flex flex-row-reverse justify-center items-center gap-sm w-full px-md md:flex-col md:items-start'>
-					{/* <div className='flex flex-col justify-center items-center w-full md:flex-col'>
-						<SelectMenu options={languages}>Language</SelectMenu>
-						<SelectMenu options={currencies}>Currency</SelectMenu>
-					</div> */}
-					<ThemeSwitch toggleThemeFunc={() => dispatch(uiActions.toggleTheme())} isThemeDark={isThemeDark} />
+				<div className='flex flex-col justify-center items-center gap-sm w-full px-md md:items-start'>
+					{!loggedIn ? (
+						<Button isAccent={true} onClickFn={openAuthPopup}>
+							Log in <MdLogout />
+						</Button>
+					) : (
+						<>
+							<Button otherStyles='font-semibold bg-transparent' onClickFn={() => {}}>
+								{userData.name || userData.email}
+							</Button>
+							<Button otherStyles=' bg-transparent py-xs text-error ' onClickFn={signOutGoogle}>
+								Logout
+							</Button>
+						</>
+					)}
+
+					<div className='flex items-center gap-sm w-full '>
+						<Button
+							onClickFn={() => {
+								console.log('create acc btn');
+							}}
+							otherStyles='text-xs'>
+							USD
+						</Button>
+						<ThemeSwitch
+							toggleThemeFunc={() => dispatch(uiActions.toggleTheme())}
+							isThemeDark={isThemeDark}
+						/>
+					</div>
 				</div>
 			</div>
+			<AuthPopup />
 		</nav>
 	);
 };

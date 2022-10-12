@@ -1,16 +1,26 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore, getDocs, collection } from 'firebase/firestore';
+import { getApp, initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getDatabase } from 'firebase/database';
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyAXKAYLizVGbouYzWsDfp65u_Zq_Ns5NIE',
-	authDomain: 'oddy-3114a.firebaseapp.com',
-	projectId: 'oddy-3114a',
-	storageBucket: 'oddy-3114a.appspot.com',
-	messagingSenderId: '145735350370',
-	appId: '1:145735350370:web:922e4141ea99f191fd793b',
-	measurementId: 'G-XHQQ8MXQ3W',
+	apiKey: process.env.NEXT_PUBLIC_API_KEY,
+	authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+	projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+	storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+	messagingSenderId: process.env.MESSAGING_SENDER_ID,
+	appId: process.env.NEXT_PUBLIC_APP_ID,
+	measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
+	databaseURL: process.env.NEXT_PUBLIC_DATABASE_URL,
 };
 
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig);
+let app;
+
+try {
+	app = getApp();
+} catch {
+	app = initializeApp(firebaseConfig);
+}
+
 export const db = getFirestore(app);
+export const auth = getAuth();

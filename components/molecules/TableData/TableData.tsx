@@ -10,7 +10,15 @@ interface Props {
 	hrefRoute?: string;
 	imgSrc?: string;
 }
-const TableData = ({ children, isBold, appendBefore, appendAfter, leftAlign, hrefRoute = '', imgSrc }: Props) => {
+const TableData = ({
+	children,
+	isBold,
+	appendBefore,
+	appendAfter,
+	leftAlign,
+	hrefRoute,
+	imgSrc,
+}: Props) => {
 	return (
 		<td
 			className={` px-xs text-sm text-font h-[6rem]
@@ -27,11 +35,20 @@ const TableData = ({ children, isBold, appendBefore, appendAfter, leftAlign, hre
 			`}>
 			{hrefRoute ? (
 				<Link passHref href={`/coins/${hrefRoute.toLowerCase()}`} className=''>
-					<a className={`flex ${leftAlign ? 'justify-start' : 'justify-end'} items-center w-full h-full`}>
+					<a
+						className={`flex ${
+							leftAlign ? 'justify-start' : 'justify-end'
+						} items-center w-full h-full`}>
 						<span className='font-bold'>{appendBefore ?? ''}</span>
 						{imgSrc && (
 							<div className=' w-[3rem] mr-4'>
-								<Image layout='responsive' src={imgSrc!} width={'10'} height={'10'} alt={`${hrefRoute} icon`} />
+								<Image
+									layout='responsive'
+									src={imgSrc!}
+									width={'10'}
+									height={'10'}
+									alt={`${hrefRoute} icon`}
+								/>
 							</div>
 						)}
 						{children}

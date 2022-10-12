@@ -16,7 +16,11 @@ module.exports = {
 		},
 
 		extend: {
-			dropShadow: { DEFAULT: '2px 2px 0 40px #E1E4E6' },
+			animation: {
+				'spin-slow': 'spin 3s linear infinite',
+			},
+
+			boxShadow: { DEFAULT: '0 0 40px 0 rgba(225, 228, 230, 1)' },
 			borderRadius: {
 				DEFAULT: '8px',
 				large: '16px',
@@ -24,7 +28,7 @@ module.exports = {
 			fontSize: {
 				xs: '1.2rem',
 				sm: '1.4rem',
-				DEFAULT: '1.6rem',
+				DEFAULT: '1.4rem',
 				md: '2rem',
 				lg: '2.4rem',
 				xl: '3.2rem',

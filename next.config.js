@@ -5,6 +5,7 @@ const nextConfig = {
 	images: {
 		domains: ['assets.coingecko.com'],
 	},
+	staticPageGenerationTimeout: 100,
 };
 
 module.exports = nextConfig;

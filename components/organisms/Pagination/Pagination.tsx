@@ -1,6 +1,6 @@
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
@@ -29,7 +29,9 @@ const Pagination = ({ currPage }: Props) => {
 				return (
 					<Link key={uuidv4()} passHref href={`/${page}`}>
 						<a
-							className={`px-xs ${+currPage === +page && ' text-sm text-white font-semibold bg-accent rounded py-sm'}`}>
+							className={`px-xs ${
+								+currPage === +page && ' text-sm text-white font-semibold bg-accent rounded py-sm'
+							}`}>
 							{page}
 						</a>
 					</Link>
