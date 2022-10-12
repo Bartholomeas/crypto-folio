@@ -41,18 +41,17 @@ const useDatabase = () => {
 	const { userData } = useAppSelector(state => state.user);
 	const [loggedIn, setLoggedIn] = useState(false);
 
-	// useEffect(() => {
-	// 	onAuthStateChanged(auth, user => {
-	// 		if (user) {
-	// 			setLoggedInUser(user);
-	// 			console.log('jest user', user);
-	// 		} else {
-	// 			console.log('error');
-	// 			removeLoggedInUser();
-	// 			return;
-	// 		}
-	// 	});
-	// }, []);
+	useEffect(() => {
+		onAuthStateChanged(auth, user => {
+			if (user && loggedIn === false) {
+				setLoggedInUser(user);
+			} else {
+				console.log('error');
+				removeLoggedInUser();
+				return;
+			}
+		});
+	}, []);
 
 	function setNotificationPopup(isOpen: boolean, isSuccess: boolean = true, content: string) {
 		dispatch(
@@ -69,9 +68,6 @@ const useDatabase = () => {
 	}
 
 	function addUserToDB(user: any) {
-		console.log(user);
-		debugger;
-
 		const userRef = doc(db, 'users', userData.uid);
 		setDoc(
 			userRef,
@@ -87,6 +83,7 @@ const useDatabase = () => {
 
 	function setLoggedInUser(user: any) {
 		setLoggedIn(true);
+		console.log(user);
 		dispatch(
 			userActions.setUserData({
 				name: user.displayName || user.email,
