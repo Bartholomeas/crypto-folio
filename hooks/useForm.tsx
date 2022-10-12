@@ -14,7 +14,6 @@ const useForm = () => {
 
 	function setInputValues(event: React.ChangeEvent<HTMLInputElement>) {
 		setValues({ ...values, [event.target.name]: event.target.value });
-		console.log(values);
 	}
 
 	function validateInputValue(event: React.ChangeEvent<HTMLInputElement>) {

@@ -41,18 +41,18 @@ const useDatabase = () => {
 	const { userData } = useAppSelector(state => state.user);
 	const [loggedIn, setLoggedIn] = useState(false);
 
-	useEffect(() => {
-		const unsubAuth = onAuthStateChanged(auth, user => {
-			if (user) {
-				setLoggedInUser(user);
-				console.log('jest user', user);
-			} else {
-				console.log('error');
-				removeLoggedInUser();
-				return;
-			}	
-		});
-	}, []);
+	// useEffect(() => {
+	// 	onAuthStateChanged(auth, user => {
+	// 		if (user) {
+	// 			setLoggedInUser(user);
+	// 			console.log('jest user', user);
+	// 		} else {
+	// 			console.log('error');
+	// 			removeLoggedInUser();
+	// 			return;
+	// 		}
+	// 	});
+	// }, []);
 
 	function setNotificationPopup(isOpen: boolean, isSuccess: boolean = true, content: string) {
 		dispatch(
@@ -68,21 +68,17 @@ const useDatabase = () => {
 		dispatch(uiActions.toggleLoader(active));
 	}
 
-	// const writeUserData = (user: DBUser) => {
-	// 	const docRef = doc(db, 'users', user.uid);
-	// 	getDoc(docRef).then(doc => {
-	// 		console.log(doc.data());
-	// 	});
-	// };
-
 	function addUserToDB(user: any) {
+		console.log(user);
+		debugger;
+
 		const userRef = doc(db, 'users', userData.uid);
 		setDoc(
 			userRef,
 			{
 				id: user.uid,
 				email: user.email,
-				name: user.displayName,
+				name: user.displayName || user.email,
 				favouriteCoins: [],
 			},
 			{ merge: true }
@@ -135,7 +131,7 @@ const useDatabase = () => {
 		signInWithEmailAndPassword(auth, emailValue, passwordValue)
 			.then(result => {
 				setLoader(false);
-				addUserToDB(result.user);
+				console.log(result);
 				setLoggedInUser(result.user);
 				dispatch(uiActions.closeAuthPopup());
 
@@ -211,14 +207,6 @@ const useDatabase = () => {
 		await updateDoc(userRef, {
 			favouriteCoins: arrayUnion(coinName),
 		});
-
-		// setDoc(
-		// 	userRef,
-		// 	{
-		// 		favouriteCoins: ['Ripple'],
-		// 	},
-		// 	{ merge: true }
-		// );
 	}
 
 	return {
