@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
 	collection,
 	getDocs,
@@ -41,6 +41,19 @@ const useDatabase = () => {
 	const { userData } = useAppSelector(state => state.user);
 	const [loggedIn, setLoggedIn] = useState(false);
 
+	useEffect(() => {
+		const unsubAuth = onAuthStateChanged(auth, user => {
+			if (user) {
+				setLoggedInUser(user);
+				console.log('jest user', user);
+			} else {
+				console.log('error');
+				removeLoggedInUser();
+				return;
+			}	
+		});
+	}, []);
+
 	function setNotificationPopup(isOpen: boolean, isSuccess: boolean = true, content: string) {
 		dispatch(
 			uiActions.toggleNotificationPopup({
@@ -62,17 +75,6 @@ const useDatabase = () => {
 	// 	});
 	// };
 
-	useEffect(() => {
-		onAuthStateChanged(auth, user => {
-			if (user) {
-				setLoggedInUser(user);
-			} else {
-				removeLoggedInUser();
-				return;
-			}
-		});
-	}, []);
-
 	function addUserToDB(user: any) {
 		const userRef = doc(db, 'users', userData.uid);
 		setDoc(
@@ -91,10 +93,10 @@ const useDatabase = () => {
 		setLoggedIn(true);
 		dispatch(
 			userActions.setUserData({
-				name: user.displayName,
+				name: user.displayName || user.email,
 				email: user.email,
 				uid: user.uid,
-				photoURL: user.photoURL,
+				photoURL: user.photoURL || '',
 			})
 		);
 		localStorage.setItem('userId', user.uid);
@@ -116,9 +118,11 @@ const useDatabase = () => {
 				setTimeout(() => {
 					setNotificationPopup(false, true, 'Congratulations, you got registered!');
 				}, 3000);
+				console.log(result);
 			})
 			.catch(err => {
 				setLoader(false);
+				console.log(err);
 				setNotificationPopup(true, false, 'We cannot register you :(');
 				setTimeout(() => {
 					setNotificationPopup(false, false, 'We cannot register you :(!');
@@ -126,23 +130,36 @@ const useDatabase = () => {
 			});
 	};
 
-	const loginCustomUser = (emailValue: string, passwordValue: string) => {
+	const authWithEmail = (emailValue: string, passwordValue: string) => {
 		setLoader(true);
 		signInWithEmailAndPassword(auth, emailValue, passwordValue)
-			.then(cred => {
+			.then(result => {
 				setLoader(false);
+				addUserToDB(result.user);
+				setLoggedInUser(result.user);
+				dispatch(uiActions.closeAuthPopup());
+
+				setNotificationPopup(true, true, 'Successfully logged in');
+				setTimeout(() => {
+					setNotificationPopup(false, true, 'Successfully logged in');
+				}, 3000);
+				console.log(result);
 			})
 			.catch(err => {
-				setLoader(false);
 				console.log(err);
+				setLoader(false);
+				setNotificationPopup(true, false, 'Something went wrong :(');
+				setTimeout(() => {
+					setNotificationPopup(false, false, 'Something went wrong :(');
+				}, 3000);
 			});
 	};
 
-	const logout = () => {
-		signOut(auth)
-			.then(() => {})
-			.catch(err => console.log(err));
-	};
+	// const logout = () => {
+	// 	signOut(auth)
+	// 		.then(() => {})
+	// 		.catch(err => console.log(err));
+	// };
 
 	function authWithGoogle() {
 		setLoader(true);
@@ -168,7 +185,7 @@ const useDatabase = () => {
 			});
 	}
 
-	function signOutGoogle() {
+	function signoutGoogle() {
 		try {
 			removeLoggedInUser();
 			signOut(auth);
@@ -207,9 +224,9 @@ const useDatabase = () => {
 	return {
 		loggedIn,
 		authWithGoogle,
-		signOutGoogle,
+		signoutGoogle,
 		signupCustomUser,
-		loginCustomUser,
+		authWithEmail,
 		addToFavourites,
 	};
 };

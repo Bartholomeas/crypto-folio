@@ -14,11 +14,14 @@ const AuthPopup = () => {
 	const dispatch = useAppDispatch();
 	const { isAuthPopupOpen, isLoaderOpen } = useAppSelector(state => state.ui);
 	const [loginBox, setLoginBox] = useState(true);
-	const { authWithGoogle, signupCustomUser } = useDatabase();
+	const { authWithGoogle, signupCustomUser, authWithEmail } = useDatabase();
 	const { values, setInputValues, validateInputValue } = useForm();
 
 	return (
-		<div className={`popup-bg ${isAuthPopupOpen ? 'fixed' : 'hidden'} 2`}>
+		<div
+			className={`popup-bg ${
+				isAuthPopupOpen ? 'fixed' : 'hidden'
+			} w-full h-full top-0 left-0 right-0 bottom-0 bg-zinc-800/50 backdrop-blur-sm`}>
 			<div className='fixed flex flex-col h-full w-full top-[50%] left-[50%] py-lg px-lg text translate-x-[-50%] translate-y-[-50%]  bg-white rounded-xl md:min-w-[500px] min-h-[500px] md:max-w-[500px] md:h-auto md:w-auto overflow-y-auto'>
 				<button
 					onClick={() => dispatch(uiActions.toggleAuthPopup())}
@@ -46,7 +49,12 @@ const AuthPopup = () => {
 				</div>
 				{loginBox ? (
 					<div className='flex flex-col items-center justify-center gap pt-lg'>
-						<form className='flex flex-col gap w-full h-full'>
+						<form
+							onSubmit={e => {
+								e.preventDefault();
+								authWithEmail(values.email, values.password);
+							}}
+							className='flex flex-col gap w-full h-full'>
 							<InputWithLabel
 								onChangeFunc={setInputValues}
 								onBlurFunc={validateInputValue}
@@ -64,7 +72,7 @@ const AuthPopup = () => {
 								Password
 							</InputWithLabel>
 
-							<Button isAccent={true} onClickFn={() => {}} otherStyles='max-h-[5rem]'>
+							<Button isAccent={true} otherStyles='max-h-[5rem]'>
 								Log in
 							</Button>
 						</form>
@@ -77,7 +85,10 @@ const AuthPopup = () => {
 				) : (
 					<div className='flex flex-col items-center justify-center gap pt-lg'>
 						<form
-							onSubmit={(e: any) => e.preventDefault()}
+							onSubmit={e => {
+								e.preventDefault();
+								signupCustomUser(values.email_register, values.password_register);
+							}}
 							className='flex flex-col gap w-full h-full'>
 							<InputWithLabel
 								onChangeFunc={setInputValues}
@@ -103,14 +114,7 @@ const AuthPopup = () => {
 								placeholderValue='Password here'>
 								Repeat password
 							</InputWithLabel>
-							<Button
-								isAccent={true}
-								onClickFn={(e: any) => {
-									e.preventDefault;
-									signupCustomUser(values.email_register, values.password_register);
-									console.log(values.password_register);
-								}}
-								otherStyles='max-h-[5rem]'>
+							<Button isAccent={true} otherStyles='max-h-[5rem]'>
 								Sign up
 							</Button>
 						</form>

@@ -27,8 +27,6 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 	const { sortCoins } = useFilter();
 	const dispatch = useAppDispatch();
 	const { coinsList } = useAppSelector(state => state.coins);
-	const { addToFavourites } = useDatabase();
-	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		dispatch(coinsActions.setCoinsList(coins));
