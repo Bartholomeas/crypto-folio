@@ -79,7 +79,7 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 								return (
 									<TableRow key={uuidv4()}>
 										<TableData>
-											<FavouriteButton funcArg={coin.id} />
+											<FavouriteButton funcArg={coin.name} />
 										</TableData>
 										<TableData hrefRoute={coin.id} isBold={true}>
 											{indexingByPage + index + 1}

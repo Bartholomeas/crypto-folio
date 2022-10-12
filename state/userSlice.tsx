@@ -6,7 +6,7 @@ interface Props {
 }
 
 interface StateInterface {
-	favouriteCoins: [];
+	favouriteCoins: string[];
 	userData: {
 		[key: string]: string | number;
 		name: string;
