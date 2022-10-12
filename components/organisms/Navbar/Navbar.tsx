@@ -24,7 +24,7 @@ const Navbar = () => {
 	const { isNavOpen, isThemeDark } = useAppSelector(state => state.ui);
 	const { userData } = useAppSelector(state => state.user);
 	const dispatch = useAppDispatch();
-	const { authWithGoogle, signOutGoogle, loggedIn } = useDatabase();
+	const { authWithGoogle, signoutGoogle, loggedIn } = useDatabase();
 
 	const openAuthPopup = () => {
 		dispatch(uiActions.toggleAuthPopup());
@@ -88,7 +88,7 @@ const Navbar = () => {
 							<Button otherStyles='font-semibold bg-transparent' onClickFn={() => {}}>
 								{userData.name || userData.email}
 							</Button>
-							<Button otherStyles=' bg-transparent py-xs text-error ' onClickFn={signOutGoogle}>
+							<Button otherStyles=' bg-transparent py-xs text-error ' onClickFn={signoutGoogle}>
 								Logout
 							</Button>
 						</>
