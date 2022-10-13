@@ -1,3 +1,1 @@
-add sparkline to coins table from react-sparklines PACKAGE
-
-configure chartjs to coin details
+- onAuthStateChanged creates a lot of rerenders (most on Explore page while mapping a lot of coin items), need to fix it in the future

@@ -24,7 +24,7 @@ const Navbar = () => {
 	const { isNavOpen, isThemeDark } = useAppSelector(state => state.ui);
 	const { userData } = useAppSelector(state => state.user);
 	const dispatch = useAppDispatch();
-	const { authWithGoogle, signoutGoogle, loggedIn } = useDatabase();
+	const { authWithGoogle, signoutUser, loggedIn } = useDatabase();
 
 	const openAuthPopup = () => {
 		dispatch(uiActions.toggleAuthPopup());
@@ -88,20 +88,14 @@ const Navbar = () => {
 							<Button otherStyles='font-semibold bg-transparent' onClickFn={() => {}}>
 								{userData.name || userData.email}
 							</Button>
-							<Button otherStyles=' bg-transparent py-xs text-error ' onClickFn={signoutGoogle}>
+							<Button otherStyles=' bg-transparent py-xs text-error ' onClickFn={signoutUser}>
 								Logout
 							</Button>
 						</>
 					)}
 
 					<div className='flex items-center gap-sm w-full '>
-						<Button
-							onClickFn={() => {
-								console.log('create acc btn');
-							}}
-							otherStyles='text-xs'>
-							USD
-						</Button>
+						<Button otherStyles='text-xs'>USD</Button>
 						<ThemeSwitch
 							toggleThemeFunc={() => dispatch(uiActions.toggleTheme())}
 							isThemeDark={isThemeDark}
