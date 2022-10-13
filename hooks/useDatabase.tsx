@@ -41,18 +41,16 @@ const useDatabase = () => {
 	const { userData } = useAppSelector(state => state.user);
 	const [loggedIn, setLoggedIn] = useState(false);
 
-	// useEffect(() => {
-	// 	onAuthStateChanged(auth, user => {
-	// 		if (user) {
-	// 			setLoggedInUser(user);
-	// 			console.log('jest user', user);
-	// 		} else {
-	// 			console.log('error');
-	// 			removeLoggedInUser();
-	// 			return;
-	// 		}
-	// 	});
-	// }, []);
+	useEffect(() => {
+		onAuthStateChanged(auth, user => {
+			if (user && loggedIn === false) {
+				setLoggedInUser(user);
+			} else {
+				removeLoggedInUser();
+				return;
+			}
+		});
+	}, []);
 
 	function setNotificationPopup(isOpen: boolean, isSuccess: boolean = true, content: string) {
 		dispatch(
@@ -69,9 +67,6 @@ const useDatabase = () => {
 	}
 
 	function addUserToDB(user: any) {
-		console.log(user);
-		debugger;
-
 		const userRef = doc(db, 'users', userData.uid);
 		setDoc(
 			userRef,
@@ -114,11 +109,9 @@ const useDatabase = () => {
 				setTimeout(() => {
 					setNotificationPopup(false, true, 'Congratulations, you got registered!');
 				}, 3000);
-				console.log(result);
 			})
 			.catch(err => {
 				setLoader(false);
-				console.log(err);
 				setNotificationPopup(true, false, 'We cannot register you :(');
 				setTimeout(() => {
 					setNotificationPopup(false, false, 'We cannot register you :(!');
@@ -131,7 +124,6 @@ const useDatabase = () => {
 		signInWithEmailAndPassword(auth, emailValue, passwordValue)
 			.then(result => {
 				setLoader(false);
-				console.log(result);
 				setLoggedInUser(result.user);
 				dispatch(uiActions.closeAuthPopup());
 
@@ -139,10 +131,8 @@ const useDatabase = () => {
 				setTimeout(() => {
 					setNotificationPopup(false, true, 'Successfully logged in');
 				}, 3000);
-				console.log(result);
 			})
 			.catch(err => {
-				console.log(err);
 				setLoader(false);
 				setNotificationPopup(true, false, 'Something went wrong :(');
 				setTimeout(() => {
@@ -150,12 +140,6 @@ const useDatabase = () => {
 				}, 3000);
 			});
 	};
-
-	// const logout = () => {
-	// 	signOut(auth)
-	// 		.then(() => {})
-	// 		.catch(err => console.log(err));
-	// };
 
 	function authWithGoogle() {
 		setLoader(true);
@@ -172,7 +156,6 @@ const useDatabase = () => {
 				}, 3000);
 			})
 			.catch(err => {
-				console.log(err);
 				setLoader(false);
 				setNotificationPopup(true, false, 'Something went wrong :(');
 				setTimeout(() => {
@@ -181,7 +164,7 @@ const useDatabase = () => {
 			});
 	}
 
-	function signoutGoogle() {
+	function signoutUser() {
 		try {
 			removeLoggedInUser();
 			signOut(auth);
@@ -196,7 +179,6 @@ const useDatabase = () => {
 	}
 
 	async function addToFavourites(coinName: string) {
-		console.log(coinName);
 		if (!userData.uid) {
 			dispatch(uiActions.toggleAuthPopup());
 			return;
@@ -212,7 +194,7 @@ const useDatabase = () => {
 	return {
 		loggedIn,
 		authWithGoogle,
-		signoutGoogle,
+		signoutUser,
 		signupCustomUser,
 		authWithEmail,
 		addToFavourites,
@@ -232,10 +214,10 @@ export default useDatabase;
 // 		snapshot.docs.forEach(doc => {
 // 			coins.push({ ...doc.data(), id: doc.id });
 // 		});
-// 		console.log(coins);
+
 // 	})
 // 	.catch(error => {
-// 		console.log(error);
+
 // 	});
 // const deleteItem = (e: any) => {
 // 	e.preventDefault();
@@ -250,11 +232,11 @@ export default useDatabase;
 // const getSingleDoc = () => {
 // 	const docRef: any = doc(db, 'favourites', 'q0XKWS2wXRC4hmoj3wqb');
 // 	getDoc(docRef).then((doc: any) => {
-// 		console.log(doc.data(), doc.id);
+
 // 	});
 
 // 	onSnapshot(docRef, (doc: any) => {
-// 		console.log(doc.data(), doc.id);
+
 // 	});
 // };
 

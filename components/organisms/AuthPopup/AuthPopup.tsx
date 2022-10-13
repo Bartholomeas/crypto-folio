@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
 import { BsGoogle } from 'react-icons/bs';
 import { useAppDispatch, useAppSelector } from '../../../state/reduxHooks';
@@ -15,7 +15,7 @@ const AuthPopup = () => {
 	const { isAuthPopupOpen, isLoaderOpen } = useAppSelector(state => state.ui);
 	const [loginBox, setLoginBox] = useState(true);
 	const { authWithGoogle, signupCustomUser, authWithEmail } = useDatabase();
-	const { values, setInputValues, validateInputValue } = useForm();
+	const { values, errors, setInputValues, validateInputValue } = useForm();
 
 	return (
 		<div
@@ -52,10 +52,13 @@ const AuthPopup = () => {
 						<form
 							onSubmit={e => {
 								e.preventDefault();
+								console.log((e.target as HTMLElement).querySelectorAll('input'));
+
 								authWithEmail(values.email, values.password);
 							}}
 							className='flex flex-col gap w-full h-full'>
 							<InputWithLabel
+								errors={errors}
 								onChangeFunc={setInputValues}
 								onBlurFunc={validateInputValue}
 								forProp='email'
@@ -64,6 +67,7 @@ const AuthPopup = () => {
 								Email
 							</InputWithLabel>
 							<InputWithLabel
+								errors={errors}
 								onChangeFunc={setInputValues}
 								onBlurFunc={validateInputValue}
 								forProp='password'
@@ -71,7 +75,6 @@ const AuthPopup = () => {
 								placeholderValue='Password here'>
 								Password
 							</InputWithLabel>
-
 							<Button isAccent={true} otherStyles='max-h-[5rem]'>
 								Log in
 							</Button>
@@ -91,6 +94,7 @@ const AuthPopup = () => {
 							}}
 							className='flex flex-col gap w-full h-full'>
 							<InputWithLabel
+								errors={errors}
 								onChangeFunc={setInputValues}
 								onBlurFunc={validateInputValue}
 								forProp='email_register'
@@ -99,6 +103,7 @@ const AuthPopup = () => {
 								Email
 							</InputWithLabel>
 							<InputWithLabel
+								errors={errors}
 								onChangeFunc={setInputValues}
 								onBlurFunc={validateInputValue}
 								forProp='password_register'
@@ -107,6 +112,7 @@ const AuthPopup = () => {
 								Password
 							</InputWithLabel>
 							<InputWithLabel
+								errors={errors}
 								onChangeFunc={setInputValues}
 								onBlurFunc={validateInputValue}
 								forProp='password_repeat'

@@ -1,6 +1,14 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-const initialInputsState = {
+interface InitialInputs {
+	email: string;
+	password: string;
+	email_register: string;
+	password_register: string;
+	password_repeat: string;
+}
+
+const initialInputsState: InitialInputs = {
 	email: '',
 	password: '',
 	email_register: '',
@@ -10,16 +18,17 @@ const initialInputsState = {
 
 const useForm = () => {
 	const [values, setValues] = useState(initialInputsState);
-	const [errors, setErrors] = useState<any>({});
+	const [errors, setErrors] = useState(initialInputsState);
 
 	function setInputValues(event: React.ChangeEvent<HTMLInputElement>) {
 		setValues({ ...values, [event.target.name]: event.target.value });
+		console.log(values);
 	}
 
 	function validateInputValue(event: React.ChangeEvent<HTMLInputElement>) {
 		const { name, value } = event.target;
 		let error = '';
-		console.log(errors);
+		// console.log(errors);
 		if (name === 'email') {
 			error = !value ? 'Email is required' : '';
 		}
