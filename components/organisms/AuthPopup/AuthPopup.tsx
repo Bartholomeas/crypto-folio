@@ -15,7 +15,7 @@ const AuthPopup = () => {
 	const { isAuthPopupOpen, isLoaderOpen } = useAppSelector(state => state.ui);
 	const [loginBox, setLoginBox] = useState(true);
 	const { authWithGoogle, signupCustomUser, authWithEmail } = useDatabase();
-	const { values, errors, setInputValues, validateInputValue } = useForm();
+	const { values, errors, setInputValues, validateInputValue, validateForm } = useForm();
 
 	return (
 		<div
@@ -52,9 +52,8 @@ const AuthPopup = () => {
 						<form
 							onSubmit={e => {
 								e.preventDefault();
-								console.log((e.target as HTMLElement).querySelectorAll('input'));
-
-								authWithEmail(values.email, values.password);
+								validateForm((e.target as HTMLElement).querySelectorAll('input'));
+								// authWithEmail(values.email, values.password);
 							}}
 							className='flex flex-col gap w-full h-full'>
 							<InputWithLabel
@@ -90,7 +89,8 @@ const AuthPopup = () => {
 						<form
 							onSubmit={e => {
 								e.preventDefault();
-								signupCustomUser(values.email_register, values.password_register);
+								validateForm((e.target as HTMLElement).querySelectorAll('input'));
+								// signupCustomUser(values.email_register, values.password_register);
 							}}
 							className='flex flex-col gap w-full h-full'>
 							<InputWithLabel
