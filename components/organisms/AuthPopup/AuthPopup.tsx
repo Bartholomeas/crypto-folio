@@ -15,7 +15,7 @@ const AuthPopup = () => {
 	const { isAuthPopupOpen, isLoaderOpen } = useAppSelector(state => state.ui);
 	const [loginBox, setLoginBox] = useState(true);
 	const { authWithGoogle, signupCustomUser, authWithEmail } = useDatabase();
-	const { values, errors, setInputValues, validateInputValue, validateForm } = useForm();
+	const { values, errors, setInputValues, validateInputOnBlur, validateAllInputs } = useForm();
 
 	return (
 		<div
@@ -52,14 +52,14 @@ const AuthPopup = () => {
 						<form
 							onSubmit={e => {
 								e.preventDefault();
-								validateForm((e.target as HTMLElement).querySelectorAll('input'));
+								validateAllInputs((e.target as HTMLElement).querySelectorAll('input'));
 								// authWithEmail(values.email, values.password);
 							}}
 							className='flex flex-col gap w-full h-full'>
 							<InputWithLabel
 								errors={errors}
 								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputValue}
+								onBlurFunc={e => validateInputOnBlur(e)}
 								forProp='email'
 								inputType='email'
 								placeholderValue='Email adress here'>
@@ -68,7 +68,7 @@ const AuthPopup = () => {
 							<InputWithLabel
 								errors={errors}
 								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputValue}
+								onBlurFunc={e => validateInputOnBlur(e)}
 								forProp='password'
 								inputType='password'
 								placeholderValue='Password here'>
@@ -89,14 +89,14 @@ const AuthPopup = () => {
 						<form
 							onSubmit={e => {
 								e.preventDefault();
-								validateForm((e.target as HTMLElement).querySelectorAll('input'));
+								validateAllInputs((e.target as HTMLElement).querySelectorAll('input'));
 								// signupCustomUser(values.email_register, values.password_register);
 							}}
 							className='flex flex-col gap w-full h-full'>
 							<InputWithLabel
 								errors={errors}
 								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputValue}
+								onBlurFunc={e => validateInputOnBlur(e)}
 								forProp='email_register'
 								inputType='email'
 								placeholderValue='Email adress here'>
@@ -105,7 +105,7 @@ const AuthPopup = () => {
 							<InputWithLabel
 								errors={errors}
 								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputValue}
+								onBlurFunc={e => validateInputOnBlur(e)}
 								forProp='password_register'
 								inputType='password'
 								placeholderValue='Password here'>
@@ -114,7 +114,7 @@ const AuthPopup = () => {
 							<InputWithLabel
 								errors={errors}
 								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputValue}
+								onBlurFunc={e => validateInputOnBlur(e)}
 								forProp='password_repeat'
 								inputType='password'
 								placeholderValue='Password here'>

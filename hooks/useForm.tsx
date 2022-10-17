@@ -19,19 +19,16 @@ const initialInputsState: InitialInputs = {
 
 const useForm = () => {
 	const [values, setValues] = useState(initialInputsState);
-	const [errors, setErrors] = useState({});
+	const [errors, setErrors] = useState(initialInputsState);
 
 	function setInputValues(event: React.ChangeEvent<HTMLInputElement>) {
 		setValues({ ...values, [event.target.name]: event.target.value });
 		console.log(values);
 	}
 
-	function validateInputValue(event: React.ChangeEvent<HTMLInputElement> | any) {
-		const { name, value } = event.target ? event.target : event;
-		// console.log(name, value);
+	function validateInput(name: string, value: string | null) {
 		let error = '';
 
-		// console.log(errors);
 		if (name === 'email') {
 			error = !value ? 'Email is required' : '';
 		}
@@ -48,33 +45,30 @@ const useForm = () => {
 			error = !value ? 'Password is required' : '';
 		}
 		if (error) {
-			setErrors({ ...errors, [name]: error });
+			setErrors(prevState => ({
+				...prevState,
+				[name]: error,
+			}));
 		} else {
 			setErrors({ ...errors, [name]: '' });
 		}
 	}
 
-	function validateForm(inputs: NodeListOf<HTMLInputElement>) {
-		inputs.forEach((input: HTMLInputElement) => {
-			// validateInputValue(input);
-			const { name, value } = input;
-
-			if (!values[name]) {
-				setErrors({ ...errors, [name]: `${name} is required` });
-			}
-			console.log(errors);
-			// console.log(errors);
-			// console.log(input.target);
-			// console.log(input);
-			// validateInputValue(input);
-			// !value
-			// 	? setErrors({ ...errors, [name]: `${name} is required` })
-			// 	: setErrors({ ...errors, [name]: '' });
-		});
-		// console.log(errors);
+	function validateInputOnBlur(event: React.ChangeEvent<HTMLInputElement>) {
+		const { name, value } = event.target;
+		validateInput(name, value);
 	}
 
-	return { setInputValues, validateInputValue, validateForm, values, errors };
+	function validateAllInputs(inputs: NodeListOf<HTMLInputElement>) {
+		console.log(errors);
+		inputs.forEach((input: HTMLInputElement) => {
+			const { name, value } = input;
+			validateInput(name, value);
+			console.log(input);
+		});
+	}
+
+	return { setInputValues, validateInputOnBlur, validateAllInputs, values, errors };
 };
 
 export default useForm;
