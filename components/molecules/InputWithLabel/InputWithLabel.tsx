@@ -20,15 +20,13 @@ const InputWithLabel = ({
 	forProp,
 	inputType = 'text',
 	placeholderValue,
-
 	errors,
 }: Props) => {
 	const [isError, setIsError] = useState(false);
 
 	useEffect(() => {
 		errors[forProp] ? setIsError(true) : setIsError(false);
-		// console.log(errors);
-	}, [errors, forProp]);
+	}, [errors]);
 
 	return (
 		<div className='relative flex flex-col gap-[.3rem] py-xs'>
