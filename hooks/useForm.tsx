@@ -19,64 +19,59 @@ const initialInputsState: InitialInputs = {
 
 const useForm = () => {
 	const [values, setValues] = useState(initialInputsState);
-	const [errors, setErrors] = useState({});
+	const [errors, setErrors] = useState(initialInputsState);
+	const [isError, setIsError] = useState(false);
 
 	function setInputValues(event: React.ChangeEvent<HTMLInputElement>) {
 		setValues({ ...values, [event.target.name]: event.target.value });
-		console.log(values);
 	}
 
-	function validateInputValue(event: React.ChangeEvent<HTMLInputElement> | any) {
-		const { name, value } = event.target ? event.target : event;
-		// console.log(name, value);
-		let error = '';
+	function validateAllInputs(inputs: NodeListOf<HTMLInputElement>) {
+		inputs.forEach((input: HTMLInputElement) => {
+			const { name, value } = input;
+			validateInput(name, value);
+		});
+		if (isError) return false;
+		return true;
+	}
 
-		// console.log(errors);
-		if (name === 'email') {
-			error = !value ? 'Email is required' : '';
+	function validateInput(name: string, value: string | null) {
+		let error = '';
+		error = !value ? `${name} is required` : '';
+
+		if ((name === 'email' || name === 'email_register') && !validateEmail(value!) && value !== '') {
+			setIsError(true);
+			error = 'invalid email';
+		} else {
+			error = !value ? `${name} is required` : '';
 		}
-		if (name === 'password') {
-			error = !value ? 'Password is required' : '';
-		}
-		if (name === 'email_register') {
-			error = !value ? 'Email is required' : '';
-		}
-		if (name === 'password_register') {
-			error = !value ? 'Password is required' : '';
-		}
-		if (name === 'password_repeat') {
-			error = !value ? 'Password is required' : '';
-		}
+
 		if (error) {
-			setErrors({ ...errors, [name]: error });
+			setErrors(prevState => ({
+				...prevState,
+				[name]: error,
+			}));
 		} else {
 			setErrors({ ...errors, [name]: '' });
 		}
+
+		if (Object.values(errors).every(error => error === '')) {
+			setIsError(false);
+		} else {
+			setIsError(true);
+		}
+	}
+	function validateEmail(email: string | undefined) {
+		if (!email) return;
+		return email.toLowerCase().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 	}
 
-	function validateForm(inputs: NodeListOf<HTMLInputElement>) {
-		inputs.forEach((input: HTMLInputElement) => {
-			// validateInputValue(input);
-			const { name, value } = input;
-
-			if (!values[name]) {
-				setErrors({ ...errors, [name]: `${name} is required` });
-			}
-			console.log(errors);
-			// console.log(errors);
-			// console.log(input.target);
-			// console.log(input);
-			// validateInputValue(input);
-			// !value
-			// 	? setErrors({ ...errors, [name]: `${name} is required` })
-			// 	: setErrors({ ...errors, [name]: '' });
-		});
-		// console.log(errors);
+	function validateInputOnBlur(event: React.ChangeEvent<HTMLInputElement>) {
+		const { name, value } = event.target;
+		validateInput(name, value);
 	}
 
-	return { setInputValues, validateInputValue, validateForm, values, errors };
+	return { setInputValues, validateInputOnBlur, validateAllInputs, values, errors, isError };
 };
 
 export default useForm;
-
-// } else if (!/\S+@\S+\.\S+/.test(values.email)) {

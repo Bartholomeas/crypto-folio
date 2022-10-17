@@ -26,7 +26,7 @@ const InputWithLabel = ({
 
 	useEffect(() => {
 		errors[forProp] ? setIsError(true) : setIsError(false);
-	}, [errors]);
+	}, [errors[forProp]]);
 
 	return (
 		<div className='relative flex flex-col gap-[.3rem] py-xs'>

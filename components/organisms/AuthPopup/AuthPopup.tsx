@@ -10,12 +10,32 @@ import BasicLink from '../../atoms/BasicLink/BasicLink';
 import useForm from '../../../hooks/useForm';
 import Loader from '../../atoms/Loader/Loader';
 
+enum CallbackType {
+	Login = 'login',
+	Register = 'register',
+}
+
 const AuthPopup = () => {
 	const dispatch = useAppDispatch();
 	const { isAuthPopupOpen, isLoaderOpen } = useAppSelector(state => state.ui);
 	const [loginBox, setLoginBox] = useState(true);
 	const { authWithGoogle, signupCustomUser, authWithEmail } = useDatabase();
-	const { values, errors, setInputValues, validateInputValue, validateForm } = useForm();
+	const { values, errors, setInputValues, validateInputOnBlur, validateAllInputs, isError } =
+		useForm();
+
+	function submitForm(e: React.FormEvent<HTMLFormElement>, type: 'login' | 'register') {
+		e.preventDefault();
+		const inputsValidity = validateAllInputs((e.target as HTMLElement).querySelectorAll('input'));
+		console.log(inputsValidity);
+
+		if (isError || inputsValidity) return;
+
+		if (type === CallbackType.Login) {
+			authWithEmail(values.email, values.password);
+		} else if (type === CallbackType.Register) {
+			signupCustomUser(values.email_register, values.password_register);
+		}
+	}
 
 	return (
 		<div
@@ -50,16 +70,12 @@ const AuthPopup = () => {
 				{loginBox ? (
 					<div className='flex flex-col items-center justify-center gap pt-lg'>
 						<form
-							onSubmit={e => {
-								e.preventDefault();
-								validateForm((e.target as HTMLElement).querySelectorAll('input'));
-								// authWithEmail(values.email, values.password);
-							}}
+							onSubmit={e => submitForm(e, CallbackType.Login)}
 							className='flex flex-col gap w-full h-full'>
 							<InputWithLabel
 								errors={errors}
 								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputValue}
+								onBlurFunc={validateInputOnBlur}
 								forProp='email'
 								inputType='email'
 								placeholderValue='Email adress here'>
@@ -68,7 +84,7 @@ const AuthPopup = () => {
 							<InputWithLabel
 								errors={errors}
 								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputValue}
+								onBlurFunc={validateInputOnBlur}
 								forProp='password'
 								inputType='password'
 								placeholderValue='Password here'>
@@ -87,16 +103,12 @@ const AuthPopup = () => {
 				) : (
 					<div className='flex flex-col items-center justify-center gap pt-lg'>
 						<form
-							onSubmit={e => {
-								e.preventDefault();
-								validateForm((e.target as HTMLElement).querySelectorAll('input'));
-								// signupCustomUser(values.email_register, values.password_register);
-							}}
+							onSubmit={e => submitForm(e, CallbackType.Register)}
 							className='flex flex-col gap w-full h-full'>
 							<InputWithLabel
 								errors={errors}
 								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputValue}
+								onBlurFunc={validateInputOnBlur}
 								forProp='email_register'
 								inputType='email'
 								placeholderValue='Email adress here'>
@@ -105,7 +117,7 @@ const AuthPopup = () => {
 							<InputWithLabel
 								errors={errors}
 								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputValue}
+								onBlurFunc={validateInputOnBlur}
 								forProp='password_register'
 								inputType='password'
 								placeholderValue='Password here'>
@@ -114,7 +126,7 @@ const AuthPopup = () => {
 							<InputWithLabel
 								errors={errors}
 								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputValue}
+								onBlurFunc={validateInputOnBlur}
 								forProp='password_repeat'
 								inputType='password'
 								placeholderValue='Password here'>
