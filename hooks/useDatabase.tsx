@@ -126,7 +126,6 @@ const useDatabase = () => {
 				setLoader(false);
 				setLoggedInUser(result.user);
 				dispatch(uiActions.closeAuthPopup());
-
 				setNotificationPopup(true, true, 'Successfully logged in');
 				setTimeout(() => {
 					setNotificationPopup(false, true, 'Successfully logged in');
