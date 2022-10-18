@@ -18,12 +18,14 @@ import { uiActions } from '../../../state/uiSlice';
 import Button from '../../atoms/Button/Button';
 import useDatabase from '../../../hooks/useDatabase';
 import AuthPopup from '../AuthPopup/AuthPopup';
+import useUiHandling from '../../../hooks/useUi';
 
 const Navbar = () => {
 	const router = useRouter();
 	const { isNavOpen, isThemeDark } = useAppSelector(state => state.ui);
 	const { userData } = useAppSelector(state => state.user);
 	const dispatch = useAppDispatch();
+	const { toggleTheme } = useUiHandling();
 	const { authWithGoogle, signoutUser, loggedIn } = useDatabase();
 
 	const openAuthPopup = () => {
@@ -33,7 +35,7 @@ const Navbar = () => {
 	return (
 		<nav
 			className='fixed h-[70px] flex flex-col w-full top-0 left-0 bg-white z-[1000] 
-		md:relative md:h-full md:max-w-[180px] md:py-lg border-b-2 border-baseLight md:border-r-2 shadow'>
+		md:relative md:h-full md:max-w-[180px] md:py-lg border-b-2 border-baseLight md:border-r-2 shadow dark:bg-dmBase '>
 			<div
 				className='nav-wrapper flex justify-between items-center w-full
 				 px-md py-sm
@@ -96,10 +98,7 @@ const Navbar = () => {
 
 					<div className='flex items-center gap-sm w-full '>
 						<Button otherStyles='text-xs'>USD</Button>
-						<ThemeSwitch
-							toggleThemeFunc={() => dispatch(uiActions.toggleTheme())}
-							isThemeDark={isThemeDark}
-						/>
+						<ThemeSwitch toggleThemeFunc={toggleTheme} isThemeDark={isThemeDark} />
 					</div>
 				</div>
 			</div>
