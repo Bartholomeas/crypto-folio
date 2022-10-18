@@ -60,6 +60,9 @@ module.exports = {
 
 				success: '#066C47',
 				error: '#FD6D6D',
+
+				dmBase: '#192557',
+				dmBaseDarker: '#13182C',
 			},
 
 			gap: {

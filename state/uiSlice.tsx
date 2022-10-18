@@ -4,6 +4,7 @@ interface Props {
 	action?: PayloadAction;
 }
 export interface StateInterface {
+	lightMode: boolean;
 	isNavOpen: boolean;
 	isThemeDark: boolean;
 	isInfoPanelOpen: boolean;
@@ -17,6 +18,7 @@ export interface StateInterface {
 }
 
 const initialState: StateInterface = {
+	lightMode: false,
 	isNavOpen: false,
 	isThemeDark: false,
 	isInfoPanelOpen: false,
@@ -33,13 +35,15 @@ const uiSlice = createSlice({
 	name: 'ui',
 	initialState,
 	reducers: {
+		setTheme(state, action: PayloadAction<boolean>) {
+			state.lightMode = action.payload;
+		},
+		toggleTheme(state) {
+			state.lightMode = !state.lightMode;
+		},
 		toggleNavbar(state) {
 			state.isNavOpen = !state.isNavOpen;
 		},
-		toggleTheme(state) {
-			state.isThemeDark = !state.isThemeDark;
-		},
-
 		toggleInfoPanel(state) {
 			state.isInfoPanelOpen = !state.isInfoPanelOpen;
 		},
