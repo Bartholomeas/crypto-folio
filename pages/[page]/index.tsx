@@ -34,7 +34,9 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 
 	return (
 		<main
-			className='flex flex-col items-start gap w-full px min-h-[100vh]  max-w
+			className='
+			dark:bg-dmBase
+			flex flex-col items-start gap w-full px min-h-[100vh]  max-w
     md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] md:overflow-y-scroll'>
 			<MarginBox />
 			<PageHeader>all Cryptocurrencies</PageHeader>
@@ -42,7 +44,7 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 				<Searchbar placeholderText='Search for coin..' />
 				<div className=' flex flex-col justify-center w-full overflow-x-scroll'>
 					{coins.length < 1 && <p className='absolute font-bold text-xl text-accent'>Loading...</p>}
-					{/* <p className='absolute font-bold text-xl text-accent top-[50%]'>Loading...</p> */}
+
 					<Table>
 						<colgroup>
 							<col className='w-[2%]' />

@@ -10,7 +10,8 @@ const TableRow = ({ children, onClickFn }: Props) => {
 	return (
 		<tr
 			onClick={onClickFn}
-			className='w-full border-solid border-b-2 border-baseVeryLight hover:bg-baseVeryLight transition-colors '>
+			className='dark:border-accentDark dark:hover:bg-dmBaseElement
+			w-full border-solid border-b-2 border-baseVeryLight hover:bg-baseVeryLight transition-colors '>
 			{children}
 		</tr>
 	);

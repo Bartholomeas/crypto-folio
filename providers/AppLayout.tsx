@@ -21,7 +21,7 @@ const AppLayout = ({ children }: Props) => {
 		<div
 			className={`${
 				lightMode && 'dark'
-			} relative flex  items-center w-full  md:flex-row md:h-[100vh]`}>
+			} relative flex  items-center w-full  md:flex-row md:h-[100vh] `}>
 			<Navbar />
 			{children}
 			<NotificationPopup>{notificationPopup.NotificationPopupContent}</NotificationPopup>

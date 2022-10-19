@@ -39,17 +39,20 @@ const Searchbar = ({ placeholderText = '' }: Props) => {
 	return (
 		<div className=' relative flex flex-col w-full min-h-[3rem] md:max-w-[400px] z-[100]'>
 			<Label forProp='searchbar'>
-				<div className='flex justify-between items-center w-full h-full border-accent border-solid border-l-4 rounded-md'>
+				<div className='dark:border-support flex justify-between items-center w-full h-full border-accent border-solid border-l-4 rounded-md'>
 					<input
 						autoComplete='off'
 						onChange={e => getInputValue(e)}
 						onBlur={e => clearCoinsData(e)}
 						id='searchbar'
 						placeholder={placeholderText}
-						className='text w-full h-full max-h-[4rem] py px-xs bg-baseVeryLight '
+						className='dark:bg-dmBaseDarker dark:text-baseLight
+						text w-full h-full max-h-[4rem] py px-xs bg-baseVeryLight '
 						type='text'
 					/>
-					<span className='flex items-center justify-center h-full max-h-[4rem] p-xs rounded-r  bg-baseVeryLight text-lg text-fontLight'>
+					<span
+						className='dark:bg-support
+					flex items-center justify-center h-full max-h-[4rem] p-xs rounded-r bg-baseVeryLight text-lg text-fontLight'>
 						<MdSearch />
 					</span>
 				</div>
