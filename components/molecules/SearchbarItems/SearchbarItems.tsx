@@ -7,7 +7,8 @@ interface Props {
 const SearchbarItems = ({ coinsData }: Props) => {
 	return (
 		<div
-			className={`bakcdrop-blur-xl absolute flex flex-col gap-sm bg-baseVeryLight top-[100%] left-0 w-full p-sm translate-y-[.3rem] rounded text-xs border-2 border-solid border-baseLight max-h-[400px] overflow-y-scroll 
+			className={`dark:bg-dmBase dark:border-support
+			 absolute flex flex-col gap-sm bg-baseVeryLight top-[100%] left-0 w-full p-sm translate-y-[.3rem] rounded text-xs border-2 border-solid border-baseLight max-h-[400px] overflow-y-scroll 
             ${coinsData.length < 1 && 'hidden'}
 			`}>
 			{coinsData.length >= 1 &&

@@ -21,14 +21,15 @@ const TableData = ({
 }: Props) => {
 	return (
 		<td
-			className={` px-xs text-sm text-font h-[6rem]
+			className={` 
+			px-xs text-sm text-font h-[6rem]
 			first:pl-xs first last:pr-xs
 			${isBold && 'font-semibold'} 
 			md:table-cell [&:nth-child(1)]:text-center
 			${
 				appendAfter === '%'
 					? children! > 0
-						? 'text-success font-semibold text-xs'
+						? 'dark:text-support text-success font-semibold text-xs'
 						: 'text-error font-semibold text-xs'
 					: ''
 			}
@@ -36,9 +37,8 @@ const TableData = ({
 			{hrefRoute ? (
 				<Link passHref href={`/coins/${hrefRoute.toLowerCase()}`} className=''>
 					<a
-						className={`flex ${
-							leftAlign ? 'justify-start' : 'justify-end'
-						} items-center w-full h-full`}>
+						className={`
+						flex ${leftAlign ? 'justify-start' : 'justify-end'} items-center w-full h-full`}>
 						<span className='font-bold'>{appendBefore ?? ''}</span>
 						{imgSrc && (
 							<div className=' w-[3rem] mr-4'>
