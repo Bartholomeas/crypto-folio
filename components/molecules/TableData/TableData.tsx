@@ -21,7 +21,7 @@ const TableData = ({
 }: Props) => {
 	return (
 		<td
-			className={` 
+			className={`dark:text-dmFont
 			px-xs text-sm text-font h-[6rem]
 			first:pl-xs first last:pr-xs
 			${isBold && 'font-semibold'} 
@@ -30,7 +30,7 @@ const TableData = ({
 				appendAfter === '%'
 					? children! > 0
 						? 'dark:text-support text-success font-semibold text-xs'
-						: 'text-error font-semibold text-xs'
+						: 'dark:text-error text-error font-semibold text-xs'
 					: ''
 			}
 			`}>

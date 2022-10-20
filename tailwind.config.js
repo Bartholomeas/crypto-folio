@@ -16,6 +16,9 @@ module.exports = {
 		},
 
 		extend: {
+			borderWidth: {
+				2: '1px',
+			},
 			animation: {
 				'spin-slow': 'spin 3s linear infinite',
 			},
@@ -62,9 +65,10 @@ module.exports = {
 				error: '#FD6D6D',
 
 				dmFont: '#9FA9CD',
-				dmBase: '#192557',
+				dmBase: '#151C39',
 				dmBaseDarker: '#13182C',
-				dmBaseElement: '#182042',
+				dmBaseElement: '#1B2655',
+				// dmBaseElement: '#182042',
 			},
 
 			gap: {

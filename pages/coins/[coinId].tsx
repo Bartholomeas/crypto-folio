@@ -58,7 +58,7 @@ const CoinDetails = ({ coinDetails }: any) => {
 				md:max-w-[35%]'>
 					<CoinHeadBox name={name} symbol={symbol} rank={market_cap_rank} />
 					<div className='flex flex-col gap-sm'>
-						<p className='text-fontLight text-sm font-semibold'>links</p>
+						<p className='dark:text-dmFont text-fontLight text-sm font-semibold'>links</p>
 						<div className='links flex items-center gap-sm flex-wrap w-fit'>
 							{coinDetails &&
 								Object.entries(links).map(([key, value]) => {
@@ -68,7 +68,8 @@ const CoinDetails = ({ coinDetails }: any) => {
 					</div>
 				</div>
 				<div
-					className='flex flex-col gap-lg w-full h-fit
+					className='dark:border-dmFont
+					flex flex-col gap-lg w-full h-fit
 				md:w-[65%] px md:h-full
 				border-baseLight md:border-l-2
 				'>
@@ -80,7 +81,9 @@ const CoinDetails = ({ coinDetails }: any) => {
 						price_change_24h={market_data.price_change_percentage_24h.toFixed(2)}></CoinPriceBox>
 				</div>
 			</div>
-			<div className='market-datas flex  justify-around gap w-full py border-t-2 border-b-2 border-baseLight lg:flex-row md:gap-lg '>
+			<div
+				className=' dark:border-dmFont
+			market-datas flex  justify-around gap w-full py border-t-2 border-b-2 border-baseLight lg:flex-row md:gap-lg '>
 				<CoinMarketData dataValue={`$ ${addSpacesToNumber(market_data.market_cap.usd)}`}>
 					Market cap
 				</CoinMarketData>

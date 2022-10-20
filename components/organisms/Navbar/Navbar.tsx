@@ -22,7 +22,7 @@ import useUiHandling from '../../../hooks/useUi';
 
 const Navbar = () => {
 	const router = useRouter();
-	const { isNavOpen, isThemeDark, lightMode } = useAppSelector(state => state.ui);
+	const { isNavOpen, lightMode } = useAppSelector(state => state.ui);
 	const { userData } = useAppSelector(state => state.user);
 	const dispatch = useAppDispatch();
 	const { toggleTheme } = useUiHandling();
@@ -92,7 +92,9 @@ const Navbar = () => {
 							<Button otherStyles='font-semibold bg-transparent' onClickFn={() => {}}>
 								{userData.name || userData.email}
 							</Button>
-							<Button otherStyles=' bg-transparent py-xs text-error ' onClickFn={signoutUser}>
+							<Button
+								otherStyles='dark:text-error bg-transparent py-xs text-error '
+								onClickFn={signoutUser}>
 								Logout
 							</Button>
 						</>
