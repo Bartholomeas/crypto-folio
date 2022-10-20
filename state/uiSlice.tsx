@@ -6,7 +6,6 @@ interface Props {
 export interface StateInterface {
 	lightMode: boolean;
 	isNavOpen: boolean;
-	isThemeDark: boolean;
 	isInfoPanelOpen: boolean;
 	isAuthPopupOpen: boolean;
 	isLoaderOpen: boolean;
@@ -20,7 +19,6 @@ export interface StateInterface {
 const initialState: StateInterface = {
 	lightMode: false,
 	isNavOpen: false,
-	isThemeDark: false,
 	isInfoPanelOpen: false,
 	isAuthPopupOpen: false,
 	isLoaderOpen: false,

@@ -105,10 +105,10 @@ const SpecifiedPage = ({ coins, page }: InferGetStaticPropsType<typeof getStatic
 			</div>
 			<Pagination currPage={page} />
 			<Footer>
-				<p className='text-xs text-fontLight'>
+				<p className='dark:text-dmFont text-xs text-fontLight'>
 					Crypto data powered by{' '}
 					<a
-						className='text-accent'
+						className='dark:text-support text-accent'
 						rel='noreferrer'
 						target={'_blank'}
 						href='https://www.coingecko.com/'>

@@ -7,8 +7,15 @@ interface Props {
 
 const PriceChangeDetails = ({ children, isHigh = false }: Props) => {
 	return (
-		<p className='text-xs text-fontOff'>
-			{isHigh ? 'High' : 'Low'} 24h: <span className='text-xs font-semibold text-fontOff'>${children}</span>
+		<p
+			className='dark:text-dmFont
+		text-xs text-fontOff'>
+			{isHigh ? 'High' : 'Low'} 24h:{' '}
+			<span
+				className=' dark:text-baseLight
+			text-xs font-semibold text-fontOff'>
+				${children}
+			</span>
 		</p>
 	);
 };

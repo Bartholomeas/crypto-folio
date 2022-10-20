@@ -15,7 +15,7 @@ const CoinHeadBox = ({ name, symbol, rank }: Props) => {
 	return (
 		<div
 			className='relative flex flex-col gap-sm translate-x-[2.4rem] h-fit
-            before:content-[""] before:absolute before:w-[1.6rem] before:h-full before:rounded-full before:top-0 before:left-[-2.4rem]  before:bg-accent'>
+            before:content-[""] before:absolute before:w-[1.6rem] before:h-full before:rounded-full before:top-0 before:left-[-2.4rem] before:bg-accent'>
 			<div className='flex items-center gap-sm'>
 				<CoinName>{name}</CoinName>
 				<CoinSymbol>{symbol.toUpperCase()}</CoinSymbol>{' '}

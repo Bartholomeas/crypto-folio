@@ -5,7 +5,13 @@ interface Props {
 }
 
 const DetailsBigPrice = ({ children }: Props) => {
-	return <p className='text-lg font-bold text-accent'>$ {children}</p>;
+	return (
+		<p
+			className='dark:text-baseLight
+	text-lg font-bold text-accent'>
+			$ {children}
+		</p>
+	);
 };
 
 export default DetailsBigPrice;

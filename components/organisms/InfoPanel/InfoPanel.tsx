@@ -9,7 +9,7 @@ const InfoPanel = () => {
 
 	return (
 		<div
-			className={`dark:bg-dmBaseDarker dark:md:border-l-2 dark:border-accentDark dark:border-t-2 dark:md:border-t-0
+			className={`dark:bg-dmBase dark:md:border-l-2 dark:border-accentDark dark:border-t-2 dark:md:border-t-0
 			 fixed bottom-0 left-0 h-full w-full bg-baseLight z-500 drop-shadow-sm transition-transform
 			z-[100] 
             ${isInfoPanelOpen ? 'translate-y-[10rem]' : 'translate-y-[95%]'}

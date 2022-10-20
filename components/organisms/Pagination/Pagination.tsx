@@ -21,16 +21,19 @@ const Pagination = ({ currPage }: Props) => {
 	};
 
 	return (
-		<div className='flex items-center justify-between gap-xs w-full text-font text-xs bg-baseVeryLight rounded md:justify-center md:mx-auto md:w-auto'>
+		<div
+			className='dark:bg-dmBaseElement
+		flex items-center justify-between gap-xs w-full text-font text-xs bg-baseVeryLight rounded md:justify-center md:mx-auto md:w-auto py-[0.3rem]'>
 			<Link passHref href={`/${changePage(currPage, false)}`}>
-				<a className=' px-xs py-xs text font-semibold'>{'<'}</a>
+				<a className='dark:text-dmFont px-xs py-xs text font-semibold'>{'<'}</a>
 			</Link>
 			{pagesArr.map(page => {
 				return (
 					<Link key={uuidv4()} passHref href={`/${page}`}>
 						<a
-							className={`px-xs ${
-								+currPage === +page && ' text-sm text-white font-semibold bg-accent rounded py-sm'
+							className={`dark:text-dmFont px-xs ${
+								+currPage === +page &&
+								'flex items-center justify-center text-sm text-white font-semibold bg-accent rounded h-full '
 							}`}>
 							{page}
 						</a>
@@ -38,7 +41,7 @@ const Pagination = ({ currPage }: Props) => {
 				);
 			})}
 			<Link passHref href={`/${changePage(currPage)}`}>
-				<a className='px-xs py-xs text font-semibold'>{'>'}</a>
+				<a className='dark:text-dmFont px-xs py-xs text font-semibold'>{'>'}</a>
 			</Link>
 		</div>
 	);
