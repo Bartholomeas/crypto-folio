@@ -10,7 +10,7 @@ const BasicLink = ({ children, hrefRoute, otherStyles }: Props) => {
 	return (
 		<Link href={hrefRoute} passHref>
 			<a
-				className={`relative text-center text-accentDark font-semibold text-xs
+				className={`dark:text-support relative text-center text-accentDark font-semibold text-xs
 				after:absolute after:content-[""] after:w-full after:h-[0.3rem] after:bottom-[-.3rem] after:rounded-full after:left-0 after:scale-x-0
 				after:transition-transform after:origin-left
 				after:bg-accent

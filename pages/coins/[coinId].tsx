@@ -48,7 +48,7 @@ const CoinDetails = ({ coinDetails }: any) => {
 	}, [homepage, subreddit_url, blockchain_site, official_forum_url, github]);
 	return (
 		<main
-			className='flex flex-col items-start  w-full px min-h-[100vh] max-w overflow-y-scroll
+			className='dark:bg-dmBase flex flex-col items-start  w-full px min-h-[100vh] max-w overflow-y-scroll
 		md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] py-[10rem] pb-[20rem] md:pb-auto '>
 			<div
 				className='top-container flex flex-col gap-xl h-fit w-full py

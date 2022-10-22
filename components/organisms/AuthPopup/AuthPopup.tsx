@@ -42,7 +42,9 @@ const AuthPopup = () => {
 			className={`popup-bg ${
 				isAuthPopupOpen ? 'fixed' : 'hidden'
 			} w-full h-full top-0 left-0 right-0 bottom-0 bg-zinc-800/50 backdrop-blur-sm`}>
-			<div className='fixed flex flex-col h-full w-full top-[50%] left-[50%] py-lg px-lg text translate-x-[-50%] translate-y-[-50%]  bg-white rounded-xl md:min-w-[500px] min-h-[500px] md:max-w-[500px] md:h-auto md:w-auto overflow-y-auto'>
+			<div
+				className='dark:bg-dmBase
+			 fixed flex flex-col h-full w-full top-[50%] left-[50%] py-lg px-lg text translate-x-[-50%] translate-y-[-50%] bg-white rounded-xl md:min-w-[500px] min-h-[500px] md:max-w-[500px] md:h-auto md:w-auto overflow-y-auto'>
 				<button
 					onClick={() => dispatch(uiActions.toggleAuthPopup())}
 					className='absolute top-0 right-0 text-md cursor-pointer pt-lg pl-sm pr-lg'>
@@ -50,7 +52,8 @@ const AuthPopup = () => {
 				</button>
 				<div className='flex items-start justify-center w-full pb-lg'>
 					<Button
-						otherStyles={` w-fit min-w-[5rem] px-md pt-0 pb-xs bg-transparent text-md hover:bg-transparent after:origin-left
+						otherStyles={`dark:bg-transparent dark:hover:bg-transparent
+						 w-fit min-w-[5rem] px-md pt-0 pb-xs bg-transparent text-md hover:bg-transparent after:origin-left
                         after:content-[""] after:absolute after:h-[.3rem] after:w-[3rem] after:bottom-0 after:left-[50%] after:translate-x-[-50%] after:bg-accent after:rounded  after:transition-transform hover:after:scale-x-100 after:scale-x-0
                         ${loginBox && 'font-semibold after:scale-x-100'}
                     `}
@@ -58,7 +61,8 @@ const AuthPopup = () => {
 						Log in
 					</Button>
 					<Button
-						otherStyles={` w-fit min-w-[5rem] px-md pt-0 pb-xs bg-transparent text-md hover:bg-transparent after:origin-left
+						otherStyles={`dark:bg-transparent dark:hover:bg-transparent
+						 w-fit min-w-[5rem] px-md pt-0 pb-xs bg-transparent text-md hover:bg-transparent after:origin-left
                         after:content-[""] after:absolute after:h-[.3rem] after:w-[3rem] after:bottom-0 after:left-[50%] after:translate-x-[-50%] after:bg-accent after:rounded  after:transition-transform hover:after:scale-x-100 after:scale-x-0
                         ${!loginBox && 'font-semibold after:scale-x-100 '}
                         
@@ -95,7 +99,7 @@ const AuthPopup = () => {
 							</Button>
 						</form>
 						<BasicLink hrefRoute={'/'}>I forgot password</BasicLink>
-						<p className='font-semibold text text-font'>OR</p>
+						<p className='dark:text-dmFont font-semibold text text-font'>OR</p>
 						<Button onClickFn={authWithGoogle} otherStyles='max-h-[5rem]'>
 							Sign in with Gmail <BsGoogle />
 						</Button>
@@ -133,17 +137,17 @@ const AuthPopup = () => {
 								Repeat password
 							</InputWithLabel>
 							<Button isAccent={true} otherStyles='max-h-[5rem]'>
-								Sign up
+								Sign in
 							</Button>
 						</form>
 
-						<p className='font-semibold text text-font'>OR</p>
+						<p className='dark:text-dmFont font-semibold text text-font'>OR</p>
 						<Button onClickFn={authWithGoogle} otherStyles='max-h-[5rem]'>
 							Sign in with Gmail <BsGoogle />
 						</Button>
 						<p className='text-fontLight text-xs max-w-[300px] text-center'>
 							By proceeding, you agree to{' '}
-							<span className='font-semibold text-accentDark'>Oddy </span>
+							<span className='dark:text-supportDark font-semibold text-accentDark'>Oddy </span>
 							Terms of Use & Privacy Policy.
 						</p>
 					</div>
