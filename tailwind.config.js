@@ -64,11 +64,10 @@ module.exports = {
 				success: '#066C47',
 				error: '#FD6D6D',
 
-				dmFont: '#9FA9CD',
-				dmBase: '#151C39',
+				dmFont: '#B5BEDF',
+				dmBase: '#13182C',
 				dmBaseDarker: '#13182C',
-				dmBaseElement: '#1B2655',
-				// dmBaseElement: '#182042',
+				dmBaseElement: '#18224D',
 			},
 
 			gap: {

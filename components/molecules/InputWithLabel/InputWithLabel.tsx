@@ -34,7 +34,7 @@ const InputWithLabel = ({
 			<input
 				onChange={onChangeFunc || (() => {})}
 				onBlur={onBlurFunc || (() => {})}
-				className={`px-sm py-sm rounded-xl border-2 border-baseLight text ${
+				className={`dark:bg-dmBaseElement dark:border-dmBase px-sm py-sm rounded-xl border-2 border-baseLight text ${
 					isError && 'border-error border-2'
 				}`}
 				placeholder={placeholderValue}

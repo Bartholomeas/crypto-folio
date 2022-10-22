@@ -14,7 +14,7 @@ const Button = ({ children, onClickFn, isAccent, otherStyles }: Props) => {
 			className={`relative flex items-center justify-center gap-sm px-sm py-sm h-full w-full text-sm rounded-xl  ${
 				isAccent
 					? ' bg-accentDark text-white font-bold hover:bg-accent'
-					: 'dark:bg-dmBase dark:hover:bg-dmBaseDarker dark:text-baseLight bg-baseLight text-font hover:bg-baseVeryLight'
+					: 'dark:bg-dmBaseElement dark:hover:bg-accentDark dark:text-baseLight bg-baseLight text-font hover:bg-baseVeryLight'
 			}
             
             transition-colors

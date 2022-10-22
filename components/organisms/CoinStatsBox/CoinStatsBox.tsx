@@ -1,6 +1,9 @@
 import React from 'react';
 import { addSpacesToNumber, convertDate } from '../../../utils/convertUtils';
 import CoinStatsLi from '../../atoms/CoinStatsLi/CoinStatsLi';
+import CoinStatsLiKey from '../../atoms/CoinStatsLiKey/CoinStatsLiKey';
+import CoinStatsLiValue from '../../atoms/CoinStatsLiValue/CoinStatsLiValue';
+
 interface Props {
 	[key: string]: number | string;
 	name: string;
@@ -18,6 +21,11 @@ interface Props {
 	atlDate: number;
 }
 
+enum ValueType {
+	Success = 'success',
+	Error = 'error',
+}
+
 const CoinStatsBox = ({ props }: { props: Props }) => {
 	return (
 		<div
@@ -26,67 +34,57 @@ const CoinStatsBox = ({ props }: { props: Props }) => {
         lg:max-w-[350px]
         '>
 			<h2 className='font-bold dark:text-dmFont text-fontLight text-md'>{props.name} statistics</h2>
+
 			<ul className='flex flex-col w-full gap py-sm '>
 				<CoinStatsLi>
-					<p className='dark:text-dmFont text-fontLight text-sm'>Current rank</p>
-					<p className='font-semibold text-font text-sm'>#{props.coinRank}</p>
+					<CoinStatsLiKey>Current rank</CoinStatsLiKey>
+					<CoinStatsLiValue>#{props.coinRank}</CoinStatsLiValue>
 				</CoinStatsLi>
 				<CoinStatsLi>
-					<p className='dark:text-dmFont text-fontLight text-sm'>Price</p>
-					<p className='font-semibold text-font text-sm'>$ {props.price}</p>
+					<CoinStatsLiKey>Price</CoinStatsLiKey>
+					<CoinStatsLiValue>{props.price}</CoinStatsLiValue>
 				</CoinStatsLi>
 				<CoinStatsLi>
-					<p className='dark:text-dmFont text-fontLight text-sm'>Price change 24h</p>
-					<p
-						className={`font-semibold text-sm ${
-							props.priceChange > 0 ? 'text-success' : 'text-error'
-						} `}>
+					<CoinStatsLiKey>Price change 24h</CoinStatsLiKey>
+					<CoinStatsLiValue type={props.priceChange > 0 ? ValueType.Success : ValueType.Error}>
 						{props.priceChange.toFixed(2)}%
-					</p>
+					</CoinStatsLiValue>
 				</CoinStatsLi>
 				<CoinStatsLi>
-					<p className='dark:text-dmFont text-fontLight text-sm'>Day low</p>
-					<p className='font-semibold text-font text-sm'>$ {props.lowDay}</p>
+					<CoinStatsLiKey>Day low</CoinStatsLiKey>
+					<CoinStatsLiValue>$ {props.lowDay}</CoinStatsLiValue>
 				</CoinStatsLi>
 				<CoinStatsLi>
-					<p className='dark:text-dmFont text-fontLight text-sm'>Day high</p>
-					<p className='font-semibold text-font text-sm'>$ {props.highDay}</p>
+					<CoinStatsLiKey>Day high</CoinStatsLiKey>
+					<CoinStatsLiValue>$ {props.highDay}</CoinStatsLiValue>
 				</CoinStatsLi>
 				<CoinStatsLi>
-					<p className='dark:text-dmFont text-fontLight text-sm'>Volume</p>
-					<p className='font-semibold text-font text-sm'>$ {addSpacesToNumber(props.volumeDay)}</p>
+					<CoinStatsLiKey>Volume</CoinStatsLiKey>
+					<CoinStatsLiValue>$ {addSpacesToNumber(props.volumeDay)}</CoinStatsLiValue>
 				</CoinStatsLi>
 				<CoinStatsLi>
-					<p className='dark:text-dmFont text-fontLight text-sm'>Total supply</p>
-					<p className='font-semibold text-font text-sm'>{addSpacesToNumber(props.totalSupply)}</p>
+					<CoinStatsLiKey>Total supply</CoinStatsLiKey>
+					<CoinStatsLiValue>{addSpacesToNumber(props.totalSupply)}</CoinStatsLiValue>
 				</CoinStatsLi>
 				<CoinStatsLi>
-					<p className='dark:text-dmFont text-fontLight text-sm'>Circulating supply</p>
-					<p className='font-semibold text-font text-sm'>
-						{addSpacesToNumber(props.circulatingSupply)}
-					</p>
+					<CoinStatsLiKey>Circulating supply</CoinStatsLiKey>
+					<CoinStatsLiValue>{addSpacesToNumber(props.circulatingSupply)}</CoinStatsLiValue>
 				</CoinStatsLi>
 				<CoinStatsLi>
-					<p className='dark:text-dmFont text-fontLight text-sm'>All time HIGH</p>
-					<p className='font-semibold text-sm text-success'>$ {props.allTimeHigh}</p>
+					<CoinStatsLiKey>All time HIGH</CoinStatsLiKey>
+					<CoinStatsLiValue type={ValueType.Success}>$ {props.allTimeHigh}</CoinStatsLiValue>
 				</CoinStatsLi>
 				<CoinStatsLi>
-					<p className='dark:text-dmFont text-fontLight text-sm'>All time LOW</p>
-					<p className='font-semibold text-sm text-error'>$ {props.allTimeLow}</p>
+					<CoinStatsLiKey>All time LOW</CoinStatsLiKey>
+					<CoinStatsLiValue type={'error'}>$ {props.allTimeLow}</CoinStatsLiValue>
 				</CoinStatsLi>
 				<CoinStatsLi>
-					<p className='dark:text-dmFont text-fontLight text-sm'>ATH date</p>
-					<p className='font-semibold text-sm text-font'>
-						{' '}
-						{convertDate(props.athDate, 'MM-dd-yyyy')}
-					</p>
+					<CoinStatsLiKey>ATH date</CoinStatsLiKey>
+					<CoinStatsLiValue>{convertDate(props.athDate, 'MM-dd-yyyy')}</CoinStatsLiValue>
 				</CoinStatsLi>
 				<CoinStatsLi>
-					<p className='dark:text-dmFont text-fontLight text-sm'>ATL date</p>
-					<p className='font-semibold text-sm text-font'>
-						{' '}
-						{convertDate(props.atlDate, 'MM-dd-yyyy')}
-					</p>
+					<CoinStatsLiKey>ATL date</CoinStatsLiKey>
+					<CoinStatsLiValue>{convertDate(props.atlDate, 'MM-dd-yyyy')}</CoinStatsLiValue>
 				</CoinStatsLi>
 			</ul>
 		</div>

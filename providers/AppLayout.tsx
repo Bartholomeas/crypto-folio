@@ -24,11 +24,13 @@ const AppLayout = ({ children }: Props) => {
 			} relative flex  items-center w-full  md:flex-row md:h-[100vh] `}>
 			<Navbar />
 			{children}
+
 			<style jsx global>{`
 				body {
-					background: ${!lightMode ? '#FFFFF' : '#151C39'};
+					background: ${!lightMode ? '#FFFFF' : '#13182C'};
 				}
 			`}</style>
+
 			<NotificationPopup>{notificationPopup.NotificationPopupContent}</NotificationPopup>
 			<InfoPanel />
 		</div>
