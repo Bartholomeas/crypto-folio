@@ -11,15 +11,14 @@ import MarginBox from '../components/atoms/MarginBox/MarginBox';
 import SecondHeader from '../components/atoms/SecondHeader/SecondHeader';
 import PageHeader from '../components/atoms/PageHeader/PageHeader';
 
-function Dashboard() {
+const Dashboard = () => {
   return (
     <main
-      className="dark:bg-dmBase flex flex-col items-start gap-sm w-full md:max-w px pb-[10rem] min-h-[100vh] bg-white overflow-y-auto
-		md:h-[100vh] md:py-lg md:mr-[5rem]"
-    >
+      className='dark:bg-dmBase flex flex-col items-start gap-sm w-full md:max-w px pb-[10rem] min-h-[100vh] bg-white overflow-y-auto
+		md:h-[100vh] md:py-lg md:mr-[5rem]'>
       <MarginBox />
-      <PageHeader appendAfter="of DefaultWallet">Dashboard</PageHeader>
-      <div className="cards flex flex-col gap-sm w-full lg:flex-row">
+      <PageHeader appendAfter='of DefaultWallet'>Dashboard</PageHeader>
+      <div className='cards flex flex-col gap-sm w-full lg:flex-row'>
         <DailyChangeGraph />
         <TotalAssetsValue
           totalValue={32227}
@@ -28,27 +27,27 @@ function Dashboard() {
           changeValue={21.34}
         />
 
-        <div className="flex flex-col lg:w-[35%] gap-sm">
-          <InfoAssetsBox asset="Atom" changeValue={14} isPercent>
+        <div className='flex flex-col lg:w-[35%] gap-sm'>
+          <InfoAssetsBox asset='Atom' changeValue={14} isPercent>
             Biggest move
           </InfoAssetsBox>
-          <InfoAssetsBox asset="Juno" changeValue={21}>
+          <InfoAssetsBox asset='Juno' changeValue={21}>
             Biggest 24h profit
           </InfoAssetsBox>
         </div>
       </div>
 
-      <div className="flex flex-col gap w-full mt-[5rem]">
+      <div className='flex flex-col gap w-full mt-[5rem]'>
         <SecondHeader>Explore coins</SecondHeader>
-        <div className="w-full  overflow-x-auto">
+        <div className='w-full  overflow-x-auto'>
           <Table>
             <colgroup>
-              <col className="w-[3%]" />
-              <col className="w-[20%]" />
-              <col className="w-[20%]" />
-              <col className="w-[15%]" />
-              <col className="w-[20%]" />
-              <col className="w-[22%]" />
+              <col className='w-[3%]' />
+              <col className='w-[20%]' />
+              <col className='w-[20%]' />
+              <col className='w-[15%]' />
+              <col className='w-[20%]' />
+              <col className='w-[22%]' />
             </colgroup>
             <TableHead>
               <TableRow>
@@ -64,22 +63,22 @@ function Dashboard() {
               <TableRow>
                 <TableData isBold>1</TableData>
                 <TableData leftAlign>Bitcoin</TableData>
-                <TableData appendAfter="USD">21321</TableData>
-                <TableData appendAfter="%" isBold>
+                <TableData appendAfter='USD'>21321</TableData>
+                <TableData appendAfter='%' isBold>
                   21.2
                 </TableData>
                 <TableData>0.73</TableData>
-                <TableData appendAfter="USD">15600</TableData>
+                <TableData appendAfter='USD'>15600</TableData>
               </TableRow>
               <TableRow>
                 <TableData isBold>1</TableData>
                 <TableData leftAlign>Bitcoin</TableData>
-                <TableData appendAfter="USD">21321</TableData>
-                <TableData appendAfter="%" isBold>
+                <TableData appendAfter='USD'>21321</TableData>
+                <TableData appendAfter='%' isBold>
                   21.2
                 </TableData>
                 <TableData>0.73</TableData>
-                <TableData appendAfter="USD">15600</TableData>
+                <TableData appendAfter='USD'>15600</TableData>
               </TableRow>
             </TableBody>
           </Table>
@@ -87,6 +86,6 @@ function Dashboard() {
       </div>
     </main>
   );
-}
+};
 
 export default Dashboard;

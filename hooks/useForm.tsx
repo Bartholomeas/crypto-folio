@@ -22,28 +22,24 @@ const useForm = () => {
   const [errors, setErrors] = useState(initialInputsState);
   const [isError, setIsError] = useState(false);
 
-  function setInputValues(event: React.ChangeEvent<HTMLInputElement>) {
+  const setInputValues = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [event.target.name]: event.target.value });
-  }
+  };
 
-  function validateAllInputs(inputs: NodeListOf<HTMLInputElement>) {
+  const validateAllInputs = (inputs: NodeListOf<HTMLInputElement>) => {
     inputs.forEach((input: HTMLInputElement) => {
       const { name, value } = input;
       validateInput(name, value);
     });
     if (isError) return false;
     return true;
-  }
+  };
 
-  function validateInput(name: string, value: string | null) {
+  const validateInput = (name: string, value: string | null) => {
     let error = '';
     error = !value ? `${name} is required` : '';
 
-    if (
-      (name === 'email' || name === 'email_register') &&
-      !validateEmail(value!) &&
-      value !== ''
-    ) {
+    if ((name === 'email' || name === 'email_register') && !validateEmail(value!) && value !== '') {
       setIsError(true);
       error = 'invalid email';
     } else {
@@ -51,7 +47,7 @@ const useForm = () => {
     }
 
     if (error) {
-      setErrors((prevState) => ({
+      setErrors(prevState => ({
         ...prevState,
         [name]: error,
       }));
@@ -59,21 +55,21 @@ const useForm = () => {
       setErrors({ ...errors, [name]: '' });
     }
 
-    if (Object.values(errors).every((error) => error === '')) {
+    if (Object.values(errors).every(error => error === '')) {
       setIsError(false);
     } else {
       setIsError(true);
     }
-  }
-  function validateEmail(email: string | undefined) {
+  };
+  const validateEmail = (email: string | undefined) => {
     if (!email) return;
     return email.toLowerCase().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-  }
+  };
 
-  function validateInputOnBlur(event: React.ChangeEvent<HTMLInputElement>) {
+  const validateInputOnBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     validateInput(name, value);
-  }
+  };
 
   return {
     setInputValues,

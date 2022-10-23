@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app';
 import AppProvider from '../providers/AppProvider';
 import AppLayout from '../providers/AppLayout';
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <AppProvider>
       <AppLayout>
@@ -11,6 +11,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </AppLayout>
     </AppProvider>
   );
-}
+};
 
 export default MyApp;

@@ -38,11 +38,11 @@ const googleProvider = new GoogleAuthProvider();
 
 const useDatabase = () => {
   const dispatch = useAppDispatch();
-  const { userData } = useAppSelector((state) => state.user);
+  const { userData } = useAppSelector(state => state.user);
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, user => {
       if (user && loggedIn === false) {
         setLoggedInUser(user);
       } else {
@@ -52,25 +52,21 @@ const useDatabase = () => {
     });
   }, []);
 
-  function setNotificationPopup(
-    isOpen: boolean,
-    isSuccess: boolean = true,
-    content: string,
-  ) {
+  const setNotificationPopup = (isOpen: boolean, isSuccess: boolean = true, content: string) => {
     dispatch(
       uiActions.toggleNotificationPopup({
         open: isOpen,
         success: isSuccess,
         content: content,
-      }),
+      })
     );
-  }
+  };
 
-  function setLoader(active: boolean) {
+  const setLoader = (active: boolean) => {
     dispatch(uiActions.toggleLoader(active));
-  }
+  };
 
-  function addUserToDB(user: any) {
+  const addUserToDB = (user: any) => {
     const userRef = doc(db, 'users', userData.uid);
     setDoc(
       userRef,
@@ -81,11 +77,11 @@ const useDatabase = () => {
         favouriteCoins: [],
         walletCoins: [],
       },
-      { merge: true },
+      { merge: true }
     );
-  }
+  };
 
-  function setLoggedInUser(user: any) {
+  const setLoggedInUser = (user: any) => {
     setLoggedIn(true);
     dispatch(
       userActions.setUserData({
@@ -93,37 +89,29 @@ const useDatabase = () => {
         email: user.email,
         uid: user.uid,
         photoURL: user.photoURL || '',
-      }),
+      })
     );
     localStorage.setItem('userId', user.uid);
-  }
+  };
 
-  function removeLoggedInUser() {
+  const removeLoggedInUser = () => {
     setLoggedIn(false);
     dispatch(userActions.setInitialState());
     localStorage.removeItem('userId');
-  }
+  };
 
-  async function signupCustomUser(emailValue: string, passwordValue: string) {
+  const signupCustomUser = async (emailValue: string, passwordValue: string) => {
     setLoader(true);
 
     try {
-      const result = await createUserWithEmailAndPassword(
-        auth,
-        emailValue,
-        passwordValue,
-      );
+      const result = await createUserWithEmailAndPassword(auth, emailValue, passwordValue);
 
       setLoader(false);
       addUserToDB(result.user);
 
       setNotificationPopup(true, true, 'Congratulations, you got registered!');
       setTimeout(() => {
-        setNotificationPopup(
-          false,
-          true,
-          'Congratulations, you got registered!',
-        );
+        setNotificationPopup(false, true, 'Congratulations, you got registered!');
       }, 3000);
     } catch {
       setLoader(false);
@@ -133,17 +121,13 @@ const useDatabase = () => {
         setNotificationPopup(false, false, 'We cannot register you :(!');
       }, 3000);
     }
-  }
+  };
 
-  async function authWithEmail(emailValue: string, passwordValue: string) {
+  const authWithEmail = async (emailValue: string, passwordValue: string) => {
     setLoader(true);
 
     try {
-      const result = await signInWithEmailAndPassword(
-        auth,
-        emailValue,
-        passwordValue,
-      );
+      const result = await signInWithEmailAndPassword(auth, emailValue, passwordValue);
 
       setLoader(false);
       setLoggedInUser(result.user);
@@ -161,9 +145,9 @@ const useDatabase = () => {
         setNotificationPopup(false, false, 'Something went wrong :(');
       }, 3000);
     }
-  }
+  };
 
-  async function authWithGoogle() {
+  const authWithGoogle = async () => {
     setLoader(true);
     try {
       const result = await signInWithPopup(auth, googleProvider);
@@ -184,9 +168,9 @@ const useDatabase = () => {
         setNotificationPopup(false, false, 'Something went wrong :(');
       }, 3000);
     }
-  }
+  };
 
-  function signoutUser() {
+  const signoutUser = () => {
     try {
       removeLoggedInUser();
       signOut(auth);
@@ -198,9 +182,9 @@ const useDatabase = () => {
     } catch {
       throw new Error('Cannot logout');
     }
-  }
+  };
 
-  async function addToFavourites(coinName: string) {
+  const addToFavourites = async (coinName: string) => {
     if (!userData.uid) {
       dispatch(uiActions.toggleAuthPopup());
       return;
@@ -211,7 +195,7 @@ const useDatabase = () => {
     await updateDoc(userRef, {
       favouriteCoins: arrayUnion(coinName),
     });
-  }
+  };
 
   return {
     loggedIn,
