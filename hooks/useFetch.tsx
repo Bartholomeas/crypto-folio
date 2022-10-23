@@ -1,12 +1,12 @@
 import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 
-const useFetch = (url?: string) => {
+const useFetch = () => {
 	const [data, setData] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState('null');
 
-	const sendRequest = async () => {
+	const sendRequest = async (url: string) => {
 		setIsLoading(true);
 		setError('null');
 		try {
@@ -18,10 +18,6 @@ const useFetch = (url?: string) => {
 			throw new Error('Something went wrong!');
 		}
 	};
-
-	useEffect(() => {
-		sendRequest();
-	}, [url]);
 
 	return { data };
 };

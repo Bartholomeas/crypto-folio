@@ -4,13 +4,13 @@ import AppProvider from '../providers/AppProvider';
 import AppLayout from '../providers/AppLayout';
 
 function MyApp({ Component, pageProps }: AppProps) {
-	return (
-		<AppProvider>
-			<AppLayout>
-				<Component {...pageProps} />
-			</AppLayout>
-		</AppProvider>
-	);
+  return (
+    <AppProvider>
+      <AppLayout>
+        <Component {...pageProps} />
+      </AppLayout>
+    </AppProvider>
+  );
 }
 
 export default MyApp;

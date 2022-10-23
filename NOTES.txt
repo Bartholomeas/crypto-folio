@@ -1,1 +1,20 @@
 - onAuthStateChanged creates a lot of rerenders (most on Explore page while mapping a lot of coin items), need to fix it in the future
+
+
+
+STRUCTURE OF walletCoins DATA
+[
+    {
+        symbol: '',
+        name: '',
+        boughtPrice: 0,
+        boughtAmount: 0,
+        boughtDates: [
+        {
+            date: '',
+            amount: 0,
+            price: 0,
+        },
+        ],
+    },
+]
