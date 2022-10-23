@@ -1,18 +1,17 @@
-import React from 'react';
-
 interface Props {
-	children: string | React.ReactNode;
-	forProp?: string;
+  children: string | React.ReactNode;
+  forProp?: string;
 }
 
 const Label = ({ children, forProp }: Props) => {
-	return (
-		<label
-			htmlFor={forProp}
-			className='dark:text-dmFont flex items-center w-full font-semibold text-font'>
-			{children}
-		</label>
-	);
+  return (
+    <label
+      htmlFor={forProp}
+      className="dark:text-dmFont flex items-center w-full font-semibold text-font"
+    >
+      {children}
+    </label>
+  );
 };
 
 export default Label;

@@ -1,16 +1,15 @@
-import React from 'react';
 import Link from 'next/link';
 
 interface Props {
-	children: React.ReactNode;
-	route: string;
-	routerPath?: string;
+  children: React.ReactNode;
+  route: string;
+  routerPath?: string;
 }
 const NavLinkItem = ({ children, route = '/', routerPath = '' }: Props) => {
-	return (
-		<Link href={route} passHref>
-			<a
-				className={`
+  return (
+    <Link href={route} passHref>
+      <a
+        className={`
 				dark:text-baseLight
 				dark:md:hover:transparent 
 
@@ -21,11 +20,12 @@ const NavLinkItem = ({ children, route = '/', routerPath = '' }: Props) => {
 			md:hover:after:bg-accentHover
 
 			${routerPath === route && 'after:bg-accentHover'}
-			`}>
-				{children}
-			</a>
-		</Link>
-	);
+			`}
+      >
+        {children}
+      </a>
+    </Link>
+  );
 };
 
 export default NavLinkItem;

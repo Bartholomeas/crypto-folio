@@ -1,9 +1,8 @@
-import React from 'react';
 interface Props {
-	allLinks: React.ReactNode[];
+  allLinks: React.ReactNode[];
 }
 const LinksContainer = ({ allLinks }: Props) => {
-	return <div></div>;
+  return <div></div>;
 };
 
 export default LinksContainer;
