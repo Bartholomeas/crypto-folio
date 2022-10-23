@@ -1,4 +1,3 @@
-import React from 'react';
 import FireIcon from '../../atoms/FireIcon/FireIcon';
 
 function TrendingCoinsBox() {

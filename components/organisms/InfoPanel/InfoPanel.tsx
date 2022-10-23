@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../state/reduxHooks';
 import { uiActions } from '../../../state/uiSlice';
 import ArrowButton from '../../atoms/ArrowButton/ArrowButton';

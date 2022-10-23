@@ -1,18 +1,20 @@
-import React from 'react';
-
 interface Props {
-	children: React.ReactNode | React.ReactNode[];
-	forProp: string;
+  children: React.ReactNode | React.ReactNode[];
+  forProp: string;
 }
 const Checkbox = ({ children, forProp }: Props) => {
-	return (
-		<div className='flex flex-row-reverse gap-sm'>
-			<label className='text-xs text-fontLight' htmlFor={forProp}>
-				{children}
-			</label>
-			<input className='cursor-pointer rounded-lg' type='checkbox' name={forProp} />
-		</div>
-	);
+  return (
+    <div className="flex flex-row-reverse gap-sm">
+      <label className="text-xs text-fontLight" htmlFor={forProp}>
+        {children}
+      </label>
+      <input
+        className="cursor-pointer rounded-lg"
+        type="checkbox"
+        name={forProp}
+      />
+    </div>
+  );
 };
 
 export default Checkbox;

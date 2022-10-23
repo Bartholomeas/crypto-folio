@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Loader() {
   return (
     <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] flex items-center justify-center gap-sm rounded-full bg-support p-xs">
