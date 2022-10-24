@@ -8,8 +8,8 @@ import {
   Tooltip,
   Filler,
   Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
+} from "chart.js";
+import { Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -19,7 +19,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Filler,
-  Legend,
+  Legend
 );
 
 interface Props {
@@ -27,12 +27,12 @@ interface Props {
   coinName: string;
 }
 
-const SparklineChart = ({ chartData, coinName = '' }: Props) => {
+function SparklineChart({ chartData, coinName = "" }: Props) {
   const options = {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top' as const,
+        position: "top" as const,
       },
       title: {
         display: true,
@@ -47,10 +47,10 @@ const SparklineChart = ({ chartData, coinName = '' }: Props) => {
     datasets: [
       {
         fill: true,
-        data: chartData.map((item) => item),
+        data: chartData.map(item => item),
         pointRadius: 0,
-        backgroundColor: 'rgba(88,237,183,.5)',
-        borderColor: 'rgba(88,237,183,1)',
+        backgroundColor: "rgba(88,237,183,.5)",
+        borderColor: "rgba(88,237,183,1)",
         tension: 0.1,
       },
     ],
@@ -60,6 +60,6 @@ const SparklineChart = ({ chartData, coinName = '' }: Props) => {
       <Line className="" options={options} data={data} />
     </div>
   );
-};
+}
 
 export default SparklineChart;

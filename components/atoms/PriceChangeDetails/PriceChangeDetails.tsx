@@ -3,13 +3,13 @@ interface Props {
   isHigh?: boolean;
 }
 
-const PriceChangeDetails = ({ children, isHigh = false }: Props) => {
+function PriceChangeDetails({ children, isHigh = false }: Props) {
   return (
     <p
       className="dark:text-dmFont
 		text-xs text-fontOff"
     >
-      {isHigh ? 'High' : 'Low'} 24h:{' '}
+      {isHigh ? "High" : "Low"} 24h:{" "}
       <span
         className=" dark:text-baseLight
 			text-xs font-semibold text-fontOff"
@@ -18,6 +18,6 @@ const PriceChangeDetails = ({ children, isHigh = false }: Props) => {
       </span>
     </p>
   );
-};
+}
 
 export default PriceChangeDetails;

@@ -18,3 +18,5 @@ STRUCTURE OF walletCoins DATA
         ],
     },
 ]
+
+

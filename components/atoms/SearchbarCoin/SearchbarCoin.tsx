@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -8,18 +8,18 @@ interface Props {
   coinLogo: string;
   coinRank: number;
 }
-const SearchbarCoin = ({
+function SearchbarCoin({
   children,
   hrefRoute,
   coinSymbol,
   coinLogo,
   coinRank,
-}: Props) => {
+}: Props) {
   return (
     <Link passHref href={hrefRoute}>
       <a className="">
         <div
-          className="dark:bg-dmBaseDarker dark:hover:bg-dmBaseElement
+          className="dark:bg-dmBase dark:hover:bg-dmBaseElement
 					flex items-center justify-between bg-white w-full px-sm py-[0.3rem] h-full rounded min-h-[5rem]
                 hover:bg-baseLight"
         >
@@ -42,6 +42,6 @@ const SearchbarCoin = ({
       </a>
     </Link>
   );
-};
+}
 
 export default SearchbarCoin;

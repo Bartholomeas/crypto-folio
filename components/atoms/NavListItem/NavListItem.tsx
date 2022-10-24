@@ -1,9 +1,9 @@
-import Link from 'next';
+import Link from "next";
 
 interface Props {
   children: React.ReactNode;
 }
-const NavListItem = ({ children }: Props) => {
+function NavListItem({ children }: Props) {
   return (
     <li
       className='before:content-[""] before:absolute before:left-[-2rem] before:bottom-0 before:h-full before:w-[5px] 
@@ -20,6 +20,6 @@ const NavListItem = ({ children }: Props) => {
       {children}
     </li>
   );
-};
+}
 
 export default NavListItem;

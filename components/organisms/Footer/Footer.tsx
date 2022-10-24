@@ -1,7 +1,7 @@
 interface Props {
   children: React.ReactNode | React.ReactNode[];
 }
-const Footer = ({ children }: Props) => {
+function Footer({ children }: Props) {
   return (
     <footer
       className="dark:bg-accentDark
@@ -10,6 +10,6 @@ const Footer = ({ children }: Props) => {
       {children}
     </footer>
   );
-};
+}
 
 export default Footer;

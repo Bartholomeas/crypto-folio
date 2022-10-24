@@ -1,18 +1,24 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
-	heightVal?: string;
+  heightVal?: string;
 }
 
-const Logo = ({ heightVal = '50' }: Props) => {
-	return (
-		<Link passHref href='/'>
-			<a className='cursor-pointer h-auto'>
-				<Image className='h-full' src='/logo.svg' width={heightVal} height={heightVal} alt='Logo of cointis app' />
-			</a>
-		</Link>
-	);
-};
+function Logo({ heightVal = "50" }: Props) {
+  return (
+    <Link passHref href="/">
+      <a className="cursor-pointer h-auto">
+        <Image
+          className="h-full"
+          src="/logo.svg"
+          width={heightVal}
+          height={heightVal}
+          alt="Logo of cointis app"
+        />
+      </a>
+    </Link>
+  );
+}
 
 export default Logo;

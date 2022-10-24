@@ -2,12 +2,12 @@ interface Props {
   children: string;
 }
 
-const ErrorText = ({ children }: Props) => {
+function ErrorText({ children }: Props) {
   return (
     <p className=" py-[0.3rem] px-sm text-xs font-bold rounded-xl bg-error text-white ">
       {children}
     </p>
   );
-};
+}
 
 export default ErrorText;

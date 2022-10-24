@@ -1,4 +1,4 @@
-import Label from '../../atoms/Label/Label';
+import Label from "../../atoms/Label/Label";
 
 interface Props {
   children: string;
@@ -6,14 +6,14 @@ interface Props {
     [key: string]: string;
   };
 }
-const SelectMenu = ({ children, options }: Props) => {
+function SelectMenu({ children, options }: Props) {
   return (
     <div className="flex items-center py-sm">
       <Label forProp="languages">{children}</Label>
 
       <select
         defaultValue={options[0]}
-        className="text-sm font-semibold text-font bg-transparent"
+        className="text font-semibold text-font bg-transparent"
         name="languages"
         id="languages"
       >
@@ -25,6 +25,6 @@ const SelectMenu = ({ children, options }: Props) => {
       </select>
     </div>
   );
-};
+}
 
 export default SelectMenu;

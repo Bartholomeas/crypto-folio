@@ -1,7 +1,6 @@
-import { useState } from 'react';
-import { CoinItem } from '../state/coinsSlice';
-import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
-import { coinsActions } from '../state/coinsSlice';
+import { useState } from "react";
+import { CoinItem, coinsActions } from "../state/coinsSlice";
+import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
 
 const useFilter = () => {
   const dispatch = useAppDispatch();

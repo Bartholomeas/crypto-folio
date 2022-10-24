@@ -1,12 +1,12 @@
-import store from '../state/store';
-import { Provider } from 'react-redux';
+import { Provider } from "react-redux";
+import store from "../state/store";
 
 interface ProviderProps {
   children: React.ReactNode;
 }
 
-const AppProvider = ({ children }: ProviderProps) => {
+function AppProvider({ children }: ProviderProps) {
   return <Provider store={store}>{children}</Provider>;
-};
+}
 
 export default AppProvider;

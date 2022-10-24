@@ -1,20 +1,21 @@
-import { CoinItem } from '../../../state/coinsSlice';
-import { useAppSelector } from '../../../state/reduxHooks';
+import { CoinItem } from "../../../state/coinsSlice";
+import { useAppSelector } from "../../../state/reduxHooks";
+
 interface Props {
   children?: string;
   leftAlign?: boolean;
   onClickFn?: (arg1: CoinItem[], arg2: string) => void | undefined;
   value?: string;
 }
-const TableHeader = ({ children, leftAlign, onClickFn, value }: Props) => {
-  const { coinsList } = useAppSelector((state) => state.coins);
+function TableHeader({ children, leftAlign, onClickFn, value }: Props) {
+  const { coinsList } = useAppSelector(state => state.coins);
 
   return (
     <th
       className={`dark:text-baseLight
 			py-sm px-xs text-xs text-font
  last:pr-xs 
-		${leftAlign ? 'text-start' : 'text-end'}
+		${leftAlign ? "text-start" : "text-end"}
 			md:table-cell
 			[&:nth-child(1)]:text-center`}
     >
@@ -28,14 +29,14 @@ const TableHeader = ({ children, leftAlign, onClickFn, value }: Props) => {
 
         <span
           className={`${
-            children === '#' || children === undefined ? 'hidden' : 'absolute'
+            children === "#" || children === undefined ? "hidden" : "absolute"
           } font-bold text rotate-90 left-0 top-[50%] translate-y-[-50%] translate-x-[-1rem] text-transparent group-hover:text-font  `}
         >
-          {'>'}
+          {">"}
         </span>
       </button>
     </th>
   );
-};
+}
 
 export default TableHeader;
