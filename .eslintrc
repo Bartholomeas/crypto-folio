@@ -1,31 +1,36 @@
+// "next/core-web-vitals",
 {
   "env": {
     "browser": true,
     "es2021": true
   },
   "extends": [
-    "next/core-web-vitals",
+    "airbnb",
+    "airbnb-typescript",
+    "prettier",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "airbnb",
-    "airbnb-typescript",
-    "prettier"
+    // "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
   ],
+
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "parserOptions": {
-      "project": "./tsconfig.json",
-      "ecmaVersion": 2022,
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true
-      }
+    "project": ["./tsconfig.json"],
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
     }
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "indent": ["error", 4],
+    "react/require-default-props": "off",
+    "react/react-in-jsx-scope": "off",
+    "jsx-a11y/anchor-is-valid": "off",
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "double"],
     "semi": ["error", "always"]

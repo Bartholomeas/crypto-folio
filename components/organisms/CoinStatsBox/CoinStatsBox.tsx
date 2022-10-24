@@ -1,7 +1,7 @@
-import { addSpacesToNumber, convertDate } from '../../../utils/convertUtils';
-import CoinStatsLi from '../../atoms/CoinStatsLi/CoinStatsLi';
-import CoinStatsLiKey from '../../atoms/CoinStatsLiKey/CoinStatsLiKey';
-import CoinStatsLiValue from '../../atoms/CoinStatsLiValue/CoinStatsLiValue';
+import { addSpacesToNumber, convertDate } from "../../../utils/convertUtils";
+import CoinStatsLi from "../../atoms/CoinStatsLi/CoinStatsLi";
+import CoinStatsLiKey from "../../atoms/CoinStatsLiKey/CoinStatsLiKey";
+import CoinStatsLiValue from "../../atoms/CoinStatsLiValue/CoinStatsLiValue";
 
 interface Props {
   [key: string]: number | string;
@@ -21,11 +21,11 @@ interface Props {
 }
 
 enum ValueType {
-  Success = 'success',
-  Error = 'error',
+  Success = "success",
+  Error = "error",
 }
 
-const CoinStatsBox = ({ props }: { props: Props }) => {
+function CoinStatsBox({ props }: { props: Props }) {
   return (
     <div
       className="dark:bg-dmBaseElement
@@ -88,25 +88,23 @@ const CoinStatsBox = ({ props }: { props: Props }) => {
         </CoinStatsLi>
         <CoinStatsLi>
           <CoinStatsLiKey>All time LOW</CoinStatsLiKey>
-          <CoinStatsLiValue type={'error'}>
-            $ {props.allTimeLow}
-          </CoinStatsLiValue>
+          <CoinStatsLiValue type="error">$ {props.allTimeLow}</CoinStatsLiValue>
         </CoinStatsLi>
         <CoinStatsLi>
           <CoinStatsLiKey>ATH date</CoinStatsLiKey>
           <CoinStatsLiValue>
-            {convertDate(props.athDate, 'MM-dd-yyyy')}
+            {convertDate(props.athDate, "MM-dd-yyyy")}
           </CoinStatsLiValue>
         </CoinStatsLi>
         <CoinStatsLi>
           <CoinStatsLiKey>ATL date</CoinStatsLiKey>
           <CoinStatsLiValue>
-            {convertDate(props.atlDate, 'MM-dd-yyyy')}
+            {convertDate(props.atlDate, "MM-dd-yyyy")}
           </CoinStatsLiValue>
         </CoinStatsLi>
       </ul>
     </div>
   );
-};
+}
 
 export default CoinStatsBox;

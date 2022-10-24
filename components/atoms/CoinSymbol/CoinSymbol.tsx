@@ -1,7 +1,7 @@
 interface Props {
   children: React.ReactNode | React.ReactNode[];
 }
-const CoinSymbol = ({ children }: Props) => {
+function CoinSymbol({ children }: Props) {
   return (
     <div
       className="dark:bg-dmBaseElement
@@ -15,6 +15,6 @@ const CoinSymbol = ({ children }: Props) => {
       </h2>
     </div>
   );
-};
+}
 
 export default CoinSymbol;

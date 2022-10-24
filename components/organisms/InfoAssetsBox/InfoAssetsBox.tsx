@@ -1,4 +1,5 @@
-import ChangeInValue from '../../atoms/ChangeInValue/ChangeInValue';
+import ChangeInValue from "../../atoms/ChangeInValue/ChangeInValue";
+
 interface Props {
   children: string;
   asset: string;
@@ -6,16 +7,16 @@ interface Props {
   isPercent?: boolean;
 }
 
-const InfoAssetsBox = ({ children, asset, changeValue, isPercent }: Props) => {
+function InfoAssetsBox({ children, asset, changeValue, isPercent }: Props) {
   return (
     <div className="flex flex-col justify-center gap-sm w-full p py-sm bg-accentDark text-white rounded lg:h-[50%]">
-      <p className="text-sm">{children}</p>
+      <p className="text">{children}</p>
       <div className="flex items-center gap-sm">
         <p className="font-semibold text">{asset}</p>
         <ChangeInValue isPercent={isPercent}>{changeValue}</ChangeInValue>
       </div>
     </div>
   );
-};
+}
 
 export default InfoAssetsBox;

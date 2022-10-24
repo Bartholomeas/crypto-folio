@@ -1,18 +1,12 @@
-import DetailsBigPrice from '../../atoms/DetailsBigPrice/DetailsBigPrice';
-import PriceChangeDetails from '../../atoms/PriceChangeDetails/PriceChangeDetails';
+import DetailsBigPrice from "../../atoms/DetailsBigPrice/DetailsBigPrice";
+import PriceChangeDetails from "../../atoms/PriceChangeDetails/PriceChangeDetails";
 
-const CoinPriceBox = ({
-  name,
-  curr_price,
-  high,
-  low,
-  price_change_24h,
-}: any) => {
+function CoinPriceBox({ name, curr_price, high, low, price_change_24h }: any) {
   return (
     <div className="flex flex-col">
       <p
         className="dark:text-dmFont
-			text-fontOff text-sm"
+			text-fontOff text"
       >
         {name} price
       </p>
@@ -22,16 +16,16 @@ const CoinPriceBox = ({
           className="
 				text-font font-semibold py-[0.3rem] px-xs bg-support rounded text-xs"
         >
-          {price_change_24h > 0 ? '+' : ''}
+          {price_change_24h > 0 ? "+" : ""}
           {price_change_24h} %
         </p>
       </div>
       <div className="flex flex-col">
         <PriceChangeDetails>{low}</PriceChangeDetails>
-        <PriceChangeDetails isHigh={true}>{high}</PriceChangeDetails>
+        <PriceChangeDetails isHigh>{high}</PriceChangeDetails>
       </div>
     </div>
   );
-};
+}
 
 export default CoinPriceBox;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface InitialInputs {
   [key: string]: string;
@@ -10,11 +10,11 @@ interface InitialInputs {
 }
 
 const initialInputsState: InitialInputs = {
-  email: '',
-  password: '',
-  email_register: '',
-  password_register: '',
-  password_repeat: '',
+  email: "",
+  password: "",
+  email_register: "",
+  password_register: "",
+  password_repeat: "",
 };
 
 const useForm = () => {
@@ -36,14 +36,18 @@ const useForm = () => {
   };
 
   const validateInput = (name: string, value: string | null) => {
-    let error = '';
-    error = !value ? `${name} is required` : '';
+    let error = "";
+    error = !value ? `${name} is required` : "";
 
-    if ((name === 'email' || name === 'email_register') && !validateEmail(value!) && value !== '') {
+    if (
+      (name === "email" || name === "email_register") &&
+      !validateEmail(value!) &&
+      value !== ""
+    ) {
       setIsError(true);
-      error = 'invalid email';
+      error = "invalid email";
     } else {
-      error = !value ? `${name} is required` : '';
+      error = !value ? `${name} is required` : "";
     }
 
     if (error) {
@@ -52,10 +56,10 @@ const useForm = () => {
         [name]: error,
       }));
     } else {
-      setErrors({ ...errors, [name]: '' });
+      setErrors({ ...errors, [name]: "" });
     }
 
-    if (Object.values(errors).every(error => error === '')) {
+    if (Object.values(errors).every(error => error === "")) {
       setIsError(false);
     } else {
       setIsError(true);

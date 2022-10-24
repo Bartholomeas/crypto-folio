@@ -1,12 +1,12 @@
-import { MdStar, MdStarBorder } from 'react-icons/md';
-import useDatabase from '../../../hooks/useDatabase';
+import { MdStar, MdStarBorder } from "react-icons/md";
+import useDatabase from "../../../hooks/useDatabase";
 
 interface Props {
   isBox?: boolean;
   funcArg: string;
 }
 
-const FavouriteButton = ({ isBox = false, funcArg = '' }: Props) => {
+function FavouriteButton({ isBox = false, funcArg = "" }: Props) {
   const { addToFavourites } = useDatabase();
 
   return (
@@ -15,12 +15,12 @@ const FavouriteButton = ({ isBox = false, funcArg = '' }: Props) => {
       className={`group fav-btn flex items-center justify-end w-full py-xs
 		${
       isBox &&
-      'dark:bg-dmBaseElement w-[3rem] h-[3rem] rounded-xl justify-center bg-baseLight text-fontLight'
-    } w-full ${!isBox && 'px-xs'}`}
+      "dark:bg-dmBaseElement w-[3rem] h-[3rem] rounded-xl justify-center bg-baseLight text-fontLight"
+    } w-full ${!isBox && "px-xs"}`}
     >
       <MdStarBorder className="fav-btn group-hover:text-yellow-500" />
     </button>
   );
-};
+}
 
 export default FavouriteButton;

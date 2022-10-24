@@ -2,7 +2,7 @@ interface Props {
   children: React.ReactNode | React.ReactNode[];
   forProp: string;
 }
-const Checkbox = ({ children, forProp }: Props) => {
+function Checkbox({ children, forProp }: Props) {
   return (
     <div className="flex flex-row-reverse gap-sm">
       <label className="text-xs text-fontLight" htmlFor={forProp}>
@@ -15,6 +15,6 @@ const Checkbox = ({ children, forProp }: Props) => {
       />
     </div>
   );
-};
+}
 
 export default Checkbox;

@@ -2,7 +2,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const DetailsBigPrice = ({ children }: Props) => {
+function DetailsBigPrice({ children }: Props) {
   return (
     <p
       className="dark:text-baseLight
@@ -11,6 +11,6 @@ const DetailsBigPrice = ({ children }: Props) => {
       $ {children}
     </p>
   );
-};
+}
 
 export default DetailsBigPrice;

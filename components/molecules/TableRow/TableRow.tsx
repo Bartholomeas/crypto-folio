@@ -1,12 +1,12 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import LinkItem from '../LinkItem/LinkItem';
+import LinkItem from "../LinkItem/LinkItem";
 
 interface Props {
   children: React.ReactNode;
   onClickFn?: (arg1: any) => void;
 }
-const TableRow = ({ children, onClickFn }: Props) => {
+function TableRow({ children, onClickFn }: Props) {
   return (
     <tr
       onClick={onClickFn}
@@ -16,6 +16,6 @@ const TableRow = ({ children, onClickFn }: Props) => {
       {children}
     </tr>
   );
-};
+}
 
 export default TableRow;

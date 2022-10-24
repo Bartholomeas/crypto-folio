@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import ErrorText from '../../atoms/ErrorText/ErrorText';
-import Label from '../../atoms/Label/Label';
+import React, { useEffect, useState } from "react";
+import ErrorText from "../../atoms/ErrorText/ErrorText";
+import Label from "../../atoms/Label/Label";
 
 interface Props {
   children: React.ReactNode | React.ReactNode[];
@@ -13,15 +13,15 @@ interface Props {
   errors?: any;
 }
 
-const InputWithLabel = ({
+function InputWithLabel({
   children,
   onChangeFunc,
   onBlurFunc,
   forProp,
-  inputType = 'text',
+  inputType = "text",
   placeholderValue,
   errors,
-}: Props) => {
+}: Props) {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
@@ -34,8 +34,9 @@ const InputWithLabel = ({
       <input
         onChange={onChangeFunc || (() => {})}
         onBlur={onBlurFunc || (() => {})}
-        className={`dark:bg-dmBaseElement dark:border-dmBase px-sm py-sm rounded-xl border-2 border-baseLight text ${
-          isError && 'border-error border-2'
+        className={`dark:bg-dmBaseElement dark:border-dmBase dark:text-dmFont
+        px-sm py-sm rounded-xl border-2 border-baseLight text ${
+          isError && "border-error border-2"
         }`}
         placeholder={placeholderValue}
         type={inputType}
@@ -45,6 +46,6 @@ const InputWithLabel = ({
       {isError && <ErrorText>{errors[forProp]}</ErrorText>}
     </div>
   );
-};
+}
 
 export default InputWithLabel;

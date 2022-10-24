@@ -1,8 +1,8 @@
 interface Props {
   allLinks: React.ReactNode[];
 }
-const LinksContainer = ({ allLinks }: Props) => {
-  return <div></div>;
-};
+function LinksContainer({ allLinks }: Props) {
+  return <div />;
+}
 
 export default LinksContainer;

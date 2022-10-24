@@ -3,7 +3,7 @@ interface Props {
   forProp?: string;
 }
 
-const Label = ({ children, forProp }: Props) => {
+function Label({ children, forProp }: Props) {
   return (
     <label
       htmlFor={forProp}
@@ -12,6 +12,6 @@ const Label = ({ children, forProp }: Props) => {
       {children}
     </label>
   );
-};
+}
 
 export default Label;

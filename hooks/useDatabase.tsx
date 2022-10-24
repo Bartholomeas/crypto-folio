@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from "react";
 import {
   collection,
   getDocs,
@@ -15,9 +15,7 @@ import {
   setDoc,
   arrayUnion,
   arrayRemove,
-} from 'firebase/firestore';
-import { db, auth } from '../firebaseConfig';
-
+} from "firebase/firestore";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -27,12 +25,14 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithRedirect,
-} from 'firebase/auth';
-import { ref, set } from 'firebase/database';
-import { useAppDispatch, useAppSelector } from '../state/reduxHooks';
-import { userActions } from '../state/userSlice';
-import { uiActions } from '../state/uiSlice';
-import { ReadVResult } from 'fs';
+} from "firebase/auth";
+import { ref, set } from "firebase/database";
+import { ReadVResult } from "fs";
+import { db, auth } from "../firebaseConfig";
+
+import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
+import { userActions } from "../state/userSlice";
+import { uiActions } from "../state/uiSlice";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -47,17 +47,20 @@ const useDatabase = () => {
         setLoggedInUser(user);
       } else {
         removeLoggedInUser();
-        return;
       }
     });
   }, []);
 
-  const setNotificationPopup = (isOpen: boolean, isSuccess: boolean = true, content: string) => {
+  const setNotificationPopup = (
+    isOpen: boolean,
+    isSuccess = true,
+    content: string
+  ) => {
     dispatch(
       uiActions.toggleNotificationPopup({
         open: isOpen,
         success: isSuccess,
-        content: content,
+        content,
       })
     );
   };
@@ -67,7 +70,7 @@ const useDatabase = () => {
   };
 
   const addUserToDB = (user: any) => {
-    const userRef = doc(db, 'users', userData.uid);
+    const userRef = doc(db, "users", userData.uid);
     setDoc(
       userRef,
       {
@@ -88,37 +91,48 @@ const useDatabase = () => {
         name: user.displayName || user.email,
         email: user.email,
         uid: user.uid,
-        photoURL: user.photoURL || '',
+        photoURL: user.photoURL || "",
       })
     );
-    localStorage.setItem('userId', user.uid);
+    localStorage.setItem("userId", user.uid);
   };
 
   const removeLoggedInUser = () => {
     setLoggedIn(false);
     dispatch(userActions.setInitialState());
-    localStorage.removeItem('userId');
+    localStorage.removeItem("userId");
   };
 
-  const signupCustomUser = async (emailValue: string, passwordValue: string) => {
+  const signupCustomUser = async (
+    emailValue: string,
+    passwordValue: string
+  ) => {
     setLoader(true);
 
     try {
-      const result = await createUserWithEmailAndPassword(auth, emailValue, passwordValue);
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        emailValue,
+        passwordValue
+      );
 
       setLoader(false);
       addUserToDB(result.user);
 
-      setNotificationPopup(true, true, 'Congratulations, you got registered!');
+      setNotificationPopup(true, true, "Congratulations, you got registered!");
       setTimeout(() => {
-        setNotificationPopup(false, true, 'Congratulations, you got registered!');
+        setNotificationPopup(
+          false,
+          true,
+          "Congratulations, you got registered!"
+        );
       }, 3000);
     } catch {
       setLoader(false);
 
-      setNotificationPopup(true, false, 'We cannot register you :(');
+      setNotificationPopup(true, false, "We cannot register you :(");
       setTimeout(() => {
-        setNotificationPopup(false, false, 'We cannot register you :(!');
+        setNotificationPopup(false, false, "We cannot register you :(!");
       }, 3000);
     }
   };
@@ -127,22 +141,26 @@ const useDatabase = () => {
     setLoader(true);
 
     try {
-      const result = await signInWithEmailAndPassword(auth, emailValue, passwordValue);
+      const result = await signInWithEmailAndPassword(
+        auth,
+        emailValue,
+        passwordValue
+      );
 
       setLoader(false);
       setLoggedInUser(result.user);
       dispatch(uiActions.closeAuthPopup());
 
-      setNotificationPopup(true, true, 'Successfully logged in');
+      setNotificationPopup(true, true, "Successfully logged in");
       setTimeout(() => {
-        setNotificationPopup(false, true, 'Successfully logged in');
+        setNotificationPopup(false, true, "Successfully logged in");
       }, 3000);
     } catch {
       setLoader(false);
 
-      setNotificationPopup(true, false, 'Something went wrong :(');
+      setNotificationPopup(true, false, "Something went wrong :(");
       setTimeout(() => {
-        setNotificationPopup(false, false, 'Something went wrong :(');
+        setNotificationPopup(false, false, "Something went wrong :(");
       }, 3000);
     }
   };
@@ -157,15 +175,15 @@ const useDatabase = () => {
       setLoggedInUser(result.user);
       dispatch(uiActions.closeAuthPopup());
       console.log(result.user);
-      setNotificationPopup(true, true, 'Successfully logged in');
+      setNotificationPopup(true, true, "Successfully logged in");
       setTimeout(() => {
-        setNotificationPopup(false, true, 'Successfully logged in');
+        setNotificationPopup(false, true, "Successfully logged in");
       }, 3000);
     } catch {
       setLoader(false);
-      setNotificationPopup(true, false, 'Something went wrong :(');
+      setNotificationPopup(true, false, "Something went wrong :(");
       setTimeout(() => {
-        setNotificationPopup(false, false, 'Something went wrong :(');
+        setNotificationPopup(false, false, "Something went wrong :(");
       }, 3000);
     }
   };
@@ -174,13 +192,13 @@ const useDatabase = () => {
     try {
       removeLoggedInUser();
       signOut(auth);
-      setNotificationPopup(true, true, 'Successfully logged out');
+      setNotificationPopup(true, true, "Successfully logged out");
 
       setTimeout(() => {
-        setNotificationPopup(false, true, 'Successfully logged out');
+        setNotificationPopup(false, true, "Successfully logged out");
       }, 3000);
     } catch {
-      throw new Error('Cannot logout');
+      throw new Error("Cannot logout");
     }
   };
 
@@ -189,9 +207,9 @@ const useDatabase = () => {
       dispatch(uiActions.toggleAuthPopup());
       return;
     }
-    if (coinName === '') return;
+    if (coinName === "") return;
 
-    const userRef = doc(db, 'users', userData.uid);
+    const userRef = doc(db, "users", userData.uid);
     await updateDoc(userRef, {
       favouriteCoins: arrayUnion(coinName),
     });
