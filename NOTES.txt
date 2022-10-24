@@ -19,4 +19,4 @@ STRUCTURE OF walletCoins DATA
     },
 ]
 
-    "eslint-config-prettier": "^8.5.0",
+

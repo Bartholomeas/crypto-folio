@@ -25,7 +25,21 @@ enum ValueType {
   Error = "error",
 }
 
-function CoinStatsBox({ props }: { props: Props }) {
+function CoinStatsBox({
+  name,
+  price,
+  coinRank,
+  priceChange,
+  lowDay,
+  highDay,
+  volumeDay,
+  totalSupply,
+  circulatingSupply,
+  allTimeHigh,
+  athDate,
+  allTimeLow,
+  atlDate,
+}: Props) {
   return (
     <div
       className="dark:bg-dmBaseElement
@@ -34,72 +48,68 @@ function CoinStatsBox({ props }: { props: Props }) {
         "
     >
       <h2 className="font-bold dark:text-dmFont text-fontLight text-md">
-        {props.name} statistics
+        {name} statistics
       </h2>
 
       <ul className="flex flex-col w-full gap py-sm ">
         <CoinStatsLi>
           <CoinStatsLiKey>Current rank</CoinStatsLiKey>
-          <CoinStatsLiValue>#{props.coinRank}</CoinStatsLiValue>
+          <CoinStatsLiValue>#{coinRank}</CoinStatsLiValue>
         </CoinStatsLi>
         <CoinStatsLi>
           <CoinStatsLiKey>Price</CoinStatsLiKey>
-          <CoinStatsLiValue>{props.price}</CoinStatsLiValue>
+          <CoinStatsLiValue>{price}</CoinStatsLiValue>
         </CoinStatsLi>
         <CoinStatsLi>
           <CoinStatsLiKey>Price change 24h</CoinStatsLiKey>
           <CoinStatsLiValue
-            type={props.priceChange > 0 ? ValueType.Success : ValueType.Error}
+            type={priceChange > 0 ? ValueType.Success : ValueType.Error}
           >
-            {props.priceChange.toFixed(2)}%
+            {priceChange.toFixed(2)}%
           </CoinStatsLiValue>
         </CoinStatsLi>
         <CoinStatsLi>
           <CoinStatsLiKey>Day low</CoinStatsLiKey>
-          <CoinStatsLiValue>$ {props.lowDay}</CoinStatsLiValue>
+          <CoinStatsLiValue>$ {lowDay}</CoinStatsLiValue>
         </CoinStatsLi>
         <CoinStatsLi>
           <CoinStatsLiKey>Day high</CoinStatsLiKey>
-          <CoinStatsLiValue>$ {props.highDay}</CoinStatsLiValue>
+          <CoinStatsLiValue>$ {highDay}</CoinStatsLiValue>
         </CoinStatsLi>
         <CoinStatsLi>
           <CoinStatsLiKey>Volume</CoinStatsLiKey>
-          <CoinStatsLiValue>
-            $ {addSpacesToNumber(props.volumeDay)}
-          </CoinStatsLiValue>
+          <CoinStatsLiValue>$ {addSpacesToNumber(volumeDay)}</CoinStatsLiValue>
         </CoinStatsLi>
         <CoinStatsLi>
           <CoinStatsLiKey>Total supply</CoinStatsLiKey>
-          <CoinStatsLiValue>
-            {addSpacesToNumber(props.totalSupply)}
-          </CoinStatsLiValue>
+          <CoinStatsLiValue>{addSpacesToNumber(totalSupply)}</CoinStatsLiValue>
         </CoinStatsLi>
         <CoinStatsLi>
           <CoinStatsLiKey>Circulating supply</CoinStatsLiKey>
           <CoinStatsLiValue>
-            {addSpacesToNumber(props.circulatingSupply)}
+            {addSpacesToNumber(circulatingSupply)}
           </CoinStatsLiValue>
         </CoinStatsLi>
         <CoinStatsLi>
           <CoinStatsLiKey>All time HIGH</CoinStatsLiKey>
           <CoinStatsLiValue type={ValueType.Success}>
-            $ {props.allTimeHigh}
+            $ {allTimeHigh}
           </CoinStatsLiValue>
         </CoinStatsLi>
         <CoinStatsLi>
           <CoinStatsLiKey>All time LOW</CoinStatsLiKey>
-          <CoinStatsLiValue type="error">$ {props.allTimeLow}</CoinStatsLiValue>
+          <CoinStatsLiValue type="error">$ {allTimeLow}</CoinStatsLiValue>
         </CoinStatsLi>
         <CoinStatsLi>
           <CoinStatsLiKey>ATH date</CoinStatsLiKey>
           <CoinStatsLiValue>
-            {convertDate(props.athDate, "MM-dd-yyyy")}
+            {convertDate(athDate, "MM-dd-yyyy")}
           </CoinStatsLiValue>
         </CoinStatsLi>
         <CoinStatsLi>
           <CoinStatsLiKey>ATL date</CoinStatsLiKey>
           <CoinStatsLiValue>
-            {convertDate(props.atlDate, "MM-dd-yyyy")}
+            {convertDate(atlDate, "MM-dd-yyyy")}
           </CoinStatsLiValue>
         </CoinStatsLi>
       </ul>

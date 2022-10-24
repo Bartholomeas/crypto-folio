@@ -9,9 +9,9 @@
     "airbnb-typescript",
     "prettier",
     "eslint:recommended",
+    "plugin:@next/next/recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    // "plugin:prettier/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript"
@@ -20,14 +20,21 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": ["./tsconfig.json"],
-    "ecmaVersion": 2018,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
+    "ecmaVersion": 2022,
+    "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
     "react/require-default-props": "off",
     "react/react-in-jsx-scope": "off",
     "jsx-a11y/anchor-is-valid": "off",
