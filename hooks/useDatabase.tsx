@@ -1,35 +1,20 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  collection,
-  getDocs,
-  getDoc,
-  addDoc,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  query,
-  where,
-  orderBy,
-  serverTimestamp,
-  updateDoc,
-  setDoc,
-  arrayUnion,
-  arrayRemove,
+	doc,
+	updateDoc,
+	setDoc,
+	arrayUnion,
+	arrayRemove,
 } from "firebase/firestore";
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signOut,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithRedirect,
+	createUserWithEmailAndPassword,
+	signOut,
+	signInWithEmailAndPassword,
+	onAuthStateChanged,
+	GoogleAuthProvider,
+	signInWithPopup,
 } from "firebase/auth";
-import { ref, set } from "firebase/database";
-import { ReadVResult } from "fs";
 import { db, auth } from "../firebaseConfig";
-
 import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
 import { userActions } from "../state/userSlice";
 import { uiActions } from "../state/uiSlice";
@@ -37,192 +22,191 @@ import { uiActions } from "../state/uiSlice";
 const googleProvider = new GoogleAuthProvider();
 
 const useDatabase = () => {
-  const dispatch = useAppDispatch();
-  const { userData } = useAppSelector(state => state.user);
-  const [loggedIn, setLoggedIn] = useState(false);
+	const dispatch = useAppDispatch();
+	const { userData } = useAppSelector((state) => state.user);
+	const [loggedIn, setLoggedIn] = useState(false);
 
-  useEffect(() => {
-    onAuthStateChanged(auth, user => {
-      if (user && loggedIn === false) {
-        setLoggedInUser(user);
-      } else {
-        removeLoggedInUser();
-      }
-    });
-  }, []);
+	const setLoggedInUser = (user: any) => {
+		setLoggedIn(true);
+		dispatch(
+			userActions.setUserData({
+				name: user.displayName || user.email,
+				email: user.email,
+				uid: user.uid,
+				photoURL: user.photoURL || "",
+			}),
+		);
+		localStorage.setItem("userId", user.uid);
+	};
 
-  const setNotificationPopup = (
-    isOpen: boolean,
-    isSuccess = true,
-    content: string
-  ) => {
-    dispatch(
-      uiActions.toggleNotificationPopup({
-        open: isOpen,
-        success: isSuccess,
-        content,
-      })
-    );
-  };
+	const removeLoggedInUser = () => {
+		setLoggedIn(false);
+		dispatch(userActions.setInitialState());
+		localStorage.removeItem("userId");
+	};
 
-  const setLoader = (active: boolean) => {
-    dispatch(uiActions.toggleLoader(active));
-  };
+	useEffect(() => {
+		onAuthStateChanged(auth, (user) => {
+			if (user && loggedIn === false) {
+				setLoggedInUser(user);
+			} else {
+				removeLoggedInUser();
+			}
+		});
+	}, []);
 
-  const addUserToDB = (user: any) => {
-    const userRef = doc(db, "users", userData.uid);
-    setDoc(
-      userRef,
-      {
-        id: user.uid,
-        email: user.email,
-        name: user.displayName || user.email,
-        favouriteCoins: [],
-        walletCoins: [],
-      },
-      { merge: true }
-    );
-  };
+	const setNotificationPopup = (
+		isOpen: boolean,
+		content: string,
+		isSuccess = true,
+	) => {
+		dispatch(
+			uiActions.toggleNotificationPopup({
+				open: isOpen,
+				success: isSuccess,
+				content,
+			}),
+		);
+	};
 
-  const setLoggedInUser = (user: any) => {
-    setLoggedIn(true);
-    dispatch(
-      userActions.setUserData({
-        name: user.displayName || user.email,
-        email: user.email,
-        uid: user.uid,
-        photoURL: user.photoURL || "",
-      })
-    );
-    localStorage.setItem("userId", user.uid);
-  };
+	const setLoader = (active: boolean) => {
+		dispatch(uiActions.toggleLoader(active));
+	};
 
-  const removeLoggedInUser = () => {
-    setLoggedIn(false);
-    dispatch(userActions.setInitialState());
-    localStorage.removeItem("userId");
-  };
+	const addUserToDB = (user: any) => {
+		const userRef = doc(db, "users", userData.uid);
+		setDoc(
+			userRef,
+			{
+				id: user.uid,
+				email: user.email,
+				name: user.displayName || user.email,
+				favouriteCoins: [],
+				walletCoins: [],
+			},
+			{ merge: true },
+		);
+	};
 
-  const signupCustomUser = async (
-    emailValue: string,
-    passwordValue: string
-  ) => {
-    setLoader(true);
+	const signupCustomUser = async (
+		emailValue: string,
+		passwordValue: string,
+	) => {
+		setLoader(true);
 
-    try {
-      const result = await createUserWithEmailAndPassword(
-        auth,
-        emailValue,
-        passwordValue
-      );
+		try {
+			const result = await createUserWithEmailAndPassword(
+				auth,
+				emailValue,
+				passwordValue,
+			);
 
-      setLoader(false);
-      addUserToDB(result.user);
+			setLoader(false);
+			addUserToDB(result.user);
 
-      setNotificationPopup(true, true, "Congratulations, you got registered!");
-      setTimeout(() => {
-        setNotificationPopup(
-          false,
-          true,
-          "Congratulations, you got registered!"
-        );
-      }, 3000);
-    } catch {
-      setLoader(false);
+			setNotificationPopup(true, "Congratulations, you got registered!", true);
+			setTimeout(() => {
+				setNotificationPopup(
+					false,
+					"Congratulations, you got registered!",
+					true,
+				);
+			}, 3000);
+		} catch {
+			setLoader(false);
 
-      setNotificationPopup(true, false, "We cannot register you :(");
-      setTimeout(() => {
-        setNotificationPopup(false, false, "We cannot register you :(!");
-      }, 3000);
-    }
-  };
+			setNotificationPopup(true, "We cannot register you :(", false);
+			setTimeout(() => {
+				setNotificationPopup(false, "We cannot register you :(!", false);
+			}, 3000);
+		}
+	};
 
-  const authWithEmail = async (emailValue: string, passwordValue: string) => {
-    setLoader(true);
+	const authWithEmail = async (emailValue: string, passwordValue: string) => {
+		setLoader(true);
 
-    try {
-      const result = await signInWithEmailAndPassword(
-        auth,
-        emailValue,
-        passwordValue
-      );
+		try {
+			const result = await signInWithEmailAndPassword(
+				auth,
+				emailValue,
+				passwordValue,
+			);
 
-      setLoader(false);
-      setLoggedInUser(result.user);
-      dispatch(uiActions.closeAuthPopup());
+			setLoader(false);
+			setLoggedInUser(result.user);
+			dispatch(uiActions.closeAuthPopup());
 
-      setNotificationPopup(true, true, "Successfully logged in");
-      setTimeout(() => {
-        setNotificationPopup(false, true, "Successfully logged in");
-      }, 3000);
-    } catch {
-      setLoader(false);
+			setNotificationPopup(true, "Successfully logged in", true);
+			setTimeout(() => {
+				setNotificationPopup(false, "Successfully logged in", true);
+			}, 3000);
+		} catch {
+			setLoader(false);
 
-      setNotificationPopup(true, false, "Something went wrong :(");
-      setTimeout(() => {
-        setNotificationPopup(false, false, "Something went wrong :(");
-      }, 3000);
-    }
-  };
+			setNotificationPopup(true, "Something went wrong :(", false);
+			setTimeout(() => {
+				setNotificationPopup(false, "Something went wrong :(", false);
+			}, 3000);
+		}
+	};
 
-  const authWithGoogle = async () => {
-    setLoader(true);
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
+	const authWithGoogle = async () => {
+		setLoader(true);
+		try {
+			const result = await signInWithPopup(auth, googleProvider);
 
-      setLoader(false);
-      addUserToDB(result.user);
-      setLoggedInUser(result.user);
-      dispatch(uiActions.closeAuthPopup());
-      console.log(result.user);
-      setNotificationPopup(true, true, "Successfully logged in");
-      setTimeout(() => {
-        setNotificationPopup(false, true, "Successfully logged in");
-      }, 3000);
-    } catch {
-      setLoader(false);
-      setNotificationPopup(true, false, "Something went wrong :(");
-      setTimeout(() => {
-        setNotificationPopup(false, false, "Something went wrong :(");
-      }, 3000);
-    }
-  };
+			setLoader(false);
+			addUserToDB(result.user);
+			setLoggedInUser(result.user);
+			dispatch(uiActions.closeAuthPopup());
+			setNotificationPopup(true, "Successfully logged in", true);
+			setTimeout(() => {
+				setNotificationPopup(false, "Successfully logged in", true);
+			}, 3000);
+		} catch {
+			setLoader(false);
+			setNotificationPopup(true, "Something went wrong :(", false);
+			setTimeout(() => {
+				setNotificationPopup(false, "Something went wrong :(", false);
+			}, 3000);
+		}
+	};
 
-  const signoutUser = () => {
-    try {
-      removeLoggedInUser();
-      signOut(auth);
-      setNotificationPopup(true, true, "Successfully logged out");
+	const signoutUser = () => {
+		try {
+			removeLoggedInUser();
+			signOut(auth);
+			setNotificationPopup(true, "Successfully logged out", true);
 
-      setTimeout(() => {
-        setNotificationPopup(false, true, "Successfully logged out");
-      }, 3000);
-    } catch {
-      throw new Error("Cannot logout");
-    }
-  };
+			setTimeout(() => {
+				setNotificationPopup(false, "Successfully logged out", true);
+			}, 3000);
+		} catch {
+			throw new Error("Cannot logout");
+		}
+	};
 
-  const addToFavourites = async (coinName: string) => {
-    if (!userData.uid) {
-      dispatch(uiActions.toggleAuthPopup());
-      return;
-    }
-    if (coinName === "") return;
+	const addToFavourites = async (coinName: string) => {
+		if (!userData.uid) {
+			dispatch(uiActions.toggleAuthPopup());
+			return;
+		}
+		if (coinName === "") return;
 
-    const userRef = doc(db, "users", userData.uid);
-    await updateDoc(userRef, {
-      favouriteCoins: arrayUnion(coinName),
-    });
-  };
+		const userRef = doc(db, "users", userData.uid);
+		await updateDoc(userRef, {
+			favouriteCoins: arrayUnion(coinName),
+		});
+	};
 
-  return {
-    loggedIn,
-    authWithGoogle,
-    signoutUser,
-    signupCustomUser,
-    authWithEmail,
-    addToFavourites,
-  };
+	return {
+		loggedIn,
+		authWithGoogle,
+		signoutUser,
+		signupCustomUser,
+		authWithEmail,
+		addToFavourites,
+	};
 };
 
 export default useDatabase;
