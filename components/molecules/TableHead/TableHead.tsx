@@ -1,15 +1,15 @@
 interface Props {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }
 function TableHead({ children }: Props) {
-  return (
-    <thead
-      className="dark:bg-dmBase dark:border-dmBaseElement
+	return (
+		<thead
+			className="dark:bg-dmBase dark:border-dmBaseElement
 		 bg-white z-100 border-t-2 border-baseVeryLight "
-    >
-      {children}
-    </thead>
-  );
+		>
+			{children}
+		</thead>
+	);
 }
 
 export default TableHead;
