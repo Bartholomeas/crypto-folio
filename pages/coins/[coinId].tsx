@@ -19,13 +19,6 @@ interface InitialStateProps {
 	forum: string | string[];
 }
 
-// interface CoinDetailsProps {
-// 	[key: string]: string | number;
-// 	links: {
-// 		[key: string]: string | number;
-// 	};
-// }
-
 const initialState: InitialStateProps = {
 	homepage: "",
 	blockchain_site: "",
