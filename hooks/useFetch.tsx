@@ -1,25 +1,25 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
+import { useAppDispatch } from "../state/reduxHooks";
+import { coinsActions } from "../state/coinsSlice";
 
 const useFetch = () => {
-  const [data, setData] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("null");
+	const [resultData, setResultData] = useState({});
+	const [isLoading, setIsLoading] = useState(false);
+	const dispatch = useAppDispatch();
 
-  const sendRequest = async (url: string) => {
-    setIsLoading(true);
-    // setError("null");
-    try {
-      const response = await axios(url!);
-      setData(response);
-      response;
-    } catch (err) {
-      // setError("Something went wrong!");
-      throw new Error("Something went wrong!");
-    }
-  };
+	const sendRequest = async (url: string) => {
+		setIsLoading(true);
+		try {
+			const res = await axios(url!);
 
-  return { sendRequest, data };
+			dispatch(coinsActions.setTrendingCoins(res.data.coins));
+		} catch (err) {
+			throw new Error("Something went wrong!");
+		}
+	};
+
+	return { sendRequest, resultData };
 };
 
 export default useFetch;
