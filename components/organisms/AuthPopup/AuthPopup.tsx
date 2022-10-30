@@ -29,10 +29,10 @@ function AuthPopup() {
 		isError,
 	} = useForm();
 
-	const submitForm = (
+	function submitForm(
 		e: React.FormEvent<HTMLFormElement>,
 		type: "login" | "register",
-	) => {
+	) {
 		e.preventDefault();
 		const inputsValidity = validateAllInputs(
 			(e.target as HTMLElement).querySelectorAll("input"),
@@ -45,7 +45,7 @@ function AuthPopup() {
 		} else if (type === CallbackType.Register) {
 			signupCustomUser(values.email_register, values.password_register);
 		}
-	};
+	}
 
 	return (
 		<div

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import React, { useEffect } from "react";
 import InfoPanel from "../components/organisms/InfoPanel/InfoPanel";
 import Navbar from "../components/organisms/Navbar/Navbar";

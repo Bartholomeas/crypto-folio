@@ -2,35 +2,35 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "../state/reduxHooks";
 import { uiActions } from "../state/uiSlice";
 
-const useUiHandling = () => {
-  const dispatch = useDispatch();
-  const { lightMode } = useAppSelector(state => state.ui);
+function useUiHandling() {
+	const dispatch = useDispatch();
+	const { lightMode } = useAppSelector((state) => state.ui);
 
-  const checkTheme = () => {
-    const theme = JSON.parse(localStorage.getItem("lightMode") || "true");
-    dispatch(uiActions.setTheme(!theme));
-  };
+	function checkTheme() {
+		const theme = JSON.parse(localStorage.getItem("lightMode") || "true");
+		dispatch(uiActions.setTheme(!theme));
+	}
 
-  const toggleTheme = () => {
-    dispatch(uiActions.toggleTheme());
-    localStorage.setItem("lightMode", JSON.stringify(lightMode));
-  };
+	function toggleTheme() {
+		dispatch(uiActions.toggleTheme());
+		localStorage.setItem("lightMode", JSON.stringify(lightMode));
+	}
 
-  const setNotificationPopup = (
-    isOpen: boolean,
-    isSuccess = true,
-    content: string
-  ) => {
-    dispatch(
-      uiActions.toggleNotificationPopup({
-        open: isOpen,
-        success: isSuccess,
-        content,
-      })
-    );
-  };
+	function setNotificationPopup(
+		isOpen: boolean,
+		content: string,
+		isSuccess = true,
+	) {
+		dispatch(
+			uiActions.toggleNotificationPopup({
+				open: isOpen,
+				success: isSuccess,
+				content,
+			}),
+		);
+	}
 
-  return { setNotificationPopup, toggleTheme, checkTheme };
-};
+	return { setNotificationPopup, toggleTheme, checkTheme };
+}
 
 export default useUiHandling;
