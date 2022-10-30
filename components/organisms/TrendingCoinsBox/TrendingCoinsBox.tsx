@@ -16,27 +16,35 @@ function TrendingCoinsBox() {
 	return (
 		<div
 			className="dark:bg-dmBaseElement
-    relative flex flex-col gap-sm py-sm px-md bg-baseLight rounded min-h-[150px]
-    md: max-w-[350px]"
+    relative flex flex-col justify-center gap-sm  p-md bg-baseLight rounde
+    "
 		>
-			<FireIcon otherStyles="top-[-2rem] right-[-1rem] " />
+			<FireIcon otherStyles="top-[-2rem] right-[-1rem]" />
 
-			<h2 className="dark:text-support font-bold text-[1.6rem] text-fontOff">
+			<h2 className="dark:text-support font-bold text-md text-fontOff">
 				Trending coins
 			</h2>
 
-			<div className="flex flex-col gap-sm">
+			<div className="flex flex-col justify-center  gap-sm flex-wrap ">
 				{trendingCoins.map(
-					({ item: { coin_id, name, thumb, symbol, market_cap_rank } }) => (
-						<TrendingCoin
-							key={coin_id}
-							image={thumb}
-							symbol={symbol}
-							capRank={market_cap_rank}
-						>
-							{name}
-						</TrendingCoin>
-					),
+					(
+						{ item: { id, coin_id, name, thumb, symbol, market_cap_rank } },
+						index,
+					) => {
+						if (index > 5) return false;
+
+						return (
+							<TrendingCoin
+								key={coin_id}
+								hrefRoute={id}
+								image={thumb}
+								symbol={symbol}
+								capRank={market_cap_rank}
+							>
+								{name}
+							</TrendingCoin>
+						);
+					},
 				)}
 			</div>
 		</div>

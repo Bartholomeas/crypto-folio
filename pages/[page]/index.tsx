@@ -46,8 +46,8 @@ function SpecifiedPage({
 			<MarginBox />
 			<PageHeader>all Cryptocurrencies</PageHeader>
 			<div className="top-[5rem] flex flex-col gap w-full pt">
-				<Searchbar placeholderText="Search for coin.." />
 				<TrendingCoinsBox />
+				<Searchbar placeholderText="Search for coin.." />
 				<div className=" flex flex-col justify-center w-full overflow-x-scroll">
 					{coins.length < 1 && (
 						<p className="absolute font-bold text-xl text-accent">Loading...</p>
