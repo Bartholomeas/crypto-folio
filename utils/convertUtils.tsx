@@ -1,4 +1,4 @@
-export const convertDate = (dateArg: string, format: string) => {
+export const convertDate = (dateArg: number, format: string) => {
 	const date = new Date(dateArg);
 	let newFormat = format;
 
