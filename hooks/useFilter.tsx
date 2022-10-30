@@ -2,11 +2,11 @@ import { useState } from "react";
 import { CoinItem, coinsActions } from "../state/coinsSlice";
 import { useAppDispatch } from "../state/reduxHooks";
 
-const useFilter = () => {
+function useFilter() {
 	const dispatch = useAppDispatch();
 	const [isAscending, setIsAscending] = useState(true);
 
-	const sortCoins = (coinsList: CoinItem[], valueToSort: string) => {
+	function sortCoins(coinsList: CoinItem[], valueToSort: string) {
 		const sortedCoinsList =
 			coinsList.length > 1 &&
 			coinsList.sort((a, b) => {
@@ -23,9 +23,9 @@ const useFilter = () => {
 			});
 		dispatch(coinsActions.setCoinsList(sortedCoinsList));
 		setIsAscending(!isAscending);
-	};
+	}
 
 	return { sortCoins };
-};
+}
 
 export default useFilter;

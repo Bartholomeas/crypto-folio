@@ -21,12 +21,12 @@ import { uiActions } from "../state/uiSlice";
 
 const googleProvider = new GoogleAuthProvider();
 
-const useDatabase = () => {
+function useDatabase() {
 	const dispatch = useAppDispatch();
 	const { userData } = useAppSelector((state) => state.user);
 	const [loggedIn, setLoggedIn] = useState(false);
 
-	const setLoggedInUser = (user: any) => {
+	function setLoggedInUser(user: any) {
 		setLoggedIn(true);
 		dispatch(
 			userActions.setUserData({
@@ -37,13 +37,13 @@ const useDatabase = () => {
 			}),
 		);
 		localStorage.setItem("userId", user.uid);
-	};
+	}
 
-	const removeLoggedInUser = () => {
+	function removeLoggedInUser() {
 		setLoggedIn(false);
 		dispatch(userActions.setInitialState());
 		localStorage.removeItem("userId");
-	};
+	}
 
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
@@ -55,11 +55,11 @@ const useDatabase = () => {
 		});
 	}, []);
 
-	const setNotificationPopup = (
+	function setNotificationPopup(
 		isOpen: boolean,
 		content: string,
 		isSuccess = true,
-	) => {
+	) {
 		dispatch(
 			uiActions.toggleNotificationPopup({
 				open: isOpen,
@@ -67,13 +67,13 @@ const useDatabase = () => {
 				content,
 			}),
 		);
-	};
+	}
 
-	const setLoader = (active: boolean) => {
+	function setLoader(active: boolean) {
 		dispatch(uiActions.toggleLoader(active));
-	};
+	}
 
-	const addUserToDB = (user: any) => {
+	function addUserToDB(user: any) {
 		const userRef = doc(db, "users", userData.uid);
 		setDoc(
 			userRef,
@@ -86,12 +86,9 @@ const useDatabase = () => {
 			},
 			{ merge: true },
 		);
-	};
+	}
 
-	const signupCustomUser = async (
-		emailValue: string,
-		passwordValue: string,
-	) => {
+	async function signupCustomUser(emailValue: string, passwordValue: string) {
 		setLoader(true);
 
 		try {
@@ -120,9 +117,9 @@ const useDatabase = () => {
 				setNotificationPopup(false, "We cannot register you :(!", false);
 			}, 3000);
 		}
-	};
+	}
 
-	const authWithEmail = async (emailValue: string, passwordValue: string) => {
+	async function authWithEmail(emailValue: string, passwordValue: string) {
 		setLoader(true);
 
 		try {
@@ -148,9 +145,9 @@ const useDatabase = () => {
 				setNotificationPopup(false, "Something went wrong :(", false);
 			}, 3000);
 		}
-	};
+	}
 
-	const authWithGoogle = async () => {
+	async function authWithGoogle() {
 		setLoader(true);
 		try {
 			const result = await signInWithPopup(auth, googleProvider);
@@ -170,9 +167,9 @@ const useDatabase = () => {
 				setNotificationPopup(false, "Something went wrong :(", false);
 			}, 3000);
 		}
-	};
+	}
 
-	const signoutUser = () => {
+	function signoutUser() {
 		try {
 			removeLoggedInUser();
 			signOut(auth);
@@ -184,9 +181,9 @@ const useDatabase = () => {
 		} catch {
 			throw new Error("Cannot logout");
 		}
-	};
+	}
 
-	const addToFavourites = async (coinName: string) => {
+	async function addToFavourites(coinName: string) {
 		if (!userData.uid) {
 			dispatch(uiActions.toggleAuthPopup());
 			return;
@@ -197,7 +194,7 @@ const useDatabase = () => {
 		await updateDoc(userRef, {
 			favouriteCoins: arrayUnion(coinName),
 		});
-	};
+	}
 
 	return {
 		loggedIn,
@@ -207,7 +204,7 @@ const useDatabase = () => {
 		authWithEmail,
 		addToFavourites,
 	};
-};
+}
 
 export default useDatabase;
 
