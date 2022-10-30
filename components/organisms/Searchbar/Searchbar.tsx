@@ -44,7 +44,7 @@ function Searchbar({ placeholderText = "" }: Props) {
 	}, [inputValue, getSearchedCoins]);
 
 	return (
-		<div className=" relative flex flex-col w-full min-h-[3rem] md:max-w-[400px] z-[100]">
+		<div className="relative flex flex-col w-full min-h-[3rem] md:max-w-[400px] z-[100]">
 			<Label forProp="searchbar">
 				<div className="dark:border-support flex justify-between items-center w-full h-full border-accent border-solid border-l-4 rounded-md">
 					<input
@@ -53,7 +53,7 @@ function Searchbar({ placeholderText = "" }: Props) {
 						onBlur={(e) => clearCoinsData(e)}
 						id="searchbar"
 						placeholder={placeholderText}
-						className="dark:bg-dmBase dark:text-baseLight
+						className="dark:bg-dmBaseElement dark:text-baseLight
 						text w-full h-full max-h-[4rem] py px-xs bg-baseVeryLight "
 						type="text"
 					/>

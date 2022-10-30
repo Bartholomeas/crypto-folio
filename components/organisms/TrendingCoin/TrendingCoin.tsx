@@ -3,24 +3,30 @@ import Link from "next/link";
 import React from "react";
 
 interface Props {
-	children: React.ReactNode | React.ReactNode[];
+	hrefRoute: string;
 	image: string;
 	symbol: string;
 	capRank: number;
+	children: React.ReactNode | React.ReactNode[];
 }
 
-function TrendingCoin({ image, symbol, capRank, children }: Props) {
+function TrendingCoin({ hrefRoute, image, symbol, capRank, children }: Props) {
 	return (
-		<Link href="">
+		<Link href={`coins/${hrefRoute}`}>
 			<div
 				className="dark:bg-dmBase
-			flex items-center justify-between bg-baseVeryLight rounded-xl py-xs px-sm text cursor-pointer"
+			flex items-center justify-between md:basis-1/4 bg-baseVeryLight rounded-xl py-sm px-sm text cursor-pointer hover:scale-[1.02] transition-transform
+			md:py-0
+			"
 			>
 				<div className="flex items-center gap-sm">
-					<Image src={image || "/"} height="20px" width="20px" />
+					<Image src={image || "/"} height="25px" width="25px" />
 					<p className="dark:text-dmFont text-font">{children}</p>
+					<p className="dark:text-dmFont text-xs text-font font-bold">
+						{symbol}
+					</p>
 				</div>
-				<p className="dark:text-dmFont text-xs font-bold"> #{capRank}</p>
+				<p className=" dark:text-dmFont text-xs font-bold"> #{capRank}</p>
 			</div>
 		</Link>
 	);
