@@ -27,8 +27,9 @@ function CoinPriceBox({
 			<div className="flex items-center gap-sm">
 				<DetailsBigPrice>{curr_price}</DetailsBigPrice>
 				<p
-					className="
-				text-font font-semibold py-[0.3rem] px-xs bg-support rounded text-xs"
+					className={`
+				text-font font-semibold py-[0.3rem] px-xs rounded text-xs
+				${price_change_24h > 0 ? "bg-support" : "bg-error"}`}
 				>
 					{price_change_24h > 0 ? "+" : ""}
 					{price_change_24h} %

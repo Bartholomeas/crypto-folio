@@ -22,7 +22,7 @@ function CoinMarketData({ children, dataValue, secondDataValue }: Props) {
 			) : (
 				<p
 					className=" dark:text-baseLight
-				text text-font font-semibold"
+				text text-font  font-semibold"
 				>
 					{dataValue}
 				</p>

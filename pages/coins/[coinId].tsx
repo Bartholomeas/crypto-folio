@@ -27,8 +27,9 @@ const initialState: InitialStateProps = {
 	forum: "",
 };
 
-function CoinDetails({ coinDetails }: any) {
+function CoinDetails({ coinDetails, chartDetails }: any) {
 	const [links, setLinks] = useState<InitialStateProps>(initialState);
+
 	const {
 		homepage,
 		subreddit_url,
@@ -36,8 +37,16 @@ function CoinDetails({ coinDetails }: any) {
 		official_forum_url,
 		repos_url: { github },
 	} = coinDetails.links;
-	const { symbol, name, market_cap_rank, description, image, market_data } =
-		coinDetails;
+
+	const {
+		symbol,
+		name,
+		market_cap_rank,
+		description,
+		image,
+		market_data,
+		genesis_date,
+	} = coinDetails;
 
 	useEffect(() => {
 		setLinks({
@@ -62,7 +71,12 @@ function CoinDetails({ coinDetails }: any) {
 					className="coin-info-heading flex flex-col gap
 				md:max-w-[35%]"
 				>
-					<CoinHeadBox name={name} symbol={symbol} rank={market_cap_rank} />
+					<CoinHeadBox
+						image={image.small}
+						name={name}
+						symbol={symbol}
+						rank={market_cap_rank}
+					/>
 					<div className="flex flex-col gap-sm">
 						<p className="dark:text-dmFont text-fontLight text font-semibold">
 							links
@@ -75,6 +89,7 @@ function CoinDetails({ coinDetails }: any) {
 						</div>
 					</div>
 				</div>
+
 				<div
 					className="dark:border-dmFont
 					flex flex-col gap-lg w-full h-fit
@@ -116,10 +131,7 @@ function CoinDetails({ coinDetails }: any) {
 			</div>
 
 			<div className="content-container flex flex-col w-full gap-lg">
-				<SparklineChart
-					coinName={name}
-					chartData={market_data.sparkline_7d.price}
-				/>
+				<SparklineChart chartData={chartDetails} />
 
 				<div className="content flex flex-col gap lg:flex-row  ">
 					<CoinStatsBox
@@ -136,6 +148,7 @@ function CoinDetails({ coinDetails }: any) {
 						athDate={market_data.ath_date.usd}
 						allTimeLow={market_data.atl.usd}
 						atlDate={market_data.atl_date.usd}
+						bornIn={genesis_date}
 					/>
 					<CoinDescription coinName={name}>{description.en}</CoinDescription>
 				</div>
@@ -151,16 +164,22 @@ export const getServerSideProps = async (
 	const { coinId } = context.params!;
 
 	try {
-		const res = await axios(
-			`https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=true`,
-		);
+		const [detailsResponse, chartResponse] = await Promise.all([
+			axios(
+				`https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=true`,
+			),
+			axios(
+				`https://api.coingecko.com/api/v3/coins/${coinId}/ohlc?vs_currency=usd&days=7`,
+			),
+		]);
+
 		if (!coinId) return;
 		// eslint-disable-next-line consistent-return
 		return {
 			props: {
-				coinDetails: res.data,
+				coinDetails: detailsResponse.data,
+				chartDetails: chartResponse.data,
 			},
-			// revalidate: 60,
 		};
 	} catch {
 		throw new Error("Something went wrong in staticProps :(");
