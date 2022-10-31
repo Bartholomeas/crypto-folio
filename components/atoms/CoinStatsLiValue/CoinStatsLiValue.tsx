@@ -5,7 +5,7 @@ interface Props {
 function CoinStatsLiValue({ children, type }: Props) {
 	return (
 		<p
-			className={`dark:text-dmFont font-semibold text text-font ${
+			className={`dark:text-dmFont font-semibold text text-font text-end ${
 				type === "success" && "text-success dark:text-support"
 			}
 			${type === "error" && "text-error"}

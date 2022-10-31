@@ -18,6 +18,7 @@ interface Props {
 	athDate: number;
 	allTimeLow: number;
 	atlDate: number;
+	bornIn: string;
 }
 
 enum ValueType {
@@ -39,6 +40,7 @@ function CoinStatsBox({
 	athDate,
 	allTimeLow,
 	atlDate,
+	bornIn,
 }: Props) {
 	return (
 		<div
@@ -111,6 +113,10 @@ function CoinStatsBox({
 					<CoinStatsLiValue>
 						{convertDate(atlDate, "MM-dd-yyyy")}
 					</CoinStatsLiValue>
+				</CoinStatsLi>
+				<CoinStatsLi>
+					<CoinStatsLiKey>Born in</CoinStatsLiKey>
+					<CoinStatsLiValue>{bornIn}</CoinStatsLiValue>
 				</CoinStatsLi>
 			</ul>
 		</div>

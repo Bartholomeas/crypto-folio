@@ -1,4 +1,4 @@
-export const convertDate = (dateArg: number, format: string) => {
+export function convertDate(dateArg: number, format: string) {
 	const date = new Date(dateArg);
 	let newFormat = format;
 
@@ -16,7 +16,9 @@ export const convertDate = (dateArg: number, format: string) => {
 
 	newFormat = newFormat.replace("dd", day.toString().padStart(2, "0"));
 	return newFormat;
-};
+}
 
-export const addSpacesToNumber = (numberData: number) =>
-	numberData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+export function addSpacesToNumber(numberData: number) {
+	if (!numberData) return "Not defined";
+	return numberData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
