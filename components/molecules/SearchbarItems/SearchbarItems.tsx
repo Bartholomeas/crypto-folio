@@ -8,7 +8,7 @@ interface Props {
 function SearchbarItems({ coinsData }: Props) {
 	return (
 		<div
-			className={`dark:bg-dmBase dark:border-support
+			className={`dark:bg-dmBase dark:border-dmBorderColor
 			 absolute flex flex-col gap-sm bg-baseVeryLight top-[100%] left-0 w-full p-sm translate-y-[.3rem] rounded text-xs border-2 border-solid border-baseLight max-h-[400px] overflow-y-scroll
             ${coinsData.length < 1 && "hidden"}
 			`}

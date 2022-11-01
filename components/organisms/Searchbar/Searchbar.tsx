@@ -12,12 +12,12 @@ function Searchbar({ placeholderText = "" }: Props) {
 	const [inputValue, setInputValue] = useState("");
 	const [searchedCoins, setSearchedCoins] = useState([]);
 
-	const clearCoinsData = (e: React.FocusEvent<HTMLInputElement>) => {
+	function clearCoinsData(e: React.FocusEvent<HTMLInputElement>) {
 		let currentValue = e.target.value;
 		currentValue = "";
 		setInputValue("");
 		setSearchedCoins([]);
-	};
+	}
 
 	const getSearchedCoins = useCallback(async (coinValue: string) => {
 		try {
@@ -30,9 +30,9 @@ function Searchbar({ placeholderText = "" }: Props) {
 		}
 	}, []);
 
-	const getInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+	function getInputValue(e: React.ChangeEvent<HTMLInputElement>) {
 		setInputValue(e.target.value);
-	};
+	}
 	useEffect(() => {
 		if (inputValue === "") return;
 		const debounceTimeout = setTimeout(() => {
@@ -44,22 +44,25 @@ function Searchbar({ placeholderText = "" }: Props) {
 	}, [inputValue, getSearchedCoins]);
 
 	return (
-		<div className="relative flex flex-col w-full min-h-[3rem] md:max-w-[400px] z-[100]">
+		<div className="relative flex flex-col w-full min-h-[3rem] md:max-w-[300px] z-[100]">
 			<Label forProp="searchbar">
-				<div className="dark:border-support flex justify-between items-center w-full h-full border-accent border-solid border-l-4 rounded-md">
+				<div
+					className="dark:border-dmBorderColor border-2
+				 flex justify-between items-center w-full h-full border-borderColor rounded-md"
+				>
 					<input
 						autoComplete="off"
 						onChange={(e) => getInputValue(e)}
 						onBlur={(e) => clearCoinsData(e)}
 						id="searchbar"
 						placeholder={placeholderText}
-						className="dark:bg-dmBaseElement dark:text-baseLight
-						text w-full h-full max-h-[4rem] py px-xs bg-baseVeryLight "
+						className="dark:bg-dmBase dark:text-baseLight
+						text w-full h-full max-h-[4rem] rounded py px-xs bg-white"
 						type="text"
 					/>
 					<span
-						className="dark:bg-support
-					flex items-center justify-center h-full max-h-[4rem] p-xs rounded-r bg-baseVeryLight text-lg text-fontLight"
+						className="dark:bg-base
+					flex items-center justify-center h-full max-h-[4rem] p-xs rounded-r text-lg text-fontLight"
 					>
 						<MdSearch />
 					</span>
@@ -71,3 +74,27 @@ function Searchbar({ placeholderText = "" }: Props) {
 }
 
 export default Searchbar;
+
+// <div className="relative flex flex-col w-full min-h-[3rem] md:max-w-[400px] z-[100]">
+// <Label forProp="searchbar">
+// 	<div className="dark:border-support flex justify-between items-center w-full h-full border-accent border-solid border-l-4 rounded-md">
+// 		<input
+// 			autoComplete="off"
+// 			onChange={(e) => getInputValue(e)}
+// 			onBlur={(e) => clearCoinsData(e)}
+// 			id="searchbar"
+// 			placeholder={placeholderText}
+// 			className="dark:bg-dmBaseElement dark:text-baseLight
+// 			text w-full h-full max-h-[4rem] py px-xs bg-baseVeryLight "
+// 			type="text"
+// 		/>
+// 		<span
+// 			className="dark:bg-support
+// 		flex items-center justify-center h-full max-h-[4rem] p-xs rounded-r bg-baseVeryLight text-lg text-fontLight"
+// 		>
+// 			<MdSearch />
+// 		</span>
+// 	</div>
+// </Label>
+// <SearchbarItems coinsData={searchedCoins} />
+// </div>

@@ -52,8 +52,8 @@ function SparklineChart({ chartData }: Props) {
 		],
 	};
 	return (
-		<div className="">
-			<Line className="" options={options} data={data} />
+		<div>
+			<Line options={options} data={data} />
 		</div>
 	);
 }

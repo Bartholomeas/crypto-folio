@@ -4,7 +4,6 @@ import useFetch from "../../../hooks/useFetch";
 import { useAppSelector } from "../../../state/reduxHooks";
 import FireIcon from "../../atoms/FireIcon/FireIcon";
 import TrendingCoin from "../TrendingCoin/TrendingCoin";
-import { CoinItem } from "../../../state/coinsSlice";
 
 function TrendingCoinsBox() {
 	const { sendRequest } = useFetch();
@@ -15,8 +14,8 @@ function TrendingCoinsBox() {
 	}, []);
 	return (
 		<div
-			className="dark:bg-dmBaseElement
-    relative flex flex-col justify-center gap-sm  p-md bg-baseLight rounde
+			className="dark:bg-dmBaseContrast
+    relative flex flex-col justify-center gap-sm p-md bg-baseVeryLight rounded
     "
 		>
 			<FireIcon otherStyles="top-[-2rem] right-[-1rem]" />
