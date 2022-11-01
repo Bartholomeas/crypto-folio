@@ -41,7 +41,7 @@ function SpecifiedPage({
 			className="
 			dark:bg-dmBase
 			flex flex-col items-start gap w-full px min-h-[100vh]  max-w
-    md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] md:overflow-y-scroll"
+    md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] md:overflow-y-scroll bg-white"
 		>
 			<MarginBox />
 			<PageHeader>all Cryptocurrencies</PageHeader>

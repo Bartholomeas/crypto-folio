@@ -53,7 +53,10 @@ module.exports = {
 				fontOff: "#0C1069",
 				fontLight: "#5E688A",
 
+				borderColor: "#D1D6E9",
+
 				accent: "#111BFF",
+				// accent: "#0B72FD",
 				accentDark: "#0911CF",
 				accentHover: "rgba(17, 27, 255, 0.05)",
 
@@ -67,10 +70,12 @@ module.exports = {
 				success: "#066C47",
 				error: "#FD6D6D",
 
+				dmBorderColor: "#343845",
+
 				dmFont: "#B5BEDF",
-				dmBase: "#13182C",
-				dmBaseContrast: "#0A1A58",
-				dmBaseElement: "#18224D",
+				dmBase: "#0B0F20",
+				dmBaseContrast: "#1A2139",
+				dmBaseElement: "#1A2139",
 			},
 
 			gap: {
