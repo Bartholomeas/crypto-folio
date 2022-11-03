@@ -96,11 +96,31 @@ module.exports = {
 					"0%, 100%": { transform: "rotate(-3deg)" },
 					"50%": { transform: "rotate(3deg)" },
 				},
+
+				float: {
+					"0%, 100%": { transform: "translate(-20%, 50%)" },
+					"50%": { transform: "rotate(30deg)" },
+				},
+
+				floatTwo: {
+					"0%, 100%": { transform: "translateY(50%)" },
+					"50%": { transform: "rotate(-30deg)" },
+				},
+				rotate: {
+					"50%": { transform: "rotate(-30deg)" },
+				},
 			},
 
 			animation: {
 				wiggle: "wiggle 1s ease-in-out infinite",
 				wiggleSlow: "wiggle 2s ease-in-out infinite",
+
+				float: "float 16s ease-in-out infinite",
+				floatSlow: "float 32s ease infinite",
+
+				floatTwo: "floatTwo 48s ease infinite",
+
+				rotate: "rotate 120s ease infinite",
 			},
 		},
 	},
