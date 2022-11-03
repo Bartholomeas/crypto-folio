@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { MdCheckCircle, MdOutlineError } from "react-icons/md";
 import { useAppSelector } from "../../../state/reduxHooks";
 

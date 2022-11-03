@@ -1,6 +1,4 @@
 /* eslint-disable react/button-has-type */
-import React from "react";
-
 interface Props {
 	onClickFn: () => void;
 	arrowDirection: boolean;
