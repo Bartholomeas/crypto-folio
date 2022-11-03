@@ -36,7 +36,7 @@ module.exports = {
 				sm: "1.4rem",
 				DEFAULT: "1.4rem",
 				md: "2rem",
-				lg: "2.4rem",
+				lg: "2.8rem",
 				xl: "3.2rem",
 			},
 
@@ -46,6 +46,7 @@ module.exports = {
 				DEFAULT: "2rem",
 				md: "2.4rem",
 				lg: "3.2rem",
+				section: "8rem",
 			},
 
 			colors: {
@@ -55,9 +56,10 @@ module.exports = {
 
 				borderColor: "#D1D6E9",
 
-				accent: "#111BFF",
-				// accent: "#0B72FD",
-				accentDark: "#0911CF",
+				accent: "#0B72FD",
+				// accent: "#111BFF",
+				accentDark: "#0B5DCB",
+				// accentDark: "#0911CF",
 				accentHover: "rgba(17, 27, 255, 0.05)",
 
 				baseLight: "#EDF0FB",
@@ -83,6 +85,10 @@ module.exports = {
 				DEFAULT: "2rem",
 				lg: "4rem",
 				xl: "8rem",
+			},
+
+			lineHeight: {
+				DEFAULT: "3rem",
 			},
 
 			keyframes: {

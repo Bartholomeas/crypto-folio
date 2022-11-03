@@ -42,14 +42,14 @@ function Navbar() {
 			<div
 				className="nav-wrapper flex justify-between items-center w-full
 				 px-md py-sm
-			 md:justify-center md:w-auto md:px-0 overflow-hidden "
+			 md:justify-center md:i	tems-start md:w-auto md:px-0 overflow-hidden "
 			>
 				<Logo />
 				<BurgerButton onClickFn={() => dispatch(uiActions.toggleNavbar())} />
 			</div>
 
 			<div
-				className={`dark:bg-dmBase  nav-menu fixed flex flex-col justify-around items-center w-full  top-[70px] left-0 bottom-0 right-0 bg-white transition-transform overflow-hidden
+				className={`dark:bg-dmBase  nav-menu fixed flex flex-col justify-around items-center w-full  top-[70px] left-0 bottom-0 right-0 bg-white  transition-transform overflow-hidden
 				 md:relative md:justify-between md:top-0 md:w-full md:my-auto md:h-full md:bg-transparent md:translate-x-0  ${
 						isNavOpen ? "translate-x-0" : "translate-x-[100%] "
 					}`}
