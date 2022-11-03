@@ -5,7 +5,7 @@ import BasicLink from "../components/atoms/BasicLink/BasicLink";
 import Button from "../components/atoms/Button/Button";
 import PageHeader from "../components/atoms/PageHeader/PageHeader";
 
-function index() {
+function Landing() {
 	return (
 		<div
 			className="relative flex flex-col justify-center items-center gap w-full h-[100vh] py-section px bg-white max-w
@@ -59,4 +59,4 @@ md:w-[300px] md:h-[300px]
 	);
 }
 
-export default index;
+export default Landing;
