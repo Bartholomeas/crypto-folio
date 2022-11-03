@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unknown-property */
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import InfoPanel from "../components/organisms/InfoPanel/InfoPanel";
 import Navbar from "../components/organisms/Navbar/Navbar";
@@ -12,14 +13,18 @@ interface Props {
 
 function AppLayout({ children }: Props) {
 	const { notificationPopup, lightMode } = useAppSelector((state) => state.ui);
-
 	const { checkTheme } = useUiHandling();
-
+	const { pathname } = useRouter();
 	useEffect(() => {
 		checkTheme();
 	}, [lightMode]);
 
-	return (
+	console.log(pathname);
+	if (pathname === "/") {
+		console.log("gut");
+	}
+
+	return pathname !== "/" ? (
 		<div
 			className={`${
 				lightMode && "dark"
@@ -39,6 +44,8 @@ function AppLayout({ children }: Props) {
 			</NotificationPopup>
 			<InfoPanel />
 		</div>
+	) : (
+		<div>{children}</div>
 	);
 }
 
