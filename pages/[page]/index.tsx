@@ -3,11 +3,9 @@ import { useEffect } from "react";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-
 import FavouriteButton from "../../components/atoms/FavouriteButton/FavouriteButton";
 import MarginBox from "../../components/atoms/MarginBox/MarginBox";
 import PageHeader from "../../components/atoms/PageHeader/PageHeader";
-
 import TableBody from "../../components/molecules/TableBody/TableBody";
 import TableData from "../../components/molecules/TableData/TableData";
 import TableHead from "../../components/molecules/TableHead/TableHead";
@@ -15,13 +13,13 @@ import TableHeader from "../../components/molecules/TableHeader/TableHeader";
 import TableRow from "../../components/molecules/TableRow/TableRow";
 import Searchbar from "../../components/organisms/Searchbar/Searchbar";
 import Table from "../../components/organisms/Table/Table";
-import { CoinItem, coinsActions } from "../../state/coinsSlice";
 import Footer from "../../components/organisms/Footer/Footer";
 import Pagination from "../../components/organisms/Pagination/Pagination";
-import { addSpacesToNumber } from "../../utils/convertUtils";
-import { useAppDispatch, useAppSelector } from "../../state/reduxHooks";
 import useFilter from "../../hooks/useFilter";
 import TrendingCoinsBox from "../../components/organisms/TrendingCoinsBox/TrendingCoinsBox";
+import { CoinItem, coinsActions } from "../../state/coinsSlice";
+import { addSpacesToNumber } from "../../utils/convertUtils";
+import { useAppDispatch, useAppSelector } from "../../state/reduxHooks";
 
 function SpecifiedPage({
 	coins,
