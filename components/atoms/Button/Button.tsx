@@ -12,9 +12,9 @@ function Button({ children, onClickFn, isAccent, otherStyles }: Props) {
 		<button
 			type="button"
 			onClick={onClickFn}
-			className={`relative flex items-center justify-center gap-sm px-sm py-sm h-full w-full text rounded-xl  ${
+			className={`relative flex items-center justify-center gap-sm px-sm py-sm h-full w-full text font-bold rounded-xl  ${
 				isAccent
-					? " bg-accentDark text-white font-bold hover:bg-accent"
+					? " bg-accentDark text-white  hover:bg-accent"
 					: "dark:bg-dmBaseElement dark:hover:bg-accentDark dark:text-baseLight bg-baseLight text-font hover:bg-baseVeryLight"
 			}
             transition-colors

@@ -2,3 +2,10 @@ node_modules
 build
 dist
 tailwind.config.js
+firebaseConfig.js
+tsconfig.json
+coverage
+.eslintrc
+postcss.config.js
+package.json
+next.config.js
