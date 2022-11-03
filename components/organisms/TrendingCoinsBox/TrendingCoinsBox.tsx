@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
 import useFetch from "../../../hooks/useFetch";
 import { useAppSelector } from "../../../state/reduxHooks";
 import FireIcon from "../../atoms/FireIcon/FireIcon";
