@@ -8,6 +8,7 @@ module.exports = {
 	theme: {
 		maxWidth: {
 			DEFAULT: "1200px",
+			sm: "900px",
 		},
 
 		screens: {
@@ -38,6 +39,10 @@ module.exports = {
 				md: "2rem",
 				lg: "2.6rem",
 				xl: "3.2rem",
+
+				h1: "3.2rem",
+				h2: "2.8rem",
+				h3: "2.4rem",
 			},
 
 			padding: {
@@ -57,9 +62,8 @@ module.exports = {
 				borderColor: "#D1D6E9",
 
 				accent: "#0B72FD",
-				// accent: "#111BFF",
 				accentDark: "#0B5DCB",
-				// accentDark: "#0911CF",
+				accentVeryDark: "#07469A",
 				accentHover: "rgba(17, 27, 255, 0.05)",
 
 				baseLight: "#EDF0FB",

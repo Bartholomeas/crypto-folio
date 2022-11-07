@@ -6,8 +6,9 @@ interface Props {
 function PageHeader({ children, appendAfter, otherStyles }: Props) {
 	return (
 		<h1
-			className={`w-full py-md font-bold text-font rounded text-lg leading-relaxed
-			md:text-xl
+			className={`dark:text-white
+			w-full py-md font-bold text-font rounded leading-relaxed
+			text-h1
 		${otherStyles ?? ""}`}
 		>
 			{children}{" "}

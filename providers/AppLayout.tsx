@@ -15,14 +15,10 @@ function AppLayout({ children }: Props) {
 	const { notificationPopup, lightMode } = useAppSelector((state) => state.ui);
 	const { checkTheme } = useUiHandling();
 	const { pathname } = useRouter();
+
 	useEffect(() => {
 		checkTheme();
 	}, [lightMode]);
-
-	console.log(pathname);
-	if (pathname === "/") {
-		console.log("gut");
-	}
 
 	return pathname !== "/" ? (
 		<div
