@@ -1,10 +1,18 @@
 interface Props {
-  children: string;
+	children: string;
+	isLight?: boolean;
 }
-function SecondHeader({ children }: Props) {
-  return (
-    <h2 className="font-bold text-accentDark text-lg md:text-lg">{children}</h2>
-  );
+function SecondHeader({ children, isLight = false }: Props) {
+	return (
+		<h2
+			className={`font-bold ${
+				isLight ? "text-white" : "text-accentDark"
+			} text-h2
+		 `}
+		>
+			{children}
+		</h2>
+	);
 }
 
 export default SecondHeader;
