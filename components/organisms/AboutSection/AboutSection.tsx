@@ -2,9 +2,10 @@ import React from "react";
 import CircleBgImage from "../../atoms/CircleBgImage/CircleBgImage";
 import SecondHeader from "../../atoms/SecondHeader/SecondHeader";
 import ThirdHeader from "../../atoms/ThirdHeader/ThirdHeader";
-import portal from "../../../assets/portal3d.png";
+import coins from "../../../assets/coins3d.png";
 import fire from "../../../assets/fire3d.png";
 import safe from "../../../assets/safe3d.png";
+import AboutOfferArticle from "../../molecules/AboutOfferArticle/AboutOfferArticle";
 
 function AboutSection() {
 	return (
@@ -12,65 +13,34 @@ function AboutSection() {
 			<SecondHeader isLight>What do we offer?</SecondHeader>
 
 			<div className="flex flex-col gap-xl">
-				<div
-					className="flex flex-col-reverse items-center justify-between gap-lg w-full max-w-sm
-				md:flex-row"
+				<AboutOfferArticle
+					source={coins}
+					articleTitle="Controlling your assets"
 				>
-					<div
-						className="flex flex-col gap-sm text-center md:text-left
-					md:w-[50%]"
-					>
-						<ThirdHeader>Controlling your assets</ThirdHeader>
-						<p className="text-white text-sm">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Doloribus, reiciendis quos ullam unde cum animi, provident beatae
-							quod sed, quis sint iusto aliquam itaque? Consequatur asperiores
-							natus adipisci libero suscipit.
-						</p>
-					</div>
-					<CircleBgImage
-						source={portal}
-						alt="Portal with coins expanding from him"
-					/>
-				</div>
-
-				<div
-					className="flex flex-col-reverse items-center justify-between gap-lg w-full max-w-sm
-				md:flex-row"
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus,
+					reiciendis quos ullam unde cum animi, provident beatae quod sed, quis
+					sint iusto aliquam itaque? Consequatur asperiores natus adipisci
+					libero suscipit.
+				</AboutOfferArticle>
+				<AboutOfferArticle
+					source={fire}
+					articleTitle="Tracking trending cryptocurrencies"
+					isReverse
 				>
-					<div
-						className="flex flex-col gap-sm text-center md:text-left
-					md:w-[50%]"
-					>
-						<ThirdHeader>Controlling your assets</ThirdHeader>
-						<p className="text-white text-sm">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Doloribus, reiciendis quos ullam unde cum animi, provident beatae
-							quod sed, quis sint iusto aliquam itaque? Consequatur asperiores
-							natus adipisci libero suscipit.
-						</p>
-					</div>
-					<CircleBgImage source={fire} alt="Fire" />
-				</div>
-
-				<div
-					className="flex flex-col-reverse items-center justify-between gap-lg w-full max-w-sm
-				md:flex-row"
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus,
+					reiciendis quos ullam unde cum animi, provident beatae quod sed, quis
+					sint iusto aliquam itaque? Consequatur asperiores natus adipisci
+					libero suscipit.
+				</AboutOfferArticle>
+				<AboutOfferArticle
+					source={safe}
+					articleTitle="Your portfolio info is completely safe"
 				>
-					<div
-						className="flex flex-col gap-sm text-center md:text-left
-					md:w-[50%]"
-					>
-						<ThirdHeader>Controlling your assets</ThirdHeader>
-						<p className="text-white text-sm">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Doloribus, reiciendis quos ullam unde cum animi, provident beatae
-							quod sed, quis sint iusto aliquam itaque? Consequatur asperiores
-							natus adipisci libero suscipit.
-						</p>
-					</div>
-					<CircleBgImage source={safe} alt="Brown safe" />
-				</div>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus,
+					reiciendis quos ullam unde cum animi, provident beatae quod sed, quis
+					sint iusto aliquam itaque? Consequatur asperiores natus adipisci
+					libero suscipit.
+				</AboutOfferArticle>
 			</div>
 		</section>
 	);
