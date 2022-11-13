@@ -113,7 +113,7 @@ function AuthPopup() {
 							>
 								Password
 							</InputWithLabel>
-							<Button isAccent otherStyles="max-h-[5rem]">
+							<Button isSubmit isAccent otherStyles="max-h-[5rem]">
 								Log in
 							</Button>
 						</form>
@@ -159,7 +159,7 @@ function AuthPopup() {
 							>
 								Repeat password
 							</InputWithLabel>
-							<Button isAccent otherStyles="max-h-[5rem]">
+							<Button isSubmit isAccent otherStyles="max-h-[5rem]">
 								Sign in
 							</Button>
 						</form>

@@ -15,7 +15,7 @@ function index() {
 		>
 			<header
 				className="relative flex flex-col items-center gap max-h-[100vh] min-h-[90vh] max-w w-full px
-			md:min-h-[50vh]"
+			md:min-h-[100vh]"
 			>
 				<div className="relative flex flex-col items-center gap-sm max-w-[500px] z-10">
 					<div

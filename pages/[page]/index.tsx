@@ -32,7 +32,7 @@ function SpecifiedPage({
 
 	useEffect(() => {
 		dispatch(coinsActions.setCoinsList(coins));
-	}, [coins, dispatch]);
+	}, []);
 
 	return (
 		<main
