@@ -50,10 +50,9 @@ function useDatabase() {
 		return onAuthStateChanged(auth, (user) => {
 			if (user && !loggedIn) {
 				callback(user);
-				console.log("LOGOWANY");
+				console.log("TO FIX");
 			} else {
 				removeLoggedInUser();
-				console.log("not logged in");
 			}
 		});
 	}
@@ -63,7 +62,7 @@ function useDatabase() {
 		return () => {
 			unsubscribe();
 		};
-	}, []);
+	}, [userData.uid]);
 
 	function setNotificationPopup(
 		isOpen: boolean,
@@ -162,7 +161,7 @@ function useDatabase() {
 		setLoader(true);
 		try {
 			const result = await signInWithPopup(auth, googleProvider);
-			// console.log(result.user, userData.uid);
+
 			setLoader(false);
 			addUserToDB(result.user);
 			setLoggedInUser(result.user);
@@ -200,8 +199,7 @@ function useDatabase() {
 			return;
 		}
 		if (coinName === "") return;
-		const userRef = doc(db, "users");
-		console.log("favourites", userRef);
+		const userRef = doc(db, "users", userData.uid);
 
 		await updateDoc(userRef, {
 			favouriteCoins: arrayUnion(coinName),
