@@ -5,6 +5,7 @@ import {
 	setDoc,
 	arrayUnion,
 	arrayRemove,
+	collection,
 } from "firebase/firestore";
 import {
 	createUserWithEmailAndPassword,
@@ -45,14 +46,23 @@ function useDatabase() {
 		localStorage.removeItem("userId");
 	}
 
-	useEffect(() => {
-		onAuthStateChanged(auth, (user) => {
-			if (user && loggedIn === false) {
-				setLoggedInUser(user);
+	function stateChangeWatcher(callback: any) {
+		return onAuthStateChanged(auth, (user) => {
+			if (user && !loggedIn) {
+				callback(user);
+				console.log("LOGOWANY");
 			} else {
 				removeLoggedInUser();
+				console.log("not logged in");
 			}
 		});
+	}
+
+	useEffect(() => {
+		const unsubscribe = stateChangeWatcher(setLoggedInUser);
+		return () => {
+			unsubscribe();
+		};
 	}, []);
 
 	function setNotificationPopup(
@@ -74,7 +84,7 @@ function useDatabase() {
 	}
 
 	function addUserToDB(user: any) {
-		const userRef = doc(db, "users", userData.uid);
+		const userRef = doc(db, "users", user.uid);
 		setDoc(
 			userRef,
 			{
@@ -129,9 +139,9 @@ function useDatabase() {
 				emailValue,
 				passwordValue,
 			);
-
 			setLoader(false);
 			setLoggedInUser(result.user);
+			addUserToDB(result.user);
 			dispatch(uiActions.closeAuthPopup());
 
 			setNotificationPopup(true, "Successfully logged in", true);
@@ -149,7 +159,6 @@ function useDatabase() {
 	}
 
 	async function authWithGoogle() {
-		console.log(userData);
 		setLoader(true);
 		try {
 			const result = await signInWithPopup(auth, googleProvider);
@@ -191,8 +200,8 @@ function useDatabase() {
 			return;
 		}
 		if (coinName === "") return;
-		console.log(coinName, userData.uid);
 		const userRef = doc(db, "users");
+		console.log("favourites", userRef);
 
 		await updateDoc(userRef, {
 			favouriteCoins: arrayUnion(coinName),
