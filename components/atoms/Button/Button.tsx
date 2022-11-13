@@ -5,12 +5,19 @@ interface Props {
 	) => void;
 	isAccent?: boolean;
 	otherStyles?: string;
+	isSubmit?: boolean;
 }
 
-function Button({ children, onClickFn, isAccent, otherStyles }: Props) {
+function Button({
+	children,
+	onClickFn,
+	isAccent,
+	otherStyles,
+	isSubmit = false,
+}: Props) {
 	return (
 		<button
-			type="button"
+			type={isSubmit ? "submit" : "button"}
 			onClick={onClickFn}
 			className={`relative flex items-center justify-center gap-sm px-sm py-sm h-full w-full text font-bold rounded-xl  ${
 				isAccent

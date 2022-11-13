@@ -102,6 +102,7 @@ function useDatabase() {
 			addUserToDB(result.user);
 
 			setNotificationPopup(true, "Congratulations, you got registered!", true);
+
 			setTimeout(() => {
 				setNotificationPopup(
 					false,
@@ -148,10 +149,11 @@ function useDatabase() {
 	}
 
 	async function authWithGoogle() {
+		console.log(userData);
 		setLoader(true);
 		try {
 			const result = await signInWithPopup(auth, googleProvider);
-
+			// console.log(result.user, userData.uid);
 			setLoader(false);
 			addUserToDB(result.user);
 			setLoggedInUser(result.user);
@@ -189,8 +191,9 @@ function useDatabase() {
 			return;
 		}
 		if (coinName === "") return;
+		console.log(coinName, userData.uid);
+		const userRef = doc(db, "users");
 
-		const userRef = doc(db, "users", userData.uid);
 		await updateDoc(userRef, {
 			favouriteCoins: arrayUnion(coinName),
 		});

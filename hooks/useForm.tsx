@@ -24,6 +24,7 @@ function useForm() {
 
 	function setInputValues(event: React.ChangeEvent<HTMLInputElement>) {
 		setValues({ ...values, [event.target.name]: event.target.value });
+		console.log(values);
 	}
 
 	function validateEmail(email: string | null) {
