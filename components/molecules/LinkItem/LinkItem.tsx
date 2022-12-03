@@ -30,9 +30,11 @@ function LinkItem({ allLinks, linkKey }: Props) {
 				>
 					{allLinks.map((link) => {
 						if (link === "" || link === null) return null;
-
 						return (
-							<li key={uuidv4()} className="z-1000">
+							<li
+								key={link.trim() !== "" ? `link-${link}` : uuidv4()}
+								className="z-1000"
+							>
 								<a
 									onClick={(e) => toggleLinkList(e, true)}
 									href={link}

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { GetServerSidePropsContext } from "next";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 import CoinHeadBox from "../../components/molecules/CoinHeadBox/CoinHeadBox";
 import LinkItem from "../../components/molecules/LinkItem/LinkItem";
 import CoinPriceBox from "../../components/molecules/CoinPriceBox/CoinPriceBox";
@@ -83,8 +82,13 @@ function CoinDetails({ coinDetails, chartDetails }: any) {
 						</p>
 						<div className="links flex items-center gap-sm flex-wrap w-fit">
 							{coinDetails &&
-								Object.entries(links).map(([key, value]) => (
-									<LinkItem key={uuidv4()} allLinks={value} linkKey={key} />
+								Object.entries(links).map(([key, value], index) => (
+									<LinkItem
+										// eslint-disable-next-line react/no-array-index-key
+										key={`${key}-${index}`}
+										allLinks={value}
+										linkKey={key}
+									/>
 								))}
 						</div>
 					</div>
@@ -160,7 +164,6 @@ function CoinDetails({ coinDetails, chartDetails }: any) {
 export const getServerSideProps = async (
 	context: GetServerSidePropsContext,
 ) => {
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const { coinId } = context.params!;
 
 	try {

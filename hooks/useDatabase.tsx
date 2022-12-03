@@ -4,8 +4,8 @@ import {
 	updateDoc,
 	setDoc,
 	arrayUnion,
-	arrayRemove,
-	collection,
+	query,
+	where,
 } from "firebase/firestore";
 import {
 	createUserWithEmailAndPassword,
@@ -17,7 +17,7 @@ import {
 } from "firebase/auth";
 import { db, auth } from "../firebaseConfig";
 import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
-import { userActions } from "../state/userSlice";
+import { PurchaseDetails, userActions } from "../state/userSlice";
 import { uiActions } from "../state/uiSlice";
 
 const googleProvider = new GoogleAuthProvider();
@@ -201,9 +201,24 @@ function useDatabase() {
 		if (coinName === "") return;
 		const userRef = doc(db, "users", userData.uid);
 
+		dispatch(userActions.addToFavourites(coinName));
 		await updateDoc(userRef, {
 			favouriteCoins: arrayUnion(coinName),
 		});
+	}
+
+	async function addCoinToWallet(purchaseDetails: PurchaseDetails) {
+		const userRef = doc(db, "users", userData.uid);
+		console.log(userRef);
+
+		const walletQuery = query(
+			userRef,
+			where("walletCoins", "array-contains", { "shoppings.name": "Bitcoin" }),
+		);
+		// await updateDoc(userRef, {
+		// 	walletCoins: arrayUnion(purchaseDetails),
+		// });
+		// dispatch(userActions.addToWallet(purchaseDetails));
 	}
 
 	return {
@@ -213,6 +228,7 @@ function useDatabase() {
 		signupCustomUser,
 		authWithEmail,
 		addToFavourites,
+		addCoinToWallet,
 	};
 }
 

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useEffect } from "react";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import FavouriteButton from "../../components/atoms/FavouriteButton/FavouriteButton";
 import MarginBox from "../../components/atoms/MarginBox/MarginBox";
@@ -29,6 +28,7 @@ function SpecifiedPage({
 	const { sortCoins } = useFilter();
 	const dispatch = useAppDispatch();
 	const { coinsList } = useAppSelector((state) => state.coins);
+	const { userData } = useAppSelector((state) => state.user);
 
 	useEffect(() => {
 		dispatch(coinsActions.setCoinsList(coins));
@@ -85,7 +85,7 @@ function SpecifiedPage({
 						</TableHead>
 						<TableBody>
 							{coinsList.map((coin: CoinItem, index: number) => (
-								<TableRow key={uuidv4()}>
+								<TableRow key={`${coin.name}-${coin.total_supply}`}>
 									<TableData>
 										<FavouriteButton funcArg={coin.name} />
 									</TableData>

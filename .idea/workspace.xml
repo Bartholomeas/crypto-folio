@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f82e7037-4eac-411f-9038-22ff87af3d79" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/hooks/useDatabase.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useDatabase.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/molecules/LinkItem/LinkItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/molecules/LinkItem/LinkItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/molecules/SearchbarItems/SearchbarItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/molecules/SearchbarItems/SearchbarItems.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/organisms/Pagination/Pagination.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/organisms/Pagination/Pagination.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/[page]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/[page]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/coins/[coinId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/coins/[coinId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/state/userSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/state/userSlice.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,21 +28,22 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/bartholomeas/Desktop/Kod/crypto-app&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/bartholomeas/Desktop/Kod/crypto-app/node_modules/typescript/lib&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/bartholomeas/Desktop/Kod/crypto-app",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/bartholomeas/Desktop/Kod/crypto-app/node_modules/prettier",
+    "ts.external.directory.path": "/Users/bartholomeas/Desktop/Kod/crypto-app/node_modules/typescript/lib"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -48,6 +56,8 @@
       <workItem from="1663704072986" duration="52000" />
       <workItem from="1664663191909" duration="27000" />
       <workItem from="1664698509585" duration="2000" />
+      <workItem from="1669128094882" duration="23000" />
+      <workItem from="1669128368830" duration="24000" />
     </task>
     <servers />
   </component>
