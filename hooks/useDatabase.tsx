@@ -4,9 +4,9 @@ import {
 	updateDoc,
 	setDoc,
 	arrayUnion,
-	query,
-	where,
+	collection,
 } from "firebase/firestore";
+
 import {
 	createUserWithEmailAndPassword,
 	signOut,
@@ -35,6 +35,8 @@ function useDatabase() {
 				email: user.email,
 				uid: user.uid,
 				photoURL: user.photoURL || "",
+				favouriteCoins: user.favouriteCoins || [],
+				walletCoins: user.walletCoins || [],
 			}),
 		);
 		localStorage.setItem("userId", user.uid);
@@ -50,7 +52,6 @@ function useDatabase() {
 		return onAuthStateChanged(auth, (user) => {
 			if (user && !loggedIn) {
 				callback(user);
-				console.log("TO FIX");
 			} else {
 				removeLoggedInUser();
 			}
@@ -90,8 +91,8 @@ function useDatabase() {
 				id: user.uid,
 				email: user.email,
 				name: user.displayName || user.email,
-				favouriteCoins: [],
-				walletCoins: [],
+				favouriteCoins: user.favouriteCoins,
+				walletCoins: user.walletCoins,
 			},
 			{ merge: true },
 		);
@@ -106,7 +107,6 @@ function useDatabase() {
 				emailValue,
 				passwordValue,
 			);
-
 			setLoader(false);
 			addUserToDB(result.user);
 
@@ -131,6 +131,7 @@ function useDatabase() {
 
 	async function authWithEmail(emailValue: string, passwordValue: string) {
 		setLoader(true);
+		const usersCollection = collection(db, "users");
 
 		try {
 			const result = await signInWithEmailAndPassword(
@@ -198,7 +199,8 @@ function useDatabase() {
 			dispatch(uiActions.toggleAuthPopup());
 			return;
 		}
-		if (coinName === "") return;
+		if (coinName.trim() === "") return;
+
 		const userRef = doc(db, "users", userData.uid);
 
 		dispatch(userActions.addToFavourites(coinName));
@@ -209,16 +211,15 @@ function useDatabase() {
 
 	async function addCoinToWallet(purchaseDetails: PurchaseDetails) {
 		const userRef = doc(db, "users", userData.uid);
-		console.log(userRef);
 
 		const walletQuery = query(
 			userRef,
-			where("walletCoins", "array-contains", { "shoppings.name": "Bitcoin" }),
+			// where("walletCoins", "array-contains", { "shoppings.name": "Bitcoin" }),
 		);
-		// await updateDoc(userRef, {
-		// 	walletCoins: arrayUnion(purchaseDetails),
-		// });
-		// dispatch(userActions.addToWallet(purchaseDetails));
+		await updateDoc(userRef, {
+			walletCoins: arrayUnion(purchaseDetails),
+		});
+		dispatch(userActions.addToWallet(purchaseDetails));
 	}
 
 	return {

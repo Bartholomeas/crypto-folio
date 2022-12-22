@@ -48,14 +48,17 @@ const userSlice = createSlice({
 		},
 
 		addToFavourites(state, action) {
-			state.userData.favouriteCoins.push(action.payload);
+			state.userData.favouriteCoins = [
+				...state.userData.favouriteCoins,
+				action.payload,
+			];
 		},
 
 		addToWallet(state, action) {
-			// state.userData.walletCoins = [
-			// 	...state.userData.walletCoins,
-			// 	action.payload,
-			// ];
+			state.userData.walletCoins = [
+				...state.userData.walletCoins,
+				action.payload,
+			];
 			state.userData.walletCoins.push(action.payload);
 		},
 
