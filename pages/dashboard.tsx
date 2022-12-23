@@ -52,10 +52,25 @@ function Dashboard() {
 									price: 21345,
 								},
 							});
-							console.log(user);
 						}}
 					>
-						Kliknij
+						Kliknij raz
+					</button>
+					<button
+						type="button"
+						onClick={() => {
+							addCoinToWallet({
+								name: "Ethereum",
+								symbol: "ETH",
+								shoppings: {
+									date: new Date().toString(),
+									amount: 0.53,
+									price: 1337,
+								},
+							});
+						}}
+					>
+						Kliknij dwa
 					</button>
 				</div>
 			</div>

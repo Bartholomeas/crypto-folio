@@ -5,6 +5,12 @@ import {
 	setDoc,
 	arrayUnion,
 	collection,
+	getDoc,
+	getDocs,
+	query,
+	where,
+	Firestore,
+	runTransaction,
 } from "firebase/firestore";
 
 import {
@@ -52,8 +58,6 @@ function useDatabase() {
 		return onAuthStateChanged(auth, (user) => {
 			if (user && !loggedIn) {
 				callback(user);
-			} else {
-				removeLoggedInUser();
 			}
 		});
 	}
@@ -131,7 +135,6 @@ function useDatabase() {
 
 	async function authWithEmail(emailValue: string, passwordValue: string) {
 		setLoader(true);
-		const usersCollection = collection(db, "users");
 
 		try {
 			const result = await signInWithEmailAndPassword(
@@ -141,7 +144,7 @@ function useDatabase() {
 			);
 			setLoader(false);
 			setLoggedInUser(result.user);
-			addUserToDB(result.user);
+			// addUserToDB(result.user);
 			dispatch(uiActions.closeAuthPopup());
 
 			setNotificationPopup(true, "Successfully logged in", true);
@@ -164,7 +167,7 @@ function useDatabase() {
 			const result = await signInWithPopup(auth, googleProvider);
 
 			setLoader(false);
-			addUserToDB(result.user);
+			// addUserToDB(result.user);
 			setLoggedInUser(result.user);
 			dispatch(uiActions.closeAuthPopup());
 			setNotificationPopup(true, "Successfully logged in", true);
@@ -204,22 +207,50 @@ function useDatabase() {
 		const userRef = doc(db, "users", userData.uid);
 
 		dispatch(userActions.addToFavourites(coinName));
-		await updateDoc(userRef, {
-			favouriteCoins: arrayUnion(coinName),
-		});
+		try {
+			await updateDoc(userRef, {
+				favouriteCoins: arrayUnion(coinName),
+			});
+		} catch {
+			console.log("error");
+		}
 	}
 
 	async function addCoinToWallet(purchaseDetails: PurchaseDetails) {
 		const userRef = doc(db, "users", userData.uid);
 
-		const walletQuery = query(
-			userRef,
-			// where("walletCoins", "array-contains", { "shoppings.name": "Bitcoin" }),
-		);
-		await updateDoc(userRef, {
-			walletCoins: arrayUnion(purchaseDetails),
-		});
-		dispatch(userActions.addToWallet(purchaseDetails));
+		try {
+			await runTransaction(db, async (transaction) => {
+				const sfDoc = await transaction.get(userRef);
+
+				transaction.update(userRef, { walletCoins: purchaseDetails });
+			});
+		} catch (e) {
+			console.log(e);
+		}
+		// const customQuery = query(
+		// 	collection(db, "users"),
+		// 	where("id", "==", userData.uid),
+		// );
+
+		// const querySnapshot = await getDoc(doc(db, "users", userData.uid));
+		// console.log(querySnapshot.data());
+
+		// await getDoc(userRef).then((dock) => {
+		// 	console.log(dock);
+		// });
+
+		// try {
+		// 	await updateDoc(
+		// 		userRef,
+		// 		{ walletCoins: arrayUnion(purchaseDetails) },
+		// 		{ merge: true },
+		// 	);
+		// } catch {
+		// 	throw new Error("Cannot update user");
+		// }
+
+		// dispatch(userActions.addToWallet(purchaseDetails));
 	}
 
 	return {
@@ -234,92 +265,3 @@ function useDatabase() {
 }
 
 export default useDatabase;
-
-// const q = query(colRef, orderBy('createdAt'));
-// const unsubCol = onSnapshot(q, snapshot => {
-// 	let coins: any[] = [];
-// 	snapshot.docs.forEach(doc => {
-// 		coins.push({ ...doc.data(), id: doc.id });
-// STATIC DATA, NOT UPDATING AFTER REQUEST
-// getDocs(colRef)
-// 	.then(snapshot => {
-// 		let coins: any[] = [];
-// 		snapshot.docs.forEach(doc => {
-// 			coins.push({ ...doc.data(), id: doc.id });
-// 		});
-
-// 	})
-// 	.catch(error => {
-
-// 	});
-// const deleteItem = (e: any) => {
-// 	e.preventDefault();
-// 	const deleteForm: any = document.querySelector('.delete-item');
-
-// 	const docRef = doc(db, 'favourites', deleteForm.idDelete.value);
-// 	deleteDoc(docRef).then(() => {
-// 		deleteForm.reset();
-// 	});
-// };
-
-// const getSingleDoc = () => {
-// 	const docRef: any = doc(db, 'favourites', 'q0XKWS2wXRC4hmoj3wqb');
-// 	getDoc(docRef).then((doc: any) => {
-
-// 	});
-
-// 	onSnapshot(docRef, (doc: any) => {
-
-// 	});
-// };
-
-// const updateItem = (e: any) => {
-// 	e.preventDefault();
-
-// 	const updateForm: any = document.querySelector('.update-item');
-// 	const updateId = updateForm.querySelector('#idUpdate').value;
-
-// 	const docRef = doc(db, 'favourites', updateId);
-
-// 	updateDoc(docRef, {
-// 		symbol: 'updated symbol lol :)',
-// 	}).then(() => {
-// 		updateForm.reset();
-// 	});
-// };
-
-// const signup = (e: any) => {
-// 	e.preventDefault();
-
-// 	createUserWithEmailAndPassword(auth, 'testowymail@onet.pl', 'testoweHaslo123')
-// 		.then(cred => {
-// 			console.log('user create:', cred.user);
-// 		})
-// 		.catch(err => console.log(err));
-// };
-
-// const login = () => {
-// 	signInWithEmailAndPassword(auth, 'testowymail@onet.pl', 'testoweHaslo123')
-// 		.then(cred => {
-// 			console.log('usee loged in:', cred.user);
-// 		})
-// 		.catch(err => console.log(err));
-// };
-
-// const logout = () => {
-// 	signOut(auth)
-// 		.then(() => {})
-// 		.catch(err => console.log(err));
-// };
-
-// const unsubAuth = onAuthStateChanged(auth, user => {
-// 	if (user) {
-// 		console.log('user is signed in' + user);
-// 	} else {
-// 		console.log('user is signed out');
-// 	}
-// });
-
-// //unsub to np unsubAuth() zwaraca funkcje ktora sie wywoluje np przy onSnapshot
-
-// return { addItem, deleteItem, getSingleDoc, updateItem, signup, logout, login };

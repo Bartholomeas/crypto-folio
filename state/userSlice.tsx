@@ -59,7 +59,6 @@ const userSlice = createSlice({
 				...state.userData.walletCoins,
 				action.payload,
 			];
-			state.userData.walletCoins.push(action.payload);
 		},
 
 		setInitialState(state) {
