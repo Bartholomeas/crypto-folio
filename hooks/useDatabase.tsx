@@ -234,7 +234,7 @@ function useDatabase() {
 				const { walletCoins } = userCoinList.data() || [];
 
 				const coinIndex = walletCoins.findIndex(
-					(item) =>
+					(item: PurchaseDetails) =>
 						item.name === purchaseDetails.name &&
 						item.symbol === purchaseDetails.symbol,
 				);
