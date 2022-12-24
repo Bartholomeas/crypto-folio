@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 import { CoinItem } from "../../../state/coinsSlice";
 import SearchbarCoin from "../../atoms/SearchbarCoin/SearchbarCoin";
 
@@ -16,7 +15,7 @@ function SearchbarItems({ coinsData }: Props) {
 			{coinsData.length >= 1 &&
 				coinsData.map((coin) => (
 					<SearchbarCoin
-						key={uuidv4()}
+						key={`${coin.id}-${coin.symbol}`}
 						hrefRoute="/"
 						coinSymbol={coin.symbol}
 						coinLogo={coin.thumb}

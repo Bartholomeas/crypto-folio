@@ -4,9 +4,15 @@ import {
 	updateDoc,
 	setDoc,
 	arrayUnion,
-	arrayRemove,
 	collection,
+	getDoc,
+	getDocs,
+	query,
+	where,
+	Firestore,
+	runTransaction,
 } from "firebase/firestore";
+
 import {
 	createUserWithEmailAndPassword,
 	signOut,
@@ -17,7 +23,7 @@ import {
 } from "firebase/auth";
 import { db, auth } from "../firebaseConfig";
 import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
-import { userActions } from "../state/userSlice";
+import { PurchaseDetails, userActions } from "../state/userSlice";
 import { uiActions } from "../state/uiSlice";
 
 const googleProvider = new GoogleAuthProvider();
@@ -35,6 +41,8 @@ function useDatabase() {
 				email: user.email,
 				uid: user.uid,
 				photoURL: user.photoURL || "",
+				favouriteCoins: user.favouriteCoins || [],
+				walletCoins: user.walletCoins || [],
 			}),
 		);
 		localStorage.setItem("userId", user.uid);
@@ -50,10 +58,6 @@ function useDatabase() {
 		return onAuthStateChanged(auth, (user) => {
 			if (user && !loggedIn) {
 				callback(user);
-				console.log("LOGOWANY");
-			} else {
-				removeLoggedInUser();
-				console.log("not logged in");
 			}
 		});
 	}
@@ -63,7 +67,7 @@ function useDatabase() {
 		return () => {
 			unsubscribe();
 		};
-	}, []);
+	}, [userData.uid]);
 
 	function setNotificationPopup(
 		isOpen: boolean,
@@ -83,19 +87,23 @@ function useDatabase() {
 		dispatch(uiActions.toggleLoader(active));
 	}
 
-	function addUserToDB(user: any) {
-		const userRef = doc(db, "users", user.uid);
-		setDoc(
-			userRef,
-			{
-				id: user.uid,
-				email: user.email,
-				name: user.displayName || user.email,
-				favouriteCoins: [],
-				walletCoins: [],
-			},
-			{ merge: true },
-		);
+	async function addUserToDB(user: any) {
+		try {
+			const userRef = await doc(db, "users", user.uid);
+			setDoc(
+				userRef,
+				{
+					id: user.uid,
+					email: user.email,
+					name: user.displayName || user.email,
+					favouriteCoins: [],
+					walletCoins: [],
+				},
+				{ merge: true },
+			);
+		} catch (e) {
+			console.log(e);
+		}
 	}
 
 	async function signupCustomUser(emailValue: string, passwordValue: string) {
@@ -107,7 +115,6 @@ function useDatabase() {
 				emailValue,
 				passwordValue,
 			);
-
 			setLoader(false);
 			addUserToDB(result.user);
 
@@ -141,7 +148,6 @@ function useDatabase() {
 			);
 			setLoader(false);
 			setLoggedInUser(result.user);
-			addUserToDB(result.user);
 			dispatch(uiActions.closeAuthPopup());
 
 			setNotificationPopup(true, "Successfully logged in", true);
@@ -162,16 +168,20 @@ function useDatabase() {
 		setLoader(true);
 		try {
 			const result = await signInWithPopup(auth, googleProvider);
-			// console.log(result.user, userData.uid);
+			const userSnap = await getDoc(doc(db, "users", result.user.uid));
+
 			setLoader(false);
-			addUserToDB(result.user);
+			if (!userSnap.exists()) {
+				addUserToDB(result.user);
+			}
 			setLoggedInUser(result.user);
 			dispatch(uiActions.closeAuthPopup());
 			setNotificationPopup(true, "Successfully logged in", true);
 			setTimeout(() => {
 				setNotificationPopup(false, "Successfully logged in", true);
 			}, 3000);
-		} catch {
+		} catch (e) {
+			console.log(e);
 			setLoader(false);
 			setNotificationPopup(true, "Something went wrong :(", false);
 			setTimeout(() => {
@@ -189,6 +199,8 @@ function useDatabase() {
 			setTimeout(() => {
 				setNotificationPopup(false, "Successfully logged out", true);
 			}, 3000);
+
+			window.location.reload();
 		} catch {
 			throw new Error("Cannot logout");
 		}
@@ -199,13 +211,74 @@ function useDatabase() {
 			dispatch(uiActions.toggleAuthPopup());
 			return;
 		}
-		if (coinName === "") return;
-		const userRef = doc(db, "users");
-		console.log("favourites", userRef);
+		if (coinName.trim() === "") return;
 
-		await updateDoc(userRef, {
-			favouriteCoins: arrayUnion(coinName),
-		});
+		const userRef = doc(db, "users", userData.uid);
+
+		dispatch(userActions.addToFavourites(coinName));
+		try {
+			await updateDoc(userRef, {
+				favouriteCoins: arrayUnion(coinName),
+			});
+		} catch {
+			console.log("error");
+		}
+	}
+
+	async function addCoinToWallet(purchaseDetails: PurchaseDetails) {
+		const userRef = doc(db, "users", userData.uid);
+		try {
+			runTransaction(db, async (transaction) => {
+				const userCoinList = await transaction.get(userRef);
+				console.log(userCoinList.data());
+				const { walletCoins } = userCoinList.data() || [];
+
+				const coinIndex = walletCoins.findIndex(
+					(item: PurchaseDetails) =>
+						item.name === purchaseDetails.name &&
+						item.symbol === purchaseDetails.symbol,
+				);
+
+				if (coinIndex === -1 && walletCoins.length > 0) {
+					walletCoins.push({
+						name: purchaseDetails.name,
+						symbol: purchaseDetails.symbol,
+						shoppings: [...walletCoins.shoppings, purchaseDetails.shoppings],
+					});
+				} else {
+					console.log("gut");
+				}
+
+				transaction.update(userRef, {
+					walletCoins: arrayUnion(purchaseDetails),
+				});
+			});
+		} catch (e) {
+			console.log(e);
+		}
+		// const customQuery = query(
+		// 	collection(db, "users"),
+		// 	where("id", "==", userData.uid),
+		// );
+
+		// const querySnapshot = await getDoc(doc(db, "users", userData.uid));
+		// console.log(querySnapshot.data());
+
+		// await getDoc(userRef).then((dock) => {
+		// 	console.log(dock);
+		// });
+
+		// try {
+		// 	await updateDoc(
+		// 		userRef,
+		// 		{ walletCoins: arrayUnion(purchaseDetails) },
+		// 		{ merge: true },
+		// 	);
+		// } catch {
+		// 	throw new Error("Cannot update user");
+		// }
+
+		// dispatch(userActions.addToWallet(purchaseDetails));
 	}
 
 	return {
@@ -215,96 +288,8 @@ function useDatabase() {
 		signupCustomUser,
 		authWithEmail,
 		addToFavourites,
+		addCoinToWallet,
 	};
 }
 
 export default useDatabase;
-
-// const q = query(colRef, orderBy('createdAt'));
-// const unsubCol = onSnapshot(q, snapshot => {
-// 	let coins: any[] = [];
-// 	snapshot.docs.forEach(doc => {
-// 		coins.push({ ...doc.data(), id: doc.id });
-// STATIC DATA, NOT UPDATING AFTER REQUEST
-// getDocs(colRef)
-// 	.then(snapshot => {
-// 		let coins: any[] = [];
-// 		snapshot.docs.forEach(doc => {
-// 			coins.push({ ...doc.data(), id: doc.id });
-// 		});
-
-// 	})
-// 	.catch(error => {
-
-// 	});
-// const deleteItem = (e: any) => {
-// 	e.preventDefault();
-// 	const deleteForm: any = document.querySelector('.delete-item');
-
-// 	const docRef = doc(db, 'favourites', deleteForm.idDelete.value);
-// 	deleteDoc(docRef).then(() => {
-// 		deleteForm.reset();
-// 	});
-// };
-
-// const getSingleDoc = () => {
-// 	const docRef: any = doc(db, 'favourites', 'q0XKWS2wXRC4hmoj3wqb');
-// 	getDoc(docRef).then((doc: any) => {
-
-// 	});
-
-// 	onSnapshot(docRef, (doc: any) => {
-
-// 	});
-// };
-
-// const updateItem = (e: any) => {
-// 	e.preventDefault();
-
-// 	const updateForm: any = document.querySelector('.update-item');
-// 	const updateId = updateForm.querySelector('#idUpdate').value;
-
-// 	const docRef = doc(db, 'favourites', updateId);
-
-// 	updateDoc(docRef, {
-// 		symbol: 'updated symbol lol :)',
-// 	}).then(() => {
-// 		updateForm.reset();
-// 	});
-// };
-
-// const signup = (e: any) => {
-// 	e.preventDefault();
-
-// 	createUserWithEmailAndPassword(auth, 'testowymail@onet.pl', 'testoweHaslo123')
-// 		.then(cred => {
-// 			console.log('user create:', cred.user);
-// 		})
-// 		.catch(err => console.log(err));
-// };
-
-// const login = () => {
-// 	signInWithEmailAndPassword(auth, 'testowymail@onet.pl', 'testoweHaslo123')
-// 		.then(cred => {
-// 			console.log('usee loged in:', cred.user);
-// 		})
-// 		.catch(err => console.log(err));
-// };
-
-// const logout = () => {
-// 	signOut(auth)
-// 		.then(() => {})
-// 		.catch(err => console.log(err));
-// };
-
-// const unsubAuth = onAuthStateChanged(auth, user => {
-// 	if (user) {
-// 		console.log('user is signed in' + user);
-// 	} else {
-// 		console.log('user is signed out');
-// 	}
-// });
-
-// //unsub to np unsubAuth() zwaraca funkcje ktora sie wywoluje np przy onSnapshot
-
-// return { addItem, deleteItem, getSingleDoc, updateItem, signup, logout, login };

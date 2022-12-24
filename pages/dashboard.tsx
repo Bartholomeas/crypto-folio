@@ -10,11 +10,12 @@ import TableBody from "../components/molecules/TableBody/TableBody";
 import MarginBox from "../components/atoms/MarginBox/MarginBox";
 import SecondHeader from "../components/atoms/SecondHeader/SecondHeader";
 import PageHeader from "../components/atoms/PageHeader/PageHeader";
-import { useAppSelector } from "../state/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
+import useDatabase from "../hooks/useDatabase";
 
 function Dashboard() {
 	const user = useAppSelector((state) => state.user);
-	console.log(user);
+	const { addCoinToWallet } = useDatabase();
 
 	return (
 		<main
@@ -39,6 +40,42 @@ function Dashboard() {
 					<InfoAssetsBox asset="Juno" changeValue={21}>
 						Biggest 24h profit
 					</InfoAssetsBox>
+					<button
+						type="button"
+						onClick={() => {
+							addCoinToWallet({
+								name: "Bitcoin",
+								symbol: "BTC",
+								shoppings: [
+									{
+										date: new Date().toString(),
+										amount: 0.23,
+										price: 21345,
+									},
+								],
+							});
+						}}
+					>
+						Kliknij raz
+					</button>
+					<button
+						type="button"
+						onClick={() => {
+							addCoinToWallet({
+								name: "Ethereum",
+								symbol: "ETH",
+								shoppings: [
+									{
+										date: new Date().toString(),
+										amount: 0.53,
+										price: 1337,
+									},
+								],
+							});
+						}}
+					>
+						Kliknij dwa
+					</button>
 				</div>
 			</div>
 

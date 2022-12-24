@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { v4 as uuidv4 } from "uuid";
 
 interface Props {
 	currPage: number;
@@ -26,7 +25,7 @@ function Pagination({ currPage }: Props) {
 				<a className="dark:text-dmFont px-xs py-xs text font-semibold">{"<"}</a>
 			</Link>
 			{pagesArr.map((page) => (
-				<Link key={uuidv4()} passHref href={`/${page}`}>
+				<Link key={`page-${page}`} passHref href={`/${page}`}>
 					<a
 						className={`dark:text-dmFont px-xs ${
 							+currPage === +page &&
