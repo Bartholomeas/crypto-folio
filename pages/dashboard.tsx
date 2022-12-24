@@ -46,11 +46,13 @@ function Dashboard() {
 							addCoinToWallet({
 								name: "Bitcoin",
 								symbol: "BTC",
-								shoppings: {
-									date: new Date().toString(),
-									amount: 0.23,
-									price: 21345,
-								},
+								shoppings: [
+									{
+										date: new Date().toString(),
+										amount: 0.23,
+										price: 21345,
+									},
+								],
 							});
 						}}
 					>
@@ -62,11 +64,13 @@ function Dashboard() {
 							addCoinToWallet({
 								name: "Ethereum",
 								symbol: "ETH",
-								shoppings: {
-									date: new Date().toString(),
-									amount: 0.53,
-									price: 1337,
-								},
+								shoppings: [
+									{
+										date: new Date().toString(),
+										amount: 0.53,
+										price: 1337,
+									},
+								],
 							});
 						}}
 					>

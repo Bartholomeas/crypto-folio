@@ -87,19 +87,23 @@ function useDatabase() {
 		dispatch(uiActions.toggleLoader(active));
 	}
 
-	function addUserToDB(user: any) {
-		const userRef = doc(db, "users", user.uid);
-		setDoc(
-			userRef,
-			{
-				id: user.uid,
-				email: user.email,
-				name: user.displayName || user.email,
-				favouriteCoins: user.favouriteCoins,
-				walletCoins: user.walletCoins,
-			},
-			{ merge: true },
-		);
+	async function addUserToDB(user: any) {
+		try {
+			const userRef = await doc(db, "users", user.uid);
+			setDoc(
+				userRef,
+				{
+					id: user.uid,
+					email: user.email,
+					name: user.displayName || user.email,
+					favouriteCoins: [],
+					walletCoins: [],
+				},
+				{ merge: true },
+			);
+		} catch (e) {
+			console.log(e);
+		}
 	}
 
 	async function signupCustomUser(emailValue: string, passwordValue: string) {
@@ -144,7 +148,6 @@ function useDatabase() {
 			);
 			setLoader(false);
 			setLoggedInUser(result.user);
-			// addUserToDB(result.user);
 			dispatch(uiActions.closeAuthPopup());
 
 			setNotificationPopup(true, "Successfully logged in", true);
@@ -165,16 +168,20 @@ function useDatabase() {
 		setLoader(true);
 		try {
 			const result = await signInWithPopup(auth, googleProvider);
+			const userSnap = await getDoc(doc(db, "users", result.user.uid));
 
 			setLoader(false);
-			// addUserToDB(result.user);
+			if (!userSnap.exists()) {
+				addUserToDB(result.user);
+			}
 			setLoggedInUser(result.user);
 			dispatch(uiActions.closeAuthPopup());
 			setNotificationPopup(true, "Successfully logged in", true);
 			setTimeout(() => {
 				setNotificationPopup(false, "Successfully logged in", true);
 			}, 3000);
-		} catch {
+		} catch (e) {
+			console.log(e);
 			setLoader(false);
 			setNotificationPopup(true, "Something went wrong :(", false);
 			setTimeout(() => {
@@ -192,6 +199,8 @@ function useDatabase() {
 			setTimeout(() => {
 				setNotificationPopup(false, "Successfully logged out", true);
 			}, 3000);
+
+			window.location.reload();
 		} catch {
 			throw new Error("Cannot logout");
 		}
@@ -218,12 +227,31 @@ function useDatabase() {
 
 	async function addCoinToWallet(purchaseDetails: PurchaseDetails) {
 		const userRef = doc(db, "users", userData.uid);
-
 		try {
-			await runTransaction(db, async (transaction) => {
-				const sfDoc = await transaction.get(userRef);
+			runTransaction(db, async (transaction) => {
+				const userCoinList = await transaction.get(userRef);
+				console.log(userCoinList.data());
+				const { walletCoins } = userCoinList.data() || [];
 
-				transaction.update(userRef, { walletCoins: purchaseDetails });
+				const coinIndex = walletCoins.findIndex(
+					(item) =>
+						item.name === purchaseDetails.name &&
+						item.symbol === purchaseDetails.symbol,
+				);
+
+				if (coinIndex === -1 && walletCoins.length > 0) {
+					walletCoins.push({
+						name: purchaseDetails.name,
+						symbol: purchaseDetails.symbol,
+						shoppings: [...walletCoins.shoppings, purchaseDetails.shoppings],
+					});
+				} else {
+					console.log("gut");
+				}
+
+				transaction.update(userRef, {
+					walletCoins: arrayUnion(purchaseDetails),
+				});
 			});
 		} catch (e) {
 			console.log(e);

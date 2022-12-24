@@ -7,7 +7,7 @@ export interface PurchaseDetails {
 		date: any;
 		amount: number;
 		price: number;
-	};
+	}[];
 }
 
 interface StateInterface {
