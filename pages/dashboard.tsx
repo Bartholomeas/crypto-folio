@@ -12,6 +12,7 @@ import SecondHeader from "../components/atoms/SecondHeader/SecondHeader";
 import PageHeader from "../components/atoms/PageHeader/PageHeader";
 import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
 import useDatabase from "../hooks/useDatabase";
+import CircleButton from "../components/atoms/CircleButton/CircleButton";
 
 function Dashboard() {
 	const user = useAppSelector((state) => state.user);
@@ -25,60 +26,14 @@ function Dashboard() {
 			<MarginBox />
 			<PageHeader appendAfter="of DefaultWallet">Dashboard</PageHeader>
 			<div className="cards flex flex-col gap-sm w-full lg:flex-row">
-				<DailyChangeGraph />
 				<TotalAssetsValue
 					totalValue={32227}
 					valueInBtc={0.3}
 					changePercent={10}
 					changeValue={21.34}
 				/>
-
-				<div className="flex flex-col lg:w-[35%] gap-sm">
-					<InfoAssetsBox asset="Atom" changeValue={14} isPercent>
-						Biggest move
-					</InfoAssetsBox>
-					<InfoAssetsBox asset="Juno" changeValue={21}>
-						Biggest 24h profit
-					</InfoAssetsBox>
-					<button
-						type="button"
-						onClick={() => {
-							addCoinToWallet({
-								name: "Bitcoin",
-								symbol: "BTC",
-								shoppings: [
-									{
-										date: new Date().toString(),
-										amount: 0.23,
-										price: 21345,
-									},
-								],
-							});
-						}}
-					>
-						Kliknij raz
-					</button>
-					<button
-						type="button"
-						onClick={() => {
-							addCoinToWallet({
-								name: "Ethereum",
-								symbol: "ETH",
-								shoppings: [
-									{
-										date: new Date().toString(),
-										amount: 0.53,
-										price: 1337,
-									},
-								],
-							});
-						}}
-					>
-						Kliknij dwa
-					</button>
-				</div>
 			</div>
-
+			<CircleButton onClickFn={() => {}} />
 			<div className="flex flex-col gap w-full mt-[5rem]">
 				<SecondHeader>Explore coins</SecondHeader>
 				<div className="w-full  overflow-x-auto">

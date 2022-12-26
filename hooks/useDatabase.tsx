@@ -1,17 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-	doc,
-	updateDoc,
-	setDoc,
-	arrayUnion,
-	collection,
-	getDoc,
-	getDocs,
-	query,
-	where,
-	Firestore,
-	runTransaction,
-} from "firebase/firestore";
+import { doc, updateDoc, setDoc, arrayUnion, getDoc } from "firebase/firestore";
 
 import {
 	createUserWithEmailAndPassword,
@@ -228,57 +216,35 @@ function useDatabase() {
 	async function addCoinToWallet(purchaseDetails: PurchaseDetails) {
 		const userRef = doc(db, "users", userData.uid);
 		try {
-			runTransaction(db, async (transaction) => {
-				const userCoinList = await transaction.get(userRef);
-				console.log(userCoinList.data());
-				const { walletCoins } = userCoinList.data() || [];
+			const userSnap = await getDoc(userRef);
+			const { walletCoins } = userSnap.data() || [];
 
-				const coinIndex = walletCoins.findIndex(
-					(item: PurchaseDetails) =>
-						item.name === purchaseDetails.name &&
-						item.symbol === purchaseDetails.symbol,
-				);
+			const coinIndex = walletCoins
+				? walletCoins.findIndex(
+						(item: PurchaseDetails) =>
+							item.name === purchaseDetails.name &&
+							item.symbol === purchaseDetails.symbol,
+				)
+				: -1;
 
-				if (coinIndex === -1 && walletCoins.length > 0) {
-					walletCoins.push({
-						name: purchaseDetails.name,
-						symbol: purchaseDetails.symbol,
-						shoppings: [...walletCoins.shoppings, purchaseDetails.shoppings],
-					});
-				} else {
-					console.log("gut");
-				}
-
-				transaction.update(userRef, {
+			if (coinIndex === -1) {
+				await updateDoc(userRef, {
 					walletCoins: arrayUnion(purchaseDetails),
 				});
-			});
+			} else if (userSnap.exists()) {
+				console.log(userSnap.data().walletCoins[coinIndex]);
+
+				walletCoins[coinIndex].shoppings = [
+					...walletCoins[coinIndex].shoppings,
+					...purchaseDetails.shoppings,
+				];
+				await updateDoc(userRef, { walletCoins });
+			} else {
+				throw new Error("No such document!");
+			}
 		} catch (e) {
-			console.log(e);
+			throw new Error("Error lol");
 		}
-		// const customQuery = query(
-		// 	collection(db, "users"),
-		// 	where("id", "==", userData.uid),
-		// );
-
-		// const querySnapshot = await getDoc(doc(db, "users", userData.uid));
-		// console.log(querySnapshot.data());
-
-		// await getDoc(userRef).then((dock) => {
-		// 	console.log(dock);
-		// });
-
-		// try {
-		// 	await updateDoc(
-		// 		userRef,
-		// 		{ walletCoins: arrayUnion(purchaseDetails) },
-		// 		{ merge: true },
-		// 	);
-		// } catch {
-		// 	throw new Error("Cannot update user");
-		// }
-
-		// dispatch(userActions.addToWallet(purchaseDetails));
 	}
 
 	return {
