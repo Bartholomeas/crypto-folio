@@ -24,7 +24,7 @@ function AppLayout({ children }: Props) {
 		<div
 			className={`${
 				lightMode && "dark"
-			} relative flex  items-center w-full  md:flex-row md:h-[100vh] `}
+			} max-w-maxWidth relative flex  items-center w-full  md:flex-row md:h-[100vh] `}
 		>
 			<Navbar />
 			{children}

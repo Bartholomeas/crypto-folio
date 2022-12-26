@@ -1,3 +1,4 @@
+import React from "react";
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -10,7 +11,6 @@ import {
 	Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { convertDate } from "../../../utils/convertUtils";
 
 ChartJS.register(
 	CategoryScale,
@@ -26,10 +26,31 @@ ChartJS.register(
 interface Props {
 	chartData: { [key: string]: number }[];
 }
-
-function SparklineChart({ chartData }: Props) {
+function BalanceChart({ chartData }: Props) {
+	const labels = ["", "", "", "", "", "", ""];
 	const options = {
 		responsive: true,
+		maintainAspectRatio: false,
+		scales: {
+			x: {
+				ticks: {
+					color: "white",
+					beginAtZero: true,
+				},
+				grid: {
+					display: false,
+				},
+			},
+			y: {
+				ticks: {
+					color: "white",
+					beginAtZero: true,
+				},
+				grid: {
+					display: false,
+				},
+			},
+		},
 		plugins: {
 			legend: {
 				display: false,
@@ -37,21 +58,25 @@ function SparklineChart({ chartData }: Props) {
 		},
 	};
 
-	const labels = chartData.map((item) => convertDate(item[0], "MM-dd-yyyy"));
 	const data = {
 		labels,
 		datasets: [
 			{
 				fill: true,
-				data: chartData.map((item) => item[4]),
+				data: labels.map(() => Math.random() * 10 * Math.random()),
 				pointRadius: 0,
 				backgroundColor: "rgba(88,237,183,.5)",
 				borderColor: "rgba(88,237,183,1)",
-				tension: 0.1,
+				color: "rgba(88,237,183,1)",
+				tension: 0.05,
 			},
 		],
 	};
-	return <Line className="" options={options} data={data} />;
+	return (
+		<div>
+			<Line options={options} data={data} />
+		</div>
+	);
 }
 
-export default SparklineChart;
+export default BalanceChart;
