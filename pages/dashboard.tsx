@@ -36,7 +36,7 @@ function Dashboard() {
 			<CircleButton onClickFn={() => {}} />
 			<div className="flex flex-col gap w-full mt-[5rem]">
 				<SecondHeader>Explore coins</SecondHeader>
-				<div className="w-full  overflow-x-auto">
+				<div className="flex flex-col justify-center w-full overflow-x-scroll">
 					<Table>
 						<colgroup>
 							<col className="w-[3%]" />
