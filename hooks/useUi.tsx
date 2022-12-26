@@ -16,6 +16,13 @@ function useUiHandling() {
 		localStorage.setItem("lightMode", JSON.stringify(lightMode));
 	}
 
+	const openAuthModal = () => {
+		dispatch(uiActions.toggleAuthModal());
+	};
+
+	const openWalletModal = () => {
+		dispatch(uiActions.toggleWalletModal());
+	};
 	function setNotificationPopup(
 		isOpen: boolean,
 		content: string,
@@ -30,7 +37,13 @@ function useUiHandling() {
 		);
 	}
 
-	return { setNotificationPopup, toggleTheme, checkTheme };
+	return {
+		setNotificationPopup,
+		toggleTheme,
+		checkTheme,
+		openAuthModal,
+		openWalletModal,
+	};
 }
 
 export default useUiHandling;

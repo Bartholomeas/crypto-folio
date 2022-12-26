@@ -21,7 +21,7 @@ function Button({
 			onClick={onClickFn}
 			className={`relative flex items-center justify-center gap-sm px-sm py-sm h-full w-full text font-bold rounded-xl  ${
 				isAccent
-					? " bg-accentDark text-white  hover:bg-accent"
+					? " bg-accent text-white  hover:bg-accentDark"
 					: "dark:bg-dmBaseElement dark:hover:bg-accentDark dark:text-baseLight bg-baseLight text-font hover:bg-baseVeryLight"
 			}
             transition-colors

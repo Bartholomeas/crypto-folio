@@ -15,9 +15,9 @@ enum CallbackType {
 	Register = "register",
 }
 
-function AuthPopup() {
+function AuthModal() {
 	const dispatch = useAppDispatch();
-	const { isAuthPopupOpen, isLoaderOpen } = useAppSelector((state) => state.ui);
+	const { isAuthModalOpen, isLoaderOpen } = useAppSelector((state) => state.ui);
 	const [loginBox, setLoginBox] = useState(true);
 	const { authWithGoogle, signupCustomUser, authWithEmail } = useDatabase();
 	const {
@@ -50,7 +50,7 @@ function AuthPopup() {
 	return (
 		<div
 			className={`popup-bg ${
-				isAuthPopupOpen ? "fixed" : "hidden"
+				isAuthModalOpen ? "fixed" : "hidden"
 			} w-full h-full top-0 left-0 right-0 bottom-0 bg-zinc-800/50 backdrop-blur-sm`}
 		>
 			<div
@@ -59,7 +59,7 @@ function AuthPopup() {
 			>
 				<button
 					type="button"
-					onClick={() => dispatch(uiActions.toggleAuthPopup())}
+					onClick={() => dispatch(uiActions.toggleAuthModal())}
 					className="absolute top-0 right-0 text-md cursor-pointer pt-lg pl-sm pr-lg"
 				>
 					<MdOutlineCancel className=" text-fontLight " />
@@ -183,4 +183,4 @@ function AuthPopup() {
 	);
 }
 
-export default AuthPopup;
+export default AuthModal;

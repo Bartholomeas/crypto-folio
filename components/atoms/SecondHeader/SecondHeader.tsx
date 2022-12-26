@@ -5,8 +5,8 @@ interface Props {
 function SecondHeader({ children, isLight = false }: Props) {
 	return (
 		<h2
-			className={`font-bold ${
-				isLight ? "text-white" : "text-accentDark"
+			className={`dark:text-white font-bold ${
+				isLight ? "text-white" : "text-font"
 			} text-h2
 		 `}
 		>

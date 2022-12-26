@@ -17,7 +17,7 @@ import ThemeSwitch from "../../molecules/ThemeSwitch/ThemeSwitch";
 import { uiActions } from "../../../state/uiSlice";
 import Button from "../../atoms/Button/Button";
 import useDatabase from "../../../hooks/useDatabase";
-import AuthPopup from "../AuthPopup/AuthPopup";
+import AuthModal from "../AuthModal/AuthModal";
 import useUiHandling from "../../../hooks/useUi";
 
 function Navbar() {
@@ -25,12 +25,8 @@ function Navbar() {
 	const { isNavOpen, lightMode } = useAppSelector((state) => state.ui);
 	const { userData } = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
-	const { toggleTheme } = useUiHandling();
-	const { authWithGoogle, signoutUser, loggedIn } = useDatabase();
-
-	const openAuthPopup = () => {
-		dispatch(uiActions.toggleAuthPopup());
-	};
+	const { toggleTheme, openAuthModal } = useUiHandling();
+	const { signoutUser, loggedIn } = useDatabase();
 
 	return (
 		<nav
@@ -87,7 +83,7 @@ function Navbar() {
 				</NavList>
 				<div className="flex flex-col justify-center items-center gap-sm w-full px-md md:items-start">
 					{!loggedIn ? (
-						<Button isAccent onClickFn={openAuthPopup}>
+						<Button isAccent onClickFn={openAuthModal}>
 							Log in <MdLogout />
 						</Button>
 					) : (
@@ -116,7 +112,7 @@ function Navbar() {
 					</div>
 				</div>
 			</div>
-			<AuthPopup />
+			<AuthModal />
 		</nav>
 	);
 }

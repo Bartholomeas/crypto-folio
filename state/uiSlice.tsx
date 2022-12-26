@@ -8,7 +8,8 @@ export interface StateInterface {
 	lightMode: boolean;
 	isNavOpen: boolean;
 	isInfoPanelOpen: boolean;
-	isAuthPopupOpen: boolean;
+	isAuthModalOpen: boolean;
+	isWalletModalOpen: boolean;
 	isLoaderOpen: boolean;
 	notificationPopup: {
 		isNotificationPopupOpen: boolean;
@@ -21,7 +22,8 @@ const initialState: StateInterface = {
 	lightMode: false,
 	isNavOpen: false,
 	isInfoPanelOpen: false,
-	isAuthPopupOpen: false,
+	isAuthModalOpen: false,
+	isWalletModalOpen: false,
 	isLoaderOpen: false,
 	notificationPopup: {
 		isNotificationPopupOpen: false,
@@ -46,11 +48,14 @@ const uiSlice = createSlice({
 		toggleInfoPanel(state) {
 			state.isInfoPanelOpen = !state.isInfoPanelOpen;
 		},
-		toggleAuthPopup(state) {
-			state.isAuthPopupOpen = !state.isAuthPopupOpen;
+		toggleAuthModal(state) {
+			state.isAuthModalOpen = !state.isAuthModalOpen;
 		},
-		closeAuthPopup(state) {
-			state.isAuthPopupOpen = false;
+		toggleWalletModal(state) {
+			state.isWalletModalOpen = !state.isWalletModalOpen;
+		},
+		closeAuthModal(state) {
+			state.isAuthModalOpen = false;
 		},
 		toggleLoader(state, action: PayloadAction<boolean>) {
 			state.isLoaderOpen = action.payload;
