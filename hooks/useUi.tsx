@@ -20,9 +20,6 @@ function useUiHandling() {
 		dispatch(uiActions.toggleAuthModal());
 	};
 
-	const openWalletModal = () => {
-		dispatch(uiActions.toggleWalletModal());
-	};
 	function setNotificationPopup(
 		isOpen: boolean,
 		content: string,
@@ -42,7 +39,6 @@ function useUiHandling() {
 		toggleTheme,
 		checkTheme,
 		openAuthModal,
-		openWalletModal,
 	};
 }
 

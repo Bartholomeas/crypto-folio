@@ -16,7 +16,7 @@ function SearchbarItems({ coinsData }: Props) {
 				coinsData.map((coin) => (
 					<SearchbarCoin
 						key={`${coin.id}-${coin.symbol}`}
-						hrefRoute="/"
+						hrefRoute={`/coins/${coin.id}`}
 						coinSymbol={coin.symbol}
 						coinLogo={coin.thumb}
 						coinRank={coin.market_cap_rank}
