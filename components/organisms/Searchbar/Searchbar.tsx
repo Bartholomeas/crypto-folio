@@ -6,17 +6,21 @@ import SearchbarItems from "../../molecules/SearchbarItems/SearchbarItems";
 
 interface Props {
 	placeholderText?: string;
+	fullWidth?: boolean;
 }
 
-function Searchbar({ placeholderText = "" }: Props) {
+function Searchbar({ placeholderText = "", fullWidth = false }: Props) {
 	const [inputValue, setInputValue] = useState("");
 	const [searchedCoins, setSearchedCoins] = useState([]);
 
 	function clearCoinsData(e: React.FocusEvent<HTMLInputElement>) {
 		let currentValue = e.target.value;
-		currentValue = "";
-		setInputValue("");
-		setSearchedCoins([]);
+
+		setTimeout(() => {
+			currentValue = "";
+			setInputValue("");
+			setSearchedCoins([]);
+		}, 300);
 	}
 
 	const getSearchedCoins = useCallback(async (coinValue: string) => {
@@ -44,11 +48,15 @@ function Searchbar({ placeholderText = "" }: Props) {
 	}, [inputValue, getSearchedCoins]);
 
 	return (
-		<div className="relative flex flex-col w-full min-h-[3rem] md:max-w-[300px] z-[100]">
+		<div
+			className={`relative flex flex-col w-full min-h-[3rem] md:${
+				fullWidth ? "" : "max-w-[300px]"
+			}  z-[9999]`}
+		>
 			<Label forProp="searchbar">
 				<div
-					className="dark:border-dmBorderColor border-2
-				 flex justify-between items-center w-full h-full border-borderColor rounded-md"
+					className="dark:bg-dmBaseElement dark:border-dmBase
+				 flex justify-between items-center w-full h-full border-2 border-baseLight rounded-xl"
 				>
 					<input
 						autoComplete="off"
@@ -56,8 +64,8 @@ function Searchbar({ placeholderText = "" }: Props) {
 						onBlur={(e) => clearCoinsData(e)}
 						id="searchbar"
 						placeholder={placeholderText}
-						className="dark:bg-dmBase dark:text-baseLight
-						text w-full h-full max-h-[4rem] rounded py px-xs bg-white"
+						className="dark:bg-inherit dark:text-dmFont
+        w-full px-sm py-sm rounded-xl text"
 						type="text"
 					/>
 					<span
@@ -74,27 +82,3 @@ function Searchbar({ placeholderText = "" }: Props) {
 }
 
 export default Searchbar;
-
-// <div className="relative flex flex-col w-full min-h-[3rem] md:max-w-[400px] z-[100]">
-// <Label forProp="searchbar">
-// 	<div className="dark:border-support flex justify-between items-center w-full h-full border-accent border-solid border-l-4 rounded-md">
-// 		<input
-// 			autoComplete="off"
-// 			onChange={(e) => getInputValue(e)}
-// 			onBlur={(e) => clearCoinsData(e)}
-// 			id="searchbar"
-// 			placeholder={placeholderText}
-// 			className="dark:bg-dmBaseElement dark:text-baseLight
-// 			text w-full h-full max-h-[4rem] py px-xs bg-baseVeryLight "
-// 			type="text"
-// 		/>
-// 		<span
-// 			className="dark:bg-support
-// 		flex items-center justify-center h-full max-h-[4rem] p-xs rounded-r bg-baseVeryLight text-lg text-fontLight"
-// 		>
-// 			<MdSearch />
-// 		</span>
-// 	</div>
-// </Label>
-// <SearchbarItems coinsData={searchedCoins} />
-// </div>

@@ -1,3 +1,4 @@
+/* eslint no-mixed-spaces-and-tabs: ["error", "smart-tabs"] */
 import { useEffect, useState } from "react";
 import { doc, updateDoc, setDoc, arrayUnion, getDoc } from "firebase/firestore";
 
@@ -136,7 +137,7 @@ function useDatabase() {
 			);
 			setLoader(false);
 			setLoggedInUser(result.user);
-			dispatch(uiActions.closeAuthPopup());
+			dispatch(uiActions.closeAuthModal());
 
 			setNotificationPopup(true, "Successfully logged in", true);
 			setTimeout(() => {
@@ -163,7 +164,7 @@ function useDatabase() {
 				addUserToDB(result.user);
 			}
 			setLoggedInUser(result.user);
-			dispatch(uiActions.closeAuthPopup());
+			dispatch(uiActions.closeAuthModal());
 			setNotificationPopup(true, "Successfully logged in", true);
 			setTimeout(() => {
 				setNotificationPopup(false, "Successfully logged in", true);
@@ -196,7 +197,7 @@ function useDatabase() {
 
 	async function addToFavourites(coinName: string) {
 		if (!userData.uid) {
-			dispatch(uiActions.toggleAuthPopup());
+			dispatch(uiActions.toggleAuthModal());
 			return;
 		}
 		if (coinName.trim() === "") return;
@@ -224,7 +225,7 @@ function useDatabase() {
 						(item: PurchaseDetails) =>
 							item.name === purchaseDetails.name &&
 							item.symbol === purchaseDetails.symbol,
-				)
+				  )
 				: -1;
 
 			if (coinIndex === -1) {

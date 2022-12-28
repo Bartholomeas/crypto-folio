@@ -7,6 +7,7 @@ interface Props {
 	coinSymbol: string;
 	coinLogo: string;
 	coinRank: number;
+	isButton?: boolean;
 }
 function SearchbarCoin({
 	children,
@@ -14,8 +15,32 @@ function SearchbarCoin({
 	coinSymbol,
 	coinLogo,
 	coinRank,
+	isButton,
 }: Props) {
-	return (
+	return isButton ? (
+		<button type="button" className="">
+			<div
+				className="dark:bg-dmBase dark:border-2 dark:border-dmBorderColor dark:hover:bg-dmBaseElement
+                hover:bg-baseLight"
+			>
+				<div className="flex items-center gap-sm">
+					<Image
+						src={coinLogo}
+						width={20}
+						height={20}
+						alt="Logo of cointis app"
+					/>
+					<p className="dark:text-dmFont text-font ">{children}</p>
+					<p className="dark:text-dmFont text-fontLight font-bold">
+						{coinSymbol}
+					</p>
+				</div>
+				<p className="dark:text-supportDark font-bold text-fontLight">
+					#{coinRank}
+				</p>
+			</div>
+		</button>
+	) : (
 		<Link passHref href={hrefRoute}>
 			<a className="">
 				<div

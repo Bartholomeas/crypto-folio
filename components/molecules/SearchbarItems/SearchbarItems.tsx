@@ -8,7 +8,7 @@ function SearchbarItems({ coinsData }: Props) {
 	return (
 		<div
 			className={`dark:bg-dmBase dark:border-dmBorderColor
-			 absolute flex flex-col gap-sm bg-baseVeryLight top-[100%] left-0 w-full p-sm translate-y-[.3rem] rounded text-xs border-2 border-solid border-baseLight max-h-[400px] overflow-y-scroll
+			 absolute flex flex-col gap-sm bg-baseVeryLight top-[100%] left-0 w-full p-sm translate-y-[.3rem] rounded text-xs border-2 border-solid border-baseLight max-h-[400px] overflow-y-scroll z-[999]
             ${coinsData.length < 1 && "hidden"}
 			`}
 		>
@@ -16,7 +16,7 @@ function SearchbarItems({ coinsData }: Props) {
 				coinsData.map((coin) => (
 					<SearchbarCoin
 						key={`${coin.id}-${coin.symbol}`}
-						hrefRoute="/"
+						hrefRoute={`/coins/${coin.id}`}
 						coinSymbol={coin.symbol}
 						coinLogo={coin.thumb}
 						coinRank={coin.market_cap_rank}

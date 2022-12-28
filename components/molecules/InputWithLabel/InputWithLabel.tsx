@@ -29,15 +29,16 @@ function InputWithLabel({
 	);
 
 	return (
-		<div className="relative flex flex-col gap-[.3rem] py-xs">
+		<div className="relative flex flex-col gap-[.3rem] py-xs w-full">
 			<Label forProp={forProp}>{children}</Label>
 			<input
 				onChange={onChangeFunc || (() => {})}
 				onBlur={onBlurFunc || (() => {})}
 				className={`dark:bg-dmBaseElement dark:border-dmBase dark:text-dmFont
-        px-sm py-sm rounded-xl border-2 border-baseLight text ${
+        px-xs py-sm rounded-xl border-2 border-baseLight text ${
 					isError && "border-error border-2"
 				}`}
+				min="0"
 				placeholder={placeholderValue}
 				type={inputType}
 				name={forProp}
