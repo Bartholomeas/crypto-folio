@@ -9,6 +9,7 @@ export interface StateInterface {
 	isNavOpen: boolean;
 	isInfoPanelOpen: boolean;
 	isAuthModalOpen: boolean;
+	isCoinModalOpen: boolean;
 	isLoaderOpen: boolean;
 	notificationPopup: {
 		isNotificationPopupOpen: boolean;
@@ -22,6 +23,7 @@ const initialState: StateInterface = {
 	isNavOpen: false,
 	isInfoPanelOpen: false,
 	isAuthModalOpen: false,
+	isCoinModalOpen: false,
 	isLoaderOpen: false,
 	notificationPopup: {
 		isNotificationPopupOpen: false,
@@ -49,7 +51,9 @@ const uiSlice = createSlice({
 		toggleAuthModal(state) {
 			state.isAuthModalOpen = !state.isAuthModalOpen;
 		},
-
+		toggleCoinModal(state) {
+			state.isCoinModalOpen = !state.isCoinModalOpen;
+		},
 		closeAuthModal(state) {
 			state.isAuthModalOpen = false;
 		},

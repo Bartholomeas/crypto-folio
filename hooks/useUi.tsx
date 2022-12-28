@@ -20,6 +20,10 @@ function useUiHandling() {
 		dispatch(uiActions.toggleAuthModal());
 	};
 
+	const openCoinModal = () => {
+		dispatch(uiActions.toggleCoinModal());
+	};
+
 	function setNotificationPopup(
 		isOpen: boolean,
 		content: string,
@@ -39,6 +43,7 @@ function useUiHandling() {
 		toggleTheme,
 		checkTheme,
 		openAuthModal,
+		openCoinModal,
 	};
 }
 

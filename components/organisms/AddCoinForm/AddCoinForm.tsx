@@ -6,9 +6,10 @@ import Searchbar from "../Searchbar/Searchbar";
 
 function AddCoinForm() {
 	return (
-		<form className="">
+		<form className="max-w-[600px]">
+			<h2>Add coin to your wallet</h2>
 			<Label>Search for coin</Label>
-			<Searchbar />
+			<Searchbar fullWidth />
 			<div className="flex items-center gap-4">
 				<InputWithLabel
 					errors={{ boughtDate: "" }}

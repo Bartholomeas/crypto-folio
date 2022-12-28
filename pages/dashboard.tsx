@@ -9,15 +9,18 @@ import TableBody from "../components/molecules/TableBody/TableBody";
 import MarginBox from "../components/atoms/MarginBox/MarginBox";
 import SecondHeader from "../components/atoms/SecondHeader/SecondHeader";
 import PageHeader from "../components/atoms/PageHeader/PageHeader";
-import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
+import { useAppSelector } from "../state/reduxHooks";
 import useDatabase from "../hooks/useDatabase";
 import useFilter from "../hooks/useFilter";
 import useUiHandling from "../hooks/useUi";
+import Button from "../components/atoms/Button/Button";
+import AddCoinModal from "../components/organisms/AddCoinModal/AddCoinModal";
 
 function Dashboard() {
 	const { sortCoins } = useFilter();
 	const user = useAppSelector((state) => state.user);
 	const { addCoinToWallet } = useDatabase();
+	const { openCoinModal } = useUiHandling();
 
 	return (
 		<main
@@ -35,15 +38,13 @@ function Dashboard() {
 				/>
 			</div>
 			<div className="flex flex-col gap w-full mt-[5rem]">
+				<AddCoinModal />
 				<div className="flex items-center justify-between w-full">
 					<SecondHeader>Explore coins</SecondHeader>
 					<Link passHref href="/wallet">
-						<a
-							className="relative flex items-center justify-center gap-sm p-sm h-[40px] w-fit text font-bold rounded-xl bg-accent text-white  hover:bg-accentDark
-            transition-colors"
-						>
+						<Button onClickFn={openCoinModal} isAccent otherStyles="w-fit">
 							Add coin +
-						</a>
+						</Button>
 					</Link>
 				</div>
 				<div className="flex flex-col justify-center w-full overflow-x-scroll">

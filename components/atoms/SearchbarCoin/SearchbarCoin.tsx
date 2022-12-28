@@ -21,7 +21,6 @@ function SearchbarCoin({
 		<button type="button" className="">
 			<div
 				className="dark:bg-dmBase dark:border-2 dark:border-dmBorderColor dark:hover:bg-dmBaseElement
-					flex items-center justify-between bg-white w-full px-sm py-[0.3rem] h-full rounded min-h-[5rem]
                 hover:bg-baseLight"
 			>
 				<div className="flex items-center gap-sm">
