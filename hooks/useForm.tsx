@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { coinsActions } from "../state/coinsSlice";
+import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
 
 interface InitialInputs {
 	[key: string]: string;
@@ -18,6 +20,16 @@ const initialInputsState: InitialInputs = {
 };
 
 function useForm() {
+	const [purchaseData, setPurchaseData] = useState({
+		name: "",
+		symbol: "",
+		date: "",
+		price: 0,
+		amount: 0,
+	});
+
+	const dispatch = useAppDispatch();
+	const { walletCoin } = useAppSelector((state) => state.coins);
 	const [values, setValues] = useState(initialInputsState);
 	const [errors, setErrors] = useState(initialInputsState);
 	const [isError, setIsError] = useState(false);
@@ -75,6 +87,29 @@ function useForm() {
 		const { name, value } = event.target;
 		validateInput(name, value);
 	}
+	function setCoinPurchaseData(key: string, value: string | number) {
+		dispatch(coinsActions.setWalletCoin({ key, value }));
+
+		console.log(walletCoin);
+		// setPurchaseData((prevState) => ({
+		// 	...prevState,
+		// 	[key]: value,
+		// }));
+		// console.log(key, value);
+		// console.log(purchaseData);
+	}
+
+	function setMultipleCoinPurchaseData({
+		keyOne,
+		keyTwo,
+		valueOne,
+		valueTwo,
+	}: {
+		[key: string]: string | number;
+	}) {
+		dispatch(coinsActions.setWalletCoin({ key: keyOne, value: valueOne }));
+		dispatch(coinsActions.setWalletCoin({ key: keyTwo, value: valueTwo }));
+	}
 
 	return {
 		setInputValues,
@@ -83,6 +118,8 @@ function useForm() {
 		values,
 		errors,
 		isError,
+		setCoinPurchaseData,
+		purchaseData,
 	};
 }
 

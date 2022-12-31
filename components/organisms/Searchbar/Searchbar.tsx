@@ -51,7 +51,7 @@ function Searchbar({ placeholderText = "", fullWidth = false }: Props) {
 		<div
 			className={`relative flex flex-col w-full min-h-[3rem] md:${
 				fullWidth ? "" : "max-w-[300px]"
-			}  z-[9999]`}
+			}  z-[1000]`}
 		>
 			<Label forProp="searchbar">
 				<div

@@ -108,6 +108,19 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
+// addCoinToWallet({
+// 	name: "Bitcoin",
+// 	symbol: "BTC",
+// 	shoppings: [
+// 		{
+// 			date: new Date().toString(),
+// 			amount: 0.23,
+// 			price: 21345,
+// 		},
+// 	],
+// });
+
 // {
 //     "id": "bitcoin",
 //     "symbol": "btc",

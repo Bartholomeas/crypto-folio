@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
+import useForm from "../../../hooks/useForm";
+import { coinsActions } from "../../../state/coinsSlice";
 import { useAppDispatch, useAppSelector } from "../../../state/reduxHooks";
 import { uiActions } from "../../../state/uiSlice";
-import BasicLink from "../../atoms/BasicLink/BasicLink";
 import Button from "../../atoms/Button/Button";
 import Label from "../../atoms/Label/Label";
 import Loader from "../../atoms/Loader/Loader";
@@ -12,6 +13,7 @@ import Searchbar from "../Searchbar/Searchbar";
 function AddCoinModal() {
 	const dispatch = useAppDispatch();
 	const { isCoinModalOpen, isLoaderOpen } = useAppSelector((state) => state.ui);
+	const { purchaseData, setCoinPurchaseData } = useForm();
 
 	return (
 		<div
@@ -42,10 +44,12 @@ function AddCoinModal() {
 							<Searchbar fullWidth />
 							<div className="flex items-center gap-4">
 								<InputWithLabel
-									errors={{ boughtDate: "" }}
-									onChangeFunc={() => {}}
+									errors={{ purchaseDate: "" }}
+									onChangeFunc={(e) => {
+										setCoinPurchaseData("date", e.target.value);
+									}}
 									onBlurFunc={() => {}}
-									forProp="boughtDate"
+									forProp="purchaseDate"
 									inputType="date"
 								>
 									Bought date
@@ -53,25 +57,33 @@ function AddCoinModal() {
 							</div>
 							<div className="flex items-center gap-4">
 								<InputWithLabel
-									errors={{ amount: "" }}
-									onChangeFunc={() => {}}
+									errors={{ purchasePrice: "" }}
+									onChangeFunc={(e) => {
+										setCoinPurchaseData("price", e.target.value);
+									}}
 									onBlurFunc={() => {}}
-									forProp="amount"
+									forProp="purchasePrice"
 									inputType="number"
 								>
 									Price
 								</InputWithLabel>
 								<InputWithLabel
-									errors={{ amount: "" }}
-									onChangeFunc={() => {}}
+									errors={{ purchaseAmount: "" }}
+									onChangeFunc={(e) => {
+										setCoinPurchaseData("amount", e.target.value);
+									}}
 									onBlurFunc={() => {}}
-									forProp="amount"
+									forProp="purchaseAmount"
 									inputType="number"
 								>
 									Amount
 								</InputWithLabel>
 							</div>
-							<Button isAccent otherStyles="self-end bottom-0">
+							<Button
+								onClickFn={() => console.log(purchaseData)}
+								isAccent
+								otherStyles="self-end bottom-0"
+							>
 								Add coin to wallet
 							</Button>
 						</div>
