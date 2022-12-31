@@ -1,10 +1,14 @@
-import { CoinItem } from "../../../state/coinsSlice";
+import useForm from "../../../hooks/useForm";
+import { CoinItem, coinsActions } from "../../../state/coinsSlice";
+import { useAppDispatch } from "../../../state/reduxHooks";
 import SearchbarCoin from "../../atoms/SearchbarCoin/SearchbarCoin";
 
 interface Props {
 	coinsData: CoinItem[];
 }
 function SearchbarItems({ coinsData }: Props) {
+	const { setCoinPurchaseData } = useForm();
+
 	return (
 		<div
 			className={`dark:bg-dmBase dark:border-dmBorderColor
@@ -15,6 +19,10 @@ function SearchbarItems({ coinsData }: Props) {
 			{coinsData.length >= 1 &&
 				coinsData.map((coin) => (
 					<SearchbarCoin
+						onClickFn={() => {
+							setCoinPurchaseData("name", coin.name);
+							setCoinPurchaseData("symbol", coin.symbol);
+						}}
 						key={`${coin.id}-${coin.symbol}`}
 						hrefRoute={`/coins/${coin.id}`}
 						coinSymbol={coin.symbol}
