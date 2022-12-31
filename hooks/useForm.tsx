@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { coinsActions } from "../state/coinsSlice";
-import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
+import { useAppDispatch } from "../state/reduxHooks";
 
 interface InitialInputs {
 	[key: string]: string;
@@ -21,7 +21,6 @@ const initialInputsState: InitialInputs = {
 
 function useForm() {
 	const dispatch = useAppDispatch();
-	const { walletCoin } = useAppSelector((state) => state.coins);
 	const [values, setValues] = useState(initialInputsState);
 	const [errors, setErrors] = useState(initialInputsState);
 	const [isError, setIsError] = useState(false);
@@ -79,6 +78,7 @@ function useForm() {
 		const { name, value } = event.target;
 		validateInput(name, value);
 	}
+
 	function setCoinPurchaseData(key: string, value: string | number) {
 		dispatch(
 			coinsActions.setWalletCoin({
@@ -86,8 +86,6 @@ function useForm() {
 				value,
 			}),
 		);
-
-		console.log(walletCoin);
 	}
 
 	return {

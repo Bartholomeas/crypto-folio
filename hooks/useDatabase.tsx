@@ -236,7 +236,6 @@ function useDatabase() {
 			],
 		};
 		setLoader(true);
-
 		try {
 			const userSnap = await getDoc(userRef);
 			const { walletCoins } = userSnap.data() || [];
@@ -265,6 +264,12 @@ function useDatabase() {
 				throw new Error("No such document!");
 			}
 			setLoader(false);
+
+			setNotificationPopup(true, "You added coin!", true);
+
+			setTimeout(() => {
+				setNotificationPopup(false, "You added coin!", true);
+			}, 3000);
 		} catch (e) {
 			setLoader(false);
 			throw new Error("Error lol");

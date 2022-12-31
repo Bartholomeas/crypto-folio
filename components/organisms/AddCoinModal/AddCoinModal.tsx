@@ -5,6 +5,7 @@ import useForm from "../../../hooks/useForm";
 import { useAppDispatch, useAppSelector } from "../../../state/reduxHooks";
 import { uiActions } from "../../../state/uiSlice";
 import Button from "../../atoms/Button/Button";
+import ErrorText from "../../atoms/ErrorText/ErrorText";
 import Label from "../../atoms/Label/Label";
 import Loader from "../../atoms/Loader/Loader";
 import InputWithLabel from "../../molecules/InputWithLabel/InputWithLabel";
@@ -13,9 +14,20 @@ import Searchbar from "../Searchbar/Searchbar";
 function AddCoinModal() {
 	const dispatch = useAppDispatch();
 	const { isCoinModalOpen, isLoaderOpen } = useAppSelector((state) => state.ui);
+
+	const [isValid, setIsValid] = useState(true);
 	const { walletCoin } = useAppSelector((state) => state.coins);
 	const { addCoinToWallet } = useDatabase();
-	const { setCoinPurchaseData } = useForm();
+	const { validateInputOnBlur, setCoinPurchaseData } = useForm();
+
+	function validateAndAddCoin() {
+		if (Object.values(walletCoin).every((item) => item)) {
+			setIsValid(true);
+			addCoinToWallet(walletCoin);
+		} else {
+			setIsValid(false);
+		}
+	}
 
 	return (
 		<div
@@ -50,7 +62,7 @@ function AddCoinModal() {
 									onChangeFunc={(e) => {
 										setCoinPurchaseData("date", e.target.value);
 									}}
-									onBlurFunc={() => {}}
+									onBlurFunc={validateInputOnBlur}
 									forProp="purchaseDate"
 									inputType="date"
 								>
@@ -63,7 +75,7 @@ function AddCoinModal() {
 									onChangeFunc={(e) => {
 										setCoinPurchaseData("price", +e.target.value);
 									}}
-									onBlurFunc={() => {}}
+									onBlurFunc={validateInputOnBlur}
 									forProp="purchasePrice"
 									inputType="number"
 								>
@@ -74,19 +86,19 @@ function AddCoinModal() {
 									onChangeFunc={(e) => {
 										setCoinPurchaseData("amount", +e.target.value);
 									}}
-									onBlurFunc={() => {}}
+									onBlurFunc={validateInputOnBlur}
 									forProp="purchaseAmount"
 									inputType="number"
 								>
 									Amount
 								</InputWithLabel>
 							</div>
-							<Button
-								onClickFn={() => addCoinToWallet(walletCoin)}
-								isAccent
-								otherStyles="self-end bottom-0"
-							>
+							{!isValid && <ErrorText>No field can be empty</ErrorText>}
+							<Button onClickFn={() => validateAndAddCoin()} isAccent>
 								Add coin to wallet
+							</Button>
+							<Button onClickFn={() => dispatch(uiActions.toggleCoinModal())}>
+								Anuluj
 							</Button>
 						</div>
 					</form>
