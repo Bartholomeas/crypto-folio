@@ -34,14 +34,6 @@ interface StateInterface {
 	walletCoin: AddWalletCoin;
 }
 
-// 	shoppings: [
-// 		{
-// 			date: new Date().toString(),
-// 			amount: 0.23,
-// 			price: 21345,
-// 		},
-// 	],
-
 const initialState: StateInterface = {
 	coinsList: [],
 	filteredCoins: [],

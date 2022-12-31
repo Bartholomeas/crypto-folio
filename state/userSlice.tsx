@@ -4,10 +4,10 @@ export interface PurchaseDetails {
 	name: string;
 	symbol: string;
 	shoppings: {
-		date: any;
+		date: string;
 		amount: number;
 		price: number;
-	}[];
+	};
 }
 
 interface StateInterface {
