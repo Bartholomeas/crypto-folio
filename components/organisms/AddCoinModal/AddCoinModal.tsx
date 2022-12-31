@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
 import useDatabase from "../../../hooks/useDatabase";
 import useForm from "../../../hooks/useForm";
-import { coinsActions } from "../../../state/coinsSlice";
 import { useAppDispatch, useAppSelector } from "../../../state/reduxHooks";
 import { uiActions } from "../../../state/uiSlice";
 import Button from "../../atoms/Button/Button";

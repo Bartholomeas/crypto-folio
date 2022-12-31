@@ -235,6 +235,7 @@ function useDatabase() {
 				},
 			],
 		};
+		setLoader(true);
 
 		try {
 			const userSnap = await getDoc(userRef);
@@ -263,7 +264,9 @@ function useDatabase() {
 			} else {
 				throw new Error("No such document!");
 			}
+			setLoader(false);
 		} catch (e) {
+			setLoader(false);
 			throw new Error("Error lol");
 		}
 	}
