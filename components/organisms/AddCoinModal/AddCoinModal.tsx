@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
+import useDatabase from "../../../hooks/useDatabase";
 import useForm from "../../../hooks/useForm";
 import { coinsActions } from "../../../state/coinsSlice";
 import { useAppDispatch, useAppSelector } from "../../../state/reduxHooks";
@@ -13,7 +14,9 @@ import Searchbar from "../Searchbar/Searchbar";
 function AddCoinModal() {
 	const dispatch = useAppDispatch();
 	const { isCoinModalOpen, isLoaderOpen } = useAppSelector((state) => state.ui);
-	const { purchaseData, setCoinPurchaseData } = useForm();
+	const { walletCoin } = useAppSelector((state) => state.coins);
+	const { addCoinToWallet } = useDatabase();
+	const { setCoinPurchaseData } = useForm();
 
 	return (
 		<div
@@ -52,14 +55,14 @@ function AddCoinModal() {
 									forProp="purchaseDate"
 									inputType="date"
 								>
-									Bought date
+									Purchase date
 								</InputWithLabel>
 							</div>
 							<div className="flex items-center gap-4">
 								<InputWithLabel
 									errors={{ purchasePrice: "" }}
 									onChangeFunc={(e) => {
-										setCoinPurchaseData("price", e.target.value);
+										setCoinPurchaseData("price", +e.target.value);
 									}}
 									onBlurFunc={() => {}}
 									forProp="purchasePrice"
@@ -70,7 +73,7 @@ function AddCoinModal() {
 								<InputWithLabel
 									errors={{ purchaseAmount: "" }}
 									onChangeFunc={(e) => {
-										setCoinPurchaseData("amount", e.target.value);
+										setCoinPurchaseData("amount", +e.target.value);
 									}}
 									onBlurFunc={() => {}}
 									forProp="purchaseAmount"
@@ -80,7 +83,7 @@ function AddCoinModal() {
 								</InputWithLabel>
 							</div>
 							<Button
-								onClickFn={() => console.log(purchaseData)}
+								onClickFn={() => addCoinToWallet(walletCoin)}
 								isAccent
 								otherStyles="self-end bottom-0"
 							>

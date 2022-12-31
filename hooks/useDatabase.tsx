@@ -17,6 +17,14 @@ import { uiActions } from "../state/uiSlice";
 
 const googleProvider = new GoogleAuthProvider();
 
+interface WalletCoinProp {
+	name: string;
+	symbol: string;
+	date: string;
+	amount: number;
+	price: number;
+}
+
 function useDatabase() {
 	const dispatch = useAppDispatch();
 	const { userData } = useAppSelector((state) => state.user);
@@ -214,8 +222,20 @@ function useDatabase() {
 		}
 	}
 
-	async function addCoinToWallet(purchaseDetails: PurchaseDetails) {
+	async function addCoinToWallet(purchaseDetails: WalletCoinProp) {
 		const userRef = doc(db, "users", userData.uid);
+		const coinObject = {
+			name: purchaseDetails.name,
+			symbol: purchaseDetails.symbol,
+			shoppings: [
+				{
+					amount: purchaseDetails.amount,
+					price: purchaseDetails.price,
+					date: purchaseDetails.date,
+				},
+			],
+		};
+
 		try {
 			const userSnap = await getDoc(userRef);
 			const { walletCoins } = userSnap.data() || [];
@@ -230,14 +250,14 @@ function useDatabase() {
 
 			if (coinIndex === -1) {
 				await updateDoc(userRef, {
-					walletCoins: arrayUnion(purchaseDetails),
+					walletCoins: arrayUnion(coinObject),
 				});
 			} else if (userSnap.exists()) {
 				console.log(userSnap.data().walletCoins[coinIndex]);
 
 				walletCoins[coinIndex].shoppings = [
 					...walletCoins[coinIndex].shoppings,
-					...purchaseDetails.shoppings,
+					...coinObject.shoppings,
 				];
 				await updateDoc(userRef, { walletCoins });
 			} else {

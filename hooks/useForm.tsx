@@ -20,14 +20,6 @@ const initialInputsState: InitialInputs = {
 };
 
 function useForm() {
-	const [purchaseData, setPurchaseData] = useState({
-		name: "",
-		symbol: "",
-		date: "",
-		price: 0,
-		amount: 0,
-	});
-
 	const dispatch = useAppDispatch();
 	const { walletCoin } = useAppSelector((state) => state.coins);
 	const [values, setValues] = useState(initialInputsState);
@@ -88,27 +80,14 @@ function useForm() {
 		validateInput(name, value);
 	}
 	function setCoinPurchaseData(key: string, value: string | number) {
-		dispatch(coinsActions.setWalletCoin({ key, value }));
+		dispatch(
+			coinsActions.setWalletCoin({
+				key,
+				value,
+			}),
+		);
 
 		console.log(walletCoin);
-		// setPurchaseData((prevState) => ({
-		// 	...prevState,
-		// 	[key]: value,
-		// }));
-		// console.log(key, value);
-		// console.log(purchaseData);
-	}
-
-	function setMultipleCoinPurchaseData({
-		keyOne,
-		keyTwo,
-		valueOne,
-		valueTwo,
-	}: {
-		[key: string]: string | number;
-	}) {
-		dispatch(coinsActions.setWalletCoin({ key: keyOne, value: valueOne }));
-		dispatch(coinsActions.setWalletCoin({ key: keyTwo, value: valueTwo }));
 	}
 
 	return {
@@ -119,7 +98,6 @@ function useForm() {
 		errors,
 		isError,
 		setCoinPurchaseData,
-		purchaseData,
 	};
 }
 
