@@ -19,6 +19,7 @@ export interface CoinItem {
 }
 
 interface AddWalletCoin {
+	[key: string]: string | number;
 	name: string;
 	symbol: string;
 	date: string;
@@ -70,7 +71,8 @@ const coinsSlice = createSlice({
 			state.trendingCoins = action.payload;
 		},
 		setWalletCoin(state, action) {
-			state.walletCoin[action.payload.key] = action.payload.value;
+			state.walletCoin[action.payload.key as keyof AddWalletCoin] =
+				action.payload.value;
 		},
 	},
 });
