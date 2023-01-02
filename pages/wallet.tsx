@@ -5,7 +5,6 @@ import TableData from "../components/molecules/TableData/TableData";
 import TableHead from "../components/molecules/TableHead/TableHead";
 import TableHeader from "../components/molecules/TableHeader/TableHeader";
 import TableRow from "../components/molecules/TableRow/TableRow";
-import AddCoinForm from "../components/organisms/AddCoinForm/AddCoinForm";
 import Table from "../components/organisms/Table/Table";
 import useFilter from "../hooks/useFilter";
 
@@ -22,7 +21,6 @@ function Wallet() {
 				<PageHeader appendAfter="of DefaultWallet">
 					Your coin balance
 				</PageHeader>
-				<AddCoinForm />
 				<div className=" flex flex-col justify-center w-full overflow-x-scroll">
 					<Table>
 						<colgroup>

@@ -20,6 +20,7 @@ const googleProvider = new GoogleAuthProvider();
 interface WalletCoinProp {
 	name: string;
 	symbol: string;
+	image: string;
 	date: string;
 	amount: number;
 	price: number;
@@ -227,6 +228,7 @@ function useDatabase() {
 		const coinObject = {
 			name: purchaseDetails.name,
 			symbol: purchaseDetails.symbol,
+			image: purchaseDetails.image,
 			shoppings: [
 				{
 					amount: purchaseDetails.amount,
@@ -253,8 +255,6 @@ function useDatabase() {
 					walletCoins: arrayUnion(coinObject),
 				});
 			} else if (userSnap.exists()) {
-				console.log(userSnap.data().walletCoins[coinIndex]);
-
 				walletCoins[coinIndex].shoppings = [
 					...walletCoins[coinIndex].shoppings,
 					...coinObject.shoppings,
@@ -276,6 +276,12 @@ function useDatabase() {
 		}
 	}
 
+	async function getUserWalletCoins() {
+		const userRef = doc(db, "users", userData.uid);
+		console.log(userRef);
+		// if (userSnap.exists()) return;
+	}
+
 	return {
 		loggedIn,
 		authWithGoogle,
@@ -284,6 +290,7 @@ function useDatabase() {
 		authWithEmail,
 		addToFavourites,
 		addCoinToWallet,
+		getUserWalletCoins,
 	};
 }
 

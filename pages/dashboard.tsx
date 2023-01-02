@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useEffect } from "react";
 import TableData from "../components/molecules/TableData/TableData";
 import TableHeader from "../components/molecules/TableHeader/TableHeader";
 import TableRow from "../components/molecules/TableRow/TableRow";
@@ -10,17 +11,20 @@ import MarginBox from "../components/atoms/MarginBox/MarginBox";
 import SecondHeader from "../components/atoms/SecondHeader/SecondHeader";
 import PageHeader from "../components/atoms/PageHeader/PageHeader";
 import { useAppSelector } from "../state/reduxHooks";
-import useDatabase from "../hooks/useDatabase";
 import useFilter from "../hooks/useFilter";
 import useUiHandling from "../hooks/useUi";
 import Button from "../components/atoms/Button/Button";
 import AddCoinModal from "../components/organisms/AddCoinModal/AddCoinModal";
+import useDatabase from "../hooks/useDatabase";
 
 function Dashboard() {
 	const { sortCoins } = useFilter();
-	const user = useAppSelector((state) => state.user);
-	const { addCoinToWallet } = useDatabase();
 	const { openCoinModal } = useUiHandling();
+	const { getUserWalletCoins } = useDatabase();
+
+	useEffect(() => {
+		getUserWalletCoins();
+	}, []);
 
 	return (
 		<main
@@ -108,18 +112,6 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
-// addCoinToWallet({
-// 	name: "Bitcoin",
-// 	symbol: "BTC",
-// 	shoppings: [
-// 		{
-// 			date: new Date().toString(),
-// 			amount: 0.23,
-// 			price: 21345,
-// 		},
-// 	],
-// });
 
 // {
 //     "id": "bitcoin",

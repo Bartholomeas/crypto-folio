@@ -22,6 +22,7 @@ interface AddWalletCoin {
 	[key: string]: string | number;
 	name: string;
 	symbol: string;
+	image: string;
 	date: string;
 	amount: number;
 	price: number;
@@ -41,6 +42,7 @@ const initialState: StateInterface = {
 	walletCoin: {
 		name: "",
 		symbol: "",
+		image: "",
 		date: "",
 		amount: 0,
 		price: 0,
