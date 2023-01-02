@@ -1,6 +1,5 @@
 import useForm from "../../../hooks/useForm";
-import { CoinItem, coinsActions } from "../../../state/coinsSlice";
-import { useAppDispatch } from "../../../state/reduxHooks";
+import { CoinItem } from "../../../state/coinsSlice";
 import SearchbarCoin from "../../atoms/SearchbarCoin/SearchbarCoin";
 
 interface Props {
@@ -22,6 +21,7 @@ function SearchbarItems({ coinsData }: Props) {
 						onClickFn={() => {
 							setCoinPurchaseData("name", coin.name);
 							setCoinPurchaseData("symbol", coin.symbol);
+							setCoinPurchaseData("image", coin.thumb);
 						}}
 						key={`${coin.id}-${coin.symbol}`}
 						hrefRoute={`/coins/${coin.id}`}
