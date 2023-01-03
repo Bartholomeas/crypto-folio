@@ -20,11 +20,13 @@ import useDatabase from "../hooks/useDatabase";
 function Dashboard() {
 	const { sortCoins } = useFilter();
 	const { openCoinModal } = useUiHandling();
-	const { getUserWalletCoins } = useDatabase();
+	const { userData } = useAppSelector((state) => state.user);
+	const { getUserWalletCoins, userWalletCoins } = useDatabase();
 
 	useEffect(() => {
-		getUserWalletCoins();
-	}, []);
+		if (userData.uid) getUserWalletCoins();
+		console.log(userWalletCoins);
+	}, [userData.uid]);
 
 	return (
 		<main
@@ -54,12 +56,9 @@ function Dashboard() {
 				<div className="flex flex-col justify-center w-full overflow-x-scroll">
 					<Table>
 						<colgroup>
-							<col className="w-[3%]" />
+							<col className="w-[5%]" />
 							<col className="w-[20%]" />
 							<col className="w-[20%]" />
-							<col className="w-[15%]" />
-							<col className="w-[20%]" />
-							<col className="w-[22%]" />
 						</colgroup>
 						<TableHead>
 							<TableRow>
