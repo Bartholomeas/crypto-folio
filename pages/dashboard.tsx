@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
+import { doc, onSnapshot } from "firebase/firestore";
 import TableData from "../components/molecules/TableData/TableData";
 import TableHeader from "../components/molecules/TableHeader/TableHeader";
 import TableRow from "../components/molecules/TableRow/TableRow";
@@ -16,17 +17,24 @@ import useUiHandling from "../hooks/useUi";
 import Button from "../components/atoms/Button/Button";
 import AddCoinModal from "../components/organisms/AddCoinModal/AddCoinModal";
 import useDatabase from "../hooks/useDatabase";
+import { db } from "../firebaseConfig";
 
 function Dashboard() {
 	const { sortCoins } = useFilter();
 	const { openCoinModal } = useUiHandling();
 	const { userData } = useAppSelector((state) => state.user);
-	const { getUserWalletCoins, userWalletCoins } = useDatabase();
+	const { loggedIn, getUserWalletCoins, userWalletCoins } = useDatabase();
 
 	useEffect(() => {
-		if (userData.uid) getUserWalletCoins();
-		console.log(userWalletCoins);
-	}, [userData.uid]);
+		const unsubscribe = onSnapshot(
+			doc(db, "users", "sfiPWUa9OKZHZO4ayApZXaYkW6j2"),
+			(item) => {
+				if (loggedIn) console.log(item.data());
+			},
+		);
+
+		return () => unsubscribe();
+	}, [loggedIn]);
 
 	return (
 		<main
