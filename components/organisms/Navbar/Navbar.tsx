@@ -31,7 +31,7 @@ function Navbar() {
 	return (
 		<nav
 			className="dark:bg-dmBase dark:border-dmBorderColor dark:shadow-none
-			 fixed h-[70px] flex flex-col w-full top-0 left-0 bg-white z-[1000]
+			 fixed h-[70px] flex flex-col w-full top-0 left-0 bg-white z-[99999]
 			border-b-2 border-baseLight
 		md:relative md:h-full md:max-w-[180px] md:py-lg md:border-r-2 md:border-b-0 "
 		>

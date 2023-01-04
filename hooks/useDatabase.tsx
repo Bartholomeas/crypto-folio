@@ -30,6 +30,7 @@ function useDatabase() {
 	const dispatch = useAppDispatch();
 	const { userData } = useAppSelector((state) => state.user);
 	const [loggedIn, setLoggedIn] = useState(false);
+	const [userWalletCoins, setUserWalletCoins] = useState([]);
 
 	function setLoggedInUser(user: any) {
 		setLoggedIn(true);
@@ -278,8 +279,11 @@ function useDatabase() {
 
 	async function getUserWalletCoins() {
 		const userRef = doc(db, "users", userData.uid);
-		console.log(userRef);
-		// if (userSnap.exists()) return;
+		const userSnap = await getDoc(userRef);
+		if (userSnap.exists()) {
+			setUserWalletCoins(userSnap.data().walletCoins);
+			// userWalletCoins, setUserWalletCoins;
+		}
 	}
 
 	return {
@@ -291,6 +295,7 @@ function useDatabase() {
 		addToFavourites,
 		addCoinToWallet,
 		getUserWalletCoins,
+		userWalletCoins,
 	};
 }
 
