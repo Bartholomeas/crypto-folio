@@ -71,11 +71,36 @@ function TableData({
 					</a>
 				</Link>
 			) : (
-				<>
-					<span className="font-bold">{appendBefore ?? ""}</span>
+				<div
+					className={`
+						flex ${leftAlign ? "justify-start" : "justify-end"} items-center w-full h-full`}
+				>
+					{appendBefore && <span className="font-bold">{appendBefore}</span>}
+
+					{imgSrc && (
+						<div className=" w-[3rem] mr-4">
+							<Image
+								layout="responsive"
+								src={imgSrc}
+								width="10"
+								height="10"
+								alt="Cryptocurrency icon"
+							/>
+						</div>
+					)}
 					{children}
-					<span className="font-bold"> {appendAfter ?? " "}</span>
-				</>
+					{appendAfter && (
+						<span className="font-bold text-xs  [&:nth-child(2)]:ml-4">
+							{" "}
+							{appendAfter}
+						</span>
+					)}
+				</div>
+				// <>
+				// 	<span className="font-bold">{appendBefore ?? ""}</span>
+				// 	{children}
+				// 	<span className="font-bold"> {appendAfter ?? " "}</span>
+				// </>
 			)}
 		</td>
 	);
