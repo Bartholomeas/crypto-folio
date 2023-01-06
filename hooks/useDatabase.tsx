@@ -1,6 +1,13 @@
 /* eslint no-mixed-spaces-and-tabs: ["error", "smart-tabs"] */
 import { useEffect, useState } from "react";
-import { doc, updateDoc, setDoc, arrayUnion, getDoc } from "firebase/firestore";
+import {
+	doc,
+	updateDoc,
+	setDoc,
+	arrayUnion,
+	getDoc,
+	onSnapshot,
+} from "firebase/firestore";
 
 import {
 	createUserWithEmailAndPassword,
@@ -30,7 +37,6 @@ function useDatabase() {
 	const dispatch = useAppDispatch();
 	const { userData } = useAppSelector((state) => state.user);
 	const [loggedIn, setLoggedIn] = useState(false);
-	const [userWalletCoins, setUserWalletCoins] = useState([]);
 
 	function setLoggedInUser(user: any) {
 		setLoggedIn(true);
@@ -39,7 +45,7 @@ function useDatabase() {
 				name: user.displayName || user.email,
 				email: user.email,
 				uid: user.uid,
-				photoURL: user.photoURL || "",
+				image: user.photoURL || "",
 				favouriteCoins: user.favouriteCoins || [],
 				walletCoins: user.walletCoins || [],
 			}),
@@ -54,8 +60,10 @@ function useDatabase() {
 	}
 
 	function stateChangeWatcher(callback: any) {
-		return onAuthStateChanged(auth, (user) => {
+		return onAuthStateChanged(auth, async (user) => {
 			if (user && !loggedIn) {
+				const userSnap = await getDoc(doc(db, "users", user.uid));
+				// console.log(userSnap.data());
 				callback(user);
 			}
 		});
@@ -89,6 +97,7 @@ function useDatabase() {
 	async function addUserToDB(user: any) {
 		try {
 			const userRef = await doc(db, "users", user.uid);
+
 			setDoc(
 				userRef,
 				{
@@ -116,7 +125,6 @@ function useDatabase() {
 			);
 			setLoader(false);
 			addUserToDB(result.user);
-
 			setNotificationPopup(true, "Congratulations, you got registered!", true);
 
 			setTimeout(() => {
@@ -225,6 +233,7 @@ function useDatabase() {
 	}
 
 	async function addCoinToWallet(purchaseDetails: WalletCoinProp) {
+		console.log(purchaseDetails);
 		const userRef = doc(db, "users", userData.uid);
 		const coinObject = {
 			name: purchaseDetails.name,
@@ -277,15 +286,6 @@ function useDatabase() {
 		}
 	}
 
-	async function getUserWalletCoins() {
-		const userRef = doc(db, "users", userData.uid);
-		const userSnap = await getDoc(userRef);
-		if (userSnap.exists()) {
-			setUserWalletCoins(userSnap.data().walletCoins);
-			// userWalletCoins, setUserWalletCoins;
-		}
-	}
-
 	return {
 		loggedIn,
 		authWithGoogle,
@@ -294,8 +294,6 @@ function useDatabase() {
 		authWithEmail,
 		addToFavourites,
 		addCoinToWallet,
-		getUserWalletCoins,
-		userWalletCoins,
 	};
 }
 

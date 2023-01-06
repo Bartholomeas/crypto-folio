@@ -21,6 +21,7 @@ function AddCoinModal() {
 	const { validateInputOnBlur, setCoinPurchaseData } = useForm();
 
 	function validateAndAddCoin() {
+		console.log(walletCoin);
 		if (Object.values(walletCoin).every((item) => item)) {
 			setIsValid(true);
 			addCoinToWallet(walletCoin);
