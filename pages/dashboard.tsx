@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import Image from "next/image";
 import TableData from "../components/molecules/TableData/TableData";
 import TableHeader from "../components/molecules/TableHeader/TableHeader";
 import TableRow from "../components/molecules/TableRow/TableRow";
@@ -24,6 +25,7 @@ import { PurchaseDetails } from "../state/userSlice";
 function Dashboard() {
 	const dispatch = useAppDispatch();
 	const { userData } = useAppSelector((state) => state.user);
+	const { coinsList } = useAppSelector((state) => state.coins);
 	const { sortCoins } = useFilter();
 	const { openCoinModal } = useUiHandling();
 	const { loggedIn } = useDatabase();
@@ -37,8 +39,6 @@ function Dashboard() {
 			const userSnap = await getDoc(doc(db, "users", user.uid));
 			if (userSnap.exists()) setUserWalletCoins(userSnap.data().walletCoins);
 		});
-		console.log(userWalletCoins);
-
 		// const unsubscribe = onSnapshot(doc(db, "users", userData.uid), (item) => {
 		// 	console.log(item.data());
 		// });
@@ -100,6 +100,8 @@ function Dashboard() {
 										<TableData>{index + 1}</TableData>
 										<TableData
 											imgSrc={coin.image}
+											// hrefRoute="/"
+											leftAlign
 											appendAfter={coin.symbol.toUpperCase()}
 										>
 											{coin.name}
