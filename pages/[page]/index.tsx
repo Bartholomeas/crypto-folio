@@ -28,7 +28,6 @@ function SpecifiedPage({
 	const { sortCoins } = useFilter();
 	const dispatch = useAppDispatch();
 	const { coinsList } = useAppSelector((state) => state.coins);
-	const { userData } = useAppSelector((state) => state.user);
 
 	useEffect(() => {
 		dispatch(coinsActions.setCoinsList(coins));

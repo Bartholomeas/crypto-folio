@@ -29,6 +29,7 @@ function Searchbar({ placeholderText = "", fullWidth = false }: Props) {
 				`https://api.coingecko.com/api/v3/search?query=${coinValue}`,
 			);
 			setSearchedCoins(data.data.coins);
+			console.log(data.data.coins);
 		} catch (error) {
 			throw new Error("Something went wrong");
 		}
@@ -42,7 +43,6 @@ function Searchbar({ placeholderText = "", fullWidth = false }: Props) {
 		const debounceTimeout = setTimeout(() => {
 			getSearchedCoins(inputValue);
 		}, 500);
-
 		// eslint-disable-next-line consistent-return
 		return () => clearTimeout(debounceTimeout);
 	}, [inputValue, getSearchedCoins]);

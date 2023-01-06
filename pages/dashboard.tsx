@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { useCallback, useEffect } from "react";
-import { doc, onSnapshot } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 import TableData from "../components/molecules/TableData/TableData";
 import TableHeader from "../components/molecules/TableHeader/TableHeader";
 import TableRow from "../components/molecules/TableRow/TableRow";
@@ -11,37 +12,48 @@ import TableBody from "../components/molecules/TableBody/TableBody";
 import MarginBox from "../components/atoms/MarginBox/MarginBox";
 import SecondHeader from "../components/atoms/SecondHeader/SecondHeader";
 import PageHeader from "../components/atoms/PageHeader/PageHeader";
-import { useAppSelector } from "../state/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
 import useFilter from "../hooks/useFilter";
 import useUiHandling from "../hooks/useUi";
 import Button from "../components/atoms/Button/Button";
 import AddCoinModal from "../components/organisms/AddCoinModal/AddCoinModal";
 import useDatabase from "../hooks/useDatabase";
-import { db } from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
+import { PurchaseDetails } from "../state/userSlice";
 
 function Dashboard() {
+	const dispatch = useAppDispatch();
+	const { userData } = useAppSelector((state) => state.user);
 	const { sortCoins } = useFilter();
 	const { openCoinModal } = useUiHandling();
-	const { userData } = useAppSelector((state) => state.user);
-	const { loggedIn, getUserWalletCoins, userWalletCoins } = useDatabase();
+	const { loggedIn } = useDatabase();
+	const [userWalletCoins, setUserWalletCoins] = useState([]);
 
 	useEffect(() => {
-		const unsubscribe = onSnapshot(
-			doc(db, "users", "sfiPWUa9OKZHZO4ayApZXaYkW6j2"),
-			(item) => {
-				if (loggedIn) console.log(item.data());
-			},
-		);
+		if (!userData.uid) return;
 
-		return () => unsubscribe();
-	}, [loggedIn]);
+		onAuthStateChanged(auth, async (user) => {
+			if (!user) return;
+			const userSnap = await getDoc(doc(db, "users", user.uid));
+			if (userSnap.exists()) setUserWalletCoins(userSnap.data().walletCoins);
+		});
+		console.log(userWalletCoins);
+
+		// const unsubscribe = onSnapshot(doc(db, "users", userData.uid), (item) => {
+		// 	console.log(item.data());
+		// });
+
+		// return () => unsubscribe();
+	}, [loggedIn, userData.uid]);
 
 	return (
 		<main
-			className="dark:bg-dmBase flex flex-col items-start gap-sm w-full md:max-w px pb-[10rem] min-h-[100vh] bg-white overflow-y-auto
-		md:h-[100vh] md:py-lg md:mr-[5rem]"
+			className="dark:bg-dmBase flex flex-col items-start gap-sm w-full
+			 min-h-[100vh] px pb-[10rem] bg-white overflow-y-auto
+		md:h-[100vh] md:py-lg md:mr-[5rem] md:max-w"
 		>
 			<MarginBox />
+
 			<PageHeader appendAfter="of DefaultWallet">Dashboard</PageHeader>
 			<div className="cards flex flex-col gap-sm w-full lg:flex-row">
 				<TotalAssetsValue
@@ -64,9 +76,9 @@ function Dashboard() {
 				<div className="flex flex-col justify-center w-full overflow-x-scroll">
 					<Table>
 						<colgroup>
-							<col className="w-[5%]" />
+							{/* <col className="w-[5%]" />
 							<col className="w-[20%]" />
-							<col className="w-[20%]" />
+							<col className="w-[20%]" /> */}
 						</colgroup>
 						<TableHead>
 							<TableRow>
@@ -76,21 +88,39 @@ function Dashboard() {
 								<TableHeader onClickFn={sortCoins} value="id" leftAlign>
 									Name
 								</TableHeader>
-								<TableHeader onClickFn={sortCoins} value="current_price">
-									Current price
-								</TableHeader>
-								<TableHeader
-									onClickFn={sortCoins}
-									value="price_change_percentage_24h"
-								>
-									24h change
-								</TableHeader>
-								<TableHeader>Quantity</TableHeader>
+								<TableHeader>Last purchase</TableHeader>
+								<TableHeader>Amount</TableHeader>
 								<TableHeader>Value</TableHeader>
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							<TableRow>
+							{userWalletCoins &&
+								userWalletCoins.map((coin: PurchaseDetails, index) => (
+									<TableRow key={coin.symbol + coin.image}>
+										<TableData>{index + 1}</TableData>
+										<TableData
+											imgSrc={coin.image}
+											appendAfter={coin.symbol.toUpperCase()}
+										>
+											{coin.name}
+										</TableData>
+										<TableData>01.01.2023</TableData>
+										<TableData appendAfter="USD">
+											{coin.shoppings.reduce(
+												(acc: number, object: any) => acc + object.amount,
+												0,
+											)}
+										</TableData>
+										<TableData appendAfter="USD">
+											{coin.shoppings.reduce(
+												(acc: number, object: any) => acc + object.amount * 21,
+												0,
+											)}
+										</TableData>
+									</TableRow>
+								))}
+
+							{/* <TableRow>
 								<TableData isBold>1</TableData>
 								<TableData leftAlign>Bitcoin</TableData>
 								<TableData appendAfter="USD">21321</TableData>
@@ -109,7 +139,7 @@ function Dashboard() {
 								</TableData>
 								<TableData>0.73</TableData>
 								<TableData appendAfter="USD">15600</TableData>
-							</TableRow>
+							</TableRow> */}
 						</TableBody>
 					</Table>
 				</div>

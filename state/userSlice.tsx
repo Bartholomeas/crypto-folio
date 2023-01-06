@@ -3,11 +3,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface PurchaseDetails {
 	name: string;
 	symbol: string;
+	image: string;
 	shoppings: {
 		date: string;
 		amount: number;
 		price: number;
-	};
+	}[];
 }
 
 interface StateInterface {
@@ -15,7 +16,7 @@ interface StateInterface {
 		name: string;
 		email: string;
 		uid: string;
-		photoURL: string;
+		image: string;
 		favouriteCoins: string[];
 		walletCoins: PurchaseDetails[];
 	};
@@ -26,7 +27,7 @@ const initialState: StateInterface = {
 		name: "",
 		email: "",
 		uid: "",
-		photoURL: "",
+		image: "",
 		favouriteCoins: [],
 		walletCoins: [],
 	},
@@ -41,7 +42,7 @@ const userSlice = createSlice({
 				name: action.payload.name,
 				email: action.payload.email,
 				uid: action.payload.uid,
-				photoURL: action.payload.photoURL,
+				image: action.payload.image,
 				favouriteCoins: action.payload.favouriteCoins,
 				walletCoins: action.payload.walletCoins,
 			};
@@ -50,13 +51,6 @@ const userSlice = createSlice({
 		addToFavourites(state, action) {
 			state.userData.favouriteCoins = [
 				...state.userData.favouriteCoins,
-				action.payload,
-			];
-		},
-
-		addToWallet(state, action) {
-			state.userData.walletCoins = [
-				...state.userData.walletCoins,
 				action.payload,
 			];
 		},
