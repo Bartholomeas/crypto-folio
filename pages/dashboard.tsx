@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import Image from "next/image";
+import axios from "axios";
 import TableData from "../components/molecules/TableData/TableData";
 import TableHeader from "../components/molecules/TableHeader/TableHeader";
 import TableRow from "../components/molecules/TableRow/TableRow";
@@ -30,6 +31,32 @@ function Dashboard() {
 	const { openCoinModal } = useUiHandling();
 	const { loggedIn } = useDatabase();
 	const [userWalletCoins, setUserWalletCoins] = useState([]);
+	const [coinPrices, setCoinPrices] = useState({});
+
+	async function getWalletCoinsPrices(coins: string[]) {
+		const coinsArr = [] as string[];
+
+		userWalletCoins.forEach((coin: any) => {
+			coinsArr.push(coin.name.toLowerCase());
+			// console.log(coin);
+		});
+		console.log(coinsArr);
+		try {
+			const result = await axios(
+				`https://api.coingecko.com/api/v3/simple/price?ids=${coins.join(
+					"%2C",
+				)}&vs_currencies=usd`,
+			);
+
+			const updatedCoinPrices = Object.entries(result.data).reduce(
+				(acc, [key, value]) => ({ ...acc, [key]: value.usd }),
+				{},
+			);
+			setCoinPrices(updatedCoinPrices);
+		} catch (e) {
+			console.log(e);
+		}
+	}
 
 	useEffect(() => {
 		if (!userData.uid) return;
@@ -39,11 +66,6 @@ function Dashboard() {
 			const userSnap = await getDoc(doc(db, "users", user.uid));
 			if (userSnap.exists()) setUserWalletCoins(userSnap.data().walletCoins);
 		});
-		// const unsubscribe = onSnapshot(doc(db, "users", userData.uid), (item) => {
-		// 	console.log(item.data());
-		// });
-
-		// return () => unsubscribe();
 	}, [loggedIn, userData.uid]);
 
 	return (
@@ -53,7 +75,22 @@ function Dashboard() {
 		md:h-[100vh] md:py-lg md:mr-[5rem] md:max-w"
 		>
 			<MarginBox />
-
+			<button
+				type="button"
+				onClick={() => {
+					getWalletCoinsPrices(["bitcoin", "ethereum"]);
+				}}
+			>
+				KLIK
+			</button>
+			<button
+				type="button"
+				onClick={() => {
+					console.log(coinPrices);
+				}}
+			>
+				KLIK2
+			</button>
 			<PageHeader appendAfter="of DefaultWallet">Dashboard</PageHeader>
 			<div className="cards flex flex-col gap-sm w-full lg:flex-row">
 				<TotalAssetsValue
@@ -100,14 +137,13 @@ function Dashboard() {
 										<TableData>{index + 1}</TableData>
 										<TableData
 											imgSrc={coin.image}
-											// hrefRoute="/"
 											leftAlign
 											appendAfter={coin.symbol.toUpperCase()}
 										>
 											{coin.name}
 										</TableData>
 										<TableData>01.01.2023</TableData>
-										<TableData appendAfter="USD">
+										<TableData appendAfter={coin.symbol}>
 											{coin.shoppings.reduce(
 												(acc: number, object: any) => acc + object.amount,
 												0,
@@ -121,27 +157,6 @@ function Dashboard() {
 										</TableData>
 									</TableRow>
 								))}
-
-							{/* <TableRow>
-								<TableData isBold>1</TableData>
-								<TableData leftAlign>Bitcoin</TableData>
-								<TableData appendAfter="USD">21321</TableData>
-								<TableData appendAfter="%" isBold>
-									21.2
-								</TableData>
-								<TableData>0.73</TableData>
-								<TableData appendAfter="USD">15600</TableData>
-							</TableRow>
-							<TableRow>
-								<TableData isBold>1</TableData>
-								<TableData leftAlign>Bitcoin</TableData>
-								<TableData appendAfter="USD">21321</TableData>
-								<TableData appendAfter="%" isBold>
-									21.2
-								</TableData>
-								<TableData>0.73</TableData>
-								<TableData appendAfter="USD">15600</TableData>
-							</TableRow> */}
 						</TableBody>
 					</Table>
 				</div>
@@ -151,33 +166,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
-// {
-//     "id": "bitcoin",
-//     "symbol": "btc",
-//     "name": "Bitcoin",
-//     "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
-//     "current_price": 16851.94,
-//     "market_cap": 324313052427,
-//     "market_cap_rank": 1,
-//     "fully_diluted_valuation": 353912011638,
-//     "total_volume": 13857269578,
-//     "high_24h": 16919.55,
-//     "low_24h": 16715,
-//     "price_change_24h": 28.6,
-//     "price_change_percentage_24h": 0.17001,
-//     "market_cap_change_24h": 513325717,
-//     "market_cap_change_percentage_24h": 0.15853,
-//     "circulating_supply": 19243693,
-//     "total_supply": 21000000,
-//     "max_supply": 21000000,
-//     "ath": 69045,
-//     "ath_change_percentage": -75.60379,
-//     "ath_date": "2021-11-10T14:24:11.849Z",
-//     "atl": 67.81,
-//     "atl_change_percentage": 24740.81181,
-//     "atl_date": "2013-07-06T00:00:00.000Z",
-//     "roi": null,
-//     "last_updated": "2022-12-26T13:39:46.577Z",
-//     "price_change_percentage_24h_in_currency": 0.17001159946262154
-// }
