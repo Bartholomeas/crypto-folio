@@ -1,14 +1,6 @@
 /* eslint no-mixed-spaces-and-tabs: ["error", "smart-tabs"] */
 import { useEffect, useState } from "react";
-import {
-	doc,
-	updateDoc,
-	setDoc,
-	arrayUnion,
-	getDoc,
-	onSnapshot,
-} from "firebase/firestore";
-
+import { doc, updateDoc, setDoc, arrayUnion, getDoc } from "firebase/firestore";
 import {
 	createUserWithEmailAndPassword,
 	signOut,
@@ -233,7 +225,6 @@ function useDatabase() {
 	}
 
 	async function addCoinToWallet(purchaseDetails: WalletCoinProp) {
-		console.log(purchaseDetails);
 		const userRef = doc(db, "users", userData.uid);
 		const coinObject = {
 			name: purchaseDetails.name,

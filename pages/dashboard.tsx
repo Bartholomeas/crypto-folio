@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
-import Image from "next/image";
 import axios from "axios";
 import TableData from "../components/molecules/TableData/TableData";
 import TableHeader from "../components/molecules/TableHeader/TableHeader";
@@ -14,7 +13,7 @@ import TableBody from "../components/molecules/TableBody/TableBody";
 import MarginBox from "../components/atoms/MarginBox/MarginBox";
 import SecondHeader from "../components/atoms/SecondHeader/SecondHeader";
 import PageHeader from "../components/atoms/PageHeader/PageHeader";
-import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
+import { useAppSelector } from "../state/reduxHooks";
 import useFilter from "../hooks/useFilter";
 import useUiHandling from "../hooks/useUi";
 import Button from "../components/atoms/Button/Button";
@@ -23,33 +22,35 @@ import useDatabase from "../hooks/useDatabase";
 import { auth, db } from "../firebaseConfig";
 import { PurchaseDetails } from "../state/userSlice";
 
+interface CoinPrice {
+	usd: number;
+}
+
+interface CoinData {
+	[key: string]: CoinPrice;
+}
+
 function Dashboard() {
-	const dispatch = useAppDispatch();
 	const { userData } = useAppSelector((state) => state.user);
-	const { coinsList } = useAppSelector((state) => state.coins);
 	const { sortCoins } = useFilter();
 	const { openCoinModal } = useUiHandling();
 	const { loggedIn } = useDatabase();
 	const [userWalletCoins, setUserWalletCoins] = useState([]);
 	const [coinPrices, setCoinPrices] = useState({});
 
-	async function getWalletCoinsPrices(coins: string[]) {
-		const coinsArr = [] as string[];
-
-		userWalletCoins.forEach((coin: any) => {
-			coinsArr.push(coin.name.toLowerCase());
-			// console.log(coin);
-		});
-		console.log(coinsArr);
+	async function handleWalletCoinsPrices(coins: string[]) {
 		try {
 			const result = await axios(
 				`https://api.coingecko.com/api/v3/simple/price?ids=${coins.join(
 					"%2C",
 				)}&vs_currencies=usd`,
 			);
-
+			console.log(result.data);
 			const updatedCoinPrices = Object.entries(result.data).reduce(
-				(acc, [key, value]) => ({ ...acc, [key]: value.usd }),
+				(acc: CoinData, [key, value]: [string, CoinPrice]) => ({
+					...acc,
+					[key]: value.usd,
+				}),
 				{},
 			);
 			setCoinPrices(updatedCoinPrices);
@@ -66,6 +67,13 @@ function Dashboard() {
 			const userSnap = await getDoc(doc(db, "users", user.uid));
 			if (userSnap.exists()) setUserWalletCoins(userSnap.data().walletCoins);
 		});
+
+		const coinsArr = [] as string[];
+		if (userWalletCoins)
+			userWalletCoins.forEach((coin: PurchaseDetails) => {
+				coinsArr.push(coin.name.toLowerCase());
+			});
+		if (userWalletCoins) handleWalletCoinsPrices(coinsArr);
 	}, [loggedIn, userData.uid]);
 
 	return (
@@ -78,15 +86,7 @@ function Dashboard() {
 			<button
 				type="button"
 				onClick={() => {
-					getWalletCoinsPrices(["bitcoin", "ethereum"]);
-				}}
-			>
-				KLIK
-			</button>
-			<button
-				type="button"
-				onClick={() => {
-					console.log(coinPrices);
+					console.log(userWalletCoins);
 				}}
 			>
 				KLIK2
@@ -151,7 +151,9 @@ function Dashboard() {
 										</TableData>
 										<TableData appendAfter="USD">
 											{coin.shoppings.reduce(
-												(acc: number, object: any) => acc + object.amount * 21,
+												(acc: number, object: any) =>
+													acc +
+													object.amount * coinPrices[coin.name.toLowerCase()],
 												0,
 											)}
 										</TableData>
