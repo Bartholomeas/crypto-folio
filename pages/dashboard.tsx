@@ -29,6 +29,9 @@ interface CoinPrice {
 interface CoinData {
 	[key: string]: CoinPrice;
 }
+interface UpdatedCoinPrice {
+	[key: string]: number;
+}
 
 function Dashboard() {
 	const { userData } = useAppSelector((state) => state.user);
@@ -45,15 +48,18 @@ function Dashboard() {
 					"%2C",
 				)}&vs_currencies=usd`,
 			);
-			console.log(result.data);
-			const updatedCoinPrices = Object.entries(result.data).reduce(
-				(acc: CoinData, [key, value]: [string, CoinPrice]) => ({
+			const updatedCoinPrices: UpdatedCoinPrice = Object.entries(
+				result.data,
+			).reduce(
+				(acc: UpdatedCoinPrice, [key, value]: [string, any]) => ({
 					...acc,
 					[key]: value.usd,
 				}),
 				{},
 			);
 			setCoinPrices(updatedCoinPrices);
+			console.log("updatedCoinPrices");
+			console.log(updatedCoinPrices);
 		} catch (e) {
 			console.log(e);
 		}
