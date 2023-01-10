@@ -22,15 +22,13 @@ import useDatabase from "../hooks/useDatabase";
 import { auth, db } from "../firebaseConfig";
 import { PurchaseDetails } from "../state/userSlice";
 
-interface CoinPrice {
-	usd: number;
-}
-
-interface CoinData {
-	[key: string]: CoinPrice;
-}
 interface UpdatedCoinPrice {
 	[key: string]: number;
+}
+interface SingleCoinShopping {
+	date: string;
+	amount: number;
+	price: number;
 }
 
 function Dashboard() {
@@ -39,7 +37,7 @@ function Dashboard() {
 	const { openCoinModal } = useUiHandling();
 	const { loggedIn } = useDatabase();
 	const [userWalletCoins, setUserWalletCoins] = useState([]);
-	const [coinPrices, setCoinPrices] = useState({});
+	const [coinPrices, setCoinPrices] = useState<UpdatedCoinPrice>({});
 
 	async function handleWalletCoinsPrices(coins: string[]) {
 		try {
@@ -58,8 +56,6 @@ function Dashboard() {
 				{},
 			);
 			setCoinPrices(updatedCoinPrices);
-			console.log("updatedCoinPrices");
-			console.log(updatedCoinPrices);
 		} catch (e) {
 			console.log(e);
 		}
@@ -157,7 +153,7 @@ function Dashboard() {
 										</TableData>
 										<TableData appendAfter="USD">
 											{coin.shoppings.reduce(
-												(acc: number, object: any) =>
+												(acc: number, object: SingleCoinShopping) =>
 													acc +
 													object.amount * coinPrices[coin.name.toLowerCase()],
 												0,
