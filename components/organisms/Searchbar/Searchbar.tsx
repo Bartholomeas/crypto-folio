@@ -29,7 +29,6 @@ function Searchbar({ placeholderText = "", fullWidth = false }: Props) {
 				`https://api.coingecko.com/api/v3/search?query=${coinValue}`,
 			);
 			setSearchedCoins(data.data.coins);
-			console.log(data.data.coins);
 		} catch (error) {
 			throw new Error("Something went wrong");
 		}
