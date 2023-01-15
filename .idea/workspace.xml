@@ -4,12 +4,8 @@
     <list default="true" id="f82e7037-4eac-411f-9038-22ff87af3d79" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/molecules/LinkItem/LinkItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/molecules/LinkItem/LinkItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/molecules/SearchbarItems/SearchbarItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/molecules/SearchbarItems/SearchbarItems.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/organisms/Pagination/Pagination.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/organisms/Pagination/Pagination.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/[page]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/[page]/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/coins/[coinId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/coins/[coinId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/state/userSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/state/userSlice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +37,7 @@
     "node.js.selected.package.standard": "",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/bartholomeas/Desktop/Kod/crypto-app/node_modules/prettier",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "ts.external.directory.path": "/Users/bartholomeas/Desktop/Kod/crypto-app/node_modules/typescript/lib"
   }
 }]]></component>
@@ -58,6 +55,7 @@
       <workItem from="1664698509585" duration="2000" />
       <workItem from="1669128094882" duration="23000" />
       <workItem from="1669128368830" duration="24000" />
+      <workItem from="1673795929538" duration="47000" />
     </task>
     <servers />
   </component>

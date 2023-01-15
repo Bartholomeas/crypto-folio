@@ -36,6 +36,7 @@ function Dashboard() {
 	const { sortCoins } = useFilter();
 	const { openCoinModal } = useUiHandling();
 	const { loggedIn } = useDatabase();
+	const [isLoading, setIsLoading] = useState(true);
 	const [userWalletCoins, setUserWalletCoins] = useState([]);
 	const [coinPrices, setCoinPrices] = useState<UpdatedCoinPrice>({});
 
@@ -46,6 +47,7 @@ function Dashboard() {
 					"%2C",
 				)}&vs_currencies=usd`,
 			);
+
 			const updatedCoinPrices: UpdatedCoinPrice = Object.entries(
 				result.data,
 			).reduce(
@@ -61,21 +63,26 @@ function Dashboard() {
 		}
 	}
 
+	async function handleUserWalletCoins(user: any) {
+		if (!user) return;
+		const userSnap = await getDoc(doc(db, "users", user.uid));
+		if (userSnap.exists()) {
+			setUserWalletCoins(userSnap.data().walletCoins);
+			setIsLoading(false);
+		}
+	}
+
 	useEffect(() => {
-		if (!userData.uid) return;
+		if (!userData.uid) return undefined;
+		const unsubscribe = onAuthStateChanged(auth, handleUserWalletCoins);
+		const coinsArr = userWalletCoins?.map((coin: PurchaseDetails) =>
+			coin.name.toLowerCase(),
+		);
+		if (coinsArr) handleWalletCoinsPrices(coinsArr);
 
-		onAuthStateChanged(auth, async (user) => {
-			if (!user) return;
-			const userSnap = await getDoc(doc(db, "users", user.uid));
-			if (userSnap.exists()) setUserWalletCoins(userSnap.data().walletCoins);
-		});
-
-		const coinsArr = [] as string[];
-		if (userWalletCoins)
-			userWalletCoins.forEach((coin: PurchaseDetails) => {
-				coinsArr.push(coin.name.toLowerCase());
-			});
-		if (userWalletCoins) handleWalletCoinsPrices(coinsArr);
+		return () => {
+			unsubscribe();
+		};
 	}, [loggedIn, userData.uid]);
 
 	return (
@@ -133,7 +140,7 @@ function Dashboard() {
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{userWalletCoins &&
+							{userWalletCoins && !isLoading ? (
 								userWalletCoins.map((coin: PurchaseDetails, index) => (
 									<TableRow key={coin.symbol + coin.image}>
 										<TableData>{index + 1}</TableData>
@@ -160,7 +167,10 @@ function Dashboard() {
 											)}
 										</TableData>
 									</TableRow>
-								))}
+								))
+							) : (
+								<div>loading</div>
+							)}
 						</TableBody>
 					</Table>
 				</div>
