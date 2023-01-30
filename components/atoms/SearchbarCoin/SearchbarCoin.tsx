@@ -7,7 +7,7 @@ interface Props {
 	coinSymbol: string;
 	coinLogo: string;
 	coinRank: number;
-	onClickFn?: () => any;
+	onClick?: () => any;
 }
 function SearchbarCoin({
 	children,
@@ -15,11 +15,11 @@ function SearchbarCoin({
 	coinSymbol,
 	coinLogo,
 	coinRank,
-	onClickFn,
+	onClick,
 }: Props) {
-	return onClickFn ? (
+	return onClick ? (
 		<button
-			onClick={onClickFn}
+			onClick={onClick}
 			type="button"
 			className="dark:bg-dmBase dark:border-2 dark:border-dmBorderColor dark:hover:bg-dmBaseElement
 					flex items-center justify-between bg-white w-full px-sm py-[0.3rem] h-full rounded min-h-[5rem]

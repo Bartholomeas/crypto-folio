@@ -1,17 +1,17 @@
 import { useAppSelector } from "../../../state/reduxHooks";
 
 interface Props {
-	onClickFn: () => void;
+	onClick: () => void;
 }
 
-function BurgerButton({ onClickFn }: Props) {
+function BurgerButton({ onClick }: Props) {
 	const { isNavOpen } = useAppSelector((state) => state.ui);
 
 	return (
 		<button
 			type="button"
 			className="flex flex-col items-center justify-center gap-2 w-[30px] h-[40px] cursor-pointer md:hidden"
-			onClick={onClickFn}
+			onClick={onClick}
 		>
 			<span
 				className={`dark:bg-baseLight  w-full h-[3px] bg-accentDark rounded ${

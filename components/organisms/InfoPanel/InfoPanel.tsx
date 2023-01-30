@@ -18,7 +18,7 @@ function InfoPanel() {
 						} xxl:translate-x-0`}
 		>
 			<ArrowButton
-				onClickFn={() => dispatch(uiActions.toggleInfoPanel())}
+				onClick={() => dispatch(uiActions.toggleInfoPanel())}
 				arrowDirection={isInfoPanelOpen}
 			/>
 

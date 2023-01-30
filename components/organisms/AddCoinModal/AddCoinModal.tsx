@@ -94,10 +94,10 @@ function AddCoinModal() {
 								</InputWithLabel>
 							</div>
 							{!isValid && <ErrorText>No field can be empty</ErrorText>}
-							<Button onClickFn={() => validateAndAddCoin()} isAccent>
+							<Button onClick={() => validateAndAddCoin()} isAccent>
 								Add coin to wallet
 							</Button>
-							<Button onClickFn={() => dispatch(uiActions.toggleCoinModal())}>
+							<Button onClick={() => dispatch(uiActions.toggleCoinModal())}>
 								Anuluj
 							</Button>
 						</div>

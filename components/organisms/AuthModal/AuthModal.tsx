@@ -66,23 +66,16 @@ function AuthModal() {
 				</button>
 				<div className="flex items-start justify-center w-full pb-lg">
 					<Button
-						otherStyles={`dark:bg-transparent dark:hover:bg-transparent
-						 w-fit min-w-[5rem] px-md pt-0 pb-xs bg-transparent text-md hover:bg-transparent after:origin-left
-                        after:content-[""] after:absolute after:h-[.3rem] after:w-[3rem] after:bottom-0 after:left-[50%] after:translate-x-[-50%] after:bg-accent after:rounded  after:transition-transform hover:after:scale-x-100 after:scale-x-0
-                        ${loginBox && "font-semibold after:scale-x-100"}
-                    `}
-						onClickFn={() => setLoginBox(true)}
+						theme="modal"
+						conditionalCheck={loginBox}
+						onClick={() => setLoginBox(true)}
 					>
 						Log in
 					</Button>
 					<Button
-						otherStyles={`dark:bg-transparent dark:hover:bg-transparent
-						 w-fit min-w-[5rem] px-md pt-0 pb-xs bg-transparent text-md hover:bg-transparent after:origin-left
-                        after:content-[""] after:absolute after:h-[.3rem] after:w-[3rem] after:bottom-0 after:left-[50%] after:translate-x-[-50%] after:bg-accent after:rounded  after:transition-transform hover:after:scale-x-100 after:scale-x-0
-                        ${!loginBox && "font-semibold after:scale-x-100 "}
-
-                        `}
-						onClickFn={() => setLoginBox(false)}
+						theme="modal"
+						conditionalCheck={!loginBox}
+						onClick={() => setLoginBox(false)}
 					>
 						Sign up
 					</Button>
@@ -113,13 +106,13 @@ function AuthModal() {
 							>
 								Password
 							</InputWithLabel>
-							<Button isSubmit isAccent otherStyles="max-h-[5rem]">
+							<Button isSubmit theme="accented">
 								Log in
 							</Button>
 						</form>
 						<BasicLink hrefRoute="/">I forgot password</BasicLink>
 						<p className="dark:text-dmFont font-semibold text text-font">OR</p>
-						<Button onClickFn={authWithGoogle} otherStyles="max-h-[5rem]">
+						<Button onClick={authWithGoogle} size="full">
 							Sign in with Gmail <BsGoogle />
 						</Button>
 					</div>
@@ -165,7 +158,7 @@ function AuthModal() {
 						</form>
 
 						<p className="dark:text-dmFont font-semibold text text-font">OR</p>
-						<Button onClickFn={authWithGoogle} otherStyles="max-h-[5rem]">
+						<Button onClick={authWithGoogle} otherStyles="max-h-[5rem]">
 							Sign in with Gmail <BsGoogle />
 						</Button>
 						<p className="text-fontLight text-xs max-w-[300px] text-center">

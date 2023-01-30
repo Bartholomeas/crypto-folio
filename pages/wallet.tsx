@@ -33,17 +33,17 @@ function Wallet() {
 						</colgroup>
 						<TableHead>
 							<TableRow>
-								<TableHeader onClickFn={sortCoins} value="market_cap_rank">
+								<TableHeader onClick={sortCoins} value="market_cap_rank">
 									#
 								</TableHeader>
-								<TableHeader onClickFn={sortCoins} value="id" leftAlign>
+								<TableHeader onClick={sortCoins} value="id" leftAlign>
 									Name
 								</TableHeader>
-								<TableHeader onClickFn={sortCoins} value="current_price">
+								<TableHeader onClick={sortCoins} value="current_price">
 									Current price
 								</TableHeader>
 								<TableHeader
-									onClickFn={sortCoins}
+									onClick={sortCoins}
 									value="price_change_percentage_24h"
 								>
 									24h change

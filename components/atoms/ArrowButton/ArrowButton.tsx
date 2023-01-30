@@ -1,14 +1,14 @@
 /* eslint-disable react/button-has-type */
 interface Props {
-	onClickFn: () => void;
+	onClick: () => void;
 	arrowDirection: boolean;
 }
 
-function ArrowButton({ onClickFn, arrowDirection }: Props) {
+function ArrowButton({ onClick, arrowDirection }: Props) {
 	return (
 		<button
 			type="button"
-			onClick={onClickFn}
+			onClick={onClick}
 			className={`absolute w-[45px] h-[45px] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-accent rounded-full text-white text-lg font-bold rotate-[90deg]
 			${arrowDirection ? "rotate-[-90deg]" : "rotate-[90deg]"} ${
 				arrowDirection ? "md:rotate-[180deg]" : "md:rotate-0"

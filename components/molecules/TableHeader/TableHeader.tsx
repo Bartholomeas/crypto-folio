@@ -4,10 +4,10 @@ import { useAppSelector } from "../../../state/reduxHooks";
 interface Props {
 	children?: string;
 	leftAlign?: boolean;
-	onClickFn?: (arg1: CoinItem[], arg2: string) => void | undefined;
+	onClick?: (arg1: CoinItem[], arg2: string) => void | undefined;
 	value?: string;
 }
-function TableHeader({ children, leftAlign, onClickFn, value }: Props) {
+function TableHeader({ children, leftAlign, onClick, value }: Props) {
 	const { coinsList } = useAppSelector((state) => state.coins);
 
 	return (
@@ -22,7 +22,7 @@ function TableHeader({ children, leftAlign, onClickFn, value }: Props) {
 			<button
 				type="button"
 				className="group relative bg-none border-none "
-				onClick={() => value && onClickFn!([...coinsList], value)}
+				onClick={() => value && onClick!([...coinsList], value)}
 			>
 				{children}
 

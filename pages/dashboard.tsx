@@ -47,7 +47,6 @@ function Dashboard() {
 					"%2C",
 				)}&vs_currencies=usd`,
 			);
-
 			const updatedCoinPrices: UpdatedCoinPrice = Object.entries(
 				result.data,
 			).reduce(
@@ -64,12 +63,13 @@ function Dashboard() {
 	}
 
 	async function handleUserWalletCoins(user: any) {
-		if (!user) return;
+		if (!user) return null;
 		const userSnap = await getDoc(doc(db, "users", user.uid));
 		if (userSnap.exists()) {
 			setUserWalletCoins(userSnap.data().walletCoins);
 			setIsLoading(false);
 		}
+		return null;
 	}
 
 	useEffect(() => {
@@ -114,7 +114,7 @@ function Dashboard() {
 				<div className="flex items-center justify-between w-full">
 					<SecondHeader>Explore coins</SecondHeader>
 					<Link passHref href="/wallet">
-						<Button onClickFn={openCoinModal} isAccent otherStyles="w-fit">
+						<Button onClick={openCoinModal} isAccent otherStyles="w-fit">
 							Add coin +
 						</Button>
 					</Link>
@@ -128,10 +128,10 @@ function Dashboard() {
 						</colgroup>
 						<TableHead>
 							<TableRow>
-								<TableHeader onClickFn={sortCoins} value="market_cap_rank">
+								<TableHeader onClick={sortCoins} value="market_cap_rank">
 									#
 								</TableHeader>
-								<TableHeader onClickFn={sortCoins} value="id" leftAlign>
+								<TableHeader onClick={sortCoins} value="id" leftAlign>
 									Name
 								</TableHeader>
 								<TableHeader>Last purchase</TableHeader>
@@ -140,7 +140,7 @@ function Dashboard() {
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{userWalletCoins && !isLoading ? (
+							{userWalletCoins ? (
 								userWalletCoins.map((coin: PurchaseDetails, index) => (
 									<TableRow key={coin.symbol + coin.image}>
 										<TableData>{index + 1}</TableData>

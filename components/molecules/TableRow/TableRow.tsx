@@ -4,12 +4,12 @@ import LinkItem from "../LinkItem/LinkItem";
 
 interface Props {
 	children: React.ReactNode;
-	onClickFn?: (arg1: any) => void;
+	onClick?: (arg1: any) => void;
 }
-function TableRow({ children, onClickFn }: Props) {
+function TableRow({ children, onClick }: Props) {
 	return (
 		<tr
-			onClick={onClickFn}
+			onClick={onClick}
 			className="dark:border-dmBorderColor dark:hover:bg-dmBaseElement
 			w-full border-solid border-b-2 border-borderColor hover:bg-baseVeryLight transition-colors "
 		>

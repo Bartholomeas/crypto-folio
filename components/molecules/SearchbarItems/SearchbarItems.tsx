@@ -18,7 +18,7 @@ function SearchbarItems({ coinsData }: Props) {
 			{coinsData.length >= 1 &&
 				coinsData.map((coin) => (
 					<SearchbarCoin
-						onClickFn={() => {
+						onClick={() => {
 							setCoinPurchaseData("name", coin.name);
 							setCoinPurchaseData("symbol", coin.symbol);
 							setCoinPurchaseData("image", coin.thumb);

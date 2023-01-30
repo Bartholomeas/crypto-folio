@@ -41,7 +41,7 @@ function Navbar() {
 			 md:justify-center md:i	tems-start md:w-auto md:px-0 overflow-hidden "
 			>
 				<Logo />
-				<BurgerButton onClickFn={() => dispatch(uiActions.toggleNavbar())} />
+				<BurgerButton onClick={() => dispatch(uiActions.toggleNavbar())} />
 			</div>
 
 			<div
@@ -83,20 +83,20 @@ function Navbar() {
 				</NavList>
 				<div className="flex flex-col justify-center items-center gap-sm w-full px-md md:items-start">
 					{!loggedIn ? (
-						<Button isAccent onClickFn={openAuthModal}>
+						<Button isAccent onClick={openAuthModal}>
 							Log in <MdLogout />
 						</Button>
 					) : (
 						<>
 							<Button
 								otherStyles="max-w-[100%] overflow-hidden text-ellipsis overflow-hiden font-semibold bg-transparent"
-								onClickFn={() => {}}
+								onClick={() => {}}
 							>
 								{userData.name || userData.email}
 							</Button>
 							<Button
 								otherStyles="dark:text-error bg-transparent py-xs text-error "
-								onClickFn={signoutUser}
+								onClick={signoutUser}
 							>
 								Logout
 							</Button>
