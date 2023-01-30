@@ -1,15 +1,38 @@
+import classNames from "classnames";
+
 interface Props {
-	children: string;
 	appendAfter?: string;
-	otherStyles?: string;
+	position?: string;
 }
-function PageHeader({ children, appendAfter, otherStyles }: Props) {
+
+interface ObjectProps {
+	[key: string]: string;
+}
+
+const positions: ObjectProps = {
+	default: "text-left",
+	center: "text-center",
+};
+
+type PageHeaderProps = React.PropsWithChildren<Props>;
+function PageHeader({
+	children,
+	appendAfter,
+	position = "default",
+}: PageHeaderProps) {
 	return (
 		<h1
-			className={`dark:text-white
-			w-full py-md font-bold text-font rounded leading-relaxed
-			text-h1
-		${otherStyles ?? ""}`}
+			className={classNames(
+				"dark:text-white",
+				"w-full",
+				"py-md",
+				"font-bold",
+				"text-font",
+				"rounded",
+				positions[position],
+				"leading-relaxed",
+				"text-h1",
+			)}
 		>
 			{children}{" "}
 			{appendAfter && (

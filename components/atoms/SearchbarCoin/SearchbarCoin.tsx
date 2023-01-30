@@ -3,7 +3,7 @@ import Link from "next/link";
 
 interface Props {
 	children: React.ReactNode | React.ReactNode[];
-	hrefRoute: string;
+	href: string;
 	coinSymbol: string;
 	coinLogo: string;
 	coinRank: number;
@@ -11,7 +11,7 @@ interface Props {
 }
 function SearchbarCoin({
 	children,
-	hrefRoute,
+	href,
 	coinSymbol,
 	coinLogo,
 	coinRank,
@@ -37,7 +37,7 @@ function SearchbarCoin({
 			</p>
 		</button>
 	) : (
-		<Link passHref href={hrefRoute}>
+		<Link passHref href={href}>
 			<a className="">
 				<div
 					className="dark:bg-dmBase dark:border-2 dark:border-dmBorderColor dark:hover:bg-dmBaseElement

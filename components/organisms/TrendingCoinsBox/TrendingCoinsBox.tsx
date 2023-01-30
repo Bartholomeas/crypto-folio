@@ -17,7 +17,7 @@ function TrendingCoinsBox() {
     relative flex flex-col justify-center gap-sm p-md bg-baseVeryLight rounded
     "
 		>
-			<FireIcon otherStyles="top-[-2rem] right-[-1rem]" />
+			<FireIcon />
 
 			<h2 className="dark:text-support font-bold text-md text-fontOff">
 				Trending coins
@@ -34,7 +34,7 @@ function TrendingCoinsBox() {
 						return (
 							<TrendingCoin
 								key={coin_id}
-								hrefRoute={id}
+								href={id}
 								image={thumb}
 								symbol={symbol}
 								capRank={market_cap_rank}

@@ -7,7 +7,7 @@ interface Props {
 	appendBefore?: string | number;
 	appendAfter?: string | number;
 	leftAlign?: boolean;
-	hrefRoute?: string;
+	href?: string;
 	imgSrc?: string;
 }
 function TableData({
@@ -16,7 +16,7 @@ function TableData({
 	appendBefore,
 	appendAfter,
 	leftAlign,
-	hrefRoute,
+	href,
 	imgSrc,
 }: Props) {
 	let priceChangeStyles = "";
@@ -42,8 +42,8 @@ function TableData({
 			${priceChangeStyles}
 			`}
 		>
-			{hrefRoute ? (
-				<Link passHref href={`/coins/${hrefRoute.toLowerCase()}`} className="">
+			{href ? (
+				<Link passHref href={`/coins/${href.toLowerCase()}`} className="">
 					<a
 						className={`
 						flex ${leftAlign ? "justify-start" : "justify-end"} items-center w-full h-full`}
@@ -57,7 +57,7 @@ function TableData({
 									src={imgSrc}
 									width="10"
 									height="10"
-									alt={`${hrefRoute} icon`}
+									alt={`${href} icon`}
 								/>
 							</div>
 						)}

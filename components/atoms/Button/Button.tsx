@@ -1,31 +1,40 @@
 import classNames from "classnames";
+import React, { ReactElement } from "react";
+import { BsGoogle } from "react-icons/bs";
+import { MdLogout } from "react-icons/md";
 
 interface Props {
 	children: React.ReactNode | React.ReactNode[];
 	onClick?: (arg1?: React.MouseEvent<HTMLButtonElement> | EventTarget) => void;
-	isAccent?: boolean;
-	otherStyles?: string;
-	isSubmit?: boolean;
 	theme?: string;
 	size?: string;
+	icon?: string;
+	typeSubmit?: boolean;
 	conditionalCheck?: boolean;
 }
 
-interface ObjectProps {
-	[key: string]: string;
+interface ObjectProps<T> {
+	[key: string]: T;
 }
 
-const themes: ObjectProps = {
+const themes: ObjectProps<string> = {
 	default:
 		"dark:bg-dmBaseElement dark:hover:bg-accentDark dark:text-baseLight bg-baseLight text-font hover:bg-baseVeryLight",
 	modal:
-		"dark:bg-transparent dark:hover:bg-transparent w-fit min-w-[5rem] px-md pt-0 pb-xs bg-transparent text-md hover:bg-transparent after:origin-left after:content-[''] after:absolute after:h-[.3rem] after:w-[3rem] after:bottom-0 after:left-[50%] after:translate-x-[-50%] after:bg-accent after:rounded  after:transition-transform hover:after:scale-x-100 after:scale-x-0",
-	accented: "bg-accent text-white  hover:bg-accentDark",
+		"dark:bg-transparent dark:text-baseLight dark:hover:bg-transparent relative w-fit min-w-[5rem] px-md pt-0 pb-xs bg-transparent text-md hover:bg-transparent after:origin-left after:content-[''] after:absolute after:h-[.3rem] after:w-[3rem] after:bottom-0 after:left-[50%] after:translate-x-[-50%] after:bg-accent after:rounded  after:transition-transform hover:after:scale-x-100 after:scale-x-0",
+	accent: "bg-accent text-white  hover:bg-accentDark ",
+	error:
+		"dark:text-error dark:bg-dmBaseElement dark:hover:bg-accentDark bg-baseLight text py-xs text-error",
 };
 
-const sizes: ObjectProps = {
+const sizes: ObjectProps<string> = {
 	default: "",
 	full: "w-full",
+};
+
+const icons: ObjectProps<React.ReactNode> = {
+	google: <BsGoogle />,
+	logout: <MdLogout />,
 };
 
 type ButtonProps = React.PropsWithChildren<Props>;
@@ -33,17 +42,17 @@ type ButtonProps = React.PropsWithChildren<Props>;
 function Button({
 	children,
 	onClick,
-	isSubmit = false,
 	theme = "default",
 	size = "default",
+	icon,
+	typeSubmit = false,
 	conditionalCheck = false,
 }: ButtonProps) {
 	return (
 		<button
-			type={isSubmit ? "submit" : "button"}
+			type={typeSubmit ? "submit" : "button"}
 			onClick={onClick}
 			className={classNames(
-				"relative",
 				"flex",
 				"items-center",
 				"justify-center",
@@ -59,7 +68,7 @@ function Button({
 				conditionalCheck && "font-semibold after:scale-x-100",
 			)}
 		>
-			{children}
+			{children} {icon && icons[icon]}
 		</button>
 	);
 }

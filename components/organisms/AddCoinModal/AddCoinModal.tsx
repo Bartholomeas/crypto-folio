@@ -59,10 +59,10 @@ function AddCoinModal() {
 							<div className="flex items-center gap-4">
 								<InputWithLabel
 									errors={{ purchaseDate: "" }}
-									onChangeFunc={(e) => {
+									onChange={(e) => {
 										setCoinPurchaseData("date", e.target.value);
 									}}
-									onBlurFunc={validateInputOnBlur}
+									onBlur={validateInputOnBlur}
 									forProp="purchaseDate"
 									inputType="date"
 								>
@@ -72,10 +72,10 @@ function AddCoinModal() {
 							<div className="flex items-center gap-4">
 								<InputWithLabel
 									errors={{ purchasePrice: "" }}
-									onChangeFunc={(e) => {
+									onChange={(e) => {
 										setCoinPurchaseData("price", +e.target.value);
 									}}
-									onBlurFunc={validateInputOnBlur}
+									onBlur={validateInputOnBlur}
 									forProp="purchasePrice"
 									inputType="number"
 								>
@@ -83,10 +83,10 @@ function AddCoinModal() {
 								</InputWithLabel>
 								<InputWithLabel
 									errors={{ purchaseAmount: "" }}
-									onChangeFunc={(e) => {
+									onChange={(e) => {
 										setCoinPurchaseData("amount", +e.target.value);
 									}}
-									onBlurFunc={validateInputOnBlur}
+									onBlur={validateInputOnBlur}
 									forProp="purchaseAmount"
 									inputType="number"
 								>

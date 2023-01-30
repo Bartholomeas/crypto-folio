@@ -1,14 +1,14 @@
 import Link from "next/link";
 
 interface Props {
-	hrefRoute: string;
+	href: string;
 }
 
 type BasicLinkProps = React.PropsWithChildren<Props>;
 
-function BasicLink({ children, hrefRoute }: BasicLinkProps) {
+function BasicLink({ children, href }: BasicLinkProps) {
 	return (
-		<Link href={hrefRoute} passHref>
+		<Link href={href} passHref>
 			<a
 				className={`dark:text-support relative text-center text-accentDark font-bold text-xs
 				after:absolute after:content-[""] after:w-full after:h-[0.3rem] after:bottom-[-.3rem] after:rounded-full after:left-0 after:scale-x-0

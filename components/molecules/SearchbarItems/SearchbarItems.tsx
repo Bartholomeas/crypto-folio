@@ -24,7 +24,7 @@ function SearchbarItems({ coinsData }: Props) {
 							setCoinPurchaseData("image", coin.thumb);
 						}}
 						key={`${coin.id}-${coin.symbol}`}
-						hrefRoute={`/coins/${coin.id}`}
+						href={`/coins/${coin.id}`}
 						coinSymbol={coin.symbol}
 						coinLogo={coin.thumb}
 						coinRank={coin.market_cap_rank}

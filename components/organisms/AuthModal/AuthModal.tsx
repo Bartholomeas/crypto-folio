@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
-import { BsGoogle } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "../../../state/reduxHooks";
 import { uiActions } from "../../../state/uiSlice";
 import Button from "../../atoms/Button/Button";
@@ -88,8 +87,8 @@ function AuthModal() {
 						>
 							<InputWithLabel
 								errors={errors}
-								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputOnBlur}
+								onChange={setInputValues}
+								onBlur={validateInputOnBlur}
 								forProp="email"
 								inputType="email"
 								placeholderValue="Email adress here"
@@ -98,22 +97,22 @@ function AuthModal() {
 							</InputWithLabel>
 							<InputWithLabel
 								errors={errors}
-								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputOnBlur}
+								onChange={setInputValues}
+								onBlur={validateInputOnBlur}
 								forProp="password"
 								inputType="password"
 								placeholderValue="Password here"
 							>
 								Password
 							</InputWithLabel>
-							<Button isSubmit theme="accented">
+							<Button typeSubmit theme="accent">
 								Log in
 							</Button>
 						</form>
-						<BasicLink hrefRoute="/">I forgot password</BasicLink>
+						<BasicLink href="/">I forgot password</BasicLink>
 						<p className="dark:text-dmFont font-semibold text text-font">OR</p>
-						<Button onClick={authWithGoogle} size="full">
-							Sign in with Gmail <BsGoogle />
+						<Button onClick={authWithGoogle} icon="google">
+							Sign in with Gmail
 						</Button>
 					</div>
 				) : (
@@ -124,8 +123,8 @@ function AuthModal() {
 						>
 							<InputWithLabel
 								errors={errors}
-								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputOnBlur}
+								onChange={setInputValues}
+								onBlur={validateInputOnBlur}
 								forProp="email_register"
 								inputType="email"
 								placeholderValue="Email adress here"
@@ -134,8 +133,8 @@ function AuthModal() {
 							</InputWithLabel>
 							<InputWithLabel
 								errors={errors}
-								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputOnBlur}
+								onChange={setInputValues}
+								onBlur={validateInputOnBlur}
 								forProp="password_register"
 								inputType="password"
 								placeholderValue="Password here"
@@ -144,22 +143,22 @@ function AuthModal() {
 							</InputWithLabel>
 							<InputWithLabel
 								errors={errors}
-								onChangeFunc={setInputValues}
-								onBlurFunc={validateInputOnBlur}
+								onChange={setInputValues}
+								onBlur={validateInputOnBlur}
 								forProp="password_repeat"
 								inputType="password"
 								placeholderValue="Password here"
 							>
 								Repeat password
 							</InputWithLabel>
-							<Button isSubmit isAccent otherStyles="max-h-[5rem]">
+							<Button typeSubmit theme="accent">
 								Sign in
 							</Button>
 						</form>
 
 						<p className="dark:text-dmFont font-semibold text text-font">OR</p>
-						<Button onClick={authWithGoogle} otherStyles="max-h-[5rem]">
-							Sign in with Gmail <BsGoogle />
+						<Button onClick={authWithGoogle} icon="google">
+							Sign in with Gmail
 						</Button>
 						<p className="text-fontLight text-xs max-w-[300px] text-center">
 							By proceeding, you agree to{" "}

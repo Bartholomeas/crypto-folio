@@ -4,8 +4,11 @@
     <list default="true" id="f82e7037-4eac-411f-9038-22ff87af3d79" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/dashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/atoms/Button/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/atoms/Button/Button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/molecules/InputWithLabel/InputWithLabel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/molecules/InputWithLabel/InputWithLabel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/organisms/AddCoinModal/AddCoinModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/organisms/AddCoinModal/AddCoinModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/organisms/AuthModal/AuthModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/organisms/AuthModal/AuthModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/organisms/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/organisms/Navbar/Navbar.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +20,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2F2UzQtYeskGjYHYNIxi6jccFlQ" />
   <component name="ProjectViewState">
@@ -33,7 +39,7 @@
     "last_opened_file_path": "/Users/bartholomeas/Desktop/Kod/crypto-app",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.eslint": "",
     "node.js.selected.package.standard": "",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/bartholomeas/Desktop/Kod/crypto-app/node_modules/prettier",
@@ -56,6 +62,7 @@
       <workItem from="1669128094882" duration="23000" />
       <workItem from="1669128368830" duration="24000" />
       <workItem from="1673795929538" duration="47000" />
+      <workItem from="1675110917982" duration="1367000" />
     </task>
     <servers />
   </component>

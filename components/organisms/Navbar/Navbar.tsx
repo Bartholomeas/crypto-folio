@@ -83,28 +83,22 @@ function Navbar() {
 				</NavList>
 				<div className="flex flex-col justify-center items-center gap-sm w-full px-md md:items-start">
 					{!loggedIn ? (
-						<Button isAccent onClick={openAuthModal}>
-							Log in <MdLogout />
+						<Button size="full" icon="logout" onClick={openAuthModal}>
+							Log in
 						</Button>
 					) : (
 						<>
-							<Button
-								otherStyles="max-w-[100%] overflow-hidden text-ellipsis overflow-hiden font-semibold bg-transparent"
-								onClick={() => {}}
-							>
+							<Button onClick={() => {}}>
 								{userData.name || userData.email}
 							</Button>
-							<Button
-								otherStyles="dark:text-error bg-transparent py-xs text-error "
-								onClick={signoutUser}
-							>
+							<Button theme="error" size="full" onClick={signoutUser}>
 								Logout
 							</Button>
 						</>
 					)}
 
-					<div className="flex items-center gap-sm w-full ">
-						<Button otherStyles="text-xs">USD</Button>
+					<div className="flex items-center gap-sm w-full">
+						<Button size="full">USD</Button>
 						<ThemeSwitch
 							toggleThemeFunc={toggleTheme}
 							isThemeDark={lightMode}

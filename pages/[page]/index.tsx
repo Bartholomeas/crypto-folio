@@ -88,24 +88,24 @@ function SpecifiedPage({
 									<TableData>
 										<FavouriteButton funcArg={coin.name} />
 									</TableData>
-									<TableData hrefRoute={coin.id} isBold>
+									<TableData href={coin.id} isBold>
 										{indexingByPage + index + 1}
 									</TableData>
 									<TableData
 										imgSrc={coin.image}
-										hrefRoute={coin.id}
+										href={coin.id}
 										leftAlign
 										appendAfter={coin.symbol.toUpperCase()}
 									>
 										{coin.name}
 									</TableData>
-									<TableData hrefRoute={coin.id} appendAfter="USD">
+									<TableData href={coin.id} appendAfter="USD">
 										{coin.current_price}
 									</TableData>
-									<TableData hrefRoute={coin.id} appendAfter="%">
+									<TableData href={coin.id} appendAfter="%">
 										{coin.price_change_percentage_24h}
 									</TableData>
-									<TableData hrefRoute={coin.id} appendAfter="USD">
+									<TableData href={coin.id} appendAfter="USD">
 										{addSpacesToNumber(coin.market_cap)}
 									</TableData>
 								</TableRow>

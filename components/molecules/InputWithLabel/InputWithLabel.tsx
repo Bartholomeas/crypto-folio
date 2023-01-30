@@ -4,8 +4,8 @@ import Label from "../../atoms/Label/Label";
 
 interface Props {
 	children: React.ReactNode | React.ReactNode[];
-	onChangeFunc?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onBlurFunc?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	forProp: string;
 	inputType?: string;
 	placeholderValue?: string;
@@ -14,8 +14,8 @@ interface Props {
 
 function InputWithLabel({
 	children,
-	onChangeFunc,
-	onBlurFunc,
+	onChange,
+	onBlur,
 	forProp,
 	inputType = "text",
 	placeholderValue,
@@ -32,8 +32,8 @@ function InputWithLabel({
 		<div className="relative flex flex-col gap-[.3rem] py-xs w-full">
 			<Label forProp={forProp}>{children}</Label>
 			<input
-				onChange={onChangeFunc || (() => {})}
-				onBlur={onBlurFunc || (() => {})}
+				onChange={onChange || (() => {})}
+				onBlur={onBlur || (() => {})}
 				className={`dark:bg-dmBaseElement dark:border-dmBase dark:text-dmFont
         px-xs py-sm rounded-xl border-2 border-baseLight text ${
 					isError && "border-error border-2"

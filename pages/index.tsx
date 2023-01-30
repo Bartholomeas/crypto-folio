@@ -37,7 +37,7 @@ function index() {
 						alt="Logo of Oddy, smiling blue robot"
 					/>
 
-					<PageHeader otherStyles="text-center">
+					<PageHeader position="center">
 						Oddy - a buddy that will improve your cryptocurrencies experience
 					</PageHeader>
 
@@ -48,7 +48,7 @@ function index() {
 				</div>
 
 				<div className="relative flex flex-col items-center gap-sm w-full z-10">
-					<CtaLink hrefRoute="/1">Enter app</CtaLink>
+					<CtaLink href="/1">Enter app</CtaLink>
 
 					<div className="absolute w-[100px] h-[100px] top-0 left-[50%] translate-x-[15rem] animate-rotate">
 						<Image src={cubeWhite} alt="White glossy cube" />

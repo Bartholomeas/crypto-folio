@@ -113,11 +113,11 @@ function Dashboard() {
 				<AddCoinModal />
 				<div className="flex items-center justify-between w-full">
 					<SecondHeader>Explore coins</SecondHeader>
-					<Link passHref href="/wallet">
-						<Button onClick={openCoinModal} isAccent otherStyles="w-fit">
-							Add coin +
-						</Button>
-					</Link>
+					{/* <Link passHref href="/wallet"> */}
+					<Button onClick={openCoinModal} theme="accent">
+						Add coin +
+					</Button>
+					{/* </Link> */}
 				</div>
 				<div className="flex flex-col justify-center w-full overflow-x-scroll">
 					<Table>
@@ -169,7 +169,9 @@ function Dashboard() {
 									</TableRow>
 								))
 							) : (
-								<div>loading</div>
+								<TableRow>
+									<td>loading</td>
+								</TableRow>
 							)}
 						</TableBody>
 					</Table>

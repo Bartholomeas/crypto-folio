@@ -2,16 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
-	hrefRoute: string;
+	href: string;
 	image: string;
 	symbol: string;
 	capRank: number;
 	children: React.ReactNode | React.ReactNode[];
 }
 
-function TrendingCoin({ hrefRoute, image, symbol, capRank, children }: Props) {
+function TrendingCoin({ href, image, symbol, capRank, children }: Props) {
 	return (
-		<Link href={`coins/${hrefRoute}`}>
+		<Link href={`coins/${href}`}>
 			<div
 				className="dark:bg-dmBase dark:border-dmBorderColor dark:border-2
 			flex items-center justify-between md:basis-1/4 bg-baseLight rounded-xl py-sm px-sm text cursor-pointer  transition-transform
