@@ -19,7 +19,7 @@ import useUiHandling from "../hooks/useUi";
 import Button from "../components/atoms/Button/Button";
 import AddCoinModal from "../components/organisms/AddCoinModal/AddCoinModal";
 import useDatabase from "../hooks/useDatabase";
-import { auth, db } from "../firebaseConfig";
+import { auth, db } from "../../firebaseConfig";
 import { PurchaseDetails } from "../state/userSlice";
 
 interface UpdatedCoinPrice {
@@ -87,8 +87,7 @@ function Dashboard() {
 
 	return (
 		<main
-			className="dark:bg-dmBase flex flex-col items-start gap-sm w-full
-			 min-h-[100vh] px pb-[10rem] bg-white overflow-y-auto
+			className="dark:bg-dmBase flex flex-col items-start gap-sm w-full min-h-[100vh] px pb-[10rem] bg-white overflow-y-auto
 		md:h-[100vh] md:py-lg md:mr-[5rem] md:max-w"
 		>
 			<MarginBox />

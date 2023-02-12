@@ -11,11 +11,11 @@ import CoinDescription from "../../components/molecules/CoinDescription/CoinDesc
 import { addSpacesToNumber } from "../../utils/convertUtils";
 
 interface InitialStateProps {
-	homepage: string | string[];
-	blockchain_site: string | string[];
-	github: string | string[];
-	reddit: string | string[];
-	forum: string | string[];
+	homepage: string;
+	blockchain_site: string;
+	github: string;
+	reddit: string;
+	forum: string;
 }
 
 const initialState: InitialStateProps = {

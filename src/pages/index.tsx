@@ -9,18 +9,14 @@ import AboutSection from "../components/organisms/AboutSection/AboutSection";
 
 function index() {
 	return (
-		<main
-			className="flex flex-col items-center gap w-full h-full py-section mx-auto bg-white overflow-hidden
-		"
-		>
+		<main className="flex flex-col items-center gap w-full h-full py-section mx-auto bg-white overflow-hidden">
 			<header
 				className="relative flex flex-col items-center gap max-h-[100vh] min-h-[90vh] max-w w-full px
 			md:min-h-[100vh]"
 			>
 				<div className="relative flex flex-col items-center gap-sm max-w-[500px] z-10">
 					<div
-						className="absolute w-[150px] h-[150px] left-0 z-[-10]
-					animate-floatTwo
+						className="absolute w-[150px] h-[150px] left-0 z-[-10] animate-floatTwo
 					md:top-[-5rem] md:w-[250px] md:h-[250px]
 				"
 					>
@@ -57,10 +53,7 @@ function index() {
 
 				<div
 					className="absolute w-[200px] h-[200px] right-[-4rem] bottom-[2rem]
-				md:right-[4rem]
-				md:top-[20%]
-				animate-floatSlow
-				"
+				md:right-[4rem]	md:top-[20%] animate-floatSlow"
 				>
 					<Image src={donutBlue} alt="Blue glossy donut" />
 				</div>

@@ -9,7 +9,7 @@ import {
 	GoogleAuthProvider,
 	signInWithPopup,
 } from "firebase/auth";
-import { db, auth } from "../firebaseConfig";
+import { db, auth } from "../../firebaseConfig";
 import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
 import { PurchaseDetails, userActions } from "../state/userSlice";
 import { uiActions } from "../state/uiSlice";
@@ -29,7 +29,6 @@ function useDatabase() {
 	const dispatch = useAppDispatch();
 	const { userData } = useAppSelector((state) => state.user);
 	const [loggedIn, setLoggedIn] = useState(false);
-
 	function setLoggedInUser(user: any) {
 		setLoggedIn(true);
 		dispatch(
@@ -55,7 +54,6 @@ function useDatabase() {
 		return onAuthStateChanged(auth, async (user) => {
 			if (user && !loggedIn) {
 				const userSnap = await getDoc(doc(db, "users", user.uid));
-				// console.log(userSnap.data());
 				callback(user);
 			}
 		});

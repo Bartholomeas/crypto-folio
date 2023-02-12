@@ -1,11 +1,11 @@
 /* eslint-disable react/no-unknown-property */
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import InfoPanel from "../components/organisms/InfoPanel/InfoPanel";
-import Navbar from "../components/organisms/Navbar/Navbar";
-import NotificationPopup from "../components/organisms/NotificationPopup/NotificationPopup";
-import useUiHandling from "../hooks/useUi";
-import { useAppSelector } from "../state/reduxHooks";
+import InfoPanel from "../organisms/InfoPanel/InfoPanel";
+import Navbar from "../organisms/Navbar/Navbar";
+import NotificationPopup from "../organisms/NotificationPopup/NotificationPopup";
+import useUiHandling from "../../hooks/useUi";
+import { useAppSelector } from "../../state/reduxHooks";
 
 interface Props {
 	children: React.ReactNode;

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { ReactElement } from "react";
+import React from "react";
 import { BsGoogle } from "react-icons/bs";
 import { MdLogout } from "react-icons/md";
 
@@ -74,7 +74,3 @@ function Button({
 }
 
 export default Button;
-// isAccent
-// 					? " bg-accent text-white  hover:bg-accentDark"
-// 					: "dark:bg-dmBaseElement dark:hover:bg-accentDark dark:text-baseLight bg-baseLight text-font hover:bg-baseVeryLight"
-// 			}
