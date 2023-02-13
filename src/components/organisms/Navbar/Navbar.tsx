@@ -4,7 +4,6 @@ import {
 	MdSearch,
 	MdAccountBalanceWallet,
 	MdHistory,
-	MdLogout,
 } from "react-icons/md";
 import { useRouter } from "next/router";
 import BurgerButton from "../../atoms/BurgerButton/BurgerButton";
@@ -16,9 +15,9 @@ import NavListItem from "../../atoms/NavListItem/NavListItem";
 import ThemeSwitch from "../../molecules/ThemeSwitch/ThemeSwitch";
 import { uiActions } from "../../../state/uiSlice";
 import Button from "../../atoms/Button/Button";
-import useDatabase from "../../../hooks/useDatabase";
 import AuthModal from "../AuthModal/AuthModal";
 import useUiHandling from "../../../hooks/useUiHandling";
+import useLogin from "../../../hooks/useLogin";
 
 function Navbar() {
 	const router = useRouter();
@@ -26,7 +25,7 @@ function Navbar() {
 	const { userData } = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
 	const { toggleTheme, openAuthModal } = useUiHandling();
-	const { signoutUser, loggedIn } = useDatabase();
+	const { signoutUser, loggedIn } = useLogin();
 
 	return (
 		<nav

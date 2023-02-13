@@ -1,5 +1,5 @@
-import { MdStar, MdStarBorder } from "react-icons/md";
-import useDatabase from "../../../hooks/useDatabase";
+import { MdStarBorder } from "react-icons/md";
+import useUserRequest from "../../../hooks/useUserRequest";
 
 interface Props {
 	isBox?: boolean;
@@ -7,7 +7,7 @@ interface Props {
 }
 
 function FavouriteButton({ isBox = false, funcArg = "" }: Props) {
-	const { addToFavourites } = useDatabase();
+	const { addToFavourites } = useUserRequest();
 
 	return (
 		<button

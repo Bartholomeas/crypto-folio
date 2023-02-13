@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
-import useDatabase from "../../../hooks/useDatabase";
 import useForm from "../../../hooks/useForm";
+import useUserRequest from "../../../hooks/useUserRequest";
 import { useAppDispatch, useAppSelector } from "../../../state/reduxHooks";
 import { uiActions } from "../../../state/uiSlice";
 import Button from "../../atoms/Button/Button";
@@ -17,7 +17,7 @@ function AddCoinModal() {
 
 	const [isValid, setIsValid] = useState(true);
 	const { walletCoin } = useAppSelector((state) => state.coins);
-	const { addCoinToWallet } = useDatabase();
+	const { addCoinToWallet } = useUserRequest();
 	const { validateInputOnBlur, setCoinPurchaseData } = useForm();
 
 	function validateAndAddCoin() {
@@ -94,7 +94,7 @@ function AddCoinModal() {
 								</InputWithLabel>
 							</div>
 							{!isValid && <ErrorText>No field can be empty</ErrorText>}
-							<Button onClick={() => validateAndAddCoin()} isAccent>
+							<Button onClick={() => validateAndAddCoin()} theme="accent">
 								Add coin to wallet
 							</Button>
 							<Button onClick={() => dispatch(uiActions.toggleCoinModal())}>
