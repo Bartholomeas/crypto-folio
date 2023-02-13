@@ -1,34 +1,29 @@
 /* eslint no-mixed-spaces-and-tabs: ["error", "smart-tabs"] */
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { doc, updateDoc, setDoc, arrayUnion, getDoc } from "firebase/firestore";
 import {
 	createUserWithEmailAndPassword,
 	signOut,
 	signInWithEmailAndPassword,
 	onAuthStateChanged,
-	GoogleAuthProvider,
 	signInWithPopup,
 } from "firebase/auth";
-import { db, auth } from "../../firebaseConfig";
 import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
 import { PurchaseDetails, userActions } from "../state/userSlice";
 import { uiActions } from "../state/uiSlice";
+import useUiHandling from "./useUiHandling";
+import { FirebaseContext } from "../providers/AppProvider";
+import useLogin from "./useLogin";
 
-const googleProvider = new GoogleAuthProvider();
 
-interface WalletCoinProp {
-	name: string;
-	symbol: string;
-	image: string;
-	date: string;
-	amount: number;
-	price: number;
-}
 
 function useDatabase() {
 	const dispatch = useAppDispatch();
+	const { db, auth, googleProvider } = useContext(FirebaseContext);
+	const { setNotificationPopup, setLoader } = useUiHandling();
 	const { userData } = useAppSelector((state) => state.user);
-	const [loggedIn, setLoggedIn] = useState(false);
+	const { loggedIn, setLoggedIn } = useLogin();
+
 	function setLoggedInUser(user: any) {
 		setLoggedIn(true);
 		dispatch(
@@ -66,126 +61,107 @@ function useDatabase() {
 		};
 	}, [userData.uid]);
 
-	function setNotificationPopup(
-		isOpen: boolean,
-		content: string,
-		isSuccess = true,
-	) {
-		dispatch(
-			uiActions.toggleNotificationPopup({
-				open: isOpen,
-				success: isSuccess,
-				content,
-			}),
-		);
-	}
+	// async function addUserToDB(user: any) {
+	// 	try {
+	// 		const userRef = await doc(db, "users", user.uid);
 
-	function setLoader(active: boolean) {
-		dispatch(uiActions.toggleLoader(active));
-	}
+	// 		setDoc(
+	// 			userRef,
+	// 			{
+	// 				id: user.uid,
+	// 				email: user.email,
+	// 				name: user.displayName || user.email,
+	// 				favouriteCoins: [],
+	// 				walletCoins: [],
+	// 			},
+	// 			{ merge: true },
+	// 		);
+	// 	} catch (e) {
+	// 		throw new Error("Something went wrong");
+	// 	}
+	// }
 
-	async function addUserToDB(user: any) {
-		try {
-			const userRef = await doc(db, "users", user.uid);
+	// async function signupCustomUser(emailValue: string, passwordValue: string) {
+	// 	setLoader(true);
 
-			setDoc(
-				userRef,
-				{
-					id: user.uid,
-					email: user.email,
-					name: user.displayName || user.email,
-					favouriteCoins: [],
-					walletCoins: [],
-				},
-				{ merge: true },
-			);
-		} catch (e) {
-			console.log(e);
-		}
-	}
+	// 	try {
+	// 		const result = await createUserWithEmailAndPassword(
+	// 			auth,
+	// 			emailValue,
+	// 			passwordValue,
+	// 		);
+	// 		setLoader(false);
+	// 		addUserToDB(result.user);
+	// 		setNotificationPopup(true, "Congratulations, you got registered!", true);
 
-	async function signupCustomUser(emailValue: string, passwordValue: string) {
-		setLoader(true);
+	// 		setTimeout(() => {
+	// 			setNotificationPopup(
+	// 				false,
+	// 				"Congratulations, you got registered!",
+	// 				true,
+	// 			);
+	// 		}, 3000);
+	// 	} catch {
+	// 		setLoader(false);
 
-		try {
-			const result = await createUserWithEmailAndPassword(
-				auth,
-				emailValue,
-				passwordValue,
-			);
-			setLoader(false);
-			addUserToDB(result.user);
-			setNotificationPopup(true, "Congratulations, you got registered!", true);
+	// 		setNotificationPopup(true, "We cannot register you :(", false);
+	// 		setTimeout(() => {
+	// 			setNotificationPopup(false, "We cannot register you :(!", false);
+	// 		}, 3000);
+	// 	}
+	// }
 
-			setTimeout(() => {
-				setNotificationPopup(
-					false,
-					"Congratulations, you got registered!",
-					true,
-				);
-			}, 3000);
-		} catch {
-			setLoader(false);
+	// async function authWithEmail(emailValue: string, passwordValue: string) {
+	// 	setLoader(true);
 
-			setNotificationPopup(true, "We cannot register you :(", false);
-			setTimeout(() => {
-				setNotificationPopup(false, "We cannot register you :(!", false);
-			}, 3000);
-		}
-	}
+	// 	try {
+	// 		const result = await signInWithEmailAndPassword(
+	// 			auth,
+	// 			emailValue,
+	// 			passwordValue,
+	// 		);
+	// 		setLoader(false);
+	// 		setLoggedInUser(result.user);
+	// 		dispatch(uiActions.closeAuthModal());
 
-	async function authWithEmail(emailValue: string, passwordValue: string) {
-		setLoader(true);
+	// 		setNotificationPopup(true, "Successfully logged in", true);
+	// 		setTimeout(() => {
+	// 			setNotificationPopup(false, "Successfully logged in", true);
+	// 		}, 3000);
+	// 	} catch {
+	// 		setLoader(false);
 
-		try {
-			const result = await signInWithEmailAndPassword(
-				auth,
-				emailValue,
-				passwordValue,
-			);
-			setLoader(false);
-			setLoggedInUser(result.user);
-			dispatch(uiActions.closeAuthModal());
+	// 		setNotificationPopup(true, "Something went wrong :(", false);
+	// 		setTimeout(() => {
+	// 			setNotificationPopup(false, "Something went wrong :(", false);
+	// 		}, 3000);
+	// 	}
+	// }
 
-			setNotificationPopup(true, "Successfully logged in", true);
-			setTimeout(() => {
-				setNotificationPopup(false, "Successfully logged in", true);
-			}, 3000);
-		} catch {
-			setLoader(false);
+	// async function authWithGoogle() {
+	// 	setLoader(true);
+	// 	try {
+	// 		const result = await signInWithPopup(auth, googleProvider);
+	// 		const userSnap = await getDoc(doc(db, "users", result.user.uid));
 
-			setNotificationPopup(true, "Something went wrong :(", false);
-			setTimeout(() => {
-				setNotificationPopup(false, "Something went wrong :(", false);
-			}, 3000);
-		}
-	}
-
-	async function authWithGoogle() {
-		setLoader(true);
-		try {
-			const result = await signInWithPopup(auth, googleProvider);
-			const userSnap = await getDoc(doc(db, "users", result.user.uid));
-
-			setLoader(false);
-			if (!userSnap.exists()) {
-				addUserToDB(result.user);
-			}
-			setLoggedInUser(result.user);
-			dispatch(uiActions.closeAuthModal());
-			setNotificationPopup(true, "Successfully logged in", true);
-			setTimeout(() => {
-				setNotificationPopup(false, "Successfully logged in", true);
-			}, 3000);
-		} catch (e) {
-			console.log(e);
-			setLoader(false);
-			setNotificationPopup(true, "Something went wrong :(", false);
-			setTimeout(() => {
-				setNotificationPopup(false, "Something went wrong :(", false);
-			}, 3000);
-		}
-	}
+	// 		setLoader(false);
+	// 		if (!userSnap.exists()) {
+	// 			addUserToDB(result.user);
+	// 		}
+	// 		setLoggedInUser(result.user);
+	// 		dispatch(uiActions.closeAuthModal());
+	// 		setNotificationPopup(true, "Successfully logged in", true, true);
+	// 		// setTimeout(() => {
+	// 		// 	setNotificationPopup(false, "Successfully logged in", true);
+	// 		// }, 3000);
+	// 	} catch (e) {
+	// 		setLoader(false);
+	// 		setNotificationPopup(true, "Something went wrong :(", false);
+	// 		setTimeout(() => {
+	// 			setNotificationPopup(false, "Something went wrong :(", false);
+	// 		}, 3000);
+	// 	}
+	// }
 
 	function signoutUser() {
 		try {
@@ -218,7 +194,7 @@ function useDatabase() {
 				favouriteCoins: arrayUnion(coinName),
 			});
 		} catch {
-			console.log("error");
+			throw new Error("Cannot add to favourites");
 		}
 	}
 
@@ -276,11 +252,7 @@ function useDatabase() {
 	}
 
 	return {
-		loggedIn,
-		authWithGoogle,
 		signoutUser,
-		signupCustomUser,
-		authWithEmail,
 		addToFavourites,
 		addCoinToWallet,
 	};

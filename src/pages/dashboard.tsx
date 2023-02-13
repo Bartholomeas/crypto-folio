@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
@@ -15,12 +14,12 @@ import SecondHeader from "../components/atoms/SecondHeader/SecondHeader";
 import PageHeader from "../components/atoms/PageHeader/PageHeader";
 import { useAppSelector } from "../state/reduxHooks";
 import useFilter from "../hooks/useFilter";
-import useUiHandling from "../hooks/useUi";
+import useUiHandling from "../hooks/useUiHandling";
 import Button from "../components/atoms/Button/Button";
 import AddCoinModal from "../components/organisms/AddCoinModal/AddCoinModal";
-import useDatabase from "../hooks/useDatabase";
 import { auth, db } from "../../firebaseConfig";
 import { PurchaseDetails } from "../state/userSlice";
+import useLogin from "../hooks/useLogin";
 
 interface UpdatedCoinPrice {
 	[key: string]: number;
@@ -35,7 +34,7 @@ function Dashboard() {
 	const { userData } = useAppSelector((state) => state.user);
 	const { sortCoins } = useFilter();
 	const { openCoinModal } = useUiHandling();
-	const { loggedIn } = useDatabase();
+	const { loggedIn } = useLogin();
 	const [isLoading, setIsLoading] = useState(true);
 	const [userWalletCoins, setUserWalletCoins] = useState([]);
 	const [coinPrices, setCoinPrices] = useState<UpdatedCoinPrice>({});
@@ -112,19 +111,13 @@ function Dashboard() {
 				<AddCoinModal />
 				<div className="flex items-center justify-between w-full">
 					<SecondHeader>Explore coins</SecondHeader>
-					{/* <Link passHref href="/wallet"> */}
 					<Button onClick={openCoinModal} theme="accent">
 						Add coin +
 					</Button>
-					{/* </Link> */}
 				</div>
 				<div className="flex flex-col justify-center w-full overflow-x-scroll">
 					<Table>
-						<colgroup>
-							{/* <col className="w-[5%]" />
-							<col className="w-[20%]" />
-							<col className="w-[20%]" /> */}
-						</colgroup>
+						<colgroup />
 						<TableHead>
 							<TableRow>
 								<TableHeader onClick={sortCoins} value="market_cap_rank">

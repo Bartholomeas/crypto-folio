@@ -1,9 +1,8 @@
-import { useDispatch } from "react-redux";
-import { useAppSelector } from "../state/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
 import { uiActions } from "../state/uiSlice";
 
 function useUiHandling() {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const { lightMode } = useAppSelector((state) => state.ui);
 
 	function checkTheme() {
@@ -16,18 +15,23 @@ function useUiHandling() {
 		localStorage.setItem("lightMode", JSON.stringify(lightMode));
 	}
 
-	const openAuthModal = () => {
+	function openAuthModal() {
 		dispatch(uiActions.toggleAuthModal());
-	};
+	}
 
-	const openCoinModal = () => {
+	function openCoinModal() {
 		dispatch(uiActions.toggleCoinModal());
-	};
+	}
+
+	function setLoader(active: boolean) {
+		dispatch(uiActions.toggleLoader(active));
+	}
 
 	function setNotificationPopup(
 		isOpen: boolean,
 		content: string,
 		isSuccess = true,
+		isCb = false,
 	) {
 		dispatch(
 			uiActions.toggleNotificationPopup({
@@ -36,6 +40,12 @@ function useUiHandling() {
 				content,
 			}),
 		);
+
+		if (isCb) {
+			setTimeout(() => {
+				setNotificationPopup(false, "We cannot register you :(!", false);
+			}, 3000);
+		}
 	}
 
 	return {
@@ -44,6 +54,7 @@ function useUiHandling() {
 		checkTheme,
 		openAuthModal,
 		openCoinModal,
+		setLoader,
 	};
 }
 

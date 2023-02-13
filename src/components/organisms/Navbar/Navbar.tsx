@@ -18,7 +18,7 @@ import { uiActions } from "../../../state/uiSlice";
 import Button from "../../atoms/Button/Button";
 import useDatabase from "../../../hooks/useDatabase";
 import AuthModal from "../AuthModal/AuthModal";
-import useUiHandling from "../../../hooks/useUi";
+import useUiHandling from "../../../hooks/useUiHandling";
 
 function Navbar() {
 	const router = useRouter();

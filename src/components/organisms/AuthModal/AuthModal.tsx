@@ -4,10 +4,11 @@ import { useAppDispatch, useAppSelector } from "../../../state/reduxHooks";
 import { uiActions } from "../../../state/uiSlice";
 import Button from "../../atoms/Button/Button";
 import InputWithLabel from "../../molecules/InputWithLabel/InputWithLabel";
-import useDatabase from "../../../hooks/useDatabase";
 import BasicLink from "../../atoms/BasicLink/BasicLink";
 import useForm from "../../../hooks/useForm";
 import Loader from "../../atoms/Loader/Loader";
+import useLogin from "../../../hooks/useLogin";
+import useRegister from "../../../hooks/useRegister";
 
 enum CallbackType {
 	Login = "login",
@@ -18,7 +19,8 @@ function AuthModal() {
 	const dispatch = useAppDispatch();
 	const { isAuthModalOpen, isLoaderOpen } = useAppSelector((state) => state.ui);
 	const [loginBox, setLoginBox] = useState(true);
-	const { authWithGoogle, signupCustomUser, authWithEmail } = useDatabase();
+	const { authWithGoogle, authWithEmail } = useLogin();
+	const { signupCustomUser } = useRegister();
 	const {
 		values,
 		errors,

@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import InfoPanel from "../organisms/InfoPanel/InfoPanel";
 import Navbar from "../organisms/Navbar/Navbar";
 import NotificationPopup from "../organisms/NotificationPopup/NotificationPopup";
-import useUiHandling from "../../hooks/useUi";
+import useUiHandling from "../../hooks/useUiHandling";
 import { useAppSelector } from "../../state/reduxHooks";
 
 interface Props {
