@@ -41,7 +41,7 @@ function Dashboard() {
 	async function handleWalletCoinsPrices(coins: string[]) {
 		try {
 			const result = await axios(
-				`https://api.coingecko.com/api/v3/simple/price?ids=${coins.join(
+				`${process.env.NEXT_PUBLIC_WALLET_COIN_PRICES}${coins.join(
 					"%2C",
 				)}&vs_currencies=usd`,
 			);

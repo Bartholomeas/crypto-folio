@@ -26,7 +26,7 @@ function Searchbar({ placeholderText = "", fullWidth = false }: Props) {
 	const getSearchedCoins = useCallback(async (coinValue: string) => {
 		try {
 			const data = await axios(
-				`https://api.coingecko.com/api/v3/search?query=${coinValue}`,
+				process.env.NEXT_PUBLIC_SEARCHED_COINS + coinValue,
 			);
 			setSearchedCoins(data.data.coins);
 		} catch (error) {

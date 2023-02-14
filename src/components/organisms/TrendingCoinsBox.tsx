@@ -9,7 +9,8 @@ function TrendingCoinsBox() {
 	const { trendingCoins } = useAppSelector((state) => state.coins);
 
 	useEffect(() => {
-		sendRequest("https://api.coingecko.com/api/v3/search/trending");
+		if (process.env.NEXT_PUBLIC_TRENDING_COINS)
+			sendRequest(process.env.NEXT_PUBLIC_TRENDING_COINS);
 	}, []);
 	return (
 		<div

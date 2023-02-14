@@ -7,7 +7,7 @@ interface Props {
 
 function Logo({ heightVal = "50" }: Props) {
 	return (
-		<Link passHref href="/src/pages">
+		<Link passHref href="/">
 			<a className="cursor-pointer h-auto">
 				<Image
 					className="h-full"
