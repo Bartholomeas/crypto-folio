@@ -1,5 +1,5 @@
-import { StaticImageData } from "next/image";
 import React from "react";
+import { StaticImageData } from "next/image";
 import CircleBgImage from "../atoms/CircleBgImage";
 import ThirdHeader from "../atoms/ThirdHeader";
 

@@ -32,7 +32,7 @@ function BalanceChart({ chartData }: Props) {
 		responsive: true,
 		maintainAspectRatio: false,
 		scales: {
-			x: {
+			y: {
 				ticks: {
 					color: "white",
 					beginAtZero: true,
@@ -41,7 +41,7 @@ function BalanceChart({ chartData }: Props) {
 					display: false,
 				},
 			},
-			y: {
+			x: {
 				ticks: {
 					color: "white",
 					beginAtZero: true,

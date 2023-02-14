@@ -6,6 +6,8 @@ import {
 	onAuthStateChanged,
 	signInWithPopup,
 	signOut,
+	UserCredential,
+	User,
 } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
 import { userActions } from "../state/userSlice";
@@ -20,7 +22,7 @@ function useLogin() {
 	const { userData } = useAppSelector((state) => state.user);
 	const [loggedIn, setLoggedIn] = useState(false);
 
-	function stateChangeWatcher(callback: any) {
+	function stateChangeWatcher(callback: (arg1: User) => void) {
 		return onAuthStateChanged(auth, async (user) => {
 			if (user && !loggedIn) {
 				await getDoc(doc(db, "users", user.uid));
@@ -29,7 +31,7 @@ function useLogin() {
 		});
 	}
 
-	function setLoggedInUser(user: any) {
+	function setLoggedInUser(user: User) {
 		setLoggedIn(true);
 		dispatch(
 			userActions.setUserData({
@@ -37,8 +39,6 @@ function useLogin() {
 				email: user.email,
 				uid: user.uid,
 				image: user.photoURL || "",
-				favouriteCoins: user.favouriteCoins || [],
-				walletCoins: user.walletCoins || [],
 			}),
 		);
 		localStorage.setItem("userId", user.uid);
@@ -55,7 +55,7 @@ function useLogin() {
 		setLoader(true);
 
 		try {
-			const result = await signInWithEmailAndPassword(
+			const result: UserCredential = await signInWithEmailAndPassword(
 				auth,
 				emailValue,
 				passwordValue,
@@ -81,7 +81,10 @@ function useLogin() {
 	async function authWithGoogle() {
 		setLoader(true);
 		try {
-			const result = await signInWithPopup(auth, googleProvider);
+			const result: UserCredential = await signInWithPopup(
+				auth,
+				googleProvider,
+			);
 			const userSnap = await getDoc(doc(db, "users", result.user.uid));
 
 			setLoader(false);

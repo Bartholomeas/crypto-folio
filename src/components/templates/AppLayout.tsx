@@ -31,7 +31,7 @@ function AppLayout({ children }: Props) {
 
 			<style jsx global>{`
 				body {
-					background: ${!lightMode ? "#FFFFF" : "#0B0F20"};
+					background-color: ${lightMode  ? "#0B0F20" : "#FFFFF"};
 				}
 			`}</style>
 

@@ -3,7 +3,8 @@ import { useContext } from "react";
 import { FirebaseContext } from "../providers/AppProvider";
 import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
 import { uiActions } from "../state/uiSlice";
-import { PurchaseDetails, userActions } from "../state/userSlice";
+import { userActions } from "../state/userSlice";
+import { PurchaseDetails } from "../types/user";
 import useUiHandling from "./useUiHandling";
 
 interface WalletCoinProp {

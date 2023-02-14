@@ -4,76 +4,10 @@
     <list default="true" id="f82e7037-4eac-411f-9038-22ff87af3d79" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/coins/[coinId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/coins/[coinId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/ArrowButton/ArrowButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/ArrowButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/BalanceChart/BalanceChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/BalanceChart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/BasicLink/BasicLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/BasicLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/BoxyLink/BoxyLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/BoxyLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/BurgerButton/BurgerButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/BurgerButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/Button/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/Button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/ChangeInValue/ChangeInValue.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/ChangeInValue.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/Checkbox/Checkbox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/Checkbox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/CircleBgImage/CircleBgImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/CircleBgImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/CoinName/CoinName.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/CoinName.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/CoinRank/CoinRank.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/CoinRank.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/CoinStatsLi/CoinStatsLi.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/CoinStatsLi.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/CoinStatsLiKey/CoinStatsLiKey.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/CoinStatsLiKey.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/CoinStatsLiValue/CoinStatsLiValue.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/CoinStatsLiValue.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/CoinSymbol/CoinSymbol.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/CoinSymbol.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/CtaLink/CtaLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/CtaLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/DetailsBigPrice/DetailsBigPrice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/DetailsBigPrice.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/ErrorText/ErrorText.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/ErrorText.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/FavouriteButton/FavouriteButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/FavouriteButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/FireIcon/FireIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/FireIcon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/Label/Label.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/Label.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/Loader/Loader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/Loader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/Logo/Logo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/Logo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/MarginBox/MarginBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/MarginBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/NavLink/NavLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/NavLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/NavListItem/NavListItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/NavListItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/PageHeader/PageHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/PageHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/PriceChangeDetails/PriceChangeDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/PriceChangeDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/SearchbarCoin/SearchbarCoin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/SearchbarCoin.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/SecondHeader/SecondHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/SecondHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/ThirdHeader/ThirdHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/ThirdHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/AboutOfferArticle/AboutOfferArticle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/AboutOfferArticle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/CoinDescription/CoinDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/CoinDescription.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/CoinHeadBox/CoinHeadBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/CoinHeadBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/CoinMarketData/CoinMarketData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/CoinMarketData.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/CoinPriceBox/CoinPriceBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/CoinPriceBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/InputWithLabel/InputWithLabel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/InputWithLabel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/LinkItem/LinkItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/LinkItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/NavList/NavList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/NavList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/SearchbarItems/SearchbarItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/SearchbarItems.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/SelectMenu/SelectMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/SelectMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/TableBody/TableBody.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/TableBody.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/TableData/TableData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/TableData.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/TableHead/TableHead.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/TableHead.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/TableHeader/TableHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/TableHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/TableRow/TableRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/TableRow.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/ThemeSwitch/ThemeSwitch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ThemeSwitch.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/AboutSection/AboutSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/AboutSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/AddCoinModal/AddCoinModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/AddCoinModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/AuthModal/AuthModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/AuthModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/CoinStatsBox/CoinStatsBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/CoinStatsBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/DailyChangeGraph/DailyChangeGraph.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/DailyChangeGraph.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/Footer/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/InfoAssetsBox/InfoAssetsBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/InfoAssetsBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/InfoPanel/InfoPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/InfoPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/NotificationPopup/NotificationPopup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/NotificationPopup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/Pagination/Pagination.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/Pagination.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/Searchbar/Searchbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/Searchbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/SparklineChart/SparklineChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/SparklineChart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/Table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/TotalAssetsValue/TotalAssetsValue.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/TotalAssetsValue.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/TrendingCoin/TrendingCoin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/TrendingCoin.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/TrendingCoinsBox/TrendingCoinsBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/TrendingCoinsBox.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/atoms/BalanceChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/BalanceChart.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/AboutOfferArticle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/AboutOfferArticle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/organisms/AboutSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/AboutSection.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/templates/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/templates/AppLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/[page]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/[page]/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/wallet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/wallet.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +42,7 @@
     "node.js.selected.package.standard": "",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/bartholomeas/Desktop/Kod/crypto-app/node_modules/prettier",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "preferences.editor",
     "ts.external.directory.path": "/Users/bartholomeas/Desktop/Kod/crypto-app/node_modules/typescript/lib"
   }
@@ -137,6 +72,7 @@
       <workItem from="1675110917982" duration="1367000" />
       <workItem from="1676325725943" duration="350000" />
       <workItem from="1676326093133" duration="118000" />
+      <workItem from="1676397235217" duration="462000" />
     </task>
     <servers />
   </component>

@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, User } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useContext } from "react";
 import { FirebaseContext } from "../providers/AppProvider";
@@ -8,7 +8,7 @@ function useRegister() {
 	const { setNotificationPopup, setLoader } = useUiHandling();
 	const { db, auth } = useContext(FirebaseContext);
 
-	async function addUserToDB(user: any) {
+	async function addUserToDB(user: User) {
 		try {
 			const userRef = await doc(db, "users", user.uid);
 

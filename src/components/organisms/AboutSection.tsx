@@ -1,7 +1,5 @@
 import React from "react";
-import CircleBgImage from "../atoms/CircleBgImage";
 import SecondHeader from "../atoms/SecondHeader";
-import ThirdHeader from "../atoms/ThirdHeader";
 import coins from "../../assets/coins3d.png";
 import fire from "../../assets/fire3d.png";
 import safe from "../../assets/safe3d.png";

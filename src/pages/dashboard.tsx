@@ -20,6 +20,7 @@ import AddCoinModal from "../components/organisms/AddCoinModal";
 import { auth, db } from "../../firebaseConfig";
 import { PurchaseDetails } from "../state/userSlice";
 import useLogin from "../hooks/useLogin";
+import { User } from "../types/user";
 
 interface UpdatedCoinPrice {
 	[key: string]: number;
@@ -61,9 +62,9 @@ function Dashboard() {
 		}
 	}
 
-	async function handleUserWalletCoins(user: any) {
+	async function handleUserWalletCoins(user: User) {
 		if (!user) return null;
-		const userSnap = await getDoc(doc(db, "users", user.uid));
+		const userSnap = (await getDoc(doc(db, "users", user.uid))) as any;
 		if (userSnap.exists()) {
 			setUserWalletCoins(userSnap.data().walletCoins);
 			setIsLoading(false);
