@@ -1,11 +1,11 @@
-import MarginBox from "../components/atoms/MarginBox/MarginBox";
-import PageHeader from "../components/atoms/PageHeader/PageHeader";
-import TableBody from "../components/molecules/TableBody/TableBody";
-import TableData from "../components/molecules/TableData/TableData";
-import TableHead from "../components/molecules/TableHead/TableHead";
-import TableHeader from "../components/molecules/TableHeader/TableHeader";
-import TableRow from "../components/molecules/TableRow/TableRow";
-import Table from "../components/organisms/Table/Table";
+import MarginBox from "../components/atoms/MarginBox";
+import PageHeader from "../components/atoms/PageHeader";
+import TableBody from "../components/molecules/TableBody";
+import TableData from "../components/molecules/TableData";
+import TableHead from "../components/molecules/TableHead";
+import TableHeader from "../components/molecules/TableHeader";
+import TableRow from "../components/molecules/TableRow";
+import Table from "../components/organisms/Table";
 import useFilter from "../hooks/useFilter";
 
 function Wallet() {

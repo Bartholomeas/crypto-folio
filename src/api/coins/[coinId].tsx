@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { GetServerSidePropsContext } from "next";
 import axios from "axios";
-import CoinHeadBox from "../../components/molecules/CoinHeadBox/CoinHeadBox";
-import LinkItem from "../../components/molecules/LinkItem/LinkItem";
-import CoinPriceBox from "../../components/molecules/CoinPriceBox/CoinPriceBox";
-import CoinMarketData from "../../components/molecules/CoinMarketData/CoinMarketData";
-import SparklineChart from "../../components/organisms/SparklineChart/SparklineChart";
-import CoinStatsBox from "../../components/organisms/CoinStatsBox/CoinStatsBox";
-import CoinDescription from "../../components/molecules/CoinDescription/CoinDescription";
+import CoinHeadBox from "../../components/molecules/CoinHeadBox";
+import LinkItem from "../../components/molecules/LinkItem";
+import CoinPriceBox from "../../components/molecules/CoinPriceBox";
+import CoinMarketData from "../../components/molecules/CoinMarketData";
+import SparklineChart from "../../components/organisms/SparklineChart";
+import CoinStatsBox from "../../components/organisms/CoinStatsBox";
+import CoinDescription from "../../components/molecules/CoinDescription";
 import { addSpacesToNumber } from "../../utils/convertUtils";
 
 interface InitialStateProps {

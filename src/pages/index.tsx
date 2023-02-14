@@ -3,9 +3,9 @@ import donutBlue from "../assets/donutBlue.png";
 import cubeBlue from "../assets/cubeBlue.png";
 import sphereWhite from "../assets/sphereWhite.png";
 import cubeWhite from "../assets/cubeWhite.png";
-import PageHeader from "../components/atoms/PageHeader/PageHeader";
-import CtaLink from "../components/atoms/CtaLink/CtaLink";
-import AboutSection from "../components/organisms/AboutSection/AboutSection";
+import PageHeader from "../components/atoms/PageHeader";
+import CtaLink from "../components/atoms/CtaLink";
+import AboutSection from "../components/organisms/AboutSection";
 
 function index() {
 	return (
