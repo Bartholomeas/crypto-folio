@@ -4,7 +4,6 @@ import { GetStaticProps, InferGetStaticPropsType } from "next";
 import axios from "axios";
 import FavouriteButton from "../../components/atoms/FavouriteButton";
 import MarginBox from "../../components/atoms/MarginBox";
-import PageHeader from "../../components/atoms/PageHeader";
 import TableBody from "../../components/molecules/TableBody";
 import TableData from "../../components/molecules/TableData";
 import TableHead from "../../components/molecules/TableHead";
@@ -19,6 +18,7 @@ import TrendingCoinsBox from "../../components/organisms/TrendingCoinsBox";
 import { CoinItem, coinsActions } from "../../state/coinsSlice";
 import { addSpacesToNumber } from "../../utils/convertUtils";
 import { useAppDispatch, useAppSelector } from "../../state/reduxHooks";
+import Heading from "../../components/atoms/Heading";
 
 function SpecifiedPage({
 	coins,
@@ -41,7 +41,7 @@ function SpecifiedPage({
     md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] md:overflow-y-scroll bg-white"
 		>
 			<MarginBox />
-			<PageHeader>all Cryptocurrencies</PageHeader>
+			<Heading headingWeight={1}>all Cryptocurrencies</Heading>
 			<div className="top-[5rem] flex flex-col gap w-full pt">
 				<TrendingCoinsBox />
 				<Searchbar placeholderText="Search for coin.." />

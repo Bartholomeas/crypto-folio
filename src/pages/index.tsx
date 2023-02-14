@@ -3,9 +3,9 @@ import donutBlue from "../assets/donutBlue.png";
 import cubeBlue from "../assets/cubeBlue.png";
 import sphereWhite from "../assets/sphereWhite.png";
 import cubeWhite from "../assets/cubeWhite.png";
-import PageHeader from "../components/atoms/PageHeader";
 import CtaLink from "../components/atoms/CtaLink";
 import AboutSection from "../components/organisms/AboutSection";
+import Heading from "../components/atoms/Heading";
 
 function index() {
 	return (
@@ -33,9 +33,9 @@ function index() {
 						alt="Logo of Oddy, smiling blue robot"
 					/>
 
-					<PageHeader position="center">
+					<Heading headingWeight={1} align="center">
 						Oddy - a buddy that will improve your cryptocurrencies experience
-					</PageHeader>
+					</Heading>
 
 					<p className="leading text-font text-center">
 						Oddy is an application that allows you to control your

@@ -1,7 +1,7 @@
 import React from "react";
 import { StaticImageData } from "next/image";
 import CircleBgImage from "../atoms/CircleBgImage";
-import ThirdHeader from "../atoms/ThirdHeader";
+import Heading from "../atoms/Heading";
 
 interface Props {
 	children: React.ReactNode;
@@ -25,7 +25,7 @@ ${isReverse ? "md:flex-row-reverse" : "md:flex-row"}`}
 				className="flex flex-col gap text-center md:text-left
 	md:w-[50%]"
 			>
-				<ThirdHeader>{articleTitle}</ThirdHeader>
+				<Heading headingWeight={3}>{articleTitle}</Heading>
 				<p className="text-white text-center leading-8 text-sm">{children}</p>
 			</div>
 			<CircleBgImage

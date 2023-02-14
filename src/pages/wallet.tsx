@@ -1,5 +1,5 @@
+import Heading from "../components/atoms/Heading";
 import MarginBox from "../components/atoms/MarginBox";
-import PageHeader from "../components/atoms/PageHeader";
 import TableBody from "../components/molecules/TableBody";
 import TableData from "../components/molecules/TableData";
 import TableHead from "../components/molecules/TableHead";
@@ -18,9 +18,9 @@ function Wallet() {
 		>
 			<MarginBox />
 			<div className="flex flex-col w-full">
-				<PageHeader appendAfter="of DefaultWallet">
+				<Heading headingWeight={1} appendAfter="of DefaultWallet">
 					Your coin balance
-				</PageHeader>
+				</Heading>
 				<div className=" flex flex-col justify-center w-full overflow-x-scroll">
 					<Table>
 						<colgroup>

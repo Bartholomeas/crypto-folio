@@ -40,9 +40,10 @@ module.exports = {
 				lg: "2.6rem",
 				xl: "3.2rem",
 
-				h1: "3.2rem",
-				h2: "2.8rem",
-				h3: "2.4rem",
+				h1: ["3.2rem", { lineHeight: "150%", fontWeight: "700" }],
+				h2: ["2.8rem", { lineHeight: "150%", fontWeight: "700" }],
+				h3: ["2.4rem", { lineHeight: "150%", fontWeight: "700" }],
+				h4: ["2rem", { lineHeight: "150%", fontWeight: "700" }],
 			},
 
 			padding: {

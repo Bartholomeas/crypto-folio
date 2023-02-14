@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 import axios from "axios";
 import TableData from "../components/molecules/TableData";
 import TableHeader from "../components/molecules/TableHeader";
@@ -10,17 +10,15 @@ import Table from "../components/organisms/Table";
 import TableHead from "../components/molecules/TableHead";
 import TableBody from "../components/molecules/TableBody";
 import MarginBox from "../components/atoms/MarginBox";
-import SecondHeader from "../components/atoms/SecondHeader";
-import PageHeader from "../components/atoms/PageHeader";
 import { useAppSelector } from "../state/reduxHooks";
 import useFilter from "../hooks/useFilter";
 import useUiHandling from "../hooks/useUiHandling";
 import Button from "../components/atoms/Button";
 import AddCoinModal from "../components/organisms/AddCoinModal";
 import { auth, db } from "../../firebaseConfig";
-import { PurchaseDetails } from "../state/userSlice";
 import useLogin from "../hooks/useLogin";
-import { User } from "../types/user";
+import { PurchaseDetails } from "../types/user";
+import Heading from "../components/atoms/Heading";
 
 interface UpdatedCoinPrice {
 	[key: string]: number;
@@ -58,13 +56,13 @@ function Dashboard() {
 			);
 			setCoinPrices(updatedCoinPrices);
 		} catch (e) {
-			console.log(e);
+			throw new Error("Cannot fetch coins prices");
 		}
 	}
 
-	async function handleUserWalletCoins(user: User) {
+	async function handleUserWalletCoins(user: User | null) {
 		if (!user) return null;
-		const userSnap = (await getDoc(doc(db, "users", user.uid))) as any;
+		const userSnap = await getDoc(doc(db, "users", user.uid));
 		if (userSnap.exists()) {
 			setUserWalletCoins(userSnap.data().walletCoins);
 			setIsLoading(false);
@@ -91,15 +89,13 @@ function Dashboard() {
 		md:h-[100vh] md:py-lg md:mr-[5rem] md:max-w"
 		>
 			<MarginBox />
-			<button
-				type="button"
-				onClick={() => {
-					console.log(userWalletCoins);
-				}}
+			<Heading
+				theme="pageHeader"
+				headingWeight={1}
+				appendAfter="of DefaultWallet"
 			>
-				KLIK2
-			</button>
-			<PageHeader appendAfter="of DefaultWallet">Dashboard</PageHeader>
+				Dashboard
+			</Heading>
 			<div className="cards flex flex-col gap-sm w-full lg:flex-row">
 				<TotalAssetsValue
 					totalValue={32227}
@@ -111,7 +107,7 @@ function Dashboard() {
 			<div className="flex flex-col gap w-full mt-[5rem]">
 				<AddCoinModal />
 				<div className="flex items-center justify-between w-full">
-					<SecondHeader>Explore coins</SecondHeader>
+					<Heading headingWeight={2}>Explore coins</Heading>
 					<Button onClick={openCoinModal} theme="accent">
 						Add coin +
 					</Button>

@@ -1,14 +1,14 @@
 import React from "react";
-import SecondHeader from "../atoms/SecondHeader";
 import coins from "../../assets/coins3d.png";
 import fire from "../../assets/fire3d.png";
 import safe from "../../assets/safe3d.png";
 import AboutOfferArticle from "../molecules/AboutOfferArticle";
+import Heading from "../atoms/Heading";
 
 function AboutSection() {
 	return (
 		<section className="flex flex-col items-center w-full min-h-[100vh] py-section px gap-xl bg-accent rounded">
-			<SecondHeader isLight>What do we offer?</SecondHeader>
+			<Heading headingWeight={2}>What do we offer?</Heading>
 
 			<div className="flex flex-col gap-xl">
 				<AboutOfferArticle
