@@ -29,7 +29,7 @@ function TotalAssetsValue({
 					<div className="flex flex-col bg-warning items-start h-fit w-full">
 						<p>Balance</p>
 						<p className="text-lg font-bold">{totalValue}$</p>
-						<p className="text-xs">={valueInBtc} BTC</p>
+						<p className="text-xs"> ={valueInBtc} BTC</p>
 					</div>
 					<div className="flex flex-col items-end bg-accentDark w-fit h-fit p-xs rounded">
 						<ChangeInValue isPercent>{changePercent}</ChangeInValue>

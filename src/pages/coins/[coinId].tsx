@@ -160,12 +160,13 @@ function CoinDetails({ coinDetails, chartDetails }: any) {
 		</main>
 	);
 }
+export default CoinDetails;
 
 export const getServerSideProps = async (
 	context: GetServerSidePropsContext,
 ) => {
 	const { coinId } = context.params!;
-
+	console.log(coinId);
 	try {
 		const [detailsResponse, chartResponse] = await Promise.all([
 			axios(
@@ -188,6 +189,3 @@ export const getServerSideProps = async (
 		throw new Error("Something went wrong in staticProps :(");
 	}
 };
-export default CoinDetails;
-
-// https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=7
