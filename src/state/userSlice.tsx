@@ -39,6 +39,9 @@ const userSlice = createSlice({
 		},
 
 		addToFavourites(state, action) {
+			if (!Array.isArray(state.userData.favouriteCoins)) {
+				state.userData.favouriteCoins = [];
+			}
 			state.userData.favouriteCoins = [
 				...state.userData.favouriteCoins,
 				action.payload,

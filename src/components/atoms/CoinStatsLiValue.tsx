@@ -2,6 +2,7 @@ interface Props {
 	children: React.ReactNode | React.ReactNode[];
 	type?: "success" | "error";
 }
+
 function CoinStatsLiValue({ children, type }: Props) {
 	return (
 		<p

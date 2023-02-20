@@ -28,7 +28,7 @@ const useUserRequest = () => {
 		}
 		if (coinName.trim() === "") return;
 		const userRef = doc(db, "users", userData.uid);
-		useAppDispatch(userActions.addToFavourites(coinName));
+		dispatch(userActions.addToFavourites(coinName));
 		try {
 			await updateDoc(userRef, {
 				favouriteCoins: arrayUnion(coinName),

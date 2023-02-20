@@ -1,7 +1,3 @@
-import Link from "next/link";
-
-import LinkItem from "./LinkItem";
-
 interface Props {
 	children: React.ReactNode;
 	onClick?: (arg1: any) => void;
