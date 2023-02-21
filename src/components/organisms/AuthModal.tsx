@@ -4,11 +4,12 @@ import { useAppDispatch, useAppSelector } from "../../state/reduxHooks";
 import { uiActions } from "../../state/uiSlice";
 import Button from "../atoms/Button";
 import InputWithLabel from "../molecules/InputWithLabel";
-import BasicLink from "../atoms/BasicLink";
+
 import useForm from "../../hooks/useForm";
 import Loader from "../atoms/Loader";
 import useLogin from "../../hooks/useLogin";
 import useRegister from "../../hooks/useRegister";
+import GenericLink from "../atoms/GenericLink";
 
 enum CallbackType {
 	Login = "login",
@@ -111,7 +112,7 @@ function AuthModal() {
 								Log in
 							</Button>
 						</form>
-						<BasicLink href="/">I forgot password</BasicLink>
+						<GenericLink href="/">I forgot password</GenericLink>
 						<p className="dark:text-dmFont font-semibold text text-font">OR</p>
 						<Button onClick={authWithGoogle} icon="google">
 							Sign in with Gmail

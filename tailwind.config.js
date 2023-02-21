@@ -65,7 +65,7 @@ module.exports = {
 				accent: "#0B72FD",
 				accentDark: "#0B5DCB",
 				accentVeryDark: "#07469A",
-				accentHover: "rgba(17, 27, 255, 0.05)",
+				accentHover: "rgba(17, 27, 255, 0.1)",
 
 				baseLight: "#EDF0FB",
 				baseVeryLight: "#F7F9FC",
@@ -83,6 +83,7 @@ module.exports = {
 				dmBase: "#0B0F20",
 				dmBaseContrast: "#1A2139",
 				dmBaseElement: "#1A2139",
+				dmAccentHover: "rgba(17, 27, 255, 1)",
 			},
 
 			gap: {
