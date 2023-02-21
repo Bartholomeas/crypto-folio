@@ -23,7 +23,6 @@ function GenericLink({
 	theme = "default",
 }: GenericLinkInterface) {
 	const router = useRouter();
-	console.log(router.asPath === href);
 	return (
 		<Link href={href} passHref>
 			<a
