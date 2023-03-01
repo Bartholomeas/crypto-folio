@@ -5,11 +5,11 @@ import { MdLogout } from "react-icons/md";
 
 interface Props {
 	children: React.ReactNode | React.ReactNode[];
-	onClick?: (arg1?: React.MouseEvent<HTMLButtonElement> | EventTarget) => void;
+	onClick?: (arg1?: React.MouseEvent<HTMLButtonElement>) => void;
 	theme?: string;
 	size?: string;
 	icon?: string;
-	typeSubmit?: boolean;
+	type?: "button" | "submit";
 	conditionalCheck?: boolean;
 }
 
@@ -45,12 +45,12 @@ function Button({
 	theme = "default",
 	size = "default",
 	icon,
-	typeSubmit = false,
+	type = "button",
 	conditionalCheck = false,
 }: ButtonProps) {
 	return (
 		<button
-			type={typeSubmit ? "submit" : "button"}
+			type={type === "button" ? "button" : "submit"}
 			onClick={onClick}
 			className={classNames(
 				"flex",

@@ -1,7 +1,7 @@
 import React from "react";
-import coins from "../../assets/coins3d.png";
-import fire from "../../assets/fire3d.png";
-import safe from "../../assets/safe3d.png";
+// import coins from "../../assets/coins3d.png";
+// import fire from "../../assets/fire3d.png";
+// import safe from "../../assets/safe3d.png";
 import AboutOfferArticle from "../molecules/AboutOfferArticle";
 import Heading from "../atoms/Heading";
 
@@ -10,7 +10,7 @@ function AboutSection() {
 		<section className="flex flex-col items-center w-full min-h-[100vh] py-section px gap-xl bg-accent rounded">
 			<Heading headingWeight={2}>What do we offer?</Heading>
 
-			<div className="flex flex-col gap-xl">
+			{/* <div className="flex flex-col gap-xl">
 				<AboutOfferArticle
 					source={coins}
 					articleTitle="Controlling your assets"
@@ -39,7 +39,7 @@ function AboutSection() {
 					sint iusto aliquam itaque? Consequatur asperiores natus adipisci
 					libero suscipit.
 				</AboutOfferArticle>
-			</div>
+			</div> */}
 		</section>
 	);
 }

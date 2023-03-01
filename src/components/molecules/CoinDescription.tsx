@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 
 interface Props {
-	children: React.ReactNode | React.ReactNode[];
 	coinName: string;
 }
 
-function CoinDescription({ children, coinName }: Props) {
+type CoinDescriptionProps = React.PropsWithChildren<Props>;
+
+function CoinDescription({ children, coinName }: CoinDescriptionProps) {
 	useEffect(() => {
 		const description = document.querySelector(".description-content");
 		if (description) description.innerHTML = `${children}`;

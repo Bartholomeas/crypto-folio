@@ -50,7 +50,34 @@ function SpecifiedPage({
 						<p className="absolute font-bold text-xl text-accent">Loading...</p>
 					)}
 
-					<Table>
+					<Table
+						tableHeaders={[
+							{ name: "#", onClick: () => sortCoins, value: "market_cap_rank" },
+							{
+								name: "Name",
+								onClick: () => sortCoins,
+								value: "id",
+							},
+							{
+								name: "Current price",
+								onClick: () => sortCoins,
+								value: "current_price",
+							},
+							{
+								name: "Capitalization",
+								onClick: () => sortCoins,
+								value: "market_cap",
+							},
+						]}
+						cols={[
+							"w-[2%]",
+							"w-[3%]",
+							"w-[20%] lg:w-[30%]",
+							"w-[20%] lg:w-[20%]",
+							"w-[20%] lg:w-[20%]",
+							"w-[35%] lg:w-[25%]",
+						]}
+					>
 						<colgroup>
 							<col className="w-[2%] lg:w-[2%]" />
 							<col className="w-[3%] lg:w-[3%]" />

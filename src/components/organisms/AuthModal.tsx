@@ -108,7 +108,7 @@ function AuthModal() {
 							>
 								Password
 							</InputWithLabel>
-							<Button typeSubmit theme="accent">
+							<Button type="submit" theme="accent">
 								Log in
 							</Button>
 						</form>
@@ -154,7 +154,7 @@ function AuthModal() {
 							>
 								Repeat password
 							</InputWithLabel>
-							<Button typeSubmit theme="accent">
+							<Button type="submit" theme="accent">
 								Sign in
 							</Button>
 						</form>

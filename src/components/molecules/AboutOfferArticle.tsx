@@ -1,25 +1,35 @@
 import React from "react";
 import { StaticImageData } from "next/image";
+import classNames from "classnames";
 import CircleBgImage from "../atoms/CircleBgImage";
 import Heading from "../atoms/Heading";
 
 interface Props {
-	children: React.ReactNode;
 	articleTitle: string;
 	source: StaticImageData;
 	isReverse?: boolean;
 }
 
+type AboutOfferArticleProps = React.PropsWithChildren<Props>;
+
 function AboutOfferArticle({
+	children,
 	articleTitle,
 	source,
 	isReverse,
-	children,
-}: Props) {
+}: AboutOfferArticleProps) {
 	return (
 		<div
-			className={`flex flex-col-reverse items-center justify-between gap-lg w-full max-w-sm
-${isReverse ? "md:flex-row-reverse" : "md:flex-row"}`}
+			className={classNames(
+				"flex",
+				"flex-col-reverse",
+				"items-center",
+				"justify-between",
+				"gap-lg",
+				"w-full",
+				"max-w-sm",
+				isReverse ? "md:flex-row-reverse" : "md:flex-row",
+			)}
 		>
 			<div
 				className="flex flex-col gap text-center md:text-left
