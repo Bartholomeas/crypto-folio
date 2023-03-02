@@ -1,8 +1,8 @@
 import Image from "next/image";
-import donutBlue from "../assets/donutBlue.png";
+// import donutBlue from "../assets/donutBlue.png";
 // import cubeBlue from "../assets/cubeBlue.png";
-import sphereWhite from "../assets/sphereWhite.png";
-import cubeWhite from "../assets/cubeWhite.png";
+// import sphereWhite from "../assets/sphereWhite.png";
+// import cubeWhite from "../assets/cubeWhite.png";
 import Heading from "../components/atoms/Heading";
 import GenericLink from "../components/atoms/GenericLink";
 import AboutSection from "../components/organisms/AboutSection";
@@ -10,7 +10,7 @@ import AboutSection from "../components/organisms/AboutSection";
 function index() {
 	return (
 		<main className="flex flex-col items-center gap w-full h-full py-section mx-auto bg-white overflow-hidden">
-			{/* <header
+			<header
 				className="relative flex flex-col items-center gap max-h-[100vh] min-h-[90vh] max-w w-full px
 			md:min-h-[100vh]"
 			>
@@ -20,11 +20,7 @@ function index() {
 					md:top-[-5rem] md:w-[250px] md:h-[250px]
 				"
 					>
-						<Image
-							src={sphereWhite}
-							alt="White glossy sphere"
-							className="scale-x-[-1]"
-						/>
+						<Image src="" alt="White glossy sphere" className="scale-x-[-1]" />
 					</div>
 					<Image
 						src="/logo.svg"
@@ -49,7 +45,7 @@ function index() {
 					</GenericLink>
 
 					<div className="absolute w-[100px] h-[100px] top-0 left-[50%] translate-x-[15rem] animate-rotate">
-						<Image src={cubeWhite} alt="White glossy cube" />
+						<Image src="" alt="White glossy cube" />
 					</div>
 				</div>
 
@@ -57,16 +53,16 @@ function index() {
 					className="absolute w-[200px] h-[200px] right-[-4rem] bottom-[2rem]
 				md:right-[4rem]	md:top-[20%] animate-floatSlow"
 				>
-					<Image src={donutBlue} alt="Blue glossy donut" />
+					<Image src="" alt="Blue glossy donut" />
 				</div>
 
 				<div
 					className="absolute w-[50px] h-[50px] left-[4rem] bottom-[5rem]
 md:w-[150px] md:h-[150px] md:bottom-[10rem] animate-float"
 				>
-					<Image src={cubeBlue} alt="Blue glossy cube" />
+					<Image src="" alt="Blue glossy cube" />
 				</div>
-			</header> */}
+			</header>
 			<AboutSection />
 		</main>
 	);
