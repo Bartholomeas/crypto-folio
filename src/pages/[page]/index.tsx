@@ -2,29 +2,21 @@
 import { useEffect } from "react";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import axios from "axios";
-import FavouriteButton from "../../components/atoms/FavouriteButton";
 import MarginBox from "../../components/atoms/MarginBox";
-import TableBody from "../../components/molecules/TableBody";
-import TableData from "../../components/molecules/TableData";
-import TableHead from "../../components/molecules/TableHead";
-import TableHeader from "../../components/molecules/TableHeader";
-import TableRow from "../../components/molecules/TableRow";
 import Searchbar from "../../components/organisms/Searchbar";
 import Table from "../../components/organisms/Table";
 import Footer from "../../components/organisms/Footer";
 import Pagination from "../../components/organisms/Pagination";
 import useFilter from "../../hooks/useFilter";
 import TrendingCoinsBox from "../../components/organisms/TrendingCoinsBox";
-import { CoinItem, coinsActions } from "../../state/coinsSlice";
-import { addSpacesToNumber } from "../../utils/convertUtils";
 import { useAppDispatch, useAppSelector } from "../../state/reduxHooks";
 import Heading from "../../components/atoms/Heading";
+import { coinsActions } from "../../state/coinsSlice";
 
 function SpecifiedPage({
 	coins,
 	page,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-	const indexingByPage = page > 1 ? (page - 1) * 100 : 0;
 	const { sortCoins } = useFilter();
 	const dispatch = useAppDispatch();
 	const { coinsList } = useAppSelector((state) => state.coins);
@@ -51,24 +43,6 @@ function SpecifiedPage({
 					)}
 
 					<Table
-						tableHeaders={[
-							{ name: "#", onClick: () => sortCoins, value: "market_cap_rank" },
-							{
-								name: "Name",
-								onClick: () => sortCoins,
-								value: "id",
-							},
-							{
-								name: "Current price",
-								onClick: () => sortCoins,
-								value: "current_price",
-							},
-							{
-								name: "Capitalization",
-								onClick: () => sortCoins,
-								value: "market_cap",
-							},
-						]}
 						cols={[
 							"w-[2%]",
 							"w-[3%]",
@@ -77,68 +51,34 @@ function SpecifiedPage({
 							"w-[20%] lg:w-[20%]",
 							"w-[35%] lg:w-[25%]",
 						]}
-					>
-						<colgroup>
-							<col className="w-[2%] lg:w-[2%]" />
-							<col className="w-[3%] lg:w-[3%]" />
-							<col className="w-[20%] lg:w-[30%]" />
-							<col className="w-[20%] lg:w-[20%]" />
-							<col className="w-[20%] lg:w-[20%]" />
-							<col className="w-[35%] lg:w-[25%]" />
-						</colgroup>
-						<TableHead>
-							<TableRow>
-								<TableHeader />
-								<TableHeader onClick={sortCoins} value="market_cap_rank">
-									#
-								</TableHeader>
-								<TableHeader onClick={sortCoins} value="id" leftAlign>
-									Name
-								</TableHeader>
-								<TableHeader onClick={sortCoins} value="current_price">
-									Current price
-								</TableHeader>
-								<TableHeader
-									onClick={sortCoins}
-									value="price_change_percentage_24h"
-								>
-									24h change
-								</TableHeader>
-								<TableHeader onClick={sortCoins} value="market_cap">
-									Capitalization
-								</TableHeader>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{coinsList.map((coin: CoinItem, index: number) => (
-								<TableRow key={`${coin.name}-${coin.total_supply}`}>
-									<TableData>
-										<FavouriteButton funcArg={coin.name} />
-									</TableData>
-									<TableData href={coin.id} isBold>
-										{indexingByPage + index + 1}
-									</TableData>
-									<TableData
-										imgSrc={coin.image}
-										href={coin.id}
-										leftAlign
-										appendAfter={coin.symbol.toUpperCase()}
-									>
-										{coin.name}
-									</TableData>
-									<TableData href={coin.id} appendAfter="USD">
-										{coin.current_price}
-									</TableData>
-									<TableData href={coin.id} appendAfter="%">
-										{coin.price_change_percentage_24h}
-									</TableData>
-									<TableData href={coin.id} appendAfter="USD">
-										{addSpacesToNumber(coin.market_cap)}
-									</TableData>
-								</TableRow>
-							))}
-						</TableBody>
-					</Table>
+						tableHeaders={[
+							{ name: "" },
+							{ name: "#", onClick: () => sortCoins, value: "market_cap_rank" },
+							{
+								name: "Name",
+								onClick: () => sortCoins,
+								value: "id",
+								props: { leftAlign: true },
+							},
+							{
+								name: "Current price",
+								onClick: () => sortCoins,
+								value: "current_price",
+							},
+							{
+								name: "24h change",
+								onClick: () => sortCoins,
+								value: "price_change_percentage_24h",
+							},
+							{
+								name: "Capitalization",
+								onClick: () => sortCoins,
+								value: "market_cap",
+							},
+						]}
+						tableData={coinsList}
+						page={page}
+					/>
 				</div>
 			</div>
 			<Pagination currPage={page} />
