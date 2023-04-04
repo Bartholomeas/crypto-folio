@@ -5,12 +5,12 @@ import { useRouter } from "next/router";
 
 interface Props {
 	href: string;
-	theme?: string;
+	theme?: "default" | "cta" | "nav";
 }
 
 type GenericLinkInterface = React.PropsWithChildren<Props>;
 
-const themes: { [key: string]: string } = {
+const themes = {
 	default:
 		"dark:text-support relative text-center text-accentDark font-bold text-xs after:absolute after:content-[''] after:w-full after:h-[0.3rem] after:bottom-[-.3rem] after:rounded-full after:left-0 after:scale-x-0 after:transition-transform after:origin-left after:bg-accent hover:after:scale-x-100",
 	cta: "dark:text-support relative py-2 px-4 w-full max-w-[300px] text-accent font-semibold text-lg text-center rounded-md z-[100] transition-colors border-2 border-accent hover:bg-accent hover:text-white",
@@ -23,19 +23,18 @@ function GenericLink({
 	theme = "default",
 }: GenericLinkInterface) {
 	const router = useRouter();
+
+	const classes = classNames(
+		"flex",
+		themes[theme],
+		router.asPath === href &&
+			theme === "nav" &&
+			"dark:after:z-[-10] dark:after:bg-accent dark:hover:after:bg-accent after:bg-accentHover",
+	);
+
 	return (
 		<Link href={href} passHref>
-			<a
-				className={classNames(
-					"flex",
-					themes[theme],
-					router.asPath === href &&
-						theme === "nav" &&
-						"dark:after:z-[-10] dark:after:bg-accent dark:hover:after:bg-accent after:bg-accentHover",
-				)}
-			>
-				{children}
-			</a>
+			<a className={classes}>{children}</a>
 		</Link>
 	);
 }
