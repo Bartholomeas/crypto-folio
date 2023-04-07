@@ -4,6 +4,62 @@ module.exports = {
 		"./src/pages/**/*.{js,ts,jsx,tsx}",
 		"./src/components/**/*.{js,ts,jsx,tsx}",
 	],
+	daisyui: {
+		themes: [
+			// "light",
+			"night",
+			{
+				test: {
+					font: "#0C1069",
+					fontOff: "#0C1069",
+					fontLight: "#5E688A",
+
+					borderColor: "#D1D6E9",
+
+					accent: "#0B72FD",
+					accentDark: "#0B5DCB",
+					accentVeryDark: "#07469A",
+					accentHover: "rgba(17, 27, 255, 0.1)",
+
+					baseLight: "#EDF0FB",
+					baseVeryLight: "#F7F9FC",
+					white: "#FFFFFF",
+
+					support: "#58EDB7",
+					supportDark: "#24D9AE",
+
+					success: "#066C47",
+					error: "#FD6D6D",
+
+					dmBorderColor: "#343845",
+
+					dmFont: "#B5BEDF",
+					dmBase: "#0B0F20",
+					dmBaseContrast: "#1A2139",
+					dmBaseElement: "#1A2139",
+					dmAccentHover: "rgba(17, 27, 255, 1)",
+					primary: "#38BDF8",
+					font: "#818CF8",
+
+					secondary: "#818CF8",
+
+					accent: "#F471B5",
+
+					neutral: "#1E293B",
+
+					"base-100": "#0F072A",
+
+					info: "#0CA5E9",
+
+					success: "#2DD4BF",
+
+					warning: "#F4BF50",
+
+					error: "#FB7085",
+				},
+			},
+		],
+	},
 	darkMode: "class",
 	theme: {
 		maxWidth: {
@@ -130,5 +186,15 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [],
+	plugins: [require("daisyui")],
+	daisyui: {
+		styled: true,
+		base: true,
+		utils: true,
+		logs: true,
+		rtl: false,
+		themes: true,
+		prefix: "",
+		darkTheme: "night",
+	},
 };

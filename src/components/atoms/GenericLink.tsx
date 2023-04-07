@@ -33,7 +33,7 @@ function GenericLink({
 	);
 
 	return (
-		<Link href={href} passHref>
+		<Link href={href} passHref className="link">
 			<a className={classes}>{children}</a>
 		</Link>
 	);

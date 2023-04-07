@@ -1,32 +1,34 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
+
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged, User } from "firebase/auth";
-import axios from "axios";
-import TableData from "../components/molecules/TableData";
-import TableHeader from "../components/molecules/TableHeader";
-import TableRow from "../components/molecules/TableRow";
+import { auth, db } from "../../firebaseConfig";
+
+import { IPurchaseDetails } from "../types/user";
+
+import useLogin from "../hooks/useLogin";
+import useFilter from "../hooks/useFilter";
+import { useAppSelector } from "../state/reduxHooks";
+import useUiHandling from "../hooks/useUiHandling";
+
+import Heading from "../components/atoms/Heading";
+import MarginBox from "../components/atoms/MarginBox";
+import Button from "../components/atoms/Button";
+
 import TotalAssetsValue from "../components/organisms/TotalAssetsValue";
 import Table from "../components/organisms/Table";
-import TableHead from "../components/molecules/TableHead";
-import TableBody from "../components/molecules/TableBody";
-import MarginBox from "../components/atoms/MarginBox";
-import { useAppSelector } from "../state/reduxHooks";
-import useFilter from "../hooks/useFilter";
-import useUiHandling from "../hooks/useUiHandling";
-import Button from "../components/atoms/Button";
 import AddCoinModal from "../components/organisms/AddCoinModal";
-import { auth, db } from "../../firebaseConfig";
-import useLogin from "../hooks/useLogin";
-import { PurchaseDetails } from "../types/user";
-import Heading from "../components/atoms/Heading";
+import TableRow from "../components/molecules/TableRow";
+import TableData from "../components/molecules/TableData";
 
-interface UpdatedCoinPrice {
-	[key: string]: number;
-}
 interface SingleCoinShopping {
 	date: string;
 	amount: number;
 	price: number;
+}
+interface IUpdatedCoinPrice {
+	[key: string]: number;
 }
 
 function Dashboard() {
@@ -36,7 +38,7 @@ function Dashboard() {
 	const { loggedIn } = useLogin();
 	const [isLoading, setIsLoading] = useState(true);
 	const [userWalletCoins, setUserWalletCoins] = useState([]);
-	const [coinPrices, setCoinPrices] = useState<UpdatedCoinPrice>({});
+	const [coinPrices, setCoinPrices] = useState<IUpdatedCoinPrice>({});
 
 	async function handleWalletCoinsPrices(coins: string[]) {
 		try {
@@ -45,10 +47,10 @@ function Dashboard() {
 					"%2C",
 				)}&vs_currencies=usd`,
 			);
-			const updatedCoinPrices: UpdatedCoinPrice = Object.entries(
+			const updatedCoinPrices: IUpdatedCoinPrice = Object.entries(
 				result.data,
 			).reduce(
-				(acc: UpdatedCoinPrice, [key, value]: [string, any]) => ({
+				(acc: IUpdatedCoinPrice, [key, value]: [string, any]) => ({
 					...acc,
 					[key]: value.usd,
 				}),
@@ -73,7 +75,7 @@ function Dashboard() {
 	useEffect(() => {
 		if (!userData.uid) return undefined;
 		const unsubscribe = onAuthStateChanged(auth, handleUserWalletCoins);
-		const coinsArr = userWalletCoins?.map((coin: PurchaseDetails) =>
+		const coinsArr = userWalletCoins?.map((coin: IPurchaseDetails) =>
 			coin.name.toLowerCase(),
 		);
 		if (coinsArr) handleWalletCoinsPrices(coinsArr);
@@ -113,7 +115,64 @@ function Dashboard() {
 					</Button>
 				</div>
 				<div className="flex flex-col justify-center w-full overflow-x-scroll">
-					<Table>
+					<Table
+						tableHeaders={[
+							{
+								name: "",
+								onClick: () => sortCoins,
+							},
+							{
+								name: "Name",
+								value: "id",
+								onClick: () => sortCoins,
+							},
+							{
+								name: "Last purhcase",
+							},
+							{
+								name: "Amount",
+							},
+							{
+								name: "Value",
+							},
+						]}
+						// tableData={userWalletCoins}
+					>
+						{userWalletCoins ? (
+							userWalletCoins.map((coin: IPurchaseDetails, index) => (
+								<TableRow key={coin.symbol + coin.image}>
+									<TableData>{index + 1}</TableData>
+									<TableData
+										imgSrc={coin.image}
+										leftAlign
+										appendAfter={coin.symbol.toUpperCase()}
+									>
+										{coin.name}
+									</TableData>
+									<TableData>01.01.2023</TableData>
+									<TableData appendAfter={coin.symbol}>
+										{coin.shoppings.reduce(
+											(acc: number, object: any) => acc + object.amount,
+											0,
+										)}
+									</TableData>
+									<TableData appendAfter="USD">
+										{coin.shoppings.reduce(
+											(acc: number, object: SingleCoinShopping) =>
+												acc +
+												object.amount * coinPrices[coin.name.toLowerCase()],
+											0,
+										)}
+									</TableData>
+								</TableRow>
+							))
+						) : (
+							<TableRow>
+								<td>loading</td>
+							</TableRow>
+						)}
+					</Table>
+					{/* <Table>
 						<colgroup />
 						<TableHead>
 							<TableRow>
@@ -130,7 +189,7 @@ function Dashboard() {
 						</TableHead>
 						<TableBody>
 							{userWalletCoins ? (
-								userWalletCoins.map((coin: PurchaseDetails, index) => (
+								userWalletCoins.map((coin: IPurchaseDetails, index) => (
 									<TableRow key={coin.symbol + coin.image}>
 										<TableData>{index + 1}</TableData>
 										<TableData
@@ -164,6 +223,7 @@ function Dashboard() {
 							)}
 						</TableBody>
 					</Table>
+						*/}
 				</div>
 			</div>
 		</main>

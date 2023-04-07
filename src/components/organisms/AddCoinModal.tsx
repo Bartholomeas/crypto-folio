@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
+
 import useForm from "../../hooks/useForm";
 import useUserRequest from "../../hooks/useUserRequest";
+
 import { useAppDispatch, useAppSelector } from "../../state/reduxHooks";
 import { uiActions } from "../../state/uiSlice";
+
 import Button from "../atoms/Button";
 import ErrorText from "../atoms/ErrorText";
 import Label from "../atoms/Label";
 import Loader from "../atoms/Loader";
+
 import InputWithLabel from "../molecules/InputWithLabel";
+
 import Searchbar from "./Searchbar";
 
 function AddCoinModal() {

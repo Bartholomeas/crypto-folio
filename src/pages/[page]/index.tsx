@@ -11,7 +11,11 @@ import useFilter from "../../hooks/useFilter";
 import TrendingCoinsBox from "../../components/organisms/TrendingCoinsBox";
 import { useAppDispatch, useAppSelector } from "../../state/reduxHooks";
 import Heading from "../../components/atoms/Heading";
-import { coinsActions } from "../../state/coinsSlice";
+import { CoinItem, coinsActions } from "../../state/coinsSlice";
+import TableRow from "../../components/molecules/TableRow";
+import TableData from "../../components/molecules/TableData";
+import FavouriteButton from "../../components/atoms/FavouriteButton";
+import { addSpacesToNumber } from "../../utils/convertUtils";
 
 function SpecifiedPage({
 	coins,
@@ -20,6 +24,8 @@ function SpecifiedPage({
 	const { sortCoins } = useFilter();
 	const dispatch = useAppDispatch();
 	const { coinsList } = useAppSelector((state) => state.coins);
+
+	const indexingByPage = page && page > 1 ? (page - 1) * 100 : 0;
 
 	useEffect(() => {
 		dispatch(coinsActions.setCoinsList(coins));
@@ -56,29 +62,56 @@ function SpecifiedPage({
 							{ name: "#", onClick: () => sortCoins, value: "market_cap_rank" },
 							{
 								name: "Name",
-								onClick: () => sortCoins,
+								onClick: sortCoins,
 								value: "id",
 								props: { leftAlign: true },
 							},
 							{
 								name: "Current price",
-								onClick: () => sortCoins,
+								onClick: sortCoins,
 								value: "current_price",
 							},
 							{
 								name: "24h change",
-								onClick: () => sortCoins,
+								onClick: sortCoins,
 								value: "price_change_percentage_24h",
 							},
 							{
 								name: "Capitalization",
-								onClick: () => sortCoins,
+								onClick: sortCoins,
 								value: "market_cap",
 							},
 						]}
-						tableData={coinsList}
 						page={page}
-					/>
+					>
+						{coinsList.map((coin: CoinItem, index: number) => (
+							<TableRow key={`${coin.name}-${coin.total_supply}`}>
+								<TableData>
+									<FavouriteButton funcArg={coin.name} />
+								</TableData>
+								<TableData href={coin.id} isBold>
+									{indexingByPage + index + 1}
+								</TableData>
+								<TableData
+									imgSrc={coin.image}
+									href={coin.id}
+									leftAlign
+									appendAfter={coin.symbol.toUpperCase()}
+								>
+									{coin.name}
+								</TableData>
+								<TableData href={coin.id} appendAfter="USD">
+									{coin.current_price}
+								</TableData>
+								<TableData href={coin.id} appendAfter="%">
+									{coin.price_change_percentage_24h}
+								</TableData>
+								<TableData href={coin.id} appendAfter="USD">
+									{addSpacesToNumber(coin.market_cap)}
+								</TableData>
+							</TableRow>
+						))}
+					</Table>
 				</div>
 			</div>
 			<Pagination currPage={page} />

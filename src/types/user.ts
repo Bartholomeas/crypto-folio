@@ -1,4 +1,4 @@
-export interface PurchaseDetails {
+export interface IPurchaseDetails {
 	name: string;
 	symbol: string;
 	image: string;

@@ -5,18 +5,22 @@ import {
 	MdAccountBalanceWallet,
 	MdHistory,
 } from "react-icons/md";
-import BurgerButton from "../atoms/BurgerButton";
-import Logo from "../atoms/Logo";
-import NavList from "../molecules/NavList";
+
 import { useAppDispatch, useAppSelector } from "../../state/reduxHooks";
-import NavListItem from "../atoms/NavListItem";
-import ThemeSwitch from "../molecules/ThemeSwitch";
 import { uiActions } from "../../state/uiSlice";
-import Button from "../atoms/Button";
-import AuthModal from "./AuthModal";
 import useUiHandling from "../../hooks/useUiHandling";
 import useLogin from "../../hooks/useLogin";
+
 import GenericLink from "../atoms/GenericLink";
+import BurgerButton from "../atoms/BurgerButton";
+import Logo from "../atoms/Logo";
+import NavListItem from "../atoms/NavListItem";
+import Button from "../atoms/Button";
+
+import NavList from "../molecules/NavList";
+import ThemeSwitch from "../molecules/ThemeSwitch";
+
+import AuthModal from "./AuthModal";
 
 function Navbar() {
 	const { isNavOpen, lightMode } = useAppSelector((state) => state.ui);
@@ -42,7 +46,7 @@ function Navbar() {
 			</div>
 
 			<div
-				className={`dark:bg-dmBase  nav-menu fixed flex flex-col justify-around items-center w-full  top-[70px] left-0 bottom-0 right-0 bg-white  transition-transform overflow-hidden
+				className={`dark:bg-dmBase  nav-menu fixed flex flex-col justify-around items-center w-full  top-[70px] left-0 bottom-0 right-0 bg-white transition-transform overflow-hidden
 				 md:relative md:justify-between md:top-0 md:w-full md:my-auto md:h-full md:bg-transparent md:translate-x-0  ${
 						isNavOpen ? "translate-x-0" : "translate-x-[100%] "
 					}`}

@@ -7,11 +7,11 @@ import NotificationPopup from "../organisms/NotificationPopup";
 import useUiHandling from "../../hooks/useUiHandling";
 import { useAppSelector } from "../../state/reduxHooks";
 
-interface Props {
+interface AppLayoutProps {
 	children: React.ReactNode;
 }
 
-function AppLayout({ children }: Props) {
+function AppLayout({ children }: AppLayoutProps) {
 	const { notificationPopup, lightMode } = useAppSelector((state) => state.ui);
 	const { checkTheme } = useUiHandling();
 	const { pathname } = useRouter();
@@ -24,14 +24,14 @@ function AppLayout({ children }: Props) {
 		<div
 			className={`${
 				lightMode && "dark"
-			} max-w-maxWidth relative flex  items-center w-full  md:flex-row md:h-[100vh] `}
+			} max-w-maxWidth relative flex items-center w-full md:flex-row md:h-[100vh] bg-rose-400`}
 		>
 			<Navbar />
 			{children}
 
 			<style jsx global>{`
 				body {
-					background-color: ${lightMode  ? "#0B0F20" : "#FFFFF"};
+					background-color: ${lightMode ? "#0B0F20" : "#FFFFF"};
 				}
 			`}</style>
 
