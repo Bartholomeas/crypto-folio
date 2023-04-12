@@ -47,5 +47,3 @@ function InfoPanel() {
 }
 
 export default InfoPanel;
-// ${isInfoPanelOpen ? "translate-y-[10rem]" : "translate-y-[95%]"}
-// 				${	isInfoPanelOpen ? "md:translate-x-0" : "md:translate-x-[27rem]"}
