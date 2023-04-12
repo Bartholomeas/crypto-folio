@@ -39,7 +39,7 @@ function index() {
 						Oddy - a buddy that will improve your cryptocurrencies experience
 					</Heading>
 
-					<p className="leading text-font text-center">
+					<p className="leading text-base-content text-center">
 						Oddy is an application that allows you to control your
 						cryptocurrencies and quickly search for information about them.
 					</p>

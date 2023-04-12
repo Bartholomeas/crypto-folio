@@ -17,7 +17,7 @@ function TotalAssetsValue({
 }: Props) {
 	return (
 		<div
-			className="flex flex-col justify-between gap-4 min-w-[200px] min-h-[350px] w-full p rounded text-white bg-accent
+			className="flex flex-col justify-between gap-4 min-w-[200px] min-h-[350px] w-full p rounded text-base-content bg-neutral
 			"
 		>
 			<div className="flex justify-between gap-10">
@@ -26,12 +26,12 @@ function TotalAssetsValue({
 					md:flex-row
 				"
 				>
-					<div className="flex flex-col bg-warning items-start h-fit w-full">
+					<div className="flex flex-col items-start h-fit w-full">
 						<p>Balance</p>
 						<p className="text-lg font-bold">{totalValue}$</p>
 						<p className="text-xs"> ={valueInBtc} BTC</p>
 					</div>
-					<div className="flex flex-col items-end bg-accentDark w-fit h-fit p-xs rounded">
+					<div className="flex flex-col items-end bg-base-100 w-fit h-fit p-xs rounded">
 						<ChangeInValue isPercent>{changePercent}</ChangeInValue>
 						<ChangeInValue isPercent={false}>{changeValue}</ChangeInValue>
 					</div>

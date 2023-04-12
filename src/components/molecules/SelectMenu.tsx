@@ -13,7 +13,7 @@ function SelectMenu({ children, options }: Props) {
 
 			<select
 				defaultValue={options[0]}
-				className="text font-semibold text-font bg-transparent"
+				className="text font-semibold text-base-content bg-transparent"
 				name="languages"
 				id="languages"
 			>

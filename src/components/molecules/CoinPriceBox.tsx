@@ -1,7 +1,7 @@
 import DetailsBigPrice from "../atoms/DetailsBigPrice";
 import PriceChangeDetails from "../atoms/PriceChangeDetails";
 
-interface Props {
+interface CoinPriceBoxProps {
 	name: string;
 	curr_price: number;
 	high: number;
@@ -15,21 +15,16 @@ function CoinPriceBox({
 	high,
 	low,
 	price_change_24h,
-}: Props) {
+}: CoinPriceBoxProps) {
 	return (
 		<div className="flex flex-col">
-			<p
-				className="dark:text-dmFont
-			text-fontOff text"
-			>
-				{name} price
-			</p>
+			<p className="text-base-content text">{name} price</p>
 			<div className="flex items-center gap-sm">
 				<DetailsBigPrice>{curr_price}</DetailsBigPrice>
 				<p
 					className={`
-				text-font font-semibold py-[0.3rem] px-xs rounded text-xs
-				${price_change_24h > 0 ? "bg-support" : "bg-error"}`}
+				text-neutral font-semibold py-[0.3rem] px-xs rounded text-xs
+				${price_change_24h > 0 ? "bg-success" : "bg-error"}`}
 				>
 					{price_change_24h > 0 ? "+" : ""}
 					{price_change_24h} %

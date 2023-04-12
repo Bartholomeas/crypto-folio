@@ -4,12 +4,12 @@ interface Props {
 function CoinSymbol({ children }: Props) {
 	return (
 		<div
-			className="dark:bg-dmBaseElement
-		flex items-center justify-center w-fit h-[3rem] px py-[0.6rem] bg-baseLight rounded-xl "
+			className="dark:bg-base-100
+		flex items-center justify-center w-fit h-[3rem] px py-[0.6rem] bg-base-100 rounded-xl "
 		>
 			<h2
-				className="dark:text-dmFont
-			 font-xs text-fontLight font-bold"
+				className="
+			 font-xs text-base-content font-bold"
 			>
 				{children}
 			</h2>

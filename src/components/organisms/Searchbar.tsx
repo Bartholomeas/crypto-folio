@@ -47,32 +47,21 @@ function Searchbar({ placeholderText = "", fullWidth = false }: Props) {
 	}, [inputValue, getSearchedCoins]);
 
 	return (
-		<div
-			className={`relative flex flex-col w-full min-h-[3rem] md:${
-				fullWidth ? "" : "max-w-[300px]"
-			}  z-[1000]`}
-		>
+		<div className="form-control">
 			<Label forProp="searchbar">
-				<div
-					className="dark:bg-dmBaseElement dark:border-dmBase
-				 flex justify-between items-center w-full h-full border-2 border-baseLight rounded-xl"
-				>
+				<div className="input-group">
 					<input
 						autoComplete="off"
 						onChange={(e) => getInputValue(e)}
 						onBlur={(e) => clearCoinsData(e)}
 						id="searchbar"
 						placeholder={placeholderText}
-						className="dark:bg-inherit dark:text-dmFont
-        w-full px-sm py-sm rounded-xl text"
+						className="input input-bordered input-lg w-full text-base-content"
 						type="text"
 					/>
-					<span
-						className="dark:bg-base
-					flex items-center justify-center h-full max-h-[4rem] p-xs rounded-r text-lg text-fontLight"
-					>
+					<button type="button" className="btn btn-lg btn-square">
 						<MdSearch />
-					</span>
+					</button>
 				</div>
 			</Label>
 			<SearchbarItems coinsData={searchedCoins} />

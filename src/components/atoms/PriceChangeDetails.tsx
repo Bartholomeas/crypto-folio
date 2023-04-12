@@ -6,13 +6,13 @@ interface Props {
 function PriceChangeDetails({ children, isHigh = false }: Props) {
 	return (
 		<p
-			className="dark:text-dmFont
-		text-xs text-fontOff"
+			className="
+		text-xs text-base-content"
 		>
 			{isHigh ? "High" : "Low"} 24h:{" "}
 			<span
-				className=" dark:text-baseLight
-			text-xs font-semibold text-fontOff"
+				className="
+			text-xs font-semibold text-base-content"
 			>
 				${children}
 			</span>

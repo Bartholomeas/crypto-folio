@@ -29,13 +29,12 @@ function InputWithLabel({
 	);
 
 	return (
-		<div className="relative flex flex-col gap-[.3rem] py-xs w-full">
+		<div className="form-control w-full">
 			<Label forProp={forProp}>{children}</Label>
 			<input
 				onChange={onChange || (() => {})}
 				onBlur={onBlur || (() => {})}
-				className={`dark:bg-dmBaseElement dark:border-dmBase dark:text-dmFont
-        px-xs py-sm rounded-xl border-2 border-baseLight text ${
+				className={`input input-bordered input-lg ${
 					isError && "border-error border-2"
 				}`}
 				min="0"

@@ -14,15 +14,12 @@ function TrendingCoinsBox() {
 	}, []);
 	return (
 		<div
-			className="dark:bg-dmBaseContrast
-    relative flex flex-col justify-center gap-sm p-md bg-baseVeryLight rounded
-    "
+			className="
+    relative flex flex-col justify-center gap-sm p-md bg-base-300 rounded"
 		>
 			<FireIcon />
 
-			<h2 className="dark:text-support font-bold text-md text-fontOff">
-				Trending coins
-			</h2>
+			<h2 className="text-accent font-bold text-md">Trending coins</h2>
 
 			<div className="flex flex-col justify-center  gap-sm flex-wrap ">
 				{trendingCoins.map(

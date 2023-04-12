@@ -33,9 +33,9 @@ function TableData({
 
 	return (
 		<td
-			className={` dark:text-dmFont
+			className={`
 			${leftAlign ? "text-left" : "text-right"}
-			px-xs text text-font h-[6rem]
+			px-xs text text-base-content h-[6rem]
 			first:pl-xs last:pr-xs
 			${isBold && "font-semibold"}
 			md:table-cell [&:nth-child(1)]:text-center

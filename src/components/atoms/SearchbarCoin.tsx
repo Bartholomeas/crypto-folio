@@ -21,18 +21,16 @@ function SearchbarCoin({
 		<button
 			onClick={onClick}
 			type="button"
-			className="dark:bg-dmBase dark:border-2 dark:border-dmBorderColor dark:hover:bg-dmBaseElement
+			className="dark:bg-base-100 dark:border-2 dark:border-dmBorderColor dark:hover:bg-base-100
 					flex items-center justify-between bg-white w-full px-sm py-[0.3rem] h-full rounded min-h-[5rem]
-                hover:bg-baseLight"
+                hover:bg-base-100"
 		>
 			<div className="flex items-center gap-sm">
 				<Image src={coinLogo} width={20} height={20} alt="Logo of coin" />
-				<p className="dark:text-dmFont text-font ">{children}</p>
-				<p className="dark:text-dmFont text-fontLight font-bold">
-					{coinSymbol}
-				</p>
+				<p className=" text-base-content ">{children}</p>
+				<p className=" text-base-content font-bold">{coinSymbol}</p>
 			</div>
-			<p className="dark:text-supportDark font-bold text-fontLight">
+			<p className="dark:text-supportDark font-bold text-base-content">
 				#{coinRank}
 			</p>
 		</button>
@@ -40,18 +38,16 @@ function SearchbarCoin({
 		<Link passHref href={href}>
 			<a className="">
 				<div
-					className="dark:bg-dmBase dark:border-2 dark:border-dmBorderColor dark:hover:bg-dmBaseElement
+					className="dark:bg-base-100 dark:border-2 dark:border-dmBorderColor dark:hover:bg-base-100
 					flex items-center justify-between bg-white w-full px-sm py-[0.3rem] h-full rounded min-h-[5rem]
-                hover:bg-baseLight"
+                hover:bg-base-100"
 				>
 					<div className="flex items-center gap-sm">
 						<Image src={coinLogo} width={20} height={20} alt="Logo of coin" />
-						<p className="dark:text-dmFont text-font ">{children}</p>
-						<p className="dark:text-dmFont text-fontLight font-bold">
-							{coinSymbol}
-						</p>
+						<p className=" text-base-content ">{children}</p>
+						<p className=" text-base-content font-bold">{coinSymbol}</p>
 					</div>
-					<p className="dark:text-supportDark font-bold text-fontLight">
+					<p className="dark:text-supportDark font-bold text-base-content">
 						#{coinRank}
 					</p>
 				</div>

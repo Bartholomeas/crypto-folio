@@ -41,7 +41,7 @@ function AddCoinModal() {
 			} w-full h-full top-0 left-0 right-0 bottom-0 bg-zinc-800/50 backdrop-blur-sm z-[1000]`}
 		>
 			<div
-				className="dark:bg-dmBase
+				className="dark:bg-base-100
 			 fixed flex flex-col h-full w-full top-[50%] left-[50%] py-lg px-lg text translate-x-[-50%] translate-y-[-50%] bg-white rounded-xl md:min-w-[500px] min-h-[500px] md:max-w-[500px] md:h-auto md:w-auto"
 			>
 				<button
@@ -49,7 +49,7 @@ function AddCoinModal() {
 					onClick={() => dispatch(uiActions.toggleCoinModal())}
 					className="absolute top-0 right-0 text-md cursor-pointer pt-lg pl-sm pr-lg"
 				>
-					<MdOutlineCancel className=" text-fontLight " />
+					<MdOutlineCancel className=" text-base-content " />
 				</button>
 				<div className="flex items-start justify-center w-full pb-lg">
 					<h2 className="text-accent text-md font-bold">
@@ -57,7 +57,7 @@ function AddCoinModal() {
 					</h2>
 				</div>
 				<div className="flex flex-col items-center justify-center gap pt-lg">
-					<form className="w-full">
+					<form className="w-full form-control">
 						<Label>Search for coin</Label>
 						<div className="flex flex-col gap-6">
 							<Searchbar fullWidth />

@@ -22,9 +22,8 @@ function AppLayout({ children }: AppLayoutProps) {
 
 	return pathname !== "/" ? (
 		<div
-			className={`${
-				lightMode && "dark"
-			} max-w-maxWidth relative flex items-center w-full md:flex-row md:h-[100vh] bg-rose-400`}
+			data-theme={lightMode ? "winter" : "night"}
+			className="text max-w-maxWidth  relative flex items-center w-full md:flex-row md:h-[100vh]"
 		>
 			<Navbar />
 			{children}
@@ -41,7 +40,7 @@ function AppLayout({ children }: AppLayoutProps) {
 			<InfoPanel />
 		</div>
 	) : (
-		<div>{children}</div>
+		<div data-theme={lightMode ? "winter" : "night"}>{children}</div>
 	);
 }
 

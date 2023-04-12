@@ -1,11 +1,6 @@
 import Heading from "../components/atoms/Heading";
 import MarginBox from "../components/atoms/MarginBox";
-import TableBody from "../components/molecules/TableBody";
-import TableData from "../components/molecules/TableData";
-import TableHead from "../components/molecules/TableHead";
-import TableHeader from "../components/molecules/TableHeader";
-import TableRow from "../components/molecules/TableRow";
-import Table from "../components/organisms/Table";
+
 import useFilter from "../hooks/useFilter";
 
 function Wallet() {
@@ -13,7 +8,7 @@ function Wallet() {
 
 	return (
 		<main
-			className="dark:bg-dmBase flex flex-col items-start gap-sm w-full md:max-w px pb-[10rem] min-h-[100vh] bg-white overflow-y-auto
+			className="dark:bg-base-100 flex flex-col items-start gap-sm w-full md:max-w px pb-[10rem] min-h-[100vh] bg-white overflow-y-auto
 		md:h-[100vh] md:py-lg md:mr-[5rem]"
 		>
 			<MarginBox />
@@ -22,7 +17,7 @@ function Wallet() {
 					Your coin balance
 				</Heading>
 				<div className=" flex flex-col justify-center w-full overflow-x-scroll">
-					<Table>
+					{/* <Table>
 						<colgroup>
 							<col className="w-[3%]" />
 							<col className="w-[20%]" />
@@ -74,7 +69,7 @@ function Wallet() {
 								<TableData appendAfter="USD">15600</TableData>
 							</TableRow>
 						</TableBody>
-					</Table>
+					</Table> */}
 				</div>
 			</div>
 		</main>

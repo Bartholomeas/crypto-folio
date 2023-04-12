@@ -8,7 +8,7 @@ interface Props {
 function BurgerButton({ onClick }: Props) {
 	const { isNavOpen } = useAppSelector((state) => state.ui);
 	const burgerBar =
-		"dark:bg-baseLight w-full h-[3px] bg-accentDark rounded origin-[30%] transition-transform";
+		"dark:bg-base-100 w-full h-[3px] bg-primary-focus rounded origin-[30%] transition-transform";
 	return (
 		<button
 			type="button"

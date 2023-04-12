@@ -3,7 +3,7 @@ interface Props {
 }
 
 function CoinStatsLiKey({ children }: Props) {
-	return <p className="dark:text-dmFont text-fontLight text">{children}</p>;
+	return <p className=" text-base-content text">{children}</p>;
 }
 
 export default CoinStatsLiKey;

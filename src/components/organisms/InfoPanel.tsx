@@ -10,7 +10,7 @@ function InfoPanel() {
 	return (
 		<div
 			className={classNames(
-				"dark:bg-dmBase",
+				"dark:bg-base-100",
 				"dark:md:border-l-2",
 				"dark:border-dmBorderColor",
 				"dark:border-t-2",
@@ -20,7 +20,7 @@ function InfoPanel() {
 				"left-0",
 				"h-full",
 				"w-full",
-				"bg-baseLight",
+				"bg-base-100",
 				"z-500",
 				"drop-shadow-sm",
 				"transition-transform",

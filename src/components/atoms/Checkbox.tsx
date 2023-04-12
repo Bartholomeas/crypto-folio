@@ -5,7 +5,7 @@ interface Props {
 function Checkbox({ children, forProp }: Props) {
 	return (
 		<div className="flex flex-row-reverse gap-sm">
-			<label className="text-xs text-fontLight" htmlFor={forProp}>
+			<label className="text-xs text-base-content" htmlFor={forProp}>
 				{children}
 			</label>
 			<input

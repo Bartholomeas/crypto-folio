@@ -43,6 +43,7 @@
 				"tsx": "never"
 			}
 		],
+		"@typescript-eslint/no-use-before-define": "off",
 		"react/require-default-props": "off",
 		"@typescript-eslint/naming-convention": "off",
 		"react/react-in-jsx-scope": "off",

@@ -13,22 +13,22 @@ function CoinMarketData({
 	return (
 		<div className="flex flex-col text-center">
 			<p
-				className=" dark:text-dmFont
-			text text-fontLight "
+				className="
+			text text-base-content "
 			>
 				{children}
 			</p>
 			{secondDataValue ? (
 				<p
-					className=" dark:text-baseLight
-				text text-font font-semibold"
+					className="
+				text text-base-content font-semibold"
 				>
 					{dataValue} <br />/ {secondDataValue}
 				</p>
 			) : (
 				<p
-					className=" dark:text-baseLight
-				text text-font  font-semibold"
+					className="
+				text text-base-content  font-semibold"
 				>
 					{dataValue}
 				</p>

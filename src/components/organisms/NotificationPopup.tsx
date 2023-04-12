@@ -10,7 +10,7 @@ function NotificationPopup({ children }: Props) {
 
 	return (
 		<div
-			className={`dark:bg-dmBase dark:shadow-accentDark dark:border-2
+			className={`dark:bg-base-100 dark:shadow-primary-focus dark:border-2
 			 flex fixed left-0 right-0 bottom-0 w-full h-auto min-h-[100px] max-h-[300px] p-md bg-white rounded-xl z-[10000] transition-transform ease-in drop-shadow-xl
 			 ${
 					notificationPopup.isNotificationPopupSuccess
@@ -34,17 +34,15 @@ function NotificationPopup({ children }: Props) {
 			/>
 
 			{notificationPopup.isNotificationPopupSuccess ? (
-				<MdCheckCircle className="dark:bg-dmBase  absolute text-[6rem] top-0 right-0 translate-x-[-50%] translate-y-[-40%] bg-white rounded-full text-supportDark " />
+				<MdCheckCircle className="dark:bg-base-100  absolute text-[6rem] top-0 right-0 translate-x-[-50%] translate-y-[-40%] bg-white rounded-full text-supportDark " />
 			) : (
-				<MdOutlineError className="dark:bg-dmBase absolute text-[6rem] top-0 right-0 translate-x-[-50%] translate-y-[-40%] bg-white rounded-full text-error " />
+				<MdOutlineError className="dark:bg-base-100 absolute text-[6rem] top-0 right-0 translate-x-[-50%] translate-y-[-40%] bg-white rounded-full text-error " />
 			)}
 			<div className="flex flex-col py-sm">
-				<p className="dark:text-baseLight text-font font-bold text-md ">
+				<p className=" text-base-content font-bold text-md ">
 					{notificationPopup.isNotificationPopupSuccess ? "Success!" : "Error"}
 				</p>
-				<p className="dark:text-baseLight text text-fontLight z-[100]">
-					{children}
-				</p>
+				<p className=" text text-base-content z-[100]">{children}</p>
 			</div>
 		</div>
 	);
