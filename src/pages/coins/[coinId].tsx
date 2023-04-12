@@ -1,13 +1,16 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { GetServerSidePropsContext } from "next";
-import axios from "axios";
+
 import CoinHeadBox from "../../components/molecules/CoinHeadBox";
 import LinkItem from "../../components/molecules/LinkItem";
 import CoinPriceBox from "../../components/molecules/CoinPriceBox";
 import CoinMarketData from "../../components/molecules/CoinMarketData";
+import CoinDescription from "../../components/molecules/CoinDescription";
+
 import SparklineChart from "../../components/organisms/SparklineChart";
 import CoinStatsBox from "../../components/organisms/CoinStatsBox";
-import CoinDescription from "../../components/molecules/CoinDescription";
+
 import { addSpacesToNumber } from "../../utils/convertUtils";
 
 interface InitialStateProps {
@@ -77,8 +80,8 @@ function CoinDetails({ coinDetails, chartDetails }: any) {
 						rank={market_cap_rank}
 					/>
 					<div className="flex flex-col gap-sm">
-						<p className=" text-base-content text font-semibold">links</p>
-						<div className="links flex items-center gap-sm flex-wrap w-fit">
+						<p className="text-base-content text font-semibold">links</p>
+						<div className="flex gap-sm flex-wrap">
 							{coinDetails &&
 								Object.entries(links).map(([key, value], index) => (
 									<LinkItem

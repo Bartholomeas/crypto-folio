@@ -44,8 +44,7 @@ function CoinStatsBox({
 }: Props) {
 	return (
 		<div
-			className="dark:bg-base-100
-			flex flex-col min-w-[300px] w-full gap min-h-[300px] h-fit px py bg-base-200 rounded
+			className="flex flex-col min-w-[300px] w-full gap min-h-[300px] h-fit px py bg-base-300 rounded
         lg:max-w-[350px]
         "
 		>
