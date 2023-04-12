@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PurchaseDetails } from "../types/user";
+import { IPurchaseDetails } from "../types/user";
 
 interface StateInterface {
 	userData: {
@@ -8,7 +8,7 @@ interface StateInterface {
 		uid: string;
 		image: string;
 		favouriteCoins: string[];
-		walletCoins: PurchaseDetails[];
+		walletCoins: IPurchaseDetails[];
 	};
 }
 
@@ -39,6 +39,9 @@ const userSlice = createSlice({
 		},
 
 		addToFavourites(state, action) {
+			if (!Array.isArray(state.userData.favouriteCoins)) {
+				state.userData.favouriteCoins = [];
+			}
 			state.userData.favouriteCoins = [
 				...state.userData.favouriteCoins,
 				action.payload,

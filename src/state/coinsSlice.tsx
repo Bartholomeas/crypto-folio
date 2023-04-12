@@ -1,9 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface Props {
-	state: StateInterface;
-	action: PayloadAction;
-}
+
 
 export interface CoinItem {
 	[key: string]: string | number;

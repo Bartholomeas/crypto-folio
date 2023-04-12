@@ -5,11 +5,11 @@ import { MdLogout } from "react-icons/md";
 
 interface Props {
 	children: React.ReactNode | React.ReactNode[];
-	onClick?: (arg1?: React.MouseEvent<HTMLButtonElement> | EventTarget) => void;
+	onClick?: (arg1?: React.MouseEvent<HTMLButtonElement>) => void;
 	theme?: string;
 	size?: string;
 	icon?: string;
-	typeSubmit?: boolean;
+	type?: "button" | "submit";
 	conditionalCheck?: boolean;
 }
 
@@ -22,7 +22,7 @@ const themes: ObjectProps<string> = {
 		"dark:bg-dmBaseElement dark:hover:bg-accentDark dark:text-baseLight bg-baseLight text-font hover:bg-baseVeryLight",
 	modal:
 		"dark:bg-transparent dark:text-baseLight dark:hover:bg-transparent relative w-fit min-w-[5rem] px-md pt-0 pb-xs bg-transparent text-md hover:bg-transparent after:origin-left after:content-[''] after:absolute after:h-[.3rem] after:w-[3rem] after:bottom-0 after:left-[50%] after:translate-x-[-50%] after:bg-accent after:rounded  after:transition-transform hover:after:scale-x-100 after:scale-x-0",
-	accent: "bg-accent text-white  hover:bg-accentDark ",
+	accent: "bg-accent text-white hover:bg-accentDark ",
 	error:
 		"dark:text-error dark:bg-dmBaseElement dark:hover:bg-accentDark bg-baseLight text py-xs text-error",
 };
@@ -45,12 +45,12 @@ function Button({
 	theme = "default",
 	size = "default",
 	icon,
-	typeSubmit = false,
+	type = "button",
 	conditionalCheck = false,
 }: ButtonProps) {
 	return (
 		<button
-			type={typeSubmit ? "submit" : "button"}
+			type={type === "button" ? "button" : "submit"}
 			onClick={onClick}
 			className={classNames(
 				"flex",

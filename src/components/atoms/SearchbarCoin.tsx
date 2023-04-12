@@ -7,7 +7,7 @@ interface Props {
 	coinSymbol: string;
 	coinLogo: string;
 	coinRank: number;
-	onClick?: () => any;
+	onClick?: () => void;
 }
 function SearchbarCoin({
 	children,

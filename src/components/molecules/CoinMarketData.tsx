@@ -1,9 +1,15 @@
 interface Props {
-	children: React.ReactNode | React.ReactNode[];
 	dataValue: React.ReactNode;
 	secondDataValue?: React.ReactNode;
 }
-function CoinMarketData({ children, dataValue, secondDataValue }: Props) {
+
+type CoinMarketDataProps = React.PropsWithChildren<Props>;
+
+function CoinMarketData({
+	children,
+	dataValue,
+	secondDataValue,
+}: CoinMarketDataProps) {
 	return (
 		<div className="flex flex-col text-center">
 			<p

@@ -1,11 +1,11 @@
 import Image from "next/image";
-import donutBlue from "../assets/donutBlue.png";
-import cubeBlue from "../assets/cubeBlue.png";
-import sphereWhite from "../assets/sphereWhite.png";
-import cubeWhite from "../assets/cubeWhite.png";
-import CtaLink from "../components/atoms/CtaLink";
-import AboutSection from "../components/organisms/AboutSection";
+import donutBlue from "../assets/blue-glossy-donut.png";
+import cubeBlue from "../assets/blue-glossy-cube.png";
+import sphereWhite from "../assets/white-glossy-sphere.png";
+import cubeWhite from "../assets/white-glossy-cube.png";
 import Heading from "../components/atoms/Heading";
+import GenericLink from "../components/atoms/GenericLink";
+import AboutSection from "../components/organisms/AboutSection";
 
 function index() {
 	return (
@@ -22,6 +22,8 @@ function index() {
 					>
 						<Image
 							src={sphereWhite}
+							width={50}
+							height={50}
 							alt="White glossy sphere"
 							className="scale-x-[-1]"
 						/>
@@ -44,7 +46,9 @@ function index() {
 				</div>
 
 				<div className="relative flex flex-col items-center gap-sm w-full z-10">
-					<CtaLink href="/1">Enter app</CtaLink>
+					<GenericLink theme="cta" href="/1">
+						Enter app
+					</GenericLink>
 
 					<div className="absolute w-[100px] h-[100px] top-0 left-[50%] translate-x-[15rem] animate-rotate">
 						<Image src={cubeWhite} alt="White glossy cube" />

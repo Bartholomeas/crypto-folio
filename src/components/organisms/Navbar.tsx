@@ -5,22 +5,24 @@ import {
 	MdAccountBalanceWallet,
 	MdHistory,
 } from "react-icons/md";
-import { useRouter } from "next/router";
-import BurgerButton from "../atoms/BurgerButton";
-import Logo from "../atoms/Logo";
-import NavList from "../molecules/NavList";
+
 import { useAppDispatch, useAppSelector } from "../../state/reduxHooks";
-import NavLinkItem from "../atoms/NavLink";
-import NavListItem from "../atoms/NavListItem";
-import ThemeSwitch from "../molecules/ThemeSwitch";
 import { uiActions } from "../../state/uiSlice";
-import Button from "../atoms/Button";
-import AuthModal from "./AuthModal";
 import useUiHandling from "../../hooks/useUiHandling";
 import useLogin from "../../hooks/useLogin";
 
+import GenericLink from "../atoms/GenericLink";
+import BurgerButton from "../atoms/BurgerButton";
+import Logo from "../atoms/Logo";
+import NavListItem from "../atoms/NavListItem";
+import Button from "../atoms/Button";
+
+import NavList from "../molecules/NavList";
+import ThemeSwitch from "../molecules/ThemeSwitch";
+
+import AuthModal from "./AuthModal";
+
 function Navbar() {
-	const router = useRouter();
 	const { isNavOpen, lightMode } = useAppSelector((state) => state.ui);
 	const { userData } = useAppSelector((state) => state.user);
 	const dispatch = useAppDispatch();
@@ -44,40 +46,40 @@ function Navbar() {
 			</div>
 
 			<div
-				className={`dark:bg-dmBase  nav-menu fixed flex flex-col justify-around items-center w-full  top-[70px] left-0 bottom-0 right-0 bg-white  transition-transform overflow-hidden
+				className={`dark:bg-dmBase  nav-menu fixed flex flex-col justify-around items-center w-full  top-[70px] left-0 bottom-0 right-0 bg-white transition-transform overflow-hidden
 				 md:relative md:justify-between md:top-0 md:w-full md:my-auto md:h-full md:bg-transparent md:translate-x-0  ${
 						isNavOpen ? "translate-x-0" : "translate-x-[100%] "
 					}`}
 			>
 				<NavList>
 					<NavListItem>
-						<NavLinkItem route="/1" routerPath={router.pathname}>
+						<GenericLink theme="nav" href="/1">
 							<MdSearch className=" icon" />
 							Explore
-						</NavLinkItem>
+						</GenericLink>
 					</NavListItem>
 					<NavListItem>
-						<NavLinkItem route="/dashboard" routerPath={router.pathname}>
+						<GenericLink theme="nav" href="/dashboard">
 							<MdDashboard className="icon" />
 							Dashboard
-						</NavLinkItem>
+						</GenericLink>
 					</NavListItem>
 					<NavListItem>
-						<NavLinkItem route="/wallet" routerPath={router.pathname}>
+						<GenericLink theme="nav" href="/wallet">
 							<MdAccountBalanceWallet className="icon" />
 							Wallet
-						</NavLinkItem>
+						</GenericLink>
 					</NavListItem>
 					<NavListItem>
-						<NavLinkItem route="/history" routerPath={router.pathname}>
+						<GenericLink theme="nav" href="/history">
 							<MdHistory className="icon" />
 							History
-						</NavLinkItem>
+						</GenericLink>
 					</NavListItem>
 					<NavListItem>
-						<NavLinkItem route="/settings" routerPath={router.pathname}>
+						<GenericLink theme="nav" href="/settings">
 							<MdSettings className="icon" /> Settings
-						</NavLinkItem>
+						</GenericLink>
 					</NavListItem>
 				</NavList>
 				<div className="flex flex-col justify-center items-center gap-sm w-full px-md md:items-start">

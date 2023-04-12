@@ -4,7 +4,7 @@ import { FirebaseContext } from "../providers/AppProvider";
 import { useAppDispatch, useAppSelector } from "../state/reduxHooks";
 import { uiActions } from "../state/uiSlice";
 import { userActions } from "../state/userSlice";
-import { PurchaseDetails } from "../types/user";
+import { IPurchaseDetails } from "../types/user";
 import useUiHandling from "./useUiHandling";
 
 interface WalletCoinProp {
@@ -28,7 +28,7 @@ const useUserRequest = () => {
 		}
 		if (coinName.trim() === "") return;
 		const userRef = doc(db, "users", userData.uid);
-		useAppDispatch(userActions.addToFavourites(coinName));
+		dispatch(userActions.addToFavourites(coinName));
 		try {
 			await updateDoc(userRef, {
 				favouriteCoins: arrayUnion(coinName),
@@ -59,7 +59,7 @@ const useUserRequest = () => {
 
 			const coinIndex = walletCoins
 				? walletCoins.findIndex(
-						(item: PurchaseDetails) =>
+						(item: IPurchaseDetails) =>
 							item.name === purchaseDetails.name &&
 							item.symbol === purchaseDetails.symbol,
 						// eslint-disable-next-line no-mixed-spaces-and-tabs
