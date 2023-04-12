@@ -17,16 +17,16 @@ function LinkItem({ allLinks, linkKey }: Props) {
 				<button
 					type="button"
 					onClick={toggleLinkList}
-					className="dark:bg-dmBaseElement dark:text-dmFont dark:hover:bg-accentDark
-					 flex items-center justify-between min-w-[3rem] w-full h-[3rem] px py-[0.6rem] bg-baseLight text-xs font-semibold text-fontLight rounded-xl cursor-pointer hover:bg-baseVeryLight transition-colors"
+					className="dark:bg-base-100
+					 flex items-center justify-between min-w-[3rem] w-full h-[3rem] px py-[0.6rem] bg-base-100 text-xs font-semibold text-base-content rounded-xl cursor-pointer transition-colors"
 				>
 					{linkKey}
-					<span className="font-bold text-fontLight text ">v</span>
+					<span className="font-bold text-base-content text ">v</span>
 				</button>
 				<ul
 					className={`${
 						isOpen ? "scale-1 translate-x-0" : "scale-0 translate-x-1/2"
-					} dark:bg-dmBaseElement absolute t-[3rem] origin-top transition-transform z-[1000] bg-baseVeryLight rounded-xl  flex flex-col gap-[0.3rem]`}
+					} dark:bg-base-100 absolute t-[3rem] origin-top transition-transform z-[1000] bg-base-200 rounded-xl  flex flex-col gap-[0.3rem]`}
 				>
 					{allLinks.map((link) => {
 						if (link === "" || link === null) return null;
@@ -39,8 +39,8 @@ function LinkItem({ allLinks, linkKey }: Props) {
 									onClick={(e) => toggleLinkList(e, true)}
 									href={link}
 									target="blank"
-									className="dark:bg-dmBaseElement dark:hover:bg-accentDark dark:text-dmFont
-									flex items-center justify-center min-w-[3rem] w-fit h-[3rem] px py-[0.6rem] bg-baseVeryLight text-xs font-semibold text-fontLight rounded-xl cursor-pointer hover:bg-baseVeryLight transition-colors"
+									className="link
+									flex items-center justify-center min-w-[3rem] w-fit h-[3rem] px py-[0.6rem] bg-base-200 text-xs font-semibold text-base-content rounded-xl cursor-pointer transition-colors"
 								>
 									{linkKey}
 								</a>
@@ -55,8 +55,7 @@ function LinkItem({ allLinks, linkKey }: Props) {
 		<a
 			href={allLinks}
 			target="blank"
-			className="dark:bg-dmBaseElement dark:hover:bg-accentDark dark:text-dmFont
-				flex items-center justify-center w-fit h-[3rem] px py-[0.6rem] bg-baseLight text-xs font-semibold text-fontLight rounded-xl cursor-pointer hover:bg-baseVeryLight transition-colors"
+			className="link	flex items-center justify-center w-fit h-[3rem] px py-[0.6rem] bg-base-100 text-xs font-semibold text-base-content rounded-xl cursor-pointer hover:bg-base-200 transition-colors"
 		>
 			{linkKey}
 		</a>

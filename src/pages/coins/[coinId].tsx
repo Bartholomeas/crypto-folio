@@ -59,7 +59,7 @@ function CoinDetails({ coinDetails, chartDetails }: any) {
 
 	return (
 		<main
-			className="dark:bg-dmBase flex flex-col items-start  w-full px min-h-[100vh] max-w overflow-y-scroll
+			className="flex flex-col items-start w-full px min-h-[100vh] max-w overflow-y-scroll
 		md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] py-[10rem] pb-[20rem] md:pb-auto "
 		>
 			<div
@@ -77,9 +77,7 @@ function CoinDetails({ coinDetails, chartDetails }: any) {
 						rank={market_cap_rank}
 					/>
 					<div className="flex flex-col gap-sm">
-						<p className="dark:text-dmFont text-fontLight text font-semibold">
-							links
-						</p>
+						<p className=" text-base-content text font-semibold">links</p>
 						<div className="links flex items-center gap-sm flex-wrap w-fit">
 							{coinDetails &&
 								Object.entries(links).map(([key, value], index) => (
@@ -95,11 +93,8 @@ function CoinDetails({ coinDetails, chartDetails }: any) {
 				</div>
 
 				<div
-					className="dark:border-dmFont
-					flex flex-col gap-lg w-full h-fit
-				md:w-[65%] px md:h-full
-				border-baseLight md:border-l-2
-				"
+					className="flex flex-col gap-lg w-full h-fit px border-base-100
+				md:w-[65%] md:h-full md:border-l-2"
 				>
 					<CoinPriceBox
 						name={name}
@@ -113,8 +108,8 @@ function CoinDetails({ coinDetails, chartDetails }: any) {
 				</div>
 			</div>
 			<div
-				className=" dark:border-dmFont
-			market-datas flex  justify-around gap w-full py border-t-2 border-b-2 border-baseLight lg:flex-row md:gap-lg "
+				className="flex justify-around gap w-full py border-t-2 border-b-2 border-base-100
+			lg:flex-row md:gap-lg"
 			>
 				<CoinMarketData
 					dataValue={`$ ${addSpacesToNumber(market_data.market_cap.usd)}`}

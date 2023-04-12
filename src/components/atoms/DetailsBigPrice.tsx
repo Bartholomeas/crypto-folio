@@ -1,16 +1,16 @@
 interface Props {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }
 
 function DetailsBigPrice({ children }: Props) {
-  return (
-    <p
-      className="dark:text-baseLight
+	return (
+		<p
+			className="
 	text-lg font-bold text-accent"
-    >
-      $ {children}
-    </p>
-  );
+		>
+			$ {children}
+		</p>
+	);
 }
 
 export default DetailsBigPrice;

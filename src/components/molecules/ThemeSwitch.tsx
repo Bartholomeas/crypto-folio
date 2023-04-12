@@ -10,11 +10,7 @@ function ThemeSwitch({ toggleThemeFunc, isThemeDark }: Props) {
 		<button
 			type="button"
 			onClick={toggleThemeFunc}
-			className="dark:bg-dmBaseElement
-			dark:hover:bg-accentDark
-			 dark:text-support
-			flex items-center justify-center bg-baseLight p-sm rounded-xl h-full  w-full text-accent
-			hover:bg-baseVeryLight transition-colors"
+			className="btn btn-square btn-primary"
 		>
 			{isThemeDark ? <MdNightlightRound /> : <MdWbSunny />}
 		</button>

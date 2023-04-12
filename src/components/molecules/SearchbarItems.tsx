@@ -10,8 +10,8 @@ function SearchbarItems({ coinsData }: Props) {
 
 	return (
 		<div
-			className={`dark:bg-dmBase dark:border-dmBorderColor
-			 absolute flex flex-col gap-sm bg-baseVeryLight top-[100%] left-0 w-full p-sm translate-y-[.3rem] rounded text-xs border-2 border-solid border-baseLight max-h-[400px] overflow-y-scroll z-[999]
+			className={`dark:bg-base-100 dark:border-dmBorderColor
+			 absolute flex flex-col gap-sm bg-base-200 top-[100%] left-0 w-full p-sm translate-y-[.3rem] rounded text-xs border-2 border-solid border-base-100 max-h-[400px] overflow-y-scroll z-[999]
             ${coinsData.length < 1 && "hidden"}
 			`}
 		>

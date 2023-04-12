@@ -4,7 +4,7 @@ import { GetStaticProps, InferGetStaticPropsType } from "next";
 import axios from "axios";
 import MarginBox from "../../components/atoms/MarginBox";
 import Searchbar from "../../components/organisms/Searchbar";
-import Table from "../../components/organisms/Table";
+import { Table, TableRow } from "../../components/organisms/Table";
 import Footer from "../../components/organisms/Footer";
 import Pagination from "../../components/organisms/Pagination";
 import useFilter from "../../hooks/useFilter";
@@ -12,7 +12,6 @@ import TrendingCoinsBox from "../../components/organisms/TrendingCoinsBox";
 import { useAppDispatch, useAppSelector } from "../../state/reduxHooks";
 import Heading from "../../components/atoms/Heading";
 import { CoinItem, coinsActions } from "../../state/coinsSlice";
-import TableRow from "../../components/molecules/TableRow";
 import TableData from "../../components/molecules/TableData";
 import FavouriteButton from "../../components/atoms/FavouriteButton";
 import { addSpacesToNumber } from "../../utils/convertUtils";
@@ -34,7 +33,7 @@ function SpecifiedPage({
 	return (
 		<main
 			className="
-			dark:bg-dmBase
+			dark:bg-base-100
 			flex flex-col items-start gap w-full px min-h-[100vh]  max-w
     md:h-[100vh] md:max-h-100vh md:py-lg md:mr-[5rem] md:overflow-y-scroll bg-white"
 		>
@@ -84,39 +83,40 @@ function SpecifiedPage({
 						]}
 						page={page}
 					>
-						{coinsList.map((coin: CoinItem, index: number) => (
-							<TableRow key={`${coin.name}-${coin.total_supply}`}>
-								<TableData>
-									<FavouriteButton funcArg={coin.name} />
-								</TableData>
-								<TableData href={coin.id} isBold>
-									{indexingByPage + index + 1}
-								</TableData>
-								<TableData
-									imgSrc={coin.image}
-									href={coin.id}
-									leftAlign
-									appendAfter={coin.symbol.toUpperCase()}
-								>
-									{coin.name}
-								</TableData>
-								<TableData href={coin.id} appendAfter="USD">
-									{coin.current_price}
-								</TableData>
-								<TableData href={coin.id} appendAfter="%">
-									{coin.price_change_percentage_24h}
-								</TableData>
-								<TableData href={coin.id} appendAfter="USD">
-									{addSpacesToNumber(coin.market_cap)}
-								</TableData>
-							</TableRow>
-						))}
+						{coinsList &&
+							coinsList.map((coin: CoinItem, index: number) => (
+								<TableRow key={`${coin.name}-${coin.total_supply}`}>
+									<TableData>
+										<FavouriteButton funcArg={coin.name} />
+									</TableData>
+									<TableData href={coin.id} isBold>
+										{indexingByPage + index + 1}
+									</TableData>
+									<TableData
+										imgSrc={coin.image}
+										href={coin.id}
+										leftAlign
+										appendAfter={coin.symbol.toUpperCase()}
+									>
+										{coin.name}
+									</TableData>
+									<TableData href={coin.id} appendAfter="USD">
+										{coin.current_price}
+									</TableData>
+									<TableData href={coin.id} appendAfter="%">
+										{coin.price_change_percentage_24h}
+									</TableData>
+									<TableData href={coin.id} appendAfter="USD">
+										{addSpacesToNumber(coin.market_cap)}
+									</TableData>
+								</TableRow>
+							))}
 					</Table>
 				</div>
 			</div>
 			<Pagination currPage={page} />
 			<Footer>
-				<p className="dark:text-dmFont text-xs text-fontLight">
+				<p className=" text-xs text-base-content">
 					Crypto data powered by{" "}
 					<a
 						className="dark:text-support text-accent"

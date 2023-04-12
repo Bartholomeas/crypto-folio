@@ -44,12 +44,12 @@ function CoinStatsBox({
 }: Props) {
 	return (
 		<div
-			className="dark:bg-dmBaseElement
-			flex flex-col min-w-[300px] w-full gap min-h-[300px] h-fit px py bg-baseVeryLight rounded
+			className="dark:bg-base-100
+			flex flex-col min-w-[300px] w-full gap min-h-[300px] h-fit px py bg-base-200 rounded
         lg:max-w-[350px]
         "
 		>
-			<h2 className="font-bold dark:text-dmFont text-fontLight text-md">
+			<h2 className="font-bold  text-base-content text-md">
 				{name} statistics
 			</h2>
 

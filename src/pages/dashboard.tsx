@@ -17,9 +17,9 @@ import MarginBox from "../components/atoms/MarginBox";
 import Button from "../components/atoms/Button";
 
 import TotalAssetsValue from "../components/organisms/TotalAssetsValue";
-import Table from "../components/organisms/Table";
+import { Table, TableRow } from "../components/organisms/Table";
+
 import AddCoinModal from "../components/organisms/AddCoinModal";
-import TableRow from "../components/molecules/TableRow";
 import TableData from "../components/molecules/TableData";
 
 interface SingleCoinShopping {
@@ -87,7 +87,7 @@ function Dashboard() {
 
 	return (
 		<main
-			className="dark:bg-dmBase flex flex-col items-start gap-sm w-full min-h-[100vh] px pb-[10rem] bg-white overflow-y-auto
+			className="dark:bg-base-100 flex flex-col items-start gap-sm w-full min-h-[100vh] px pb-[10rem] bg-white overflow-y-auto
 		md:h-[100vh] md:py-lg md:mr-[5rem] md:max-w"
 		>
 			<MarginBox />
@@ -136,7 +136,6 @@ function Dashboard() {
 								name: "Value",
 							},
 						]}
-						// tableData={userWalletCoins}
 					>
 						{userWalletCoins ? (
 							userWalletCoins.map((coin: IPurchaseDetails, index) => (
@@ -224,6 +223,14 @@ function Dashboard() {
 						</TableBody>
 					</Table>
 						*/}
+				</div>
+				<div data-theme="light">
+					<div className="h-[50px] w-[50px] bg-primary" />
+					<div className="h-[50px] w-[50px] bg-secondary" />
+					<div className="h-[50px] w-[50px] bg-accent" />
+					<div className="h-[50px] w-[50px] bg-neutral" />
+					<div className="h-[50px] w-[50px] bg-base-200" />
+					<div className="h-[50px] w-[50px] bg-default" />
 				</div>
 			</div>
 		</main>

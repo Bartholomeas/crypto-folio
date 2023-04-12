@@ -14,10 +14,10 @@ function CoinDescription({ children, coinName }: CoinDescriptionProps) {
 
 	return (
 		<div className="text flex-col">
-			<h3 className="dark:text-support text-accentDark text-md font-bold">
+			<h3 className="dark:text-support text-primary-focus text-md font-bold">
 				About {coinName}
 			</h3>
-			<p className="dark:text-dmFont description-content text-font text leading-loose  overflow-y-auto">
+			<p className=" description-content text-base-content text leading-loose  overflow-y-auto">
 				{children}
 			</p>
 		</div>

@@ -56,7 +56,7 @@ function AuthModal() {
 			} w-full h-full top-0 left-0 right-0 bottom-0 bg-zinc-800/50 backdrop-blur-sm`}
 		>
 			<div
-				className="dark:bg-dmBase
+				className="dark:bg-base-100
 			 fixed flex flex-col h-full w-full top-[50%] left-[50%] py-lg px-lg text translate-x-[-50%] translate-y-[-50%] bg-white rounded-xl md:min-w-[500px] min-h-[500px] md:max-w-[500px] md:h-auto md:w-auto overflow-y-auto"
 			>
 				<button
@@ -64,7 +64,7 @@ function AuthModal() {
 					onClick={() => dispatch(uiActions.toggleAuthModal())}
 					className="absolute top-0 right-0 text-md cursor-pointer pt-lg pl-sm pr-lg"
 				>
-					<MdOutlineCancel className=" text-fontLight " />
+					<MdOutlineCancel className=" text-base-content " />
 				</button>
 				<div className="flex items-start justify-center w-full pb-lg">
 					<Button
@@ -113,7 +113,7 @@ function AuthModal() {
 							</Button>
 						</form>
 						<GenericLink href="/">I forgot password</GenericLink>
-						<p className="dark:text-dmFont font-semibold text text-font">OR</p>
+						<p className=" font-semibold text text-base-content">OR</p>
 						<Button onClick={authWithGoogle} icon="google">
 							Sign in with Gmail
 						</Button>
@@ -159,13 +159,13 @@ function AuthModal() {
 							</Button>
 						</form>
 
-						<p className="dark:text-dmFont font-semibold text text-font">OR</p>
+						<p className=" font-semibold text text-base-content">OR</p>
 						<Button onClick={authWithGoogle} icon="google">
 							Sign in with Gmail
 						</Button>
-						<p className="text-fontLight text-xs max-w-[300px] text-center">
+						<p className="text-base-content text-xs max-w-[300px] text-center">
 							By proceeding, you agree to{" "}
-							<span className="dark:text-supportDark font-semibold text-accentDark">
+							<span className="dark:text-supportDark font-semibold text-primary-focus">
 								Oddy{" "}
 							</span>
 							Terms of Use & Privacy Policy.

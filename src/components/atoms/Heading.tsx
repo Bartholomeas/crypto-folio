@@ -25,7 +25,7 @@ const headingWeights: PropsObject<string> = {
 };
 
 const themes: PropsObject<string> = {
-	default: "dark:text-white text-font",
+	default: "dark:text-white text-base-content",
 	pageHeader:
 		"dark:text-white w-full py-md font-bold text-white leading-relaxed text-h1",
 };
