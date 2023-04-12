@@ -36,3 +36,5 @@ firebaseConfig.js
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.eslintcache
